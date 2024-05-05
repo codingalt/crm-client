@@ -1,0 +1,32 @@
+@import "../../styles/constants.scss";
+
+.dashboardDetails{
+  width: 100%;
+  margin: .92rem 10px;
+
+  .top{
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+
+    h1{
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    svg{
+      font-size: 19px;
+      color: $primary;
+    }
+  }
+
+  // Cards 
+  .cards{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+
+    
+  }
+}

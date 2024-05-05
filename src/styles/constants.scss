@@ -1,0 +1,59 @@
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+$xxl: 1536px;
+$primary: #01AB8E;
+$primaryLight: #13D3B3;
+$white: #fff;
+$textSecondary: #6A6C6D;
+$error: #FF0000;
+
+.inputBottomBorder{
+  border-bottom: 1px solid $error !important;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin shadowSm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+@mixin shadowMd {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+@mixin button($width: 12rem, $height: 3rem, $background: $primary) {
+  width: $width;
+  height: $height;
+  border-radius: 3rem;
+  font-size: 1.13rem;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0;
+  text-align: center;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  background-color: $primary;
+  transition: all 0.2s;
+  z-index: 10;
+  gap: 8px;
+
+  &:hover{
+    background-color: $primaryLight;
+    transition: all 0.2s;
+  }
+}
