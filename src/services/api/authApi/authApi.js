@@ -28,6 +28,33 @@ export const authApi = createApi({
       invalidatesTags: ["Users"],
     }),
 
+    validateCode: builder.mutation({
+      query: (data) => ({
+        url: "validateCode",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+
+    reSendVerificationCode: builder.mutation({
+      query: (data) => ({
+        url: "reSendVerificationCode",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+
+    storeBusinessInformation: builder.mutation({
+      query: (data) => ({
+        url: "business/businessInfo",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+
     loginUser: builder.mutation({
       query: (data) => ({
         url: "login",
@@ -39,4 +66,11 @@ export const authApi = createApi({
   }),
 });
 
-export const { useValidateTokenQuery, useRegisterUserMutation,useLoginUserMutation } = authApi;
+export const {
+  useValidateTokenQuery,
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useValidateCodeMutation,
+  useReSendVerificationCodeMutation,
+  useStoreBusinessInformationMutation,
+} = authApi;

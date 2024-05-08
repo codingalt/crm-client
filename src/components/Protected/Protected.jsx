@@ -17,7 +17,6 @@ const Protected = ({ Component }) => {
     error,
   } = useValidateTokenQuery(null, { refetchOnMountOrArgChange: true });
 
-  console.log("user", token?.user);
   useEffect(() => {
     const authToken = localStorage.getItem("crmBusinessToken");
     if (!authToken) {
@@ -25,13 +24,21 @@ const Protected = ({ Component }) => {
     } else {
       // Check for token validity
       if (!isLoading) {
-        dispatch(setAuth(token?.user));
-        if (!isLoading && isSuccess) {
+        const user = {...token?.user, phoneVerified: token?.phone_verified}
+        dispatch(setAuth(user));
+
+        if (user?.phoneVerified === 0){
+          navigate("/verificationCode");
           setShow(true);
-        } else if (!isLoading && error) {
-          setShow(false);
-          navigate("/login");
+          return;
         }
+
+          if (!isLoading && isSuccess) {
+            setShow(true);
+          } else if (!isLoading && error) {
+            setShow(false);
+            navigate("/login");
+          }
       }
     }
   }, [token, isSuccess, error, isLoading]);
@@ -46,12 +53,10 @@ const Protected = ({ Component }) => {
           justifyContent: "center",
           alignItems: "center",
           zIndex: "999",
-          paddingBottom:"3rem",
-          background:
-            "linear-gradient(170.28deg, #292734 -9.44%, #000000 100%)",
+          paddingBottom: "3rem",
         }}
       >
-        <ClipLoader color="#3632FF" size={45} speedMultiplier={0.85} />
+        <ClipLoader color="#01AB8E" size={45} speedMultiplier={0.85} />
       </div>
     );
   }

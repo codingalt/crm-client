@@ -176,60 +176,65 @@
   }
 }
 
+.errorSpan {
+  font-size: 0.82rem;
+  color: $error;
+  margin-top: -8px;
+}
+
 //   Add New Service
 .addService {
   width: 100%;
-  margin: .7rem auto;
+  margin: 0.7rem auto;
 
   .heading {
     font-size: 28px;
     font-weight: 500;
   }
 
-  form{
+  form {
     width: 100%;
     margin-top: 2.5rem;
 
-    .inputContainer{
-        flex: 1;
+    .inputContainer {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+
+      label {
+        font-size: 18px;
+        font-weight: 500;
+        color: #212121;
+      }
+
+      .input {
+        position: relative;
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: .9rem;
-
-        label{
-            font-size: 18px;
-            font-weight: 500;
-            color: #212121;
-        }
-
-        .input{
-            position: relative;
-            width: 100%;
-        }
+      }
     }
 
-      .buttons{
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 1rem;
-        margin-top: 2.6rem;
+    .buttons {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2.6rem;
 
-        button{
-            @include button($width: 9.5rem, $height: 2.6rem);
-            font-size: 16px;
-            gap: 10px;
+      button {
+        @include button($width: 9.5rem, $height: 2.6rem);
+        font-size: 16px;
+        gap: 10px;
 
-            &:nth-child(1){
-                width: 8.5rem;
-                background-color: transparent;
-                border: 2px solid $primary;
-                color: $primary;
-            }
+        &:nth-child(1) {
+          width: 8.5rem;
+          background-color: transparent;
+          border: 2px solid $primary;
+          color: $primary;
         }
+      }
     }
-
   }
 }

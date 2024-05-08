@@ -12,6 +12,8 @@ import AddNewServicePage from "../pages/AddNewServicePage";
 import StatisticsPage from "../pages/StatisticsPage";
 import EmployeesPage from "../pages/EmployeesPage";
 import AddEmployeePage from "../pages/AddEmployeePage";
+import BookingsPage from "../pages/BookingsPage";
+import Protected from "../components/Protected/Protected";
 
 export const router = createBrowserRouter([
   {
@@ -23,11 +25,11 @@ export const router = createBrowserRouter([
       { index: true, element: <Email /> },
       {
         path: "/verificationCode",
-        element: <VerificationCode />,
+        element: <Protected Component={VerificationCode} />,
       },
       {
         path: "/personalInformation",
-        element: <PersonalInformation />,
+        element: <Protected Component={PersonalInformation} />,
       },
       {
         path: "/login",
@@ -35,27 +37,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <DashboardPage />,
+        element: <Protected Component={BookingsPage} />,
       },
       {
         path: "/statistics",
-        element: <StatisticsPage />,
+        element: <Protected Component={StatisticsPage} />,
       },
       {
         path: "/services",
-        element: <ServicesPage />,
+        element: <Protected Component={ServicesPage} />,
       },
       {
         path: "/newService",
-        element: <AddNewServicePage />,
+        element: <Protected Component={AddNewServicePage} />,
       },
       {
         path: "/employees",
-        element: <EmployeesPage />,
+        element: <Protected Component={EmployeesPage} />,
       },
       {
         path: "/addEmployee",
-        element: <AddEmployeePage />,
+        element: <Protected Component={AddEmployeePage} />,
       },
     ],
   },

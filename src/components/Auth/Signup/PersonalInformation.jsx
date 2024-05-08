@@ -1,27 +1,66 @@
-import React from "react";
+import React, { useMemo, useRef, useState } from "react";
 import css from "./Signup.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { personalInformationSchema } from "../../../utils/validations/AuthValidation";
+import { Button } from "@nextui-org/react";
+import { useStoreBusinessInformationMutation } from "../../../services/api/authApi/authApi";
+import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
+import { AiOutlineCamera } from "react-icons/ai";
+import avatar from "../../../assets/loadingProfile.png"
 
 const PersonalInformation = () => {
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
+  const imageRef = useRef();
   const initialValues = {
     name: "",
     description: "",
+    address: "",
+    profileImg: "",
   };
 
-  // const apiErrors = useApiErrorHandling(error);
+  const [storeBusinessInformation, res] = useStoreBusinessInformationMutation();
+  const {isLoading, isSuccess, error} = res;
 
-  const handleSubmit = async (values) => {};
+  useMemo(()=>{
+    if(isSuccess){
+      navigate("/dashboard");
+    }
+  },[isSuccess]);
+
+  const apiErrors = useApiErrorHandling(error);
+
+  const handleSubmit = async (values) => {
+    console.log(values);
+    let formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("description", values.description);
+    formData.append("address", values.address);
+    formData.append("profile_pic", values.profileImg);
+
+    await storeBusinessInformation(formData);
+  };
+
+  const openImage = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      setImage({
+        image: URL.createObjectURL(img),
+      });
+    }
+  };
 
   return (
-    <div className="w-full h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
-      <div className={css.wrapper}>
+    <div className="w-full min-h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
+      <div className={`${css.wrapper} ${css.businessWrapper}`}>
         <div className={css.top}>
-          <p>Personal Information</p>
+          <p className="text-center">Business Information</p>
         </div>
+
+        {/* Display Errors  */}
+        <ApiErrorDisplay apiErrors={apiErrors} className="mx-auto mt-3 -mb-6" />
 
         <Formik
           initialValues={initialValues}
@@ -29,14 +68,47 @@ const PersonalInformation = () => {
           onSubmit={handleSubmit}
         >
           {({ errors, setFieldValue, touched }) => (
-            <Form>
+            <Form className={`${css.personalInfoForm} mt-14`}>
               <div className={css.inputContainer}>
-                <label htmlFor="name">Buisness Name</label>
+                <label className="text-center mb-3" htmlFor="name">
+                  Business Profile
+                </label>
+                <div className={css.userProfile}>
+                  <div
+                    className={css.profile}
+                    onClick={() => imageRef.current.click()}
+                  >
+                    <input
+                      ref={imageRef}
+                      type="file"
+                      onChange={(e) => {
+                        setFieldValue("profileImg", e.target.files[0]);
+                        openImage(e);
+                      }}
+                      style={{ display: "none" }}
+                      accept="image/*"
+                    />
+                    <img src={image ? image.image : avatar} alt="" />
+                  </div>
+                  <div className={css.icon}>
+                    <AiOutlineCamera />
+                  </div>
+                </div>
+              </div>
+              <ErrorMessage
+                name="profileImg"
+                component="div"
+                className={`${css.errorSpan} text-center mb-1`}
+                style={{ marginTop: "-25px" }}
+              />
+
+              <div className={css.inputContainer}>
+                <label htmlFor="name">Business Name</label>
                 <Field
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="Enter buisness Name"
+                  placeholder="Enter business name"
                   className={errors.name && touched.name && "inputBottomBorder"}
                 />
                 <ErrorMessage
@@ -47,12 +119,12 @@ const PersonalInformation = () => {
               </div>
 
               <div className={css.inputContainer}>
-                <label htmlFor="description">Buisness Description</label>
+                <label htmlFor="description">Business Description</label>
                 <Field
                   type="text"
                   name="description"
                   id="description"
-                  placeholder="Enter buisness description"
+                  placeholder="Enter short description of your business "
                   className={
                     errors.description &&
                     touched.description &&
@@ -66,17 +138,28 @@ const PersonalInformation = () => {
                 />
               </div>
 
+              <div className={css.inputContainer}>
+                <label htmlFor="address">Address</label>
+                <Field
+                  type="text"
+                  name="address"
+                  id="address"
+                  placeholder="Enter business address"
+                  className={
+                    errors.address && touched.address && "inputBottomBorder"
+                  }
+                />
+                <ErrorMessage
+                  name="address"
+                  component="div"
+                  className={css.errorSpan}
+                />
+              </div>
+
               <div className={css.button}>
-                <button
-                  onClick={() => navigate(-1)}
-                  type="button"
-                  className={css.backBtn}
-                >
-                  Back
-                </button>
-                <button onClick={() => navigate("/login")} type="submit">
+                <Button isLoading={isLoading} type="submit">
                   Next
-                </button>
+                </Button>
               </div>
             </Form>
           )}

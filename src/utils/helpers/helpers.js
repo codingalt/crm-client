@@ -6,3 +6,18 @@ export const extractErrors = (errors) => {
     return errorsArray;
   }
 };
+
+// Format Time 
+export const formatTime = (time) => {
+  if (time > 0) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const formattedSeconds = String(seconds).padStart(2, "0");
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  } else {
+    return `00:00`;
+  }
+};

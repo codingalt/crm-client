@@ -1,57 +1,18 @@
-import React from 'react'
+import React from "react";
 import css from "./Statistics.module.scss";
 
-const BottomCard = () => {
+const BottomCard = ({ data,index }) => {
   return (
     <>
       {/* First Main Card  */}
-      <div className={css.cardBottom}>
-        <div className={css.subCard}>
-          <h3>Percent</h3>
-          <span>Cancellations</span>
-          <div className={css.line}></div>
-          <div className={css.value}>
-            <p style={{ fontSize: "20px", fontWeight: "600" }}>5%</p>
-          </div>
+      <>
+        <h3>{data?.heading}</h3>
+        <span>{data?.subHeading}</span>
+        <div className={css.line}></div>
+        <div className={css.value}>
+          <p style={index === 0 ? { fontSize: "20px", fontWeight: "600" } : {}}>{data?.value}</p>
         </div>
-
-        <div className={css.subCard}>
-          <h3>Appointment Cancelled</h3>
-          <span>Most</span>
-          <div className={css.line}></div>
-          <div className={css.value}>
-            <p>Haircut For a Man</p>
-          </div>
-        </div>
-
-        <div className={css.subCard}>
-          <h3>Best Turn </h3>
-          <span>Sold</span>
-          <div className={css.line}></div>
-          <div className={css.value}>
-            <p>Queue Description</p>
-          </div>
-        </div>
-
-        <div className={css.subCard}>
-          <h3>The Fast Queue</h3>
-          <span>Most</span>
-          <div className={css.line}></div>
-          <div className={css.value}>
-            <p>Queue Description</p>
-          </div>
-        </div>
-
-        <div className={css.subCard}>
-          <h3>The Space Queue</h3>
-          <span>Most</span>
-          <div className={css.line}></div>
-          <div className={css.value}>
-            <p>Queue Description</p>
-          </div>
-        </div>
-
-      </div>
+      </>
 
       {/* Second Main Card  */}
       {/* <div className={css.cardBottom}>
@@ -84,6 +45,6 @@ const BottomCard = () => {
       </div> */}
     </>
   );
-}
+};
 
-export default BottomCard
+export default BottomCard;

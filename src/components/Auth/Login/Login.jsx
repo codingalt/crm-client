@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import css from "./Login.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginSchema } from "../../../utils/validations/AuthValidation";
+import { Button } from "@nextui-org/react";
+import { useLoginUserMutation } from "../../../services/api/authApi/authApi";
+import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,9 +15,22 @@ const Login = () => {
     password: "",
   };
 
-  // const apiErrors = useApiErrorHandling(error);
+  const [loginUser, res] = useLoginUserMutation();
+  const {isLoading, isSuccess, error} = res;
 
-  const handleSubmit = async (values) => {};
+  const apiErrors = useApiErrorHandling(error);
+
+  const handleSubmit = async (values) => {
+    const {data} = await loginUser({
+      email: values.email,
+      password: values.password,
+    });
+
+    if (data?.token) {
+      localStorage.setItem("crmBusinessToken", data.token);
+      navigate("/dashboard");
+    }
+  };
 
   return (
     <div className="w-full h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
@@ -23,13 +39,16 @@ const Login = () => {
           <p>Connection</p>
         </div>
 
+        {/* Display Errors  */}
+        <ApiErrorDisplay apiErrors={apiErrors} className="mx-auto mt-3" />
+
         <Formik
           initialValues={initialValues}
           validationSchema={loginSchema}
           onSubmit={handleSubmit}
         >
           {({ errors, setFieldValue, touched }) => (
-            <Form>
+            <Form className={css.loginForm}>
               <div className={css.inputContainer}>
                 <label htmlFor="name">Email</label>
                 <Field
@@ -74,9 +93,9 @@ const Login = () => {
                 >
                   Forgot Password ?
                 </button>
-                <button onClick={() => navigate("/dashboard")} type="submit">
+                <Button isLoading={isLoading} type="submit">
                   Enter
-                </button>
+                </Button>
               </div>
             </Form>
           )}

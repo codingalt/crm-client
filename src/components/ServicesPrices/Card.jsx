@@ -6,12 +6,12 @@ import { FaUser } from "react-icons/fa6";
 import { MdAccessTime } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-const Card = () => {
+const Card = ({item}) => {
   return (
     <div className={`${css.card} shadow-lg border`}>
       <header>
         <div className={css.left}>
-          <p>Hair Cut</p>
+          <p>{item.name}</p>
           <HiPencil />
         </div>
         <div className={css.icon}>
@@ -21,29 +21,30 @@ const Card = () => {
 
       {/* Tags  */}
       <div className={css.tags}>
-        <div className={css.tag}>
-          <p>Short hair</p>
-        </div>
-        <div className={css.tag}>
-          <p>Draft</p>
-        </div>
+        {
+          item.tags?.map((tag)=>(
+            <div className={css.tag} key={tag.id}>
+              <p>{tag.name}</p>
+            </div>
+          ))
+        }
       </div>
 
       <div className={css.user}>
         <FaUser />
-        <p>Faheem Malik</p>
+            <p>{item.employees[0].name}</p>
       </div>
 
       <div className={css.timeInfo}>
         <div className={css.left}>
             <MdAccessTime />
-            <span>30 mints</span>
+            <span>{item.time} mints</span>
         </div>
-        <div className={css.right}>20 Nis</div>
+        <div className={css.right}>{item.price} Nis</div>
       </div>
 
       <div className={css.actions}>
-        <p>Remarks</p>
+        <p>{item.category.name}</p>
         <FaRegTrashAlt />
       </div>
 
