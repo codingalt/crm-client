@@ -14,6 +14,7 @@ import EmployeesPage from "../pages/EmployeesPage";
 import AddEmployeePage from "../pages/AddEmployeePage";
 import BookingsPage from "../pages/BookingsPage";
 import Protected from "../components/Protected/Protected";
+import BusinessProfilePage from "../pages/BusinessProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/addEmployee",
         element: <Protected Component={AddEmployeePage} />,
+      },
+      {
+        path: "/profile",
+        element: <Protected Component={BusinessProfilePage} />,
       },
     ],
   },

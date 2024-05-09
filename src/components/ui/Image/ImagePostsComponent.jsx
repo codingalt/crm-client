@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Blurhash } from "react-blurhash";
-import blankImage from "../../../assets/blank-img.jpg";
+import blankImage from "../../../assets//blank-img.jpg";
 
 const ImageComponent = ({ src, className, radius }) => {
   const [imageLoaded, setImageLoaded] = useState(false);

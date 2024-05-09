@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import css from "./Sidebar.module.scss"
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import css from "./Sidebar.module.scss";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
 import InsertChartOutlinedIcon from "@mui/icons-material/InsertChartOutlined";
-import { Grid, Tooltip } from '@mui/material';
+import { Grid, Tooltip } from "@mui/material";
 import { FaLightbulb } from "react-icons/fa";
 import { LuClock4 } from "react-icons/lu";
 import { MdMedicalServices } from "react-icons/md";
 import { IoStatsChart } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
+import { FaUserCircle } from "react-icons/fa";
+import { RiHome2Fill } from "react-icons/ri";
+import { AiFillHome } from "react-icons/ai";
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState("");
@@ -40,7 +43,7 @@ const Sidebar = () => {
                       pathname.match("/dashboard") ? css.activeMenuLi : ""
                     }
                   >
-                    <BiHomeAlt2 />
+                    <AiFillHome />
                   </NavLink>
                 </li>
               </Tooltip>
@@ -59,7 +62,7 @@ const Sidebar = () => {
                 </li>
               </Tooltip>
             </Grid>
-     
+
             <Grid item>
               <Tooltip title="Services" placement="right-end">
                 <li className="sidebar-li">
@@ -80,9 +83,7 @@ const Sidebar = () => {
                   <NavLink
                     to={"/employees"}
                     className={
-                      pathname.match("/employees")
-                        ? css.activeMenuLi
-                        : ""
+                      pathname.match("/employees") ? css.activeMenuLi : ""
                     }
                   >
                     <FaUserFriends />
@@ -90,20 +91,25 @@ const Sidebar = () => {
                 </li>
               </Tooltip>
             </Grid>
-            {/* <Grid item>
-              <Tooltip title="Settings" placement="right-end">
+            <Grid item>
+              <Tooltip title="Profile" placement="right-end">
                 <li className="sidebar-li">
-                  <NavLink to={"/"}>
-                    <IoSettingsOutline />
+                  <NavLink
+                    to={"/profile"}
+                    className={
+                      pathname.match("/profile") ? css.activeMenuLi : ""
+                    }
+                  >
+                    <FaUserCircle />
                   </NavLink>
                 </li>
               </Tooltip>
-            </Grid> */}
+            </Grid>
           </ul>
         </div>
       </div>
     </>
   );
-}
+};
 
-export default Sidebar
+export default Sidebar;

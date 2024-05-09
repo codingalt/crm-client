@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import css from "./Signup.module.scss";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signupEmailSchema } from "../../../utils/validations/AuthValidation";
@@ -167,7 +167,8 @@ const Email = () => {
                 />
               </div>
 
-              <div className={css.button}>
+              <div className={`${css.button} flex items-center justify-between w-full`} style={{justifyContent:"space-between"}}>
+                <p className="text-medium font-medium text-default-600">Already have an account? <NavLink className="text-blue-400" to={"/login"}>Login</NavLink></p>
                 <Button isLoading={isLoading} type="submit">
                   Next
                 </Button>

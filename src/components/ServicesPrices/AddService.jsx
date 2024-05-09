@@ -40,9 +40,9 @@ const genderData = [
 const AddService = () => {
   const initialValues = {
     name: "",
-    category: null,
-    subCategory: null,
-    tags: null,
+    category: "",
+    subCategory: "",
+    tags: "",
     gender: "",
     time: "",
     price: "",
@@ -50,7 +50,7 @@ const AddService = () => {
   };
 
   const [isParking, setIsParking] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedEmployees, setSelectedEmployees] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -69,15 +69,15 @@ const AddService = () => {
   const [addService, res] = useAddServiceMutation();
   const { isLoading, isSuccess, error } = res;
 
-  useMemo(()=>{
-    if(isSuccess){
+  useMemo(() => {
+    if (isSuccess) {
       toastSuccess("Service added successfully");
     }
-  },[isSuccess]);
+  }, [isSuccess]);
 
   const apiErrors = useApiErrorHandling(error);
 
-  const handleSubmit = async (values, {resetForm}) => {
+  const handleSubmit = async (values, { resetForm }) => {
     console.log(values);
 
     const {data} = await addService({
@@ -96,6 +96,8 @@ const AddService = () => {
     });
     setSelectedEmployees([]);
     setSelectedTags([]);
+    setSelectedCategory("");
+    setIsParking(false);
   };
 
   const handleChange = (e, setFieldValue) => {
@@ -135,7 +137,7 @@ const AddService = () => {
         validationSchema={addServiceSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, setFieldValue, touched,values }) => (
+        {({ errors, setFieldValue, touched, values }) => (
           <Form>
             <div className="w-full mb-8 flex justify-between items-center gap-16">
               <div className={css.inputContainer}>
@@ -241,13 +243,12 @@ const AddService = () => {
                     <Skeleton className="h-10 w-full rounded-lg" />
                   ) : (
                     <Select
-                      items={categories?.categories}
                       isRequired
                       variant="underlined"
                       placeholder="Select Category"
-                      labelPlacement="outside"
                       name="category"
                       id="category"
+                      selectedKeys={[selectedCategory]}
                       classNames={{
                         base: "max-w-xxl",
                         trigger: "min-h-unit-12 py-2",
@@ -258,23 +259,18 @@ const AddService = () => {
                       aria-label="category"
                       onChange={(e) => {
                         handleChange(e, setFieldValue);
-                        setSelectedCategory(parseInt(e.target.value));
+                        setSelectedCategory(e.target.value);
                       }}
                     >
-                      {(item) => (
+                      {categories?.categories?.map((item) => (
                         <SelectItem
                           className="bg-white"
                           key={item.id}
-                          textValue={item.name}
                           value={item.id}
                         >
-                          <div className="flex gap-2 items-center">
-                            <div className="flex flex-col">
-                              <span className="text-small">{item?.name}</span>
-                            </div>
-                          </div>
+                          {item.name}
                         </SelectItem>
-                      )}
+                      ))}
                     </Select>
                   )}
                 </div>
@@ -292,13 +288,12 @@ const AddService = () => {
                     <Skeleton className="h-10 w-full rounded-lg" />
                   ) : (
                     <Select
-                      items={subCategories?.category?.sub_categories || []}
                       isRequired
                       variant="underlined"
                       placeholder="Select Sub Category"
-                      labelPlacement="outside"
                       name="subCategory"
                       id="subCategory"
+                      selectedKeys={[values.subCategory]}
                       classNames={{
                         base: "max-w-xxl",
                         trigger: "min-h-unit-12 py-2",
@@ -309,20 +304,11 @@ const AddService = () => {
                       aria-label="subCategory"
                       onChange={(e) => handleChange(e, setFieldValue)}
                     >
-                      {(item) => (
-                        <SelectItem
-                          className="bg-white"
-                          key={item.id}
-                          textValue={item.name}
-                          value={item.id}
-                        >
-                          <div className="flex gap-2 items-center">
-                            <div className="flex flex-col">
-                              <span className="text-small">{item?.name}</span>
-                            </div>
-                          </div>
+                      {subCategories?.category?.sub_categories.map((item) => (
+                        <SelectItem key={item.id} value={item.id}>
+                          {item.name}
                         </SelectItem>
-                      )}
+                      ))}
                     </Select>
                   )}
                 </div>
@@ -406,14 +392,12 @@ const AddService = () => {
                 <label htmlFor="gender">Gender</label>
                 <div className={css.input}>
                   <Select
-                    items={genderData}
                     isRequired
                     variant="underlined"
                     placeholder="Select gender"
-                    labelPlacement="outside"
                     name="gender"
                     id="gender"
-                    value={values.gender}
+                    selectedKeys={[values.gender]}
                     startContent={
                       <RiUser3Fill className="text-[21px] text-[#01AB8E] mr-2 pointer-events-none flex-shrink-0" />
                     }
@@ -424,20 +408,11 @@ const AddService = () => {
                     aria-label="gender"
                     onChange={(e) => handleChange(e, setFieldValue)}
                   >
-                    {(item) => (
-                      <SelectItem
-                        className="bg-white"
-                        key={item.name}
-                        textValue={item.name}
-                        value={item.name}
-                      >
-                        <div className="flex gap-2 items-center">
-                          <div className="flex flex-col">
-                            <span className="text-small">{item?.name}</span>
-                          </div>
-                        </div>
+                    {genderData?.map((item) => (
+                      <SelectItem key={item.name} value={item.name}>
+                        {item.name}
                       </SelectItem>
-                    )}
+                    ))}
                   </Select>
                 </div>
                 <ErrorMessage
@@ -513,6 +488,7 @@ const AddService = () => {
                     setIsParking(e);
                     setFieldValue("has_parking", e);
                   }}
+                  isSelected={isParking}
                   size="sm"
                   color="success"
                   aria-label="Has Parking"
