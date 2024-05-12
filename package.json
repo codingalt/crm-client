@@ -17,6 +17,8 @@
     "@nextui-org/react": "^2.3.6",
     "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^2.2.3",
+    "@uidotdev/usehooks": "^2.4.1",
+    "antd": "^5.17.0",
     "apexcharts": "^3.49.0",
     "blurhash": "^2.0.5",
     "formik": "^2.4.6",

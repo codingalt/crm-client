@@ -95,7 +95,7 @@ const Statistics = () => {
 
       {/* Top Cards  */}
       <div
-        className={`${css.topCards} grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5`}
+        className={`${css.topCards} grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-4 gap-x-3 md:gap-x-5 md:gap-y-5`}
       >
         {topData?.map((item, index) => {
           const x = trail[index]?.y;
@@ -114,8 +114,14 @@ const Statistics = () => {
       </div>
 
       {/* Bottom Cards  */}
+      <h3
+        className="mt-10 -mb-1 md:hidden"
+        style={{ fontSize: "23px", fontWeight: "500", color: "#3c3b3b" }}
+      >
+        Metrics Overview
+      </h3>
       <div
-        className={`${css.cardBottom} mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5`}
+        className={`${css.cardBottom} mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-4 gap-x-3 md:gap-x-5 md:gap-y-5`}
       >
         {bottomData?.map((item, index) => {
           const x = trail2[index]?.y;

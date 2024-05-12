@@ -4,13 +4,20 @@ import Header from '../Header/Header';
 import css from "./Layout.module.scss";
 
 const Layout = ({ children }) => {
+  const [activeSidebar, setActiveSidebar] = useState(false);
 
   return (
     <div className={css.wrapper}>
       <div className={css.wrapperInner}>
-        <Header />
+        <Header
+          activeSidebar={activeSidebar}
+          setActiveSidebar={setActiveSidebar}
+        />
         <div className={css.container}>
-          <Sidebar />
+          <Sidebar
+            activeSidebar={activeSidebar}
+            setActiveSidebar={setActiveSidebar}
+          />
 
           <div className={css.mainContent}>
             {/* Content  */}

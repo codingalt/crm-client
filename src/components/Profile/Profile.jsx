@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import css from "./Profile.module.scss";
 import { Button, Image, Input, Switch } from "@nextui-org/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -9,17 +9,34 @@ import h3 from "../../assets/h3.jpg";
 import h4 from "../../assets/h4.jpg";
 import ImageComponent from "../ui/Image/ImagePostsComponent";
 import { businessProfileSchema } from "../../utils/validations/AuthValidation";
+import { useGetBusinessProfileQuery } from "../../services/api/profileApi/profileApi";
 
 export const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const submitButton = useRef();
 
-  const initialValues = {
+  const [initialValues, setInitialValues] = useState({
     name: "",
     address: "",
     email: "",
     contact: "",
-  };
+    description: "",
+  });
+
+  const { data,isLoading } = useGetBusinessProfileQuery();
+  console.log(data);
+
+  useEffect(()=>{
+    if(data){
+      setInitialValues((prev) => ({
+        name: data.business.name,
+        address: data.business.address,
+        email: data.business.email,
+        contact: data.business.contact,
+        description: data.business.description,
+      }));
+    }
+  },[data]);
 
   const handleSubmit = async (values) => {
     console.log(values);
@@ -38,13 +55,13 @@ export const Profile = () => {
         {isEditing && (
           <div className={css.buttons}>
             <Button
-              className="px-6"
+              className="px-3 md:px-6"
               type="button"
               onClick={() => setIsEditing(false)}
             >
               Cancel
             </Button>
-            <Button className="bg-[#01AB8E] px-5 text-white" type="submit">
+            <Button className="bg-[#01AB8E] px-3 md:px-5 text-white" type="submit">
               Save Changes
             </Button>
           </div>

@@ -56,11 +56,8 @@ const Email = () => {
           <p>Business Registration</p>
         </div>
 
-          {/* Display Errors  */}
-          <ApiErrorDisplay
-            apiErrors={apiErrors}
-            className="mx-auto mt-3"
-          />
+        {/* Display Errors  */}
+        <ApiErrorDisplay apiErrors={apiErrors} className="mx-auto mt-3" />
 
         <Formik
           initialValues={initialValues}
@@ -97,7 +94,7 @@ const Email = () => {
                       : "mobileInput"
                   }
                   placeholder="(485)-845-8542658"
-                  containerClass="inputContainer"
+                  containerClass={css.inputContainer}
                   name="contact"
                   value=""
                   containerStyle={{
@@ -167,8 +164,16 @@ const Email = () => {
                 />
               </div>
 
-              <div className={`${css.button} flex items-center justify-between w-full`} style={{justifyContent:"space-between"}}>
-                <p className="text-medium font-medium text-default-600">Already have an account? <NavLink className="text-blue-400" to={"/login"}>Login</NavLink></p>
+              <div
+                className={`${css.button} flex items-center justify-between w-full`}
+                style={{ justifyContent: "space-between" }}
+              >
+                <p className="text-medium font-medium text-default-600">
+                  <span>Already have an account?</span>{" "}
+                  <NavLink className="text-blue-400" to={"/login"}>
+                    Login
+                  </NavLink>
+                </p>
                 <Button isLoading={isLoading} type="submit">
                   Next
                 </Button>

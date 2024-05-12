@@ -26,7 +26,7 @@ const Employees = () => {
       </div>
 
       {/* Employees  */}
-      <div className={`${css.employeesTable} w-full mx-auto my-5 h-14`}>
+      <div className={`${css.employeesTable} w-full mx-auto my-6 md:my-5 overflow-x-auto scrollbar-hide`}>
         {/* Table Header  */}
         <div className={css.tableHeader}>
           <div className={css.item}>Employee Name</div>
@@ -37,7 +37,7 @@ const Employees = () => {
 
         {/* Loader  */}
         {isLoading && (
-          <div className="w-full h-[400px] flex items-center justify-center">
+          <div className="w-full h-[360px] flex items-center justify-center">
             <ClipLoader color="#01AB8E" size={44} speedMultiplier={0.85} />
           </div>
         )}
@@ -58,8 +58,8 @@ const Employees = () => {
             data?.employees?.map((item) => (
               <div className={css.tableRow} key={item.id}>
                 <p>{item.name}</p>
-                <p>{item.contact}</p>
-                <p>{item.role}</p>
+                <p>{item.contact}03156765542</p>
+                <p>{item.role}Manager</p>
                 <div className={css.action}>
                   <div
                     className={`${css.stats} shadow-lg border cursor-pointer`}

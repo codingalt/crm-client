@@ -91,7 +91,7 @@ const Login = () => {
                   className={`border-none ${css.backBtn}`}
                   style={{ width: "auto", fontWeight: "500", fontSize: "18px" }}
                 >
-                  Forgot Password ?
+                  Forgot Password?
                 </button>
                 <Button isLoading={isLoading} type="submit">
                   Enter

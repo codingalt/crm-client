@@ -23,10 +23,9 @@ const BookingsTable = ({ setIsModal }) => {
             <h3>Today</h3>
             <div
               onClick={() => setIsModal(true)}
-              className="w-12 h-12 bg-[#01AB8E] cursor-pointer rounded-xl shadow-md flex justify-center items-center"
+              className="md:w-12 md:h-12 text-[25px] md:text-[28px] h-10 w-10 bg-[#01AB8E] cursor-pointer rounded-xl shadow-md flex justify-center items-center"
             >
               <RiFilter3Fill
-                fontSize={28}
                 className="text-default-600"
                 color="#fff"
               />
@@ -40,7 +39,7 @@ const BookingsTable = ({ setIsModal }) => {
               <div className={css.item}>Service Provider</div>
               <div className={css.item}>Payment</div>
               <div className={css.item}>
-                <div className="bg-[#01AB8E] w-28 flex text-[14px] justify-center items-center text-white rounded-full px-7 py-1">
+                <div className="bg-[#01AB8E] w-24 md:w-28 flex text-[12px] md:text-[14px] justify-center items-center text-white rounded-full px-0 md:px-7 py-1">
                   Approval
                 </div>
               </div>

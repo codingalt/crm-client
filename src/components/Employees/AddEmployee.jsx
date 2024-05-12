@@ -74,7 +74,7 @@ const AddEmployee = () => {
       >
         {({ errors, setFieldValue, touched, values }) => (
           <Form>
-            <div className="w-full mb-8 flex justify-between items-center gap-16">
+            <div className="w-full mb-8 flex flex-col md:flex-row justify-between items-center gap-7 md:gap-16">
               <div className={css.inputContainer}>
                 <label htmlFor="name">Employee Name</label>
                 <div className={css.input}>
@@ -130,7 +130,7 @@ const AddEmployee = () => {
               </div>
             </div>
 
-            <div className="w-full mb-8 flex justify-between items-center gap-16">
+            <div className="w-full mb-8 flex flex-col md:flex-row justify-between items-center gap-7 md:gap-16">
               <div className={css.inputContainer}>
                 <label htmlFor="role">Role</label>
                 <div className={css.input}>

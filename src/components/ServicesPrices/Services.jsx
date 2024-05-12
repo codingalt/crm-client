@@ -17,7 +17,7 @@ const Services = () => {
       <div className={css.headingTop}>
         <h1>Services and prices</h1>
         <div className={css.bottom}>
-          <p>Existing Services</p>
+          <p className="hidden md:block">Existing Services</p>
           <button type="button" onClick={() => navigate("/newService")}>
             <FaPlus /> <span>Add service</span>
           </button>

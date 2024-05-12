@@ -139,7 +139,7 @@ const AddService = () => {
       >
         {({ errors, setFieldValue, touched, values }) => (
           <Form>
-            <div className="w-full mb-8 flex justify-between items-center gap-16">
+            <div className="w-full mb-8 flex flex-col md:flex-row justify-between items-center gap-7 md:gap-16">
               <div className={css.inputContainer}>
                 <label htmlFor="name">Service Name</label>
                 <div className={css.input}>
@@ -235,7 +235,7 @@ const AddService = () => {
               </div>
             </div>
 
-            <div className="w-full mb-8 flex justify-between items-center gap-16">
+            <div className="w-full mb-8 flex flex-col md:flex-row justify-between items-center gap-7 md:gap-16">
               <div className={css.inputContainer}>
                 <label htmlFor="category">Category</label>
                 <div className={css.input}>
@@ -320,7 +320,7 @@ const AddService = () => {
               </div>
             </div>
 
-            <div className="w-full mb-8 flex justify-between items-center gap-16">
+            <div className="w-full mb-8 flex flex-col md:flex-row justify-between items-center gap-7 md:gap-16">
               <div className={css.inputContainer}>
                 <label htmlFor="tags">Select Tags</label>
                 <div className={css.input}>
@@ -423,7 +423,7 @@ const AddService = () => {
               </div>
             </div>
 
-            <div className="w-full mb-9 flex justify-between items-center gap-16">
+            <div className="w-full mb-8 flex flex-col md:flex-row justify-between items-center gap-7 md:gap-16">
               <div className={css.inputContainer}>
                 <label htmlFor="time">Length of service</label>
                 <div className={css.input}>
@@ -481,7 +481,7 @@ const AddService = () => {
               </div>
             </div>
 
-            <div className="w-full flex justify-between items-center gap-16">
+            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-7 md:gap-16">
               <div className={css.inputContainer}>
                 <Switch
                   onValueChange={(e) => {

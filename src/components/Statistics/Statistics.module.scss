@@ -230,4 +230,39 @@
       margin: 1rem auto;
     }
   }
+
+  @media (max-width: 768px){
+    &{
+      padding-left: 0;
+
+      .topCards{
+
+        .cardTop{
+          position: relative;
+          height: 140px;
+
+          h3{
+            font-size: 17px;
+          }
+
+          .time{
+            position: absolute;
+            bottom: 10px;
+            right: 11px;
+          }
+        }
+      }
+
+      .cardBottom{
+
+        .subCard{
+          height: 155px;
+
+          .line{
+            margin-top: 9px;
+          }
+        }
+      }
+    }
+  }
 }

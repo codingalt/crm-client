@@ -32,11 +32,11 @@ const FilterByDateModal = ({ isModal, setIsModal }) => {
               <div className={`${css.heading} max-w-5xl mx-auto`}>
                 <span>Daily - Monthly</span>
                 <div
-                  className="w-10 h-10 cursor-pointer rounded-full bg-default-200 flex items-center justify-center"
+                  className="w-8 h-8 md:w-10 md:h-10 cursor-pointer rounded-full bg-default-200 flex items-center justify-center"
                   onClick={() => setIsModal(false)}
                 >
                   {" "}
-                  <RxCross2 fontSize={22} color="#222" />
+                  <RxCross2 className="text-[19px] md:text-[22px]" color="#222" />
                 </div>
               </div>
               

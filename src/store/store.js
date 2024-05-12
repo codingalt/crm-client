@@ -4,6 +4,7 @@ import authSlice from "../services/slices/auth/authSlice";
 import { authApi } from "../services/api/authApi/authApi";
 import { servicesApi } from "../services/api/servicesApi/servicesApi";
 import { employeesApi } from "../services/api/employeesApi/employeesApi";
+import { profileApi } from "../services/api/profileApi/profileApi";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,9 @@ export const store = configureStore({
     // Employees Api
     [employeesApi.reducerPath]: employeesApi.reducer,
 
+    // Business Profile Api
+    [profileApi.reducerPath]: profileApi.reducer,
+
     auth: authSlice,
   },
   middleware: (getDefaultMiddleware) =>
@@ -23,6 +27,7 @@ export const store = configureStore({
       authApi.middleware,
       servicesApi.middleware,
       employeesApi.middleware,
+      profileApi.middleware,
     ]),
 });
 

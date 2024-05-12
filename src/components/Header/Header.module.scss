@@ -121,15 +121,15 @@
   @media (max-width: 768px) {
     & {
       padding: 0 1rem;
+      border-radius: 0;
+      height: 4.2rem;
 
       .header_left {
         gap: 0;
+        margin-left: 0px;
         
         .logo {
-          width: 28px;
-          position: absolute;
-          left: 0;
-          right: 0;
+          width: 26px;
         }
 
         .searchBox {

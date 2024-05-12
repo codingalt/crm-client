@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import css from "./Sidebar.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { BiHomeAlt2 } from "react-icons/bi";
@@ -10,24 +10,30 @@ import { LuClock4 } from "react-icons/lu";
 import { MdMedicalServices } from "react-icons/md";
 import { IoStatsChart } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
-import { FaUserGroup } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
-import { RiHome2Fill } from "react-icons/ri";
 import { AiFillHome } from "react-icons/ai";
+import useClickOutside from "../../hooks/useClickOutside";
 
-const Sidebar = () => {
-  const [activeLink, setActiveLink] = useState("");
+const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
   let pathname = window.location.pathname;
-  const navigate = useNavigate();
+  const sidebarRef = useRef();
 
   useEffect(() => {
     pathname = window.location.pathname;
   }, [window.location.pathname]);
 
+  useClickOutside(sidebarRef, () => setActiveSidebar(false));
+
   return (
     <>
       <input type="checkbox" id="nav-toggle" hidden />
-      <div className={`${css.sidebar}`} id="sidebar">
+      <div
+        className={
+          activeSidebar ? `${css.sidebar} ${css.sidebarActive}` : css.sidebar
+        }
+        id="sidebar"
+        ref={sidebarRef}
+      >
         <div className={css.sidebarProfile}>
           <FaLightbulb />
           <LuClock4 />

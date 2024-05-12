@@ -83,4 +83,62 @@
       }
     }
   }
+
+    @media (max-width: 768px){
+    &{
+      width: 80%;
+      padding-bottom: 7rem;
+
+      .top{
+        p{
+          font-size: 33px;
+          text-align: center;
+          line-height: 46px;
+          font-weight: 500;
+        }
+      }
+
+      form{
+        margin-top: 4.5rem;
+
+        .inputContainer{
+          gap: 0;
+
+          label{
+            font-size: 19px;
+          }
+
+          input{
+            font-size: 19px !important;
+          }
+
+        }
+
+        .button {
+          gap: 0;
+          justify-content: space-between;
+          
+          p{
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            flex: 1.3;
+
+            a{
+              margin-left: 2px;
+            }
+          }
+
+          button{
+            height: 43px;
+
+            &:nth-child(1){
+              font-size: 12px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

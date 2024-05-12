@@ -28,7 +28,7 @@ ul li {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
-.sidebar-active {
+.sidebarActive {
   left: 0 !important;
   top: 0 !important;
   z-index: 999;
@@ -334,11 +334,6 @@ header label span {
 }
 
 @media only screen and (max-width: 1200px) {
-  // .sidebar {
-  //   left: -100% !important;
-  //   transition: all ease 0.5s !important;
-  // }
-
 
   .nav-toggle {
     display: block;
@@ -417,10 +412,6 @@ header label span {
     overflow-x: hidden;
   }
 
-  main {
-    overflow-x: hidden;
-  }
-
   .border_line {
     display: none;
   }
@@ -450,15 +441,9 @@ header label span {
   .sidebar {
     left: -100%;
     transition: all ease 0.5s !important;
-    border-radius: 0;
     height: 100%;
-  }
-
-  main {
-    padding-left: 0;
-    border: none;
-    border-radius: 0;
-    padding-bottom: 2rem;
+    top: 4.3rem;
+    background-color: #fff;
   }
 
   .nav-toggle {
@@ -479,37 +464,6 @@ header label span {
     text-align: center;
   }
 
-  header h3 label {
-    display: inline-block;
-    text-align: center;
-    border-radius: 50%;
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center !important;
-    padding-right: 0rem;
-    padding-left: 0.4rem;
-    margin-right: 1rem;
-    padding-top: 0.1rem;
-    font-size: 24px;
-    height: 40px;
-    width: 40px;
-    margin-top: 5px;
-  }
-
-  header h3 span {
-    text-align: center;
-    padding-right: 0rem;
-  }
-
-  header h3 {
-    display: flex;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0;
-  }
-
   .header_left i {
     padding-top: 10px;
     cursor: pointer;
@@ -519,10 +473,6 @@ header label span {
   .main-content {
     width: 100%;
     margin-left: 0rem;
-  }
-  header {
-    width: 100% !important;
-    left: 0 !important;
   }
 
   #nav-toggle:checked + .sidebar .sidebar-brand,
@@ -555,9 +505,9 @@ header label span {
     margin-left: 0rem !important;
   }
 
-  .sidebar-active {
+  .sidebarActive {
     left: 0 !important;
-    top: 0 !important;
+    top: 4.3rem !important;
     z-index: 999;
     transition: width 300ms;
   }

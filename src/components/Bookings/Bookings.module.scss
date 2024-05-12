@@ -152,6 +152,7 @@
           font-size: 16px;
           font-weight: 400;
           color: #a1aebf;
+          color: $primary;
           flex: 1;
           margin-bottom: 1.55rem;
           padding: 9px 16px;
@@ -212,6 +213,119 @@
 
                 &:nth-child(1) {
                   justify-content: flex-start;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px){
+    &{
+      margin: 0.8rem 0;
+      margin-top: 0.6rem;
+
+      .top{
+        max-width: 100%;
+        width: 100%;
+        gap: 1.2rem;
+
+        h1{
+          font-size: 28px;
+        }
+      }
+
+      .cards{
+        width: 100%;
+        max-width: 95%;
+        flex-direction: column;
+        gap: .9rem;
+        align-items: stretch;
+        margin-top: 2.2rem;
+
+        .inner{
+
+          h3{
+            font-size: 20px;
+          }
+        }
+
+        .arrow{
+          flex: 1;
+          transform: rotate(90deg);
+          margin-top: .7rem;
+          
+          svg{
+            font-size: 2.9rem;
+          }
+        }
+      }
+
+      .bookingsTable{
+        margin-top: 3.3rem;
+
+        h3{
+          font-size: 25px;
+        }
+
+        .table{
+          gap: .4rem;
+
+          .hoursCol{
+            width: 65px;
+
+            .item{
+              color: $primary;
+            }
+          }
+
+          .tableData{
+
+            .employeesTable{
+              overflow-x: auto;
+              scrollbar-width: none;
+
+              .tableHeader{
+                gap: 1.7rem;
+                padding: 15px 18px;
+                overflow-x: auto;
+                scrollbar-width: none;
+                width: max-content;
+
+                .item{
+                  font-size: 13px;
+                  width: 120px;
+
+                  &:nth-child(3){
+                    width: 100px;
+                  }
+
+                  &:nth-child(3){
+                    width: 100px;
+                  }
+                }
+              }
+
+              .tableBody{
+                overflow-x: auto;
+                scrollbar-width: none;
+                width: max-content;
+
+                .tableRow{
+                  padding: 15px 18px;
+                  gap: 1.7rem;
+                  scrollbar-width: none;
+                  
+                  p{
+                    font-size: 13px;
+                    width: 120px;
+
+                    &:nth-child(3){
+                    width: 100px;
+                  }
+                  }
                 }
               }
             }

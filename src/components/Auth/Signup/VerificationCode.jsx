@@ -40,7 +40,7 @@ const VerificationCode = () => {
   const { isLoading, isSuccess, error } = res;
 
   useMemo(() => {
-    if(error){
+    if (error) {
       if (error.status === 422) {
         toastError("Incorrect OTP. Please try again");
       } else {
@@ -48,7 +48,6 @@ const VerificationCode = () => {
         setValidateCodeError(apiErrors);
       }
     }
-    
   }, [error]);
 
   // Resend Code Mutation
@@ -60,7 +59,7 @@ const VerificationCode = () => {
   } = resp;
 
   useMemo(() => {
-    if(isSuccessResend){
+    if (isSuccessResend) {
       toastSuccess("Verification code sent successfully");
     }
   }, [isSuccessResend]);
@@ -90,8 +89,6 @@ const VerificationCode = () => {
       navigate("/personalInformation");
     }
   }, [isSuccess]);
-
-  
 
   const handleSubmit = async (values) => {
     await validateCode({ code: values.code });
@@ -138,9 +135,9 @@ const VerificationCode = () => {
                   />
 
                   <div
-                    className={`flex justify-between items-center ${css.note}`}
+                    className={`flex justify-end items-end flex-col md:flex-row md:justify-between md:items-center ${css.note}`}
                   >
-                    <p>
+                    <p className="text-sm md:text-medium">
                       The verification code is sent to the number 050-5050505
                     </p>
                     <div className="flex">
@@ -173,7 +170,6 @@ const VerificationCode = () => {
                 </div>
 
                 <div className={css.button}>
-                 
                   <Button isLoading={isLoading} type="submit">
                     Next
                   </Button>
