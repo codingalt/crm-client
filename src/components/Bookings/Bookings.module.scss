@@ -271,10 +271,11 @@
         }
 
         .table{
-          gap: .4rem;
+          gap: 0rem;
 
           .hoursCol{
             width: 65px;
+            gap: 0.7rem;
 
             .item{
               color: $primary;

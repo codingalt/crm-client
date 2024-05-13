@@ -6,6 +6,9 @@ import user from "../../assets/user.jpg";
 import { FaChevronDown } from "react-icons/fa6";
 import logo from "../../assets/logo.svg";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import { MdMenuOpen } from "react-icons/md";
+import { MdMenu } from "react-icons/md";
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
 const Header = ({ activeSidebar, setActiveSidebar }) => {
   const navigate = useNavigate();
@@ -15,8 +18,11 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
 
   return (
     <header className={`${css.Header}`}>
-      <div className={css.header_left}>
-        <div className={css.logo} onClick={() => isSmallDevice && setActiveSidebar(!activeSidebar)}>
+      <div className={`${css.header_left} flex items-center gap-2`}>
+        <div
+          className={css.logo}
+          // onClick={() => isSmallDevice && setActiveSidebar(!activeSidebar)}
+        >
           <img src={logo} alt="" />
         </div>
         <div className={css.searchBox}>
@@ -28,7 +34,13 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
         Paycust
       </div>
       <div className={css.header_right}>
-        <div className={css.profile}>
+        <div
+          onClick={() => isSmallDevice && setActiveSidebar(!activeSidebar)}
+          className="md:hidden text-[29px] text-[#01AB8E]"
+        >
+          <HiOutlineMenuAlt2 />
+        </div>
+        <div className={`${css.profile}`}>
           <img src={user} alt="" />
           <span>Faheem</span>
           <FaChevronDown />

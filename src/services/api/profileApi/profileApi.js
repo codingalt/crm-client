@@ -16,20 +16,31 @@ export const profileApi = createApi({
   endpoints: (builder) => ({
     getBusinessProfile: builder.query({
       query: () => `business/businessProfile`,
-      providesTags: ["Profile"], 
+      providesTags: ["Profile"],
     }),
 
-    // addService: builder.mutation({
-    //   query: (data) => ({
-    //     url: "business/services",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    //   invalidatesTags: ["Profile"],
-    // }),
+    updateBusinessInfo: builder.mutation({
+      query: (data) => ({
+        url: "business/businessInfo",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Profile"],
+    }),
+
+    updateOpeningHours: builder.mutation({
+      query: (data) => ({
+        url: "business/businessOpeningHoursPost",
+        method: "POST",
+        body: { data: data },
+      }),
+      invalidatesTags: ["Profile"],
+    }),
   }),
 });
 
 export const {
-  useGetBusinessProfileQuery
+  useGetBusinessProfileQuery,
+  useUpdateOpeningHoursMutation,
+  useUpdateBusinessInfoMutation
 } = profileApi;
