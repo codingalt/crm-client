@@ -1,5 +1,18 @@
 @import "../../styles/constants.scss";
 
+.chartStatistics{
+
+  &>div{
+    min-height: 500px !important;
+  }
+
+  @media (max-width: 768px){
+    &>div{
+      min-height: 230px !important;
+    }
+  }
+}
+
 .wrapper {
   width: 100%;
   margin: 0.6rem auto;
@@ -228,6 +241,10 @@
     .graphContainer {
       width: 100%;
       margin: 1rem auto;
+
+      #chart{
+        min-height: 228px !important;
+      }
     }
   }
 

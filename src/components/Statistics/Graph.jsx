@@ -46,12 +46,12 @@ const Graph = () => {
 
       {/* Graph  */}
       <div className={css.graphContainer}>
-        <div id="chart">
+        <div id="chartStatistics" className={css.chartStatistics}>
           <ReactApexChart
             options={options}
             series={series}
             type="area"
-            height={500}
+            // height={500}
           />
         </div>
         <div id="html-dist"></div>
