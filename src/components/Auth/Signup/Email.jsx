@@ -10,13 +10,13 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import { useDispatch } from "react-redux";
-import { setAuth } from "../../../services/slices/auth/authSlice";
 
 const Email = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isContactErr, setIsContactErr] = useState(false);
   const initialValues = {
+    name: "",
     email: "",
     contact: "",
     password: "",
@@ -36,14 +36,15 @@ const Email = () => {
     }
 
     const {data} = await registerUser({
+      name: values.name,
       email: values.email,
       phone_number: values.contact,
       password: values.password,
-      type: "business",
+      type: "customer",
     });
 
     if(data?.token){
-      localStorage.setItem("crmBusinessToken", data.token);
+      localStorage.setItem("crmClientToken", data.token);
       navigate("/verificationCode");
     }
 
@@ -53,7 +54,7 @@ const Email = () => {
     <div className="w-full min-h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
       <div className={css.wrapper}>
         <div className={css.top}>
-          <p>Business Registration</p>
+          <p>Account Registration</p>
         </div>
 
         {/* Display Errors  */}
@@ -66,6 +67,24 @@ const Email = () => {
         >
           {({ errors, setFieldValue, touched }) => (
             <Form className={`${css.emailForm} mt-12`}>
+              <div className={css.inputContainer}>
+                <label htmlFor="name">Name</label>
+                <Field
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="John Smith"
+                  className={
+                    errors.name && touched.name && "inputBottomBorder"
+                  }
+                />
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className={css.errorSpan}
+                />
+              </div>
+
               <div className={css.inputContainer}>
                 <label htmlFor="email">Email</label>
                 <Field

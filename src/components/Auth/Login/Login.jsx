@@ -27,7 +27,7 @@ const Login = () => {
     });
 
     if (data?.token) {
-      localStorage.setItem("crmBusinessToken", data.token);
+      localStorage.setItem("crmClientToken", data.token);
       navigate("/dashboard");
     }
   };

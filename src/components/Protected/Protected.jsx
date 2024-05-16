@@ -18,7 +18,7 @@ const Protected = ({ Component }) => {
   } = useValidateTokenQuery(null, { refetchOnMountOrArgChange: true });
 
   useEffect(() => {
-    const authToken = localStorage.getItem("crmBusinessToken");
+    const authToken = localStorage.getItem("crmClientToken");
     if (!authToken) {
       navigate("/login");
     } else {

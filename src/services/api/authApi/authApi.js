@@ -5,7 +5,7 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_URI,
     prepareHeaders: async (headers, query) => {
-      const authToken = localStorage.getItem("crmBusinessToken");
+      const authToken = localStorage.getItem("crmClientToken");
       headers.set("authorization", `Bearer ${authToken}`);
       headers.set("x-app-type", "Web");
       headers.set("Accept", "application/json");

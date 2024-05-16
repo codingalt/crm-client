@@ -3,17 +3,12 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../pages/ErrorPage";
 import Root from "../pages/Root";
 import Email from "../components/Auth/Signup/Email";
-import VerificationCode from "../components/Auth/Signup/VerificationCode";
-import PersonalInformation from "../components/Auth/Signup/PersonalInformation";
 import Login from "../components/Auth/Login/Login";
 import DashboardPage from "../pages/DashboardPage";
-import ServicesPage from "../pages/ServicesPage";
-import AddNewServicePage from "../pages/AddNewServicePage";
-import StatisticsPage from "../pages/StatisticsPage";
-import EmployeesPage from "../pages/EmployeesPage";
-import AddEmployeePage from "../pages/AddEmployeePage";
-import BookingsPage from "../pages/BookingsPage";
+import VerificationCode from "../components/Auth/Signup/VerificationCode";
+import PersonalInformation from "../components/Auth/Signup/PersonalInformation";
 import Protected from "../components/Protected/Protected";
+import SubCategoriesPage from "../pages/SubCategoriesPage";
 import BusinessProfilePage from "../pages/BusinessProfilePage";
 
 export const router = createBrowserRouter([
@@ -38,30 +33,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Protected Component={BookingsPage} />,
+        element: <Protected Component={DashboardPage} />,
       },
       {
-        path: "/statistics",
-        element: <Protected Component={StatisticsPage} />,
+        path: "/categories/:categoryName/:categoryId",
+        element: <Protected Component={SubCategoriesPage} />,
       },
       {
-        path: "/services",
-        element: <Protected Component={ServicesPage} />,
-      },
-      {
-        path: "/newService",
-        element: <Protected Component={AddNewServicePage} />,
-      },
-      {
-        path: "/employees",
-        element: <Protected Component={EmployeesPage} />,
-      },
-      {
-        path: "/addEmployee",
-        element: <Protected Component={AddEmployeePage} />,
-      },
-      {
-        path: "/profile",
+        path: "/businesses/:businessName/:businessId",
         element: <Protected Component={BusinessProfilePage} />,
       },
     ],

@@ -86,7 +86,7 @@ const VerificationCode = () => {
 
   useMemo(() => {
     if (isSuccess) {
-      navigate("/personalInformation");
+      navigate("/dashboard");
     }
   }, [isSuccess]);
 

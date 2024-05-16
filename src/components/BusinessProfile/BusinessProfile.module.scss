@@ -1,0 +1,257 @@
+@import "../../styles/constants.scss";
+
+.wrapper {
+  width: 100%;
+  margin: 0.92rem 10px;
+
+  .profileInfo {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 1.8rem;
+    width: 100%;
+
+    .left {
+      display: flex;
+      gap: 24px;
+
+      .image {
+        width: 140px;
+
+        img {
+          width: 100%;
+          border-radius: 11px;
+        }
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        .name {
+          font-size: 1.8rem;
+          font-weight: 700;
+          text-overflow: ellipsis;
+        }
+
+        .address {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: #333333;
+
+          svg {
+            color: $primary;
+            font-size: 1rem;
+          }
+        }
+
+        .rating {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 0.8rem;
+
+          p {
+            margin: 0;
+            // margin-top: 2px;
+            font-weight: 500;
+            color: #333333;
+
+            span {
+              color: #707070;
+            }
+          }
+
+          button {
+            background-color: transparent;
+            color: $primary;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-left: 10px;
+          }
+
+          .moreInfo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 12px;
+
+            svg {
+              font-size: 1.15rem;
+            }
+          }
+        }
+      }
+    }
+
+    .right{
+      button{
+        @include button($width: auto, $height:3.3rem);
+        padding: 0 1.6rem;
+        font-size: 1.02rem;
+        box-shadow: 2px 0px 5px 0px $primaryLight;
+      }
+    }
+  }
+
+  //   Services
+  .servicesWrapper {
+    width: 100%;
+    margin: 2rem 0;
+
+    .title {
+      h1 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #333333;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        svg {
+          color: #fc8236;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .services {
+      display: flex;
+      margin: 1.5rem 0;
+      gap: 2rem;
+
+      .left {
+        flex: 1;
+
+        .cards {
+          .card {
+            border: 1px solid #dcdcdc;
+            border-radius: 12px;
+            padding: 1.3rem 1.2rem;
+            display: flex;
+            // align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+              background-color: #f6f6f6;
+              transform: scale(1.04);
+              transition: all 0.2s;
+            }
+
+            .left {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              gap: 7px;
+
+              .name {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: #333333;
+              }
+
+              .price {
+                font-size: 0.94rem;
+                color: #333333;
+                font-weight: 400;
+              }
+
+              .desc {
+                font-size: 0.94rem;
+                color: #707070;
+                font-weight: 400;
+              }
+            }
+
+            .right {
+              flex: 0.6;
+              width: 100%;
+              display: flex;
+              justify-content: flex-end;
+
+              .img {
+                min-height: 128px;
+                width: 128px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                object-fit: cover;
+
+                img {
+                  width: 128px;
+                  height: 128px;
+                  border-radius: 8px !important;
+                  object-fit: cover;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .right {
+        flex: 0.4;
+
+        .openingHours {
+          width: 100%;
+          height: 100%;
+          position: relative;
+
+          .box {
+            position: sticky;
+            // top: 0;
+            // left: 0;
+            border: 1px solid #dcdcdc;
+            border-radius: 12px;
+            padding: 1.2rem 1.1rem;
+            // height: 100vh;
+            width: 100%;
+
+            ul {
+              padding-left: 0;
+
+              li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 1.5rem;
+
+                & > p {
+                  font-size: 1rem;
+                  font-weight: 500;
+                  width: 30%;
+                  flex: 0.68;
+                }
+
+                .right {
+                  width: 70%;
+                  display: flex;
+                  align-items: center;
+                  gap: 5px;
+                  flex: 1;
+                  justify-content: flex-end;
+
+                  p {
+                    width: max-content;
+                    font-size: 0.93rem;
+                    color: #707070;
+                    font-weight: 500;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

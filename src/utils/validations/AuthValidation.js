@@ -1,6 +1,9 @@
 import * as Yup from "yup";
 
 export const signupEmailSchema = Yup.object({
+  name: Yup.string()
+    .max(255, "Maximun characters are 255")
+    .required("Name is Required"),
   email: Yup.string()
     .max(255, "Maximun characters are 255")
     .email("Please Enter a valid email address")
@@ -25,19 +28,6 @@ export const verificationCodeSchema = Yup.object({
     ),
 });
 
-export const personalInformationSchema = Yup.object({
-  name: Yup.string()
-    .max(255, "Maximun characters are 255")
-    .required("Buisness name is Required"),
-  description: Yup.string()
-    .max(255, "Maximun characters are 255")
-    .required("Buisness description is Required"),
-  address: Yup.string()
-    .max(255, "Maximun characters are 255")
-    .required("Buisness Address is Required"),
-  profileImg: Yup.mixed().nullable().required("Please Select Business Profile"),
-});
-
 export const loginSchema = Yup.object({
   email: Yup.string()
     .max(255, "Maximun characters are 255")
@@ -49,19 +39,15 @@ export const loginSchema = Yup.object({
     .required("Password is Required"),
 });
 
-export const businessProfileSchema = Yup.object({
+export const personalInformationSchema = Yup.object({
   name: Yup.string()
     .max(255, "Maximun characters are 255")
-    .min(3, "Minimum characters are 3")
-    .required("Name is Required"),
-  email: Yup.string()
-    .max(255, "Maximun characters are 255")
-    .email("Please Enter a valid email address")
-    .required("Email is Required"),
-  address: Yup.string()
-    .max(255, "Maximun characters are 255")
-    .required("Buisness Address is Required"),
+    .required("Buisness name is Required"),
   description: Yup.string()
     .max(255, "Maximun characters are 255")
     .required("Buisness description is Required"),
+  address: Yup.string()
+    .max(255, "Maximun characters are 255")
+    .required("Buisness Address is Required"),
+  profileImg: Yup.mixed().nullable().required("Please Select Business Profile"),
 });
