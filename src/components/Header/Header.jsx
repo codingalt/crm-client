@@ -6,8 +6,6 @@ import user from "../../assets/user.jpg";
 import { FaChevronDown } from "react-icons/fa6";
 import logo from "../../assets/logo.svg";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import { MdMenuOpen } from "react-icons/md";
-import { MdMenu } from "react-icons/md";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
 const Header = ({ activeSidebar, setActiveSidebar }) => {

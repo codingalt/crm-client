@@ -10,49 +10,49 @@ const OpeningHours = () => {
           <li>
             <p>Monday</p>
             <div className={css.right}>
-              <p>9:00 Am</p>
+              <p>9:00Am</p>
               <p>-</p>
-              <p>5:00 Pm</p>
+              <p>5:00Pm</p>
             </div>
           </li>
           <li>
             <p>Tuesday</p>
             <div className={css.right}>
-              <p>9:00 Am</p>
+              <p>9:00Am</p>
               <p>-</p>
-              <p>5:00 Pm</p>
+              <p>5:00Pm</p>
             </div>
           </li>
           <li>
             <p>Wednesday</p>
             <div className={css.right}>
-              <p>9:00 Am</p>
+              <p>9:00Am</p>
               <p>-</p>
-              <p>5:00 Pm</p>
+              <p>5:00Pm</p>
             </div>
           </li>
           <li>
             <p>Thursday</p>
             <div className={css.right}>
-              <p>9:00 Am</p>
+              <p>9:00Am</p>
               <p>-</p>
-              <p>5:00 Pm</p>
+              <p>5:00Pm</p>
             </div>
           </li>
           <li>
             <p>Friday</p>
             <div className={css.right}>
-              <p>9:00 Am</p>
+              <p>9:00Am</p>
               <p>-</p>
-              <p>5:00 Pm</p>
+              <p>5:00Pm</p>
             </div>
           </li>
           <li>
             <p>Saturday</p>
             <div className={css.right}>
-              <p>9:00 Am</p>
+              <p>9:00Am</p>
               <p>-</p>
-              <p>5:00 Pm</p>
+              <p>5:00Pm</p>
             </div>
           </li>
           <li>

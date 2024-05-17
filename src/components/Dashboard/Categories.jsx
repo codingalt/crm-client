@@ -1,43 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import css from "./Dashboard.module.scss";
-import { CiDumbbell } from "react-icons/ci";
-import { LuDumbbell } from "react-icons/lu";
-import { GiComb } from "react-icons/gi";
 import { FaStethoscope } from "react-icons/fa";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { Skeleton } from "@nextui-org/react";
+import { useMediaQuery } from "@uidotdev/usehooks";
+import ImageComponent from "../ui/Image/ImageComponent";
 
-const Categories = () => {
+const Categories = ({ data, isLoading }) => {
   const navigate = useNavigate();
+  const [value, setValue] = useState(0);
+
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const isMediumDevice = useMediaQuery(
+    "only screen and (min-width : 769px) and (max-width : 1280px)"
+  );
+  const isLargeDevice = useMediaQuery(
+    "only screen and (min-width : 1281px) and (max-width : 1536px)"
+  );
+  const isExtraLargeDevice = useMediaQuery(
+    "only screen and (min-width : 1537px)"
+  );
+
+  useEffect(() => {
+    isSmallDevice
+      ? setValue(2)
+      : isMediumDevice
+      ? setValue(3)
+      : isLargeDevice
+      ? setValue(4)
+      : isExtraLargeDevice
+      ? setValue(6)
+      : null;
+  }, [isSmallDevice, isMediumDevice, isLargeDevice, isExtraLargeDevice]);
 
   return (
     <div
-      className={`${css.categories} grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-x-5 gap-y-4`}
+      className={`${css.categories} lg:min-h-44 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-x-5 gap-y-4`}
     >
-      <div
-        className={css.item}
-        onClick={() => navigate(`/categories/Health/1`)}
-      >
-        <FaStethoscope />
-        <p>Health</p>
-      </div>
-
-      <div
-        className={css.item}
-        onClick={() => navigate(`/categories/Capacity/2`)}
-      >
-        <CiDumbbell />
-        <p>Capacity</p>
-      </div>
-
-      <div
-        className={css.item}
-        onClick={() => navigate(`/categories/Cultivation/3`)}
-      >
-        <GiComb />
-        <p>Cultivation</p>
-      </div>
+      {isLoading
+        ? Array.from({ length: value }).map((_, index) => (
+            <Skeleton key={index} className="rounded-lg h-44">
+              <div className="w-full rounded-lg bg-secondary"></div>
+            </Skeleton>
+          ))
+        : data?.map((item) => (
+            <div
+              key={item.id}
+              className={css.item}
+              onClick={() => navigate(`/categories/${item.name}/${item.id}`)}
+            >
+              <div className={css.image}>
+                <ImageComponent src={import.meta.env.VITE_CATEGORY_IMAGE+item.image} radius={"8px"} />
+              </div>
+              <p>{item.name}</p>
+            </div>
+          ))}
     </div>
   );
-}
+};
 
-export default Categories
+export default Categories;

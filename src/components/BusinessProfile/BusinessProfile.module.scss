@@ -14,6 +14,7 @@
 
     .left {
       display: flex;
+      align-items: center;
       gap: 24px;
 
       .image {
@@ -43,10 +44,15 @@
           font-size: 0.95rem;
           font-weight: 500;
           color: #333333;
+          max-width: 38rem;
 
           svg {
             color: $primary;
             font-size: 1rem;
+          }
+
+          span{
+            width: calc(100% - 25px);
           }
         }
 
@@ -129,6 +135,7 @@
         flex: 1;
 
         .cards {
+
           .card {
             border: 1px solid #dcdcdc;
             border-radius: 12px;
@@ -193,6 +200,31 @@
                   object-fit: cover;
                 }
               }
+            }
+          }
+
+          .activeCard{
+            background: $primary;
+            color: #fff;
+
+            .left{
+
+              .name{
+                color: #fff;
+              }
+
+              .price{
+                color: #fff;
+              }
+
+              .desc{
+                color: #fff;
+              }
+            }
+
+            &:hover{
+              background-color: $primary;
+              transform: scale(1);
             }
           }
         }

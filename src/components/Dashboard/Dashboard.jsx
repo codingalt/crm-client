@@ -4,8 +4,13 @@ import { FaChevronDown } from "react-icons/fa6";
 import Categories from "./Categories";
 import Appointments from "./Appointments";
 import Business from "./Business";
+import { useGetBusinessesQuery, useGetGlobalCategoriesQuery } from "../../services/api/categoriesApi/categoriesApi";
 
 const Dashboard = () => {
+  const {data, isLoading} = useGetGlobalCategoriesQuery();
+  const { data: businesses, isLoading: isLoadingBusinesses } = useGetBusinessesQuery();
+  console.log(businesses);
+
   return (
     <>
       <div className={css.dashboardDetails}>
@@ -14,11 +19,14 @@ const Dashboard = () => {
           <FaChevronDown />
         </div>
 
-        <Categories />
+        <Categories data={data?.categories} isLoading={isLoading} />
 
         <Appointments />
 
-        <Business />
+        <Business
+          data={businesses?.businesses}
+          isLoading={isLoadingBusinesses}
+        />
       </div>
     </>
   );
