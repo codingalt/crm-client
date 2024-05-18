@@ -10,6 +10,8 @@ import PersonalInformation from "../components/Auth/Signup/PersonalInformation";
 import Protected from "../components/Protected/Protected";
 import SubCategoriesPage from "../pages/SubCategoriesPage";
 import BusinessProfilePage from "../pages/BusinessProfilePage";
+import MakeAppointmentPage from "../pages/MakeAppointmentPage";
+import Completion from "../components/BookAppointmentSteps/Payment/Completion";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ export const router = createBrowserRouter([
       {
         path: "/businesses/:businessName/:businessId",
         element: <Protected Component={BusinessProfilePage} />,
+      },
+      {
+        path: "/makeAppointment/:businessName",
+        element: <Protected Component={MakeAppointmentPage} />,
+      },
+      {
+        path: "/success",
+        element: <Protected Component={Completion} />,
       },
     ],
   },

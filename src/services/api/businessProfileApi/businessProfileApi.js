@@ -19,8 +19,25 @@ export const businessProfileApi = createApi({
       providesTags: ["BusinessProfile"],
     }),
 
+    getPaymentIntent: builder.mutation({
+      query: ({ amount }) => ({
+        url: `customer/balanceTopUpPaymentIntent`,
+        method: "POST",
+        body: { amount: amount },
+      }),
+      invalidatesTags: ["BusinessProfile"],
+    }),
+
+    paymentSuccess: builder.mutation({
+      query: ({ payment_intent }) => ({
+        url: `customer/balanceTopUpConfirmPayment`,
+        method: "POST",
+        body: { payment_intent_id: payment_intent },
+      }),
+      invalidatesTags: ["BusinessProfile"],
+    }),
   }),
 });
 
-export const { useGetBusinessProfileQuery } =
+export const { useGetBusinessProfileQuery, useGetPaymentIntentMutation, usePaymentSuccessMutation } =
   businessProfileApi;
