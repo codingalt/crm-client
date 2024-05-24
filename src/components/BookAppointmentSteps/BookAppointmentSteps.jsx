@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import css from "./BookAppointmentSteps.module.scss";
 import { wrap } from "popmotion";
 import SelectDate from "./SelectDate/SelectDate";
 import SelectTime from "./SelectTime/SelectTime";
 import PaymentStep from "./Payment/PaymentStep";
+import { useSelector } from "react-redux";
+import { useGetServiceDetailsByIdQuery } from "../../services/api/servicesApi/servicesApi";
+import { useLocation, useNavigate } from "react-router-dom";
+import CashPayment from "./CashPayment/CashPayment";
+import { useBookAppointmentMutation } from "../../services/api/businessProfileApi/businessProfileApi";
+import { useApiErrorHandling } from "../../hooks/useApiErrors";
+import { toastError, toastSuccess } from "../Toast/Toast";
+import moment from "moment";
 
 const variants = {
   enter: (direction) => {
@@ -34,15 +42,77 @@ const variants = {
 };
 
 const BookAppointmentSteps = () => {
+  const { user } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const serviceId = searchParams.get("service-id");
+
+  const [loadingPayment, setLoadingPayment] = useState(null);
   const [[page, direction], setPage] = useState([0, 0]);
   const [selectedDate, setSelectedDate] = useState();
   const [selectedTime, setSelectedTime] = useState();
+  const [isConfirmPayment, setIsConfirmPayment] = useState(null);
+
+  // Service Details
+  const { data: service } = useGetServiceDetailsByIdQuery(serviceId);
 
   const paginate = (newDirection) => {
     const nextPage = page + newDirection;
     if (nextPage >= 0 && nextPage <= 3) {
+      if (nextPage === 2) {
+        // Process Payment and User Balance Details
+        const checkBalance = service?.service.price - user?.balance;
+
+        if (checkBalance <= 0) {
+          // It Means User have enough balance in wallet. Show Confirm Payment Component
+          setIsConfirmPayment(true);
+        } else if (checkBalance > 0) {
+          // User do not have enough balance in wallet. Show Stripe Form
+          setIsConfirmPayment(false);
+        }
+      }
       setPage([nextPage, newDirection]);
     }
+  };
+
+  // Book Appointment
+  const [bookAppointment, res] = useBookAppointmentMutation();
+  const { isLoading, error, isSuccess } = res;
+
+  const apiErrors = useApiErrorHandling(error);
+
+  useEffect(() => {
+    if (error && error.status !== 500 && error.status != "FETCH_ERROR") {
+      toastError(
+        error?.data?.message
+          ? error?.data?.message
+          : "Uh ho! Something went wrong"
+      );
+    }
+  }, [error]);
+
+  useEffect(()=>{
+    if(isSuccess){
+      toastSuccess("Booking Successfull");
+
+      setTimeout(() => {
+          navigate("/appointments");
+      }, 1500);
+    }
+  },[isSuccess]);
+
+  const handleBookAppointment = async () => {
+    const date = moment(selectedDate);
+    const time = moment(selectedTime);
+
+    const formattedDate = date.format("YYYY-MM-DD");
+    const formattedTime = time.format("HH:mm:ss");
+
+    // Concatenate the formatted date and time
+    const formattedDateTime = `${formattedDate} ${formattedTime}`;
+    console.log("formattedDateTime", formattedDateTime);
+    await bookAppointment({ serviceId: serviceId, date: formattedDateTime });
   };
 
   const renderData = [
@@ -52,7 +122,20 @@ const BookAppointmentSteps = () => {
       selectedTime={selectedTime}
       setSelectedTime={setSelectedTime}
     />,
-    <PaymentStep />
+    isConfirmPayment ? (
+      <CashPayment
+        data={service?.service}
+        handleBookAppointment={handleBookAppointment}
+        isLoading={isLoading}
+      />
+    ) : (
+      <PaymentStep
+        loading={loadingPayment}
+        setLoading={setLoadingPayment}
+        paginate={paginate}
+        amount={service?.service.price - user?.balance}
+      />
+    ),
   ];
 
   const dataIndex = wrap(0, renderData.length, page);
@@ -78,26 +161,27 @@ const BookAppointmentSteps = () => {
 
       {/* Render Dots  */}
       <div className="flex w-full mt-3 bottom-28 space-x-2 items-center justify-center mx-auto">
-        {Array(renderData.length)
-          .fill(null)
-          .map((item, index) =>
-            page === index ? (
-              <div
-                key={index}
-                className="w-[16px] h-[16px] bg-[#01ABAB] rounded-full cursor-pointer transition-all"
-              ></div>
-            ) : (
-              <div
-                key={index}
-                onClick={() => {
-                  page === 0 || page < index
-                    ? paginate(1)
-                    : index < page && paginate(-1);
-                }}
-                className="w-[16px] h-[16px] border-1 border-[#01ABAB] rounded-full cursor-pointer transition-all"
-              ></div>
-            )
-          )}
+        {!loadingPayment &&
+          Array(renderData.length)
+            .fill(null)
+            .map((item, index) =>
+              page === index ? (
+                <div
+                  key={index}
+                  className="w-[16px] h-[16px] bg-[#01ABAB] rounded-full cursor-pointer transition-all"
+                ></div>
+              ) : (
+                <div
+                  key={index}
+                  onClick={() => {
+                    page === 0 || page < index
+                      ? paginate(1)
+                      : index < page && paginate(-1);
+                  }}
+                  className="w-[16px] h-[16px] border-1 border-[#01ABAB] rounded-full cursor-pointer transition-all"
+                ></div>
+              )
+            )}
       </div>
     </div>
   );

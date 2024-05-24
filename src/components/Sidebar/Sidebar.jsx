@@ -1,18 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import css from "./Sidebar.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import { BiHomeAlt2 } from "react-icons/bi";
-import { IoSettingsOutline } from "react-icons/io5";
-import InsertChartOutlinedIcon from "@mui/icons-material/InsertChartOutlined";
 import { Grid, Tooltip } from "@mui/material";
 import { FaLightbulb } from "react-icons/fa";
 import { LuClock4 } from "react-icons/lu";
-import { MdMedicalServices } from "react-icons/md";
-import { IoStatsChart } from "react-icons/io5";
-import { FaUserFriends } from "react-icons/fa";
-import { FaUserCircle } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
 import useClickOutside from "../../hooks/useClickOutside";
+import { FaUser } from "react-icons/fa";
+import { IoMdListBox } from "react-icons/io";
+import { IoNotificationsSharp } from "react-icons/io5";
 
 const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
   let pathname = window.location.pathname;
@@ -55,48 +51,33 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
               </Tooltip>
             </Grid>
             <Grid item>
-              <Tooltip title="Statistics" placement="right-end">
+              <Tooltip title="Appointments" placement="right-end">
                 <li className="sidebar-li">
                   <NavLink
-                    to={"/statistics"}
+                    to={"/appointments"}
                     className={
-                      pathname.match("/statistics") ? css.activeMenuLi : ""
+                      pathname.match("/appointments") ? css.activeMenuLi : ""
                     }
                   >
-                    <IoStatsChart />
+                    <IoMdListBox />
                   </NavLink>
                 </li>
               </Tooltip>
             </Grid>
 
             <Grid item>
-              <Tooltip title="Services" placement="right-end">
+              <Tooltip title="Notifications" placement="right-end">
                 <li className="sidebar-li">
                   <NavLink
-                    to={"/services"}
-                    className={
-                      pathname.match("/services") ? css.activeMenuLi : ""
-                    }
+                    to={"#"}
+                    className={pathname.match("#") ? css.activeMenuLi : ""}
                   >
-                    <MdMedicalServices />
+                    <IoNotificationsSharp />
                   </NavLink>
                 </li>
               </Tooltip>
             </Grid>
-            <Grid item>
-              <Tooltip title="Employees" placement="right-end">
-                <li className="sidebar-li">
-                  <NavLink
-                    to={"/employees"}
-                    className={
-                      pathname.match("/employees") ? css.activeMenuLi : ""
-                    }
-                  >
-                    <FaUserFriends />
-                  </NavLink>
-                </li>
-              </Tooltip>
-            </Grid>
+
             <Grid item>
               <Tooltip title="Profile" placement="right-end">
                 <li className="sidebar-li">
@@ -106,7 +87,7 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
                       pathname.match("/profile") ? css.activeMenuLi : ""
                     }
                   >
-                    <FaUserCircle />
+                    <FaUser />
                   </NavLink>
                 </li>
               </Tooltip>

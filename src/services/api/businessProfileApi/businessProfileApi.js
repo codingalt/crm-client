@@ -19,6 +19,11 @@ export const businessProfileApi = createApi({
       providesTags: ["BusinessProfile"],
     }),
 
+    getMyBookings: builder.query({
+      query: () => `customer/bookings`,
+      providesTags: ["BusinessProfile"],
+    }),
+
     getPaymentIntent: builder.mutation({
       query: ({ amount }) => ({
         url: `customer/balanceTopUpPaymentIntent`,
@@ -36,8 +41,17 @@ export const businessProfileApi = createApi({
       }),
       invalidatesTags: ["BusinessProfile"],
     }),
+
+    bookAppointment: builder.mutation({
+      query: ({ serviceId, date }) => ({
+        url: `customer/bookAppointment/${serviceId}`,
+        method: "POST",
+        body: { date: date },
+      }),
+      invalidatesTags: ["BusinessProfile"],
+    }),
   }),
 });
 
-export const { useGetBusinessProfileQuery, useGetPaymentIntentMutation, usePaymentSuccessMutation } =
+export const { useGetBusinessProfileQuery, useGetPaymentIntentMutation, usePaymentSuccessMutation, useBookAppointmentMutation, useGetMyBookingsQuery } =
   businessProfileApi;

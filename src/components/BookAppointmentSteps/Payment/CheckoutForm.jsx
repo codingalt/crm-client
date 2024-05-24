@@ -11,7 +11,7 @@ import css from "./Payment.module.scss";
 import { Button } from "@nextui-org/react";
 import { usePaymentSuccessMutation } from "../../../services/api/businessProfileApi/businessProfileApi";
 
-const CheckoutForm = ({ clientSecret }) => {
+const CheckoutForm = ({ clientSecret, paginate }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
@@ -19,11 +19,13 @@ const CheckoutForm = ({ clientSecret }) => {
   const [paymentSuccess, result] = usePaymentSuccessMutation();
   const { isLoading, error, isSuccess } = result;
 
-  useMemo(()=>{
-    if(error){
-      toastError(error?.data?.message ? error.data.message : "Something went wrong")
+  useMemo(() => {
+    if (error) {
+      toastError(
+        error?.data?.message ? error.data.message : "Something went wrong"
+      );
     }
-  },[error]);
+  }, [error]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,14 +47,13 @@ const CheckoutForm = ({ clientSecret }) => {
     if (error) {
       toastError(error.message);
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
-      const {data} = await paymentSuccess({
+      const { data } = await paymentSuccess({
         payment_intent: paymentIntent.id,
       });
 
-      if(data?.success){
-        navigate(`/success`);
+      if (data?.success) {
+        paginate(1);
       }
-
     } else {
       toastError("Something went wrong.");
     }
@@ -62,10 +63,7 @@ const CheckoutForm = ({ clientSecret }) => {
 
   return (
     <div className={css.paymentForm}>
-      <form
-        id="payment-form"
-        onSubmit={handleSubmit}
-      >
+      <form id="payment-form" onSubmit={handleSubmit}>
         <PaymentElement />
         {clientSecret && (
           <Button
@@ -73,7 +71,9 @@ const CheckoutForm = ({ clientSecret }) => {
             isLoading={loading}
             type="submit"
           >
-            {loading || isLoading ? "Processing.." : "Pay now to Book Appointment"}
+            {loading || isLoading
+              ? "Processing.."
+              : "Pay now to Book Appointment"}
           </Button>
         )}
       </form>

@@ -1,0 +1,60 @@
+@import "../../../styles/constants.scss";
+
+.wrapper {
+  width: 100%;
+  min-height: 50vh;
+
+  .heading {
+    color: #333333;
+    font-size: 32px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+  }
+
+  .card{
+    margin-top: 2rem;
+
+    .item{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 500;
+        font-size: 1.05rem;
+        padding: 1.25rem 1.5rem;
+        padding-bottom: .3rem;
+    }
+
+    .footer{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0rem;
+        font-weight: 500;
+        font-size: 1.18rem;
+        padding: 1.25rem 1.5rem;
+        padding-bottom: 1rem;
+        background: $primary;
+        color: $white;
+        margin-top: 1.5rem;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+  }
+
+  .button{
+    width: 100%;
+    margin: 4rem auto;
+    margin-top: 4.7rem;
+
+    button{
+        @include button($width: 100%, $height: 3rem);
+    }
+  }
+
+
+}

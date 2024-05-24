@@ -12,6 +12,7 @@ import SubCategoriesPage from "../pages/SubCategoriesPage";
 import BusinessProfilePage from "../pages/BusinessProfilePage";
 import MakeAppointmentPage from "../pages/MakeAppointmentPage";
 import Completion from "../components/BookAppointmentSteps/Payment/Completion";
+import AppointmentsPage from "../pages/AppointmentsPage";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: "/success",
         element: <Protected Component={Completion} />,
+      },
+      {
+        path: "/appointments",
+        element: <Protected Component={AppointmentsPage} />,
       },
     ],
   },
