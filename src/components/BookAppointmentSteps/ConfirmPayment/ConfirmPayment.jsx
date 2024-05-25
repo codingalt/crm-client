@@ -1,8 +1,8 @@
 import React from "react";
-import css from "./CashPayment.module.scss";
+import css from "./ConfirmPayment.module.scss";
 import { Button } from "@nextui-org/react";
 
-const CashPayment = ({ data, handleBookAppointment, isLoading }) => {
+const ConfirmPayment = ({ data, handleBookAppointment, isLoading }) => {
   return (
     <div className={css.wrapper}>
       <div
@@ -35,4 +35,4 @@ const CashPayment = ({ data, handleBookAppointment, isLoading }) => {
   );
 };
 
-export default CashPayment;
+export default ConfirmPayment;

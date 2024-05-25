@@ -54,7 +54,7 @@ const appearance = {
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
-const Payment = ({ loading, setLoading, paginate, amount }) => {
+const Payment = ({ loading, setLoading, amount, setIsConfirmPayment }) => {
   const navigate = useNavigate();
   const [clientSecret, setClientSecret] = useState("");
   const [getPaymentIntent, res] = useGetPaymentIntentMutation();
@@ -121,7 +121,7 @@ const Payment = ({ loading, setLoading, paginate, amount }) => {
               <CheckoutForm
                 clientSecret={clientSecret}
                 isLoading={loading}
-                paginate={paginate}
+                setIsConfirmPayment={setIsConfirmPayment}
               />
             </Elements>
           )}

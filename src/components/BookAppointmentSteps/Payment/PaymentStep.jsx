@@ -3,7 +3,7 @@ import css from "./PaymentStep.module.scss";
 import { Button } from '@nextui-org/react';
 import Payment from './Payment';
 
-const PaymentStep = ({ loading, setLoading, paginate, amount }) => {
+const PaymentStep = ({ loading, setLoading, amount, setIsConfirmPayment }) => {
   useEffect(() => {
     setLoading(true);
   }, []);
@@ -20,8 +20,8 @@ const PaymentStep = ({ loading, setLoading, paginate, amount }) => {
         <Payment
           loading={loading}
           setLoading={setLoading}
-          paginate={paginate}
           amount={amount}
+          setIsConfirmPayment={setIsConfirmPayment}
         />
       </div>
     </div>

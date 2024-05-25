@@ -8,7 +8,6 @@ const Appointments = () => {
     <div className={css.wrapper}>
       <div className={css.top}>
         <h1>My Queues</h1>
-        <FaChevronDown />
       </div>
 
       {/* Tabs  */}

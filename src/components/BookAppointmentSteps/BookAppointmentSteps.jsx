@@ -8,11 +8,11 @@ import PaymentStep from "./Payment/PaymentStep";
 import { useSelector } from "react-redux";
 import { useGetServiceDetailsByIdQuery } from "../../services/api/servicesApi/servicesApi";
 import { useLocation, useNavigate } from "react-router-dom";
-import CashPayment from "./CashPayment/CashPayment";
 import { useBookAppointmentMutation } from "../../services/api/businessProfileApi/businessProfileApi";
 import { useApiErrorHandling } from "../../hooks/useApiErrors";
 import { toastError, toastSuccess } from "../Toast/Toast";
 import moment from "moment";
+import ConfirmPayment from "./ConfirmPayment/ConfirmPayment";
 
 const variants = {
   enter: (direction) => {
@@ -61,6 +61,7 @@ const BookAppointmentSteps = () => {
     const nextPage = page + newDirection;
     if (nextPage >= 0 && nextPage <= 3) {
       if (nextPage === 2) {
+        console.log(nextPage);
         // Process Payment and User Balance Details
         const checkBalance = service?.service.price - user?.balance;
 
@@ -123,7 +124,7 @@ const BookAppointmentSteps = () => {
       setSelectedTime={setSelectedTime}
     />,
     isConfirmPayment ? (
-      <CashPayment
+      <ConfirmPayment
         data={service?.service}
         handleBookAppointment={handleBookAppointment}
         isLoading={isLoading}
@@ -132,7 +133,7 @@ const BookAppointmentSteps = () => {
       <PaymentStep
         loading={loadingPayment}
         setLoading={setLoadingPayment}
-        paginate={paginate}
+        setIsConfirmPayment={setIsConfirmPayment}
         amount={service?.service.price - user?.balance}
       />
     ),

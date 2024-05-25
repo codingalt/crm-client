@@ -16,13 +16,15 @@ const Dashboard = () => {
       <div className={css.dashboardDetails}>
         <div className={css.top}>
           <h1>Categories</h1>
-          <FaChevronDown />
         </div>
 
         <Categories data={data?.categories} isLoading={isLoading} />
 
         <Appointments />
 
+        <div className={css.heading}>
+          <h1>Businesses</h1>
+        </div>
         <Business
           data={businesses?.businesses}
           isLoading={isLoadingBusinesses}

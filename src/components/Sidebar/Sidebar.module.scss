@@ -3,9 +3,11 @@
 a {
   text-decoration: none;
 }
+
 ul li a:hover {
   text-decoration: none;
 }
+
 ul li {
   list-style-type: none;
 }
@@ -20,7 +22,7 @@ ul li {
   padding-top: 1.5rem;
   position: fixed;
   left: 0;
-  top: 4.7rem;
+  top: 4.5rem;
   border-radius: 12px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

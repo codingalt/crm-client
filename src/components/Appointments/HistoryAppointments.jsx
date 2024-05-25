@@ -16,8 +16,16 @@ const HistoryAppointments = ({data}) => {
         {data?.map((item) => (
           <div className={css.card} key={item.id}>
             <div className={css.item}>
-              <p>Appointment </p>
-              <span>{moment(item.appointment_date).format("D MMMM, YYYY")}</span>
+              <p>Appointment Date</p>
+              <span>
+                {moment(item.appointment_date).format("D MMMM, YYYY")}
+              </span>
+            </div>
+            <div className={css.item}>
+              <p>Appointment Time</p>
+              <span>
+                {moment(item.appointment_date).format("hh:mm A")}
+              </span>
             </div>
             <div className={css.item}>
               <p>Service</p>

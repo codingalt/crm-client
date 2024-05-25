@@ -12,7 +12,7 @@ import ClipSpinner from '../Loader/ClipSpinner';
 
 const AppointmentTabs = () => {
     const { data,isLoading } = useGetMyBookingsQuery();
-    console.log(data);
+
   return (
     <div className="flex w-full flex-col">
       <Tabs
@@ -20,6 +20,7 @@ const AppointmentTabs = () => {
         color="primary"
         variant="underlined"
         size="lg"
+        keyboardActivation="manual"
         classNames={{
           tabList:
             "gap-14 w-full max-w-md relative rounded-none p-0 border-b border-divider",
@@ -34,23 +35,28 @@ const AppointmentTabs = () => {
             <div className="flex items-center space-x-2">
               <MdUpcoming fontSize={23} />
               <span>Active Queues</span>
-              <Chip size="sm" variant="faded">
-                9
-              </Chip>
+              {data && (
+                <Chip size="sm" variant="faded">
+                  {parseInt(data?.active?.length) +
+                    parseInt(data?.upComing?.length)}
+                </Chip>
+              )}
             </div>
           }
         >
+          {!isLoading &&
+            data?.active.length === 0 &&
+            data?.upComing.length === 0 && (
+              <div className="w-full h-40 flex justify-center max-w-md mt-10">
+                <Empty description={<span>No active appointments.</span>} />
+              </div>
+            )}
+
           <FutureQueues active={data?.active} upComing={data?.upComing} />
 
           {isLoading && (
             <div className="w-full h-40 flex justify-center max-w-md mt-14">
               <ClipSpinner />
-            </div>
-          )}
-
-          {!isLoading && data?.active.length === 0 && (
-            <div className="w-full h-40 flex justify-center max-w-md mt-10">
-              <Empty description={<span>No active appointments.</span>} />
             </div>
           )}
         </Tab>
@@ -60,9 +66,11 @@ const AppointmentTabs = () => {
             <div className="flex items-center space-x-2">
               <RiChatHistoryFill fontSize={23} />
               <span>Queues History</span>
-              <Chip size="sm" variant="faded">
-                3
-              </Chip>
+              {data && (
+                <Chip size="sm" variant="faded">
+                  {parseInt(data?.completed?.length)}
+                </Chip>
+              )}
             </div>
           }
         >

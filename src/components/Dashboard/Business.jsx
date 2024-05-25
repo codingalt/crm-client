@@ -5,6 +5,7 @@ import ImageProfileComponent from "../ui/Image/ImageProfileComponent";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { Skeleton } from "@nextui-org/react";
+import { truncateText } from "../../utils/helpers/helpers";
 
 const Business = ({data, isLoading}) => {
   const navigate = useNavigate();
@@ -55,14 +56,10 @@ const Business = ({data, isLoading}) => {
               <div className={css.data}>
                 <div className={css.name}>{item.name}</div>
                 <div className={css.desc}>
-                  {item.description.length > 30
-                    ? `${item.description.slice(0, 30)}..`
-                    : item.description}
+                  {truncateText(item.description,40)}
                 </div>
                 <div className={css.address}>
-                  {item.address.length > 30
-                    ? `${item.address.slice(0, 30)}..`
-                    : item.address}
+                  {truncateText(item.address,40)}
                 </div>
               </div>
             </div>

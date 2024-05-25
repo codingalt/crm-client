@@ -33,6 +33,13 @@ $error: #FF0000;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
+@mixin limitText($maxWidth: 200px) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: $maxWidth;
+}
+
 @mixin button($width: 12rem, $height: 3rem, $background: $primary) {
   width: $width;
   height: $height;

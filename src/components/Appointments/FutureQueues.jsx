@@ -16,8 +16,9 @@ const FutureQueues = ({ active, upComing }) => {
             <div className={css.card}>
               <div className={css.cardHeader}>
                 <div className={css.cardTitle}>
-                  {/* <h4>Motive</h4> */}
-                  <Chip color="success">Active</Chip>
+                  <div className="bg-[#fdf3f1] font-medium text-tiny px-3 py-1 rounded-full">
+                    Active
+                  </div>
                 </div>
               </div>
 
@@ -25,7 +26,7 @@ const FutureQueues = ({ active, upComing }) => {
                 <p>{item.service.name}</p>
               </div>
 
-              <div className={css.cardFooter}>
+              <div className={`${css.cardFooter} bg-[#fdf3f1]`}>
                 <p>{item.service.time} minutes</p>
                 <p>{item.price} Nis</p>
               </div>
@@ -40,8 +41,9 @@ const FutureQueues = ({ active, upComing }) => {
             <div className={css.card}>
               <div className={css.cardHeader}>
                 <div className={css.cardTitle}>
-                  {/* <h4>Upcoming</h4> */}
-                  <Chip color="danger">Upcoming</Chip>
+                  <div className="bg-[#ECF3F9] font-medium text-tiny px-3 py-1 rounded-full">
+                    Upcoming
+                  </div>
                 </div>
               </div>
 
@@ -49,7 +51,7 @@ const FutureQueues = ({ active, upComing }) => {
                 <p>{item.service.name}</p>
               </div>
 
-              <div className={css.cardFooter}>
+              <div className={`${css.cardFooter} bg-[#ECF3F9]`}>
                 <p>{item.service.time} minutes</p>
                 <p>{item.price} Nis</p>
               </div>
