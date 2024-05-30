@@ -9,10 +9,13 @@ import useClickOutside from "../../hooks/useClickOutside";
 import { FaUser } from "react-icons/fa";
 import { IoMdListBox } from "react-icons/io";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { Badge } from "@nextui-org/react";
+import { useSelector } from "react-redux";
 
 const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
   let pathname = window.location.pathname;
   const sidebarRef = useRef();
+  const { user } = useSelector((store) => store.auth);
 
   useEffect(() => {
     pathname = window.location.pathname;
@@ -69,10 +72,23 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
               <Tooltip title="Notifications" placement="right-end">
                 <li className="sidebar-li">
                   <NavLink
-                    to={"#"}
-                    className={pathname.match("#") ? css.activeMenuLi : ""}
+                    to={"/notifications"}
+                    className={
+                      pathname.match("/notifications") ? css.activeMenuLi : ""
+                    }
                   >
-                    <IoNotificationsSharp />
+                    {user?.notificationCount > 0 ? (
+                      <Badge
+                        color="danger"
+                        content={user?.notificationCount}
+                        isInvisible={!user}
+                        shape="circle"
+                      >
+                        <IoNotificationsSharp />
+                      </Badge>
+                    ) : (
+                      <IoNotificationsSharp />
+                    )}
                   </NavLink>
                 </li>
               </Tooltip>

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import css from "./Login.module.scss";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginSchema } from "../../../utils/validations/AuthValidation";
@@ -97,6 +97,13 @@ const Login = () => {
                   Enter
                 </Button>
               </div>
+
+              <p className="text-medium text-center font-medium text-default-600 mt-14">
+                <span>Don't have an account?</span>{" "}
+                <NavLink className="text-blue-400" to={"/"}>
+                  Register here
+                </NavLink>
+              </p>
             </Form>
           )}
         </Formik>

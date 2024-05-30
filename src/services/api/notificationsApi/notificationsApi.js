@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const categoriesApi = createApi({
-  reducerPath: "categoriesApi",
+export const notificationsApi = createApi({
+  reducerPath: "notificationsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_URI,
     prepareHeaders: async (headers, query) => {
@@ -12,22 +12,15 @@ export const categoriesApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Category"],
+  tagTypes: ["Notifications"],
   endpoints: (builder) => ({
-    getGlobalCategories: builder.query({
-      query: () => `customer/categories`,
-      providesTags: ["Category"],
-    }),
-
-    getBusinesses: builder.query({
-      query: () => `customer/businesses`,
-      providesTags: ["Category"],
+    getNotifications: builder.query({
+      query: () => `customer/notifications`,
+      providesTags: ["Notifications"],
     }),
     
   }),
 });
 
-export const {
-  useGetGlobalCategoriesQuery,
-  useGetBusinessesQuery
-} = categoriesApi;
+export const { useGetNotificationsQuery } =
+  notificationsApi;

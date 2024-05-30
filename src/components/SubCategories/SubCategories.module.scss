@@ -1,8 +1,8 @@
 @import "../../styles/constants.scss";
 
 .wrapper {
-    width: 100%;
-    margin: 0.92rem 10px;
+  width: 100%;
+  margin: 0.92rem 10px;
 
   .subCategories {
     width: 100%;
@@ -26,6 +26,36 @@
         font-size: 20px;
         font-weight: 600;
         text-align: center;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      margin-top: 0rem;
+
+      .subCategories {
+        margin-top: 1.4rem;
+
+        .item {
+          padding: 0.8rem 1.1rem;
+          gap: 16px;
+
+          svg {
+            font-size: 2.5rem;
+          }
+
+          .image {
+            width: 40px;
+            height: 40px;
+          }
+
+          p {
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+          }
+        }
       }
     }
   }

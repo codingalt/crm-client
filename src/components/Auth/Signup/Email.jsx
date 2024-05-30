@@ -37,7 +37,7 @@ const Email = () => {
         navigate("/dashboard");
       } else if (!isLoadingValidate && isErrorValidate) {
         setShow(true);
-        localStorage.removeItem("crmClientToken");
+        // localStorage.removeItem("crmClientToken");
       }
     }
   }, [data, isLoadingValidate, isErrorValidate, isSuccessValidate]);

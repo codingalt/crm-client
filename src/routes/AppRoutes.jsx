@@ -13,6 +13,8 @@ import BusinessProfilePage from "../pages/BusinessProfilePage";
 import MakeAppointmentPage from "../pages/MakeAppointmentPage";
 import Completion from "../components/BookAppointmentSteps/Payment/Completion";
 import AppointmentsPage from "../pages/AppointmentsPage";
+import NotificationsPage from "../pages/NotificationsPage";
+import NotFound from "../components/NotFound/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +59,14 @@ export const router = createBrowserRouter([
       {
         path: "/appointments",
         element: <Protected Component={AppointmentsPage} />,
+      },
+      {
+        path: "/notifications",
+        element: <Protected Component={NotificationsPage} />,
+      },
+      {
+        path: "*",
+        element: <Protected Component={NotFound} />,
       },
     ],
   },

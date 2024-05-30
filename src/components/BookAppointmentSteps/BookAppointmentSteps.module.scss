@@ -5,4 +5,10 @@
   margin: 0.4rem 10px;
   scrollbar-width: none;
   position: relative;
+
+  @media (max-width: 768px){
+    &{
+      margin: 0.5rem auto;
+    }
+  }
 }

@@ -58,7 +58,7 @@ const OpeningHours = () => {
           <li>
             <p>Sunday</p>
               <div className={css.right}>
-                <div className="flex items-center justify-between w-[71%] px-4 bg-green-50 h-8 rounded-md">
+                <div className="flex items-center justify-between w-[73.6%] md:w-[71%] px-4 bg-green-50 h-8 rounded-md">
                   <IoMoonOutline />
                   <p
                     style={{

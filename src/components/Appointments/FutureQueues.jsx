@@ -7,7 +7,7 @@ const FutureQueues = ({ active, upComing }) => {
   return (
     <div className="w-full mt-6">
       <div
-        className={`${css.queues} grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5 gap-y-5`}
+        className={`${css.queues} grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5 gap-y-4 md:gap-y-5`}
       >
         {/* Active Appointments  */}
         {active?.map((item) => (

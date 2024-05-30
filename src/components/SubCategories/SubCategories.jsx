@@ -8,12 +8,12 @@ const SubCategories = () => {
 
   return (
     <div className={css.wrapper}>
-      <p className="text-medium font-medium my-2">
+      <p className="md:text-medium text-sm font-medium  my-2">
         Results for <span className="text-orange-400">"{categoryName}"</span> Category
       </p>
 
       <div
-        className={`${css.subCategories} grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-x-5 gap-y-4`}
+        className={`${css.subCategories} grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-x-3 gap-y-3 md:gap-x-5 md:gap-y-4`}
       >
         <Card />
       </div>

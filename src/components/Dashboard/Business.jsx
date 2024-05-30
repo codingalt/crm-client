@@ -30,13 +30,13 @@ const Business = ({data, isLoading}) => {
       : isLargeDevice
       ? setValue(3)
       : isExtraLargeDevice
-      ? setValue(4)
+      ? setValue(3)
       : null;
   }, [isSmallDevice, isMediumDevice, isLargeDevice, isExtraLargeDevice]);
 
   return (
     <div
-      className={`${css.business} lg:min-h-40 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-2`}
+      className={`${css.business} lg:min-h-40 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5 gap-y-2`}
     >
       {isLoading
         ? Array.from({ length: value }).map((_, index) => (
@@ -56,10 +56,10 @@ const Business = ({data, isLoading}) => {
               <div className={css.data}>
                 <div className={css.name}>{item.name}</div>
                 <div className={css.desc}>
-                  {truncateText(item.description,40)}
+                  {truncateText(item.description, 40)}
                 </div>
                 <div className={css.address}>
-                  {truncateText(item.address,40)}
+                  {truncateText(item.address, isSmallDevice ? 24 : 40)}
                 </div>
               </div>
             </div>

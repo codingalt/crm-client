@@ -4,7 +4,7 @@ import css from "./Dashboard.module.scss";
 const Appointments = () => {
   return (
     <div className={css.queuesWrap}>
-      <h3>Your Appointments</h3>
+      <h3>Appointments</h3>
 
       <div
         className={`${css.queues} grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5`}

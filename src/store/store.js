@@ -5,6 +5,7 @@ import { authApi } from "../services/api/authApi/authApi";
 import { categoriesApi } from "../services/api/categoriesApi/categoriesApi";
 import { businessProfileApi } from "../services/api/businessProfileApi/businessProfileApi";
 import { servicesApi } from "../services/api/servicesApi/servicesApi";
+import { notificationsApi } from "../services/api/notificationsApi/notificationsApi";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,9 @@ export const store = configureStore({
     // Services Api
     [servicesApi.reducerPath]: servicesApi.reducer,
 
+    // Notifications Api
+    [notificationsApi.reducerPath]: notificationsApi.reducer,
+
     auth: authSlice,
   },
   middleware: (getDefaultMiddleware) =>
@@ -28,6 +32,7 @@ export const store = configureStore({
       categoriesApi.middleware,
       businessProfileApi.middleware,
       servicesApi.middleware,
+      notificationsApi.middleware,
     ]),
 });
 

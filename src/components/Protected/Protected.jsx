@@ -24,7 +24,11 @@ const Protected = ({ Component }) => {
     } else {
       // Check for token validity
       if (!isLoading) {
-        const user = {...token?.user, phoneVerified: token?.phone_verified}
+        const user = {
+          ...token?.user,
+          phoneVerified: token?.phone_verified,
+          notificationCount: token?.notifications,
+        };
         dispatch(setAuth(user));
 
         if (user?.phoneVerified === 0){

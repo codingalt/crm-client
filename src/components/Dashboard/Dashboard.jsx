@@ -9,7 +9,6 @@ import { useGetBusinessesQuery, useGetGlobalCategoriesQuery } from "../../servic
 const Dashboard = () => {
   const {data, isLoading} = useGetGlobalCategoriesQuery();
   const { data: businesses, isLoading: isLoadingBusinesses } = useGetBusinessesQuery();
-  console.log(businesses);
 
   return (
     <>

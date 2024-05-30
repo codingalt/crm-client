@@ -6,7 +6,7 @@
 
   .profileInfo {
     display: flex;
-    align-items: center; 
+    align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #ebebeb;
     padding-bottom: 1.8rem;
@@ -51,7 +51,7 @@
             font-size: 1rem;
           }
 
-          span{
+          span {
             width: calc(100% - 25px);
           }
         }
@@ -95,12 +95,12 @@
       }
     }
 
-    .right{
-      button{
-        @include button($width: auto, $height:3.3rem);
+    .right {
+      button {
+        @include button($width: auto, $height: 3.3rem);
         padding: 0 1.6rem;
         font-size: 1.02rem;
-        box-shadow: 2px 0px 5px 0px $primaryLight;
+        box-shadow: 2px 0px 4px 0px $primaryLight;
       }
     }
   }
@@ -135,7 +135,6 @@
         flex: 1;
 
         .cards {
-
           .card {
             border: 1px solid #dcdcdc;
             border-radius: 12px;
@@ -203,26 +202,25 @@
             }
           }
 
-          .activeCard{
+          .activeCard {
             background: $primary;
             color: #fff;
 
-            .left{
-
-              .name{
+            .left {
+              .name {
                 color: #fff;
               }
 
-              .price{
+              .price {
                 color: #fff;
               }
 
-              .desc{
+              .desc {
                 color: #fff;
               }
             }
 
-            &:hover{
+            &:hover {
               background-color: $primary;
               transform: scale(1);
             }
@@ -277,6 +275,151 @@
                     font-size: 0.93rem;
                     color: #707070;
                     font-weight: 500;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      margin: 0 8px;
+      margin-top: 1.2rem;
+
+      .profileInfo {
+        flex-direction: column;
+        align-items: start;
+
+        .left {
+          flex-direction: column;
+          gap: 11px;
+          align-items: start;
+          width: 100%;
+
+          .image {
+            width: 100px;
+          }
+
+          .details {
+            gap: 7px;
+
+            .name {
+              font-size: 1.3rem;
+              font-weight: 700;
+            }
+
+            .address {
+              gap: 3px;
+              font-size: 0.9rem;
+
+              span {
+                text-overflow: ellipsis;
+              }
+            }
+
+            .rating {
+              margin-top: 0.4rem;
+
+              button {
+                margin-left: 8px;
+                font-size: 0.8rem;
+                font-weight: 400;
+              }
+            }
+          }
+        }
+
+        .right {
+          margin-top: 1.9rem;
+          width: 100%;
+
+          button {
+            width: 100%;
+            height: 2.8rem;
+            font-size: 0.96rem;
+            box-shadow: 2px 0px 1px 0px $primaryLight;
+          }
+        }
+      }
+
+      .servicesWrapper {
+        .title {
+          h1 {
+            font-size: 1.15rem;
+            font-weight: 600;
+          }
+
+          &>div{
+            font-size: .85rem;
+            padding: 0.125rem 1.3rem;
+          }
+        }
+
+        .services {
+          flex-direction: column;
+          gap: 5.5rem;
+          padding-bottom: 8rem;
+
+          .left {
+            flex: 1;
+            width: 100%;
+
+            .cards {
+              gap: 1.1rem;
+
+              .card {
+                padding: 1.2rem 1rem;
+
+                .left {
+                  .name {
+                    @include limitText($maxWidth: 130px);
+                  }
+
+                  .desc {
+                    text-overflow: ellipsis;
+                    height: 50px;
+                    overflow: hidden;
+                  }
+                }
+
+                .right {
+                  .img {
+                    width: 120px;
+                    min-height: 115px;
+                    height: 115px;
+
+                    img {
+                      width: 100%;
+                      height: 100%;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .right {
+            flex: 1;
+            width: 100%;
+
+            .openingHours{
+              .box{
+                padding: 1.2rem 1rem;
+
+                ul {
+
+                  li{
+                    .right{
+                      gap: 3px;
+
+                      p{
+                        font-size: 0.85rem;
+                      }
+                    }
                   }
                 }
               }

@@ -1,7 +1,8 @@
 @import "../../../styles/constants.scss";
 
 .selectDateWrapper {
-  width: 100%;
+  width: 90%;
+  margin: auto;
 
   .heading {
     color: #333333;
@@ -10,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 3rem;
+    margin-bottom: 2.7rem;
   }
 
   .calendarWrapper {
@@ -28,6 +29,34 @@
       @include button($width: 11rem, $height: 3rem);
       // margin: 3.6rem auto;
       // margin-bottom: 8rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      width: 95%;
+      margin: auto;
+      margin-top: .5rem;
+
+      .heading {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 1.3rem;
+        text-align: center;
+      }
+
+      .nextButton {
+        display: none;
+      }
+
+      .mobileBtn{
+        margin-bottom: 1.6rem;
+        margin-top: 16px;
+        button {
+          @include button($width: 10.5rem, $height: 2.5rem);
+          font-size: .95rem;
+        }
+      }
     }
   }
 }

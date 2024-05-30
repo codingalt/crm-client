@@ -8,7 +8,7 @@ const SelectTime = ({ paginate, selectedTime, setSelectedTime }) => {
 
   const handleNext = () => {
     setSelectedTime(dayjs(selectedTime).format());
-    paginate(1);
+    paginate(1, true);
   };
 
   return (
@@ -26,12 +26,21 @@ const SelectTime = ({ paginate, selectedTime, setSelectedTime }) => {
       <div className={`${css.clockWrapper} max-w-4xl`}>
         <Clock setSelectedTime={setSelectedTime} />
 
-        <div className="w-full my-7 mb-10 flex justify-between items-center">
-          <p className="text-default-600 font-medium text-lg">Selected Time</p>
-          <p className="font-medi text-lg px-5 py-2 rounded-xl bg-[#01ABAB] text-white">
+        {/* <div className="w-full px-2 md:px-0 my-0 md:my-7 mb-6 md:mb-10 flex justify-between items-center">
+          <p className="text-default-600 font-medium md:text-lg text-tiny">
+            Selected Time
+          </p>
+          <p className="md:font-medium font-normal text-tiny md:text-lg px-6 md:px-5 py-1 md:py-2 rounded-xl bg-green-100 text-black">
             {dayjs(selectedTime).format("hh:mm A")}
           </p>
-        </div>
+        </div> */}
+      </div>
+
+      {/* Next Button Mobile  */}
+      <div
+        className={`${css.mobileBtn} flex md:hidden justify-center items-center`}
+      >
+        <Button onClick={handleNext}>Next</Button>
       </div>
     </div>
   );

@@ -8,11 +8,29 @@ import PaymentStep from "./Payment/PaymentStep";
 import { useSelector } from "react-redux";
 import { useGetServiceDetailsByIdQuery } from "../../services/api/servicesApi/servicesApi";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useBookAppointmentMutation } from "../../services/api/businessProfileApi/businessProfileApi";
+import {
+  useBookAppointmentMutation,
+  useCheckBookingAvailableTimeMutation,
+} from "../../services/api/businessProfileApi/businessProfileApi";
 import { useApiErrorHandling } from "../../hooks/useApiErrors";
 import { toastError, toastSuccess } from "../Toast/Toast";
 import moment from "moment";
 import ConfirmPayment from "./ConfirmPayment/ConfirmPayment";
+import ConfirmTime from "./ConfirmTime/ConfirmTime";
+import LoadingCard from "../Loader/LoadingCard";
+import ClipSpinner from "../Loader/ClipSpinner";
+
+const formatDate = (selectedDate, selectedTime) => {
+  const date = moment(selectedDate);
+  const time = moment(selectedTime);
+
+  const formattedDate = date.format("YYYY-MM-DD");
+  const formattedTime = time.format("HH:mm:ss");
+
+  // Concatenate the formatted date and time
+  const formattedDateTime = `${formattedDate} ${formattedTime}`;
+  return formattedDateTime;
+};
 
 const variants = {
   enter: (direction) => {
@@ -53,15 +71,34 @@ const BookAppointmentSteps = () => {
   const [selectedDate, setSelectedDate] = useState();
   const [selectedTime, setSelectedTime] = useState();
   const [isConfirmPayment, setIsConfirmPayment] = useState(null);
+  const [availableTimeMsg, setAvailableTimeMsg] = useState(null);
 
   // Service Details
   const { data: service } = useGetServiceDetailsByIdQuery(serviceId);
 
-  const paginate = (newDirection) => {
+  // Check Booking Available Time
+  const [checkAvailableTime, resp] = useCheckBookingAvailableTimeMutation();
+  const {
+    isLoading: isLoadingAvailableTime,
+    isSuccess: isSuccessAvailableTime,
+  } = resp;
+
+  const paginate = (newDirection, availTimeFlag) => {
     const nextPage = page + newDirection;
-    if (nextPage >= 0 && nextPage <= 3) {
-      if (nextPage === 2) {
-        console.log(nextPage);
+
+    if (nextPage >= 0 && nextPage <= 4) {
+      // Check Booking Available Time
+      if (nextPage === 2 && availTimeFlag) {
+        handleCheckAvailableTime();
+        return;
+      }
+
+      if(nextPage === 2  && !availableTimeMsg){
+        setPage([1, 1]);
+        return;
+      }
+
+      if (nextPage === 3) {
         // Process Payment and User Balance Details
         const checkBalance = service?.service.price - user?.balance;
 
@@ -73,8 +110,32 @@ const BookAppointmentSteps = () => {
           setIsConfirmPayment(false);
         }
       }
+
       setPage([nextPage, newDirection]);
     }
+  };
+
+  const handleCheckAvailableTime = async () => {
+    const formattedDateTime = formatDate(selectedDate, selectedTime);
+    const { data: availableTime } = await checkAvailableTime({
+      id: serviceId,
+      date: formattedDateTime,
+    });
+
+    if (availableTime && availableTime.has_appointment) {
+      if (availableTime.mine_appointment) {
+        setAvailableTimeMsg("You already have an appointment on this time.");
+      } else {
+        setAvailableTimeMsg(
+          "This service provider already have an appointment on this time."
+        );
+      }
+
+      setPage([2,2]);
+    } else {
+      paginate(2);
+    }
+    
   };
 
   // Book Appointment
@@ -93,26 +154,19 @@ const BookAppointmentSteps = () => {
     }
   }, [error]);
 
-  useEffect(()=>{
-    if(isSuccess){
+  useEffect(() => {
+    if (isSuccess) {
       toastSuccess("Booking Successfull");
 
       setTimeout(() => {
-          navigate("/appointments");
+        navigate("/appointments");
       }, 1500);
     }
-  },[isSuccess]);
+  }, [isSuccess]);
 
   const handleBookAppointment = async () => {
-    const date = moment(selectedDate);
-    const time = moment(selectedTime);
+    const formattedDateTime = formatDate(selectedDate, selectedTime);
 
-    const formattedDate = date.format("YYYY-MM-DD");
-    const formattedTime = time.format("HH:mm:ss");
-
-    // Concatenate the formatted date and time
-    const formattedDateTime = `${formattedDate} ${formattedTime}`;
-    console.log("formattedDateTime", formattedDateTime);
     await bookAppointment({ serviceId: serviceId, date: formattedDateTime });
   };
 
@@ -122,6 +176,11 @@ const BookAppointmentSteps = () => {
       paginate={paginate}
       selectedTime={selectedTime}
       setSelectedTime={setSelectedTime}
+    />,
+    <ConfirmTime
+      setPage={setPage}
+      availableTimeMsg={availableTimeMsg}
+      paginate={paginate}
     />,
     isConfirmPayment ? (
       <ConfirmPayment
@@ -143,6 +202,13 @@ const BookAppointmentSteps = () => {
 
   return (
     <div className={css.wrapper}>
+      {/* {isLoadingAvailableTime && <LoadingCard />}  */}
+      {isLoadingAvailableTime && (
+        <div className="w-full h-screen scrollbar-hide overflow-hidden flex items-center justify-center fixed top-0 left-16 z-50">
+          <ClipSpinner />
+        </div>
+      )}
+
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={page}
@@ -169,7 +235,7 @@ const BookAppointmentSteps = () => {
               page === index ? (
                 <div
                   key={index}
-                  className="w-[16px] h-[16px] bg-[#01ABAB] rounded-full cursor-pointer transition-all"
+                  className="w-[13px] h-[13px] md:w-[16px] md:h-[16px] bg-[#01ABAB] rounded-full cursor-pointer transition-all"
                 ></div>
               ) : (
                 <div
@@ -179,7 +245,7 @@ const BookAppointmentSteps = () => {
                       ? paginate(1)
                       : index < page && paginate(-1);
                   }}
-                  className="w-[16px] h-[16px] border-1 border-[#01ABAB] rounded-full cursor-pointer transition-all"
+                  className="w-[13px] h-[13px] md:w-[16px] md:h-[16px] border-1 border-[#01ABAB] rounded-full cursor-pointer transition-all"
                 ></div>
               )
             )}

@@ -25,5 +25,5 @@ export const formatTime = (time) => {
 
 // Truncate Text 
 export const truncateText = (text, maxLength) => {
-  return text.length > maxLength ? `${text.substring(0, maxLength)}..` : text;
+  return text?.length > maxLength ? `${text?.substring(0, maxLength)}..` : text;
 };

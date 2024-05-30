@@ -35,11 +35,11 @@ const Categories = ({ data, isLoading }) => {
 
   return (
     <div
-      className={`${css.categories} lg:min-h-44 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-4`}
+      className={`${css.categories} min-h-36 lg:min-h-44 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-4`}
     >
       {isLoading
         ? Array.from({ length: value }).map((_, index) => (
-            <Skeleton key={index} className="rounded-lg h-44">
+            <Skeleton disableAnimation key={index} className="rounded-lg h-32 md:h-44">
               <div className="w-full rounded-lg bg-secondary"></div>
             </Skeleton>
           ))

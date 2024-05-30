@@ -73,7 +73,7 @@ const CheckoutForm = ({ clientSecret, setIsConfirmPayment }) => {
           >
             {loading || isLoading
               ? "Processing.."
-              : "Pay now to Book Appointment"}
+              : "Pay Now to Book Appointment"}
           </Button>
         )}
       </form>

@@ -14,16 +14,30 @@
     margin-bottom: 1.2rem;
   }
 
-  .nextButton {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  // .nextButton {
+  //   width: 100%;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: flex-end;
 
-    button {
-      @include button($width: 11rem, $height: 3rem);
-      // margin: 3.6rem auto;
-      // margin-bottom: 8rem;
+  //   button {
+  //     @include button($width: 11rem, $height: 3rem);
+  //   }
+  // }
+
+  @media (max-width: 768px) {
+    & {
+      min-height: 60vh;
+      width: 95%;
+      margin: auto;
+      margin-top: .5rem;
+
+      .heading {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: .3rem;
+        text-align: center;
+      }
     }
   }
 }

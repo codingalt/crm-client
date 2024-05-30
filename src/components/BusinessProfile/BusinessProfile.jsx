@@ -97,7 +97,7 @@ const BusinessProfile = () => {
                   <div className={css.rating}>
                     <FaStar color="#FFA534" />
                     <p>
-                      4.1/4<span> (1000+)</span>
+                      4.1/5<span> (1000+)</span>
                     </p>
                     <button>See reviews</button>
                     <button className={css.moreInfo}>

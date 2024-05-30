@@ -19,6 +19,15 @@ export const authApi = createApi({
       providesTags: ["Users"],
     }),
 
+    markNotiAsRead: builder.mutation({
+      query: (data) => ({
+        url: "customer/markNotiAsRead",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+
     registerUser: builder.mutation({
       query: (data) => ({
         url: "register",
@@ -73,4 +82,5 @@ export const {
   useValidateCodeMutation,
   useReSendVerificationCodeMutation,
   useStoreBusinessInformationMutation,
+  useMarkNotiAsReadMutation
 } = authApi;

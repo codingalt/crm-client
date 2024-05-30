@@ -14,8 +14,11 @@ const Clock = ({ setSelectedTime }) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={["TimePicker", "StaticTimePicker"]}>
-        <DemoItem label="">
+      <DemoContainer
+        components={["TimePicker", "StaticTimePicker"]}
+        sx={{ scrollbarWidth: "none", overflow: "hidden" }}
+      >
+        <DemoItem label="" sx={{ scrollbarWidth: "none", overflow: "hidden" }}>
           <StaticTimePicker
             orientation="portrait"
             defaultValue={dayjs(new Date())}
@@ -26,6 +29,32 @@ const Clock = ({ setSelectedTime }) => {
                   [`.${pickersLayoutClasses.actionBar}`]: {
                     display: "none",
                   },
+
+                  [`.css-1rv8zyt-MuiStack-root`]: {
+                    scrollbarWidth: "none",
+                  },
+
+                  [`.css-7kirvq-MuiTypography-root-MuiPickersToolbarText-root.Mui-selected`]:
+                    {
+                      backgroundColor: "#01ABAB",
+                      color: "#fff",
+                      textAlign: "center",
+                      padding: "2px 5px",
+                      borderRadius: "6px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    },
+
+                  [`.css-7kirvq-MuiTypography-root-MuiPickersToolbarText-root:active`]:
+                    {
+                      color: "#fff",
+                    },
+
+                  [`.css-ihhycx-MuiTimePickerToolbar-amPmSelection .MuiTimePickerToolbar-ampmLabel`]:
+                    {
+                      borderRadius: "6px",
+                    },
 
                   [`.css-umzx0k-MuiClock-pin`]: {
                     backgroundColor: "#01ABAB",

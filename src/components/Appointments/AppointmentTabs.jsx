@@ -10,8 +10,8 @@ import { useGetMyBookingsQuery } from '../../services/api/businessProfileApi/bus
 import { Empty } from 'antd';
 import ClipSpinner from '../Loader/ClipSpinner';
 
-const AppointmentTabs = () => {
-    const { data,isLoading } = useGetMyBookingsQuery();
+const AppointmentTabs = ({ setRatingData, setShow }) => {
+  const { data, isLoading } = useGetMyBookingsQuery();
 
   return (
     <div className="flex w-full flex-col">
@@ -23,7 +23,7 @@ const AppointmentTabs = () => {
         keyboardActivation="manual"
         classNames={{
           tabList:
-            "gap-14 w-full max-w-md relative rounded-none p-0 border-b border-divider",
+            "gap-9 md:gap-14 w-full max-w-xs md:max-w-md relative rounded-none p-0 border-b border-divider",
           cursor: "w-full bg-[#01ABAB]",
           tab: "max-w-fit px-0 h-12",
           tabContent: "group-data-[selected=true]:text-[#01ABAB]",
@@ -32,8 +32,8 @@ const AppointmentTabs = () => {
         <Tab
           key="future"
           title={
-            <div className="flex items-center space-x-2">
-              <MdUpcoming fontSize={23} />
+            <div className="flex items-center space-x-2 text-sm md:text-medium">
+              <MdUpcoming className="text-[18px] md:text-[23px]" />
               <span>Active Queues</span>
               {data && (
                 <Chip size="sm" variant="faded">
@@ -45,9 +45,9 @@ const AppointmentTabs = () => {
           }
         >
           {!isLoading &&
-            data?.active.length === 0 &&
-            data?.upComing.length === 0 && (
-              <div className="w-full h-40 flex justify-center max-w-md mt-10">
+            data?.active?.length === 0 &&
+            data?.upComing?.length === 0 && (
+              <div className="w-full h-40 flex justify-center max-w-md mt-20 md:mt-10">
                 <Empty description={<span>No active appointments.</span>} />
               </div>
             )}
@@ -63,8 +63,8 @@ const AppointmentTabs = () => {
         <Tab
           key="history"
           title={
-            <div className="flex items-center space-x-2">
-              <RiChatHistoryFill fontSize={23} />
+            <div className="flex items-center space-x-2 text-sm md:text-medium">
+              <RiChatHistoryFill className="text-[18px] md:text-[23px]" />
               <span>Queues History</span>
               {data && (
                 <Chip size="sm" variant="faded">
@@ -74,8 +74,8 @@ const AppointmentTabs = () => {
             </div>
           }
         >
-          <HistoryAppointments data={data?.completed} />
-          {!isLoading && data?.completed.length === 0 && (
+          <HistoryAppointments data={data?.completed} setShow={setShow} setRatingData={setRatingData} />
+          {!isLoading && data?.completed?.length === 0 && (
             <div className="w-full h-40 flex justify-center max-w-md mt-10">
               <Empty description={<span>No completed appointments.</span>} />
             </div>
@@ -84,6 +84,6 @@ const AppointmentTabs = () => {
       </Tabs>
     </div>
   );
-}
+};
 
 export default AppointmentTabs
