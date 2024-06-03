@@ -27,12 +27,6 @@ const SelectDate = ({ paginate, setSelectedDate }) => {
         <Calendar2 setSelectedDate={setSelectedDate} />
       </div>
 
-      <div className="flex w-full text-center justify-center">
-        <p className="text-default-600 font-medium text-sm md:text-medium md:my-2 my-0 mb-2">
-          You have no appointment on this day{" "}
-        </p>
-      </div>
-
       {/* Next Button Mobile  */}
       <div
         className={`${css.mobileBtn} flex md:hidden justify-center items-center`}

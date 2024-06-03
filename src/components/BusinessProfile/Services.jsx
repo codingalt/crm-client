@@ -4,8 +4,11 @@ import { RiFireFill } from "react-icons/ri";
 import ImageComponent from "../ui/Image/ImageComponent";
 import s1 from "../../assets/h3.jpg";
 import { Skeleton } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 const Services = ({ data, isLoading, selectedService, setSelectedService }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       className={`${css.cards} grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5`}
@@ -24,7 +27,7 @@ const Services = ({ data, isLoading, selectedService, setSelectedService }) => {
                   : css.card
               }
               key={item.id}
-              onClick={() => setSelectedService(item)}
+              onClick={() => navigate(`/services/${item.name}/${item.id}`)}
             >
               <div className={css.left}>
                 <div className={css.name}>{item.name}</div>

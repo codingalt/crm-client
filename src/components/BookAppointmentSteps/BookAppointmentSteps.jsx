@@ -19,6 +19,7 @@ import ConfirmPayment from "./ConfirmPayment/ConfirmPayment";
 import ConfirmTime from "./ConfirmTime/ConfirmTime";
 import LoadingCard from "../Loader/LoadingCard";
 import ClipSpinner from "../Loader/ClipSpinner";
+import Calendar from "./Diary/Diary";
 
 const formatDate = (selectedDate, selectedTime) => {
   const date = moment(selectedDate);
@@ -72,6 +73,13 @@ const BookAppointmentSteps = () => {
   const [selectedTime, setSelectedTime] = useState();
   const [isConfirmPayment, setIsConfirmPayment] = useState(null);
   const [availableTimeMsg, setAvailableTimeMsg] = useState(null);
+  const [totalPages, setTotalPages] = useState(3);
+
+  useEffect(() => {
+    if(availableTimeMsg){
+      setTotalPages(4);
+    }
+  }, [availableTimeMsg]);
 
   // Service Details
   const { data: service } = useGetServiceDetailsByIdQuery(serviceId);
@@ -86,19 +94,19 @@ const BookAppointmentSteps = () => {
   const paginate = (newDirection, availTimeFlag) => {
     const nextPage = page + newDirection;
 
-    if (nextPage >= 0 && nextPage <= 4) {
+    if (nextPage >= 0 && nextPage <= totalPages) {
       // Check Booking Available Time
       if (nextPage === 2 && availTimeFlag) {
         handleCheckAvailableTime();
         return;
       }
 
-      if(nextPage === 2  && !availableTimeMsg){
-        setPage([1, 1]);
-        return;
-      }
+      // if (nextPage === 2 && !availableTimeMsg) {
+      //   setPage([1, 1]);
+      //   return;
+      // }
 
-      if (nextPage === 3) {
+      if (nextPage === totalPages === 3 ? 2 : 3) {
         // Process Payment and User Balance Details
         const checkBalance = service?.service.price - user?.balance;
 
@@ -133,7 +141,7 @@ const BookAppointmentSteps = () => {
 
       setPage([2,2]);
     } else {
-      paginate(2);
+      paginate(1);
     }
     
   };
@@ -170,18 +178,32 @@ const BookAppointmentSteps = () => {
     await bookAppointment({ serviceId: serviceId, date: formattedDateTime });
   };
 
+   const handleBack = () => {
+     if (page > 0 && page < 3) {
+       paginate(-1);
+     }
+   };
+
+   const today = new Date();
+
   const renderData = [
     <SelectDate paginate={paginate} setSelectedDate={setSelectedDate} />,
+    
+    // <div id="calendar" className="calendar">
+    //   <Calendar
+    //     firstDate={new Date(today.getFullYear(), today.getMonth() - 6, 1)}
+    //     lastDate={new Date(today.getFullYear(), today.getMonth() + 6, 0)}
+    //     today={today}
+    //     cTitle={"Date Selection"}
+    //   />
+    // </div>,
     <SelectTime
       paginate={paginate}
       selectedTime={selectedTime}
       setSelectedTime={setSelectedTime}
+      handleBack={handleBack}
     />,
-    <ConfirmTime
-      setPage={setPage}
-      availableTimeMsg={availableTimeMsg}
-      paginate={paginate}
-    />,
+
     isConfirmPayment ? (
       <ConfirmPayment
         data={service?.service}
@@ -197,6 +219,19 @@ const BookAppointmentSteps = () => {
       />
     ),
   ];
+
+   if (availableTimeMsg) {
+     renderData.splice(
+       2,
+       0,
+       <ConfirmTime
+         key="ConfirmTime"
+         setPage={setPage}
+         availableTimeMsg={availableTimeMsg}
+         paginate={paginate}
+       />
+     );
+   }
 
   const dataIndex = wrap(0, renderData.length, page);
 
@@ -235,17 +270,17 @@ const BookAppointmentSteps = () => {
               page === index ? (
                 <div
                   key={index}
-                  className="w-[13px] h-[13px] md:w-[16px] md:h-[16px] bg-[#01ABAB] rounded-full cursor-pointer transition-all"
+                  className="w-[13px] h-[13px] md:w-[16px] md:h-[16px] bg-[#01ABAB] rounded-full transition-all"
                 ></div>
               ) : (
                 <div
                   key={index}
-                  onClick={() => {
-                    page === 0 || page < index
-                      ? paginate(1)
-                      : index < page && paginate(-1);
-                  }}
-                  className="w-[13px] h-[13px] md:w-[16px] md:h-[16px] border-1 border-[#01ABAB] rounded-full cursor-pointer transition-all"
+                  // onClick={() => {
+                  //   page === 0 || page < index
+                  //     ? paginate(1)
+                  //     : index < page && paginate(-1);
+                  // }}
+                  className="w-[13px] h-[13px] md:w-[16px] md:h-[16px] border-1 border-[#01ABAB] rounded-full transition-all"
                 ></div>
               )
             )}

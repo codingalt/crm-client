@@ -15,6 +15,7 @@ import Completion from "../components/BookAppointmentSteps/Payment/Completion";
 import AppointmentsPage from "../pages/AppointmentsPage";
 import NotificationsPage from "../pages/NotificationsPage";
 import NotFound from "../components/NotFound/NotFound";
+import ViewServicePage from "../pages/ViewServicePage";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: "/appointments",
         element: <Protected Component={AppointmentsPage} />,
+      },
+      {
+        path: "/services/:serviceName/:serviceId",
+        element: <Protected Component={ViewServicePage} />,
       },
       {
         path: "/notifications",

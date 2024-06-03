@@ -110,22 +110,11 @@ const BusinessProfile = () => {
           </div>
 
           <div className={css.right}>
-            {/* <Tooltip
-              title={<><div className="flex flex-col px-3 py-3 gap-y-1 w-56">
-                <p className="text-medium font-semibold text-white">{selectedService?.name}</p>
-                <p>Rs. {selectedService?.price}</p>
-                </div></>}
-              open={selectedService}
-              placement="left"
-              color="cyan"
-              disabled
-            > */}
-              <Button disabled={isLoading} onClick={handleMakeAppointment}>
+              {/* <Button disabled={isLoading} onClick={handleMakeAppointment}>
                 {selectedService
                   ? `Make a $${selectedService.price} Appointment`
                   : "Make a new Appointment"}
-              </Button>
-            {/* </Tooltip>  */}
+              </Button> */}
           </div>
         </div>
 
