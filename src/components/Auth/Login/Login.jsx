@@ -73,7 +73,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="***********"
+                  placeholder="Enter your password"
                   className={
                     errors.password && touched.password && "inputBottomBorder"
                   }

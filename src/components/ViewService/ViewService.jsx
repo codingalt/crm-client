@@ -22,7 +22,7 @@ const ViewService = () => {
       return;
     }
 
-    navigate(`/makeAppointment/${service?.name}?service-id=${service?.id}`);
+    navigate(service && `/makeAppointment/${service?.name}?service-id=${service?.id}`);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import css from "./RatingModal.module.scss";
 import moment from "moment";
 import * as rx from "react-icons/rx";
@@ -10,8 +10,10 @@ import { toastError, toastSuccess } from "../Toast/Toast";
 import { useSendRatingMutation } from "../../services/api/businessProfileApi/businessProfileApi";
 import { Button, Textarea } from "@nextui-org/react";
 import { useApiErrorHandling } from "../../hooks/useApiErrors";
+import { DirectionContext } from "../../context/DirectionContext";
 
 const RatingModal = ({ show,data, setShow }) => {
+  const { direction } = useContext(DirectionContext);
   const [value, setValue] = useState(0);
   const [comment, setComment] = useState("");
   const ratingRef = useRef();
@@ -105,6 +107,7 @@ const RatingModal = ({ show,data, setShow }) => {
             onChange={(event, newValue) => {
               setValue(newValue);
             }}
+            dir={direction}
           />
         </div>
 

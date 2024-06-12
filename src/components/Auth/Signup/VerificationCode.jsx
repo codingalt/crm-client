@@ -19,6 +19,7 @@ const VerificationCode = () => {
   const [show, setShow] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
   const { user } = useSelector((store) => store.auth);
+  const clientContact = localStorage.getItem("clientContact");
   useEffect(()=>{
     if(user){
 
@@ -34,6 +35,7 @@ const VerificationCode = () => {
   const initialValues = {
     code: "",
   };
+
   const [validateCodeError, setValidateCodeError] = useState(null);
 
   const [validateCode, res] = useValidateCodeMutation();
@@ -138,7 +140,8 @@ const VerificationCode = () => {
                     className={`flex justify-end items-end flex-col md:flex-row md:justify-between md:items-center ${css.note}`}
                   >
                     <p className="text-sm md:text-medium">
-                      The verification code is sent to the number 050-5050505
+                      The verification code is sent to the number{" "}
+                      {clientContact}
                     </p>
                     <div className="flex">
                       {remainingTime > 0 ? (

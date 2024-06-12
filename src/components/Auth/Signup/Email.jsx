@@ -4,19 +4,24 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signupEmailSchema } from "../../../utils/validations/AuthValidation";
-import { useRegisterUserMutation, useValidateTokenQuery } from "../../../services/api/authApi/authApi";
-import {Button} from "@nextui-org/react"
+import {
+  useRegisterUserMutation,
+  useValidateTokenQuery,
+} from "../../../services/api/authApi/authApi";
+import { Button } from "@nextui-org/react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import { useDispatch } from "react-redux";
 import ClipSpinner from "../../Loader/ClipSpinner";
+import Location from "./Location";
 
 const Email = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isContactErr, setIsContactErr] = useState(false);
   const token = localStorage.getItem("crmClientToken");
+  const [isAddressError, setIsAddressError] = useState(false);
   const {
     data,
     isLoading: isLoadingValidate,
@@ -37,7 +42,6 @@ const Email = () => {
         navigate("/dashboard");
       } else if (!isLoadingValidate && isErrorValidate) {
         setShow(true);
-        // localStorage.removeItem("crmClientToken");
       }
     }
   }, [data, isLoadingValidate, isErrorValidate, isSuccessValidate]);
@@ -46,35 +50,57 @@ const Email = () => {
     name: "",
     email: "",
     contact: "",
+    address: "",
+    latLng: "",
+    country: "",
+    city: "",
     password: "",
     confirmPass: "",
   };
 
   const [registerUser, res] = useRegisterUserMutation();
-  const {isLoading, isSuccess, error} = res;
+  const { isLoading, isSuccess, error } = res;
 
   const apiErrors = useApiErrorHandling(error);
 
-  const handleSubmit = async (values) => {
+useEffect(() => {
+  if (error) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+}, [error]);
 
+
+  const handleSubmit = async (values) => {
     if (values.contact.length < 5) {
       setIsContactErr(true);
       return;
     }
 
-    const {data} = await registerUser({
+    if (!values.address) {
+      setIsAddressError(true);
+      return;
+    }
+
+    const { data } = await registerUser({
       name: values.name,
       email: values.email,
       phone_number: values.contact,
       password: values.password,
+      address: values.address,
+      latLng: values.latLng,
+      country: values.country,
+      city: values.city,
       type: "customer",
     });
 
-    if(data?.token){
+    if (data?.token) {
       localStorage.setItem("crmClientToken", data.token);
-      navigate("/verificationCode");
+      localStorage.setItem("clientContact", values.contact);
+      navigate(`/verificationCode`);
     }
-
   };
 
   if (isLoadingValidate) {
@@ -120,7 +146,7 @@ const Email = () => {
                       type="text"
                       name="name"
                       id="name"
-                      placeholder="John Smith"
+                      placeholder="Enter your name"
                       className={
                         errors.name && touched.name && "inputBottomBorder"
                       }
@@ -138,7 +164,7 @@ const Email = () => {
                       type="email"
                       name="email"
                       id="email"
-                      placeholder="example@gmail.com"
+                      placeholder="Enter your email address"
                       className={
                         errors.email && touched.email && "inputBottomBorder"
                       }
@@ -166,6 +192,7 @@ const Email = () => {
                       containerStyle={{
                         height: "3rem",
                         marginTop: "27px",
+                        marginBottom: "5px",
                       }}
                       inputStyle={{
                         height: "3rem",
@@ -193,12 +220,31 @@ const Email = () => {
                   </div>
 
                   <div className={css.inputContainer}>
+                    <label htmlFor="address">Address</label>
+                    <Location
+                      errors={errors}
+                      touched={touched}
+                      setIsAddressError={setIsAddressError}
+                      setFieldValue={setFieldValue}
+                    />
+                    {
+                      isAddressError && (
+                        <div className={css.errorSpan}>Address is Required.</div>
+                      )
+                    }
+
+                    {isContactErr && (
+                      <span className={css.errorSpan}>Contact is Required</span>
+                    )}
+                  </div>
+
+                  <div className={css.inputContainer}>
                     <label htmlFor="password">Password</label>
                     <Field
                       type="password"
                       name="password"
                       id="password"
-                      placeholder="********"
+                      placeholder="Enter your password"
                       className={
                         errors.password &&
                         touched.password &&
@@ -218,7 +264,7 @@ const Email = () => {
                       type="password"
                       name="confirmPass"
                       id="confirmPass"
-                      placeholder="********"
+                      placeholder="Confirm Password"
                       className={
                         errors.confirmPass &&
                         touched.confirmPass &&

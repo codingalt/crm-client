@@ -11,6 +11,14 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 2.1rem;
+
+    .backButton {
+      svg {
+        [dir="rtl"] & {
+          transform: scaleX(-1);
+        }
+      }
+    }
   }
 
   .clockWrapper {
@@ -36,12 +44,12 @@
     & {
       width: 95%;
       margin: auto;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
 
       .heading {
         font-size: 22px;
         font-weight: 600;
-        margin-bottom: .1rem;
+        margin-bottom: 0.1rem;
         text-align: center;
       }
 

@@ -21,7 +21,7 @@ const SelectTime = ({
       <div
         className={`${css.heading} max-w-4xl mx-auto flex justify-between items-center`}
       >
-        <div className="flex items-center gap-x-6">
+        <div className={`${css.backButton} flex items-center gap-x-6`}>
           <div
             onClick={() => handleBack()}
             className="w-12 h-12 cursor-pointer hover:bg-default-50 transition-all text-lg border shadow-sm rounded-full flex items-center justify-center"
@@ -38,15 +38,6 @@ const SelectTime = ({
 
       <div className={`${css.clockWrapper} max-w-4xl`}>
         <Clock setSelectedTime={setSelectedTime} />
-
-        {/* <div className="w-full px-2 md:px-0 my-0 md:my-7 mb-6 md:mb-10 flex justify-between items-center">
-          <p className="text-default-600 font-medium md:text-lg text-tiny">
-            Selected Time
-          </p>
-          <p className="md:font-medium font-normal text-tiny md:text-lg px-6 md:px-5 py-1 md:py-2 rounded-xl bg-green-100 text-black">
-            {dayjs(selectedTime).format("hh:mm A")}
-          </p>
-        </div> */}
       </div>
 
       {/* Next Button Mobile  */}

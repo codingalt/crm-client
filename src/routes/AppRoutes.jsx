@@ -6,7 +6,6 @@ import Email from "../components/Auth/Signup/Email";
 import Login from "../components/Auth/Login/Login";
 import DashboardPage from "../pages/DashboardPage";
 import VerificationCode from "../components/Auth/Signup/VerificationCode";
-import PersonalInformation from "../components/Auth/Signup/PersonalInformation";
 import Protected from "../components/Protected/Protected";
 import SubCategoriesPage from "../pages/SubCategoriesPage";
 import BusinessProfilePage from "../pages/BusinessProfilePage";
@@ -28,10 +27,6 @@ export const router = createBrowserRouter([
       {
         path: "/verificationCode",
         element: <Protected Component={VerificationCode} />,
-      },
-      {
-        path: "/personalInformation",
-        element: <Protected Component={PersonalInformation} />,
       },
       {
         path: "/login",

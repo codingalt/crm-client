@@ -239,8 +239,9 @@ const BookAppointmentSteps = () => {
     <div className={css.wrapper}>
       {/* {isLoadingAvailableTime && <LoadingCard />}  */}
       {isLoadingAvailableTime && (
-        <div className="w-full h-screen scrollbar-hide overflow-hidden flex items-center justify-center fixed top-0 left-16 z-50">
-          <ClipSpinner />
+        <div className="bg-black bg-opacity-5 w-full h-screen scrollbar-hide overflow-hidden flex flex-col space-y-1 items-center justify-center fixed top-0 left-16 z-50">
+          <ClipSpinner size={30} />
+          <span className="text-[#01ABAB]">Loading...</span>
         </div>
       )}
 

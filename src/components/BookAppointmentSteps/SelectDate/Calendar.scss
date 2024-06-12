@@ -75,6 +75,14 @@
   border-bottom-right-radius: 0;
   color: #fff;
 }
+
+.calendar .month svg {
+  [dir="rtl"] & {
+    transform: scaleX(-1);
+  }
+}
+
+
 .calendar .month .prev,
 .calendar .month .next {
   cursor: pointer;
