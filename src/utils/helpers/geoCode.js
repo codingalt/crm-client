@@ -25,7 +25,6 @@ export async function geocodeLatLng(latlng) {
     const last = response.results.length - 1;
     let country = response.results[last].formatted_address;
 
-    console.log(response.results);
     return {address: response.results[1].formatted_address, country: country, city: city}
   } catch (error) {
     console.log("Geocoder failed due to: " + error);

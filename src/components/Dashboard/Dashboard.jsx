@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import css from "./Dashboard.module.scss";
-import { FaChevronDown } from "react-icons/fa6";
 import Categories from "./Categories";
 import Appointments from "./Appointments";
 import Business from "./Business";
-import { useGetBusinessesQuery, useGetGlobalCategoriesQuery } from "../../services/api/categoriesApi/categoriesApi";
+import {
+  useGetBusinessesQuery,
+  useGetGlobalCategoriesQuery,
+} from "../../services/api/categoriesApi/categoriesApi";
+import Services from "./Services";
 
 const Dashboard = () => {
-  const {data, isLoading} = useGetGlobalCategoriesQuery();
-  const { data: businesses, isLoading: isLoadingBusinesses } = useGetBusinessesQuery();
+  const { data, isLoading } = useGetGlobalCategoriesQuery();
+  const { data: businesses, isLoading: isLoadingBusinesses } =
+    useGetBusinessesQuery();
 
   return (
     <>
@@ -18,6 +22,11 @@ const Dashboard = () => {
         </div>
 
         <Categories data={data?.categories} isLoading={isLoading} />
+
+        <div className={css.heading}>
+          <h1>Services</h1>
+        </div>
+        <Services />
 
         <Appointments />
 

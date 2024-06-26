@@ -23,11 +23,16 @@ export const categoriesApi = createApi({
       query: () => `customer/businesses`,
       providesTags: ["Category"],
     }),
-    
+
+    getSubCategoriesByCategoryId: builder.query({
+      query: (id) => `customer/category/${id}`,
+      providesTags: ["Category"],
+    }),
   }),
 });
 
 export const {
   useGetGlobalCategoriesQuery,
-  useGetBusinessesQuery
+  useGetBusinessesQuery,
+  useGetSubCategoriesByCategoryIdQuery
 } = categoriesApi;

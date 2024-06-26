@@ -5,6 +5,7 @@ import ImageComponent from "../ui/Image/ImageComponent";
 import s1 from "../../assets/h3.jpg";
 import { Skeleton } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import { Empty } from "antd";
 
 const Services = ({ data, isLoading, selectedService, setSelectedService }) => {
   const navigate = useNavigate();
@@ -43,6 +44,13 @@ const Services = ({ data, isLoading, selectedService, setSelectedService }) => {
               </div>
             </div>
           ))}
+
+      {/* When No Service Available Empty state  */}
+      {!isLoading && data?.services?.length === 0 && (
+        <div className="w-full h-40 flex mt-20 md:mt-10">
+          <Empty description={<span>No Services Available.</span>} />
+        </div>
+      )}
     </div>
   );
 };

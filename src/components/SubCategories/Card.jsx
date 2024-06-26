@@ -1,40 +1,34 @@
 import React from "react";
-import { CiDumbbell } from "react-icons/ci";
-import { GiComb } from "react-icons/gi";
-import { FaStethoscope } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import css from "./SubCategories.module.scss";
-import { FaNutritionix } from "react-icons/fa";
+import ImageComponent from "../ui/Image/ImageComponent";
 
-const Card = () => {
+const colors = [
+  "#E7F9F3",
+  "#FFF6DD",
+  "#E7EBF9",
+  "#ECF2F9",
+  "#ECF2F9",
+  "#E6F4F6",
+];
+
+const Card = ({ item, index }) => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <div
-        className={css.item}
-        onClick={() => navigate(`/categories/Health/1`)}
-      >
-        <FaNutritionix />
-        <p>Nutritional Supplements</p>
+    <div
+      className={css.item}
+      style={{ background: colors[index % colors.length] }}
+      onClick={() => navigate(`/categories/${item.name}/${item.id}`)}
+    >
+      <div className={css.image}>
+        <ImageComponent
+          src={import.meta.env.VITE_SUB_CATEGORY_IMAGE + item?.image}
+          radius={"8px"}
+        />
       </div>
-
-      <div
-        className={css.item}
-        onClick={() => navigate(`/categories/Capacity/2`)}
-      >
-        <CiDumbbell />
-        <p>Strength Training</p>
-      </div>
-
-      <div
-        className={css.item}
-        onClick={() => navigate(`/categories/Cultivation/3`)}
-      >
-        <GiComb />
-        <p>Flexibility and Stretching</p>
-      </div>
-    </>
+      <p>{item.name}</p>
+    </div>
   );
 };
 

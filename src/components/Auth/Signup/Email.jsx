@@ -20,31 +20,7 @@ const Email = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isContactErr, setIsContactErr] = useState(false);
-  const token = localStorage.getItem("crmClientToken");
   const [isAddressError, setIsAddressError] = useState(false);
-  const {
-    data,
-    isLoading: isLoadingValidate,
-    isSuccess: isSuccessValidate,
-    error: isErrorValidate,
-  } = useValidateTokenQuery(null, {
-    refetchOnMountOrArgChange: true,
-    skip: !token,
-  });
-
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    if (!token) {
-      setShow(true);
-    } else {
-      if (!isLoadingValidate && isSuccessValidate) {
-        navigate("/dashboard");
-      } else if (!isLoadingValidate && isErrorValidate) {
-        setShow(true);
-      }
-    }
-  }, [data, isLoadingValidate, isErrorValidate, isSuccessValidate]);
 
   const initialValues = {
     name: "",
@@ -103,27 +79,8 @@ useEffect(() => {
     }
   };
 
-  if (isLoadingValidate) {
-    return (
-      <div
-        style={{
-          width: "100%",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          zIndex: "999",
-          paddingBottom: "3rem",
-        }}
-      >
-        <ClipSpinner color="#01ABAB" size={45} speedMultiplier={0.85} />
-      </div>
-    );
-  }
-
   return (
     <>
-      {show && (
         <div className="w-full min-h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
           <div className={css.wrapper}>
             <div className={css.top}>
@@ -289,7 +246,7 @@ useEffect(() => {
 
                   <p className="text-sm text-center font-medium text-default-600 mt-10">
                     <span>Already have an account?</span>{" "}
-                    <NavLink className="text-blue-400" to={"/login"}>
+                    <NavLink className="text-blue-400" to={"/"}>
                       Login
                     </NavLink>
                   </p>
@@ -298,7 +255,6 @@ useEffect(() => {
             </Formik>
           </div>
         </div>
-      )}
     </>
   );
 };
