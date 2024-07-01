@@ -12,6 +12,8 @@ import { GrContactInfo } from "react-icons/gr";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { truncateText } from "../../utils/helpers/helpers";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
+import logo from "../../assets/logo.svg";
+import ImagePlaceholder from "../ui/Image/ImagePlaceholder";
 
 const data = [
   {
@@ -79,12 +81,11 @@ const Services = () => {
         {data?.map((item, index) => (
           <div key={index} className={`${css.card}`}>
             <div className={css.image}>
-              <Image
-                radius="sm"
-                isZoomed
+              <ImagePlaceholder
                 src={item.image}
                 width={"100%"}
                 height={"100%"}
+                isZoomed
               />
             </div>
             <Tooltip

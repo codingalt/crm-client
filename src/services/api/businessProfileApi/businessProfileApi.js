@@ -24,11 +24,15 @@ export const businessProfileApi = createApi({
       providesTags: ["BusinessProfile"],
     }),
 
+    getPaymentMethods: builder.query({
+      query: () => `paymentMethods`,
+    }),
+
     checkBookingAvailableTime: builder.mutation({
-      query: ({ id,date }) => ({
+      query: ({ id, date }) => ({
         url: `customer/checkAvailableTime/${id}`,
         method: "POST",
-        body: {date: date},
+        body: { date: date },
       }),
       invalidatesTags: ["BusinessProfile"],
     }),
@@ -71,5 +75,5 @@ export const businessProfileApi = createApi({
   }),
 });
 
-export const { useGetBusinessProfileQuery, useGetPaymentIntentMutation, usePaymentSuccessMutation, useBookAppointmentMutation, useGetMyBookingsQuery, useSendRatingMutation, useCheckBookingAvailableTimeMutation } =
+export const { useGetBusinessProfileQuery, useGetPaymentIntentMutation, usePaymentSuccessMutation, useBookAppointmentMutation, useGetMyBookingsQuery, useSendRatingMutation, useCheckBookingAvailableTimeMutation, useGetPaymentMethodsQuery } =
   businessProfileApi;

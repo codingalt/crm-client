@@ -1,6 +1,6 @@
 @import "../../../styles/constants.scss";
 
-.selectTimeWrapper {
+.paymentMethodWrapper {
   width: 100%;
 
   .heading {
@@ -21,10 +21,31 @@
     }
   }
 
-  .clockWrapper {
+  .methodCards {
     width: 100%;
-    margin: 1.6rem auto;
-    margin-top: 0;
+    margin: 6.5rem auto;
+    margin-bottom: 11rem;
+
+    .card {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #d2d2d2;
+      @include flexCenter;
+      gap: 0.8rem;
+      padding: 4rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      svg {
+        font-size: 2rem;
+      }
+
+      p {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 400;
+      }
+    }
   }
 
   .nextButton {
@@ -35,8 +56,6 @@
 
     button {
       @include button($width: 11rem, $height: 3rem);
-      // margin: 3.6rem auto;
-      // margin-bottom: 8rem;
     }
   }
 
@@ -53,16 +72,34 @@
         text-align: center;
       }
 
+      .methodCards {
+        margin: 2.8rem auto;
+        margin-bottom: 6rem;
+
+        .card {
+          padding: 2.5rem 1.5rem;
+          width: 87%;
+
+          svg {
+            font-size: 1.8rem;
+          }
+
+          p {
+            font-size: 18px;
+          }
+        }
+      }
+
       .nextButton {
         display: none;
       }
 
       .mobileBtn {
         margin-bottom: 1.5rem;
-        margin-top: 18px;
+        margin-top: 40px;
 
         button {
-          @include button($width: 11.5rem, $height: 2.75rem);
+          @include button($width: 10.5rem, $height: 2.5rem);
           font-size: 0.95rem;
         }
       }

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import css from "./SubCategories.module.scss";
 import ImageComponent from "../ui/Image/ImageComponent";
+import ImagePlaceholder from "../ui/Image/ImagePlaceholder";
 
 const colors = [
   "#E7F9F3",
@@ -22,9 +23,11 @@ const Card = ({ item, index }) => {
       onClick={() => navigate(`/categories/${item.name}/${item.id}`)}
     >
       <div className={css.image}>
-        <ImageComponent
+        <ImagePlaceholder
           src={import.meta.env.VITE_SUB_CATEGORY_IMAGE + item?.image}
           radius={"8px"}
+          width="100%"
+          height="100%"
         />
       </div>
       <p>{item.name}</p>

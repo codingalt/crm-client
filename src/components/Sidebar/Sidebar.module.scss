@@ -34,7 +34,7 @@ ul li {
 .sidebarActive {
   left: 0 !important;
   top: 0 !important;
-  z-index: 999;
+  z-index: 49;
   transition: width 300ms;
 }
 
@@ -383,7 +383,7 @@ header label span {
 
   #nav-toggle:checked + .sidebar {
     left: 0 !important;
-    z-index: 100;
+    z-index: 49;
     width: 260px;
     transition: all ease 0.3s;
   }
@@ -499,7 +499,7 @@ header label span {
 
   #nav-toggle:checked + .sidebar {
     left: 0 !important;
-    z-index: 100;
+    z-index: 49;
     width: 260px;
     transition: all ease 0.3s;
   }
@@ -511,7 +511,7 @@ header label span {
   .sidebarActive {
     left: 0 !important;
     top: 4.25rem !important;
-    z-index: 999;
+    z-index: 49;
     transition: width 300ms;
   }
 }

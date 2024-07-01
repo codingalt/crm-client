@@ -17,9 +17,8 @@ import { toastError, toastSuccess } from "../Toast/Toast";
 import moment from "moment";
 import ConfirmPayment from "./ConfirmPayment/ConfirmPayment";
 import ConfirmTime from "./ConfirmTime/ConfirmTime";
-import LoadingCard from "../Loader/LoadingCard";
 import ClipSpinner from "../Loader/ClipSpinner";
-import Calendar from "./Diary/Diary";
+import PaymentMethod from "./PaymentMethod/PaymentMethod";
 
 const formatDate = (selectedDate, selectedTime) => {
   const date = moment(selectedDate);
@@ -73,11 +72,12 @@ const BookAppointmentSteps = () => {
   const [selectedTime, setSelectedTime] = useState();
   const [isConfirmPayment, setIsConfirmPayment] = useState(null);
   const [availableTimeMsg, setAvailableTimeMsg] = useState(null);
-  const [totalPages, setTotalPages] = useState(3);
+  const [totalPages, setTotalPages] = useState(4);
+  const [paymentMethod, setPaymentMethod] = useState("cash");
 
   useEffect(() => {
-    if(availableTimeMsg){
-      setTotalPages(4);
+    if (availableTimeMsg) {
+      setTotalPages(5);
     }
   }, [availableTimeMsg]);
 
@@ -101,12 +101,11 @@ const BookAppointmentSteps = () => {
         return;
       }
 
-      // if (nextPage === 2 && !availableTimeMsg) {
-      //   setPage([1, 1]);
-      //   return;
-      // }
+      // Show Appointment Confirmation Page if Method is cash
 
-      if (nextPage === totalPages === 3 ? 2 : 3) {
+      if (paymentMethod === "cash" && nextPage === 3) {
+        setIsConfirmPayment(true);
+      } else if (paymentMethod === "card" && nextPage === 3) {
         // Process Payment and User Balance Details
         const checkBalance = service?.service.price - user?.balance;
 
@@ -139,11 +138,10 @@ const BookAppointmentSteps = () => {
         );
       }
 
-      setPage([2,2]);
+      setPage([2, 2]);
     } else {
       paginate(1);
     }
-    
   };
 
   // Book Appointment
@@ -178,30 +176,25 @@ const BookAppointmentSteps = () => {
     await bookAppointment({ serviceId: serviceId, date: formattedDateTime });
   };
 
-   const handleBack = () => {
-     if (page > 0 && page < 3) {
-       paginate(-1);
-     }
-   };
-
-   const today = new Date();
+  const handleBack = () => {
+    if (page > 0 && page < 4) {
+      paginate(-1);
+    }
+  };
 
   const renderData = [
     <SelectDate paginate={paginate} setSelectedDate={setSelectedDate} />,
-    
-    // <div id="calendar" className="calendar">
-    //   <Calendar
-    //     firstDate={new Date(today.getFullYear(), today.getMonth() - 6, 1)}
-    //     lastDate={new Date(today.getFullYear(), today.getMonth() + 6, 0)}
-    //     today={today}
-    //     cTitle={"Date Selection"}
-    //   />
-    // </div>,
     <SelectTime
       paginate={paginate}
       selectedTime={selectedTime}
       setSelectedTime={setSelectedTime}
       handleBack={handleBack}
+    />,
+    <PaymentMethod
+      paginate={paginate}
+      handleBack={handleBack}
+      paymentMethod={paymentMethod}
+      setPaymentMethod={setPaymentMethod}
     />,
 
     isConfirmPayment ? (
@@ -209,6 +202,8 @@ const BookAppointmentSteps = () => {
         data={service?.service}
         handleBookAppointment={handleBookAppointment}
         isLoading={isLoading}
+        paymentMethod={paymentMethod}
+        handleBack={handleBack}
       />
     ) : (
       <PaymentStep
@@ -216,30 +211,33 @@ const BookAppointmentSteps = () => {
         setLoading={setLoadingPayment}
         setIsConfirmPayment={setIsConfirmPayment}
         amount={service?.service.price - user?.balance}
+        handleBack={handleBack}
       />
     ),
   ];
 
-   if (availableTimeMsg) {
-     renderData.splice(
-       2,
-       0,
-       <ConfirmTime
-         key="ConfirmTime"
-         setPage={setPage}
-         availableTimeMsg={availableTimeMsg}
-         paginate={paginate}
-       />
-     );
-   }
+  if (availableTimeMsg) {
+    renderData.splice(
+      2,
+      0,
+      <ConfirmTime
+        key="ConfirmTime"
+        setPage={setPage}
+        availableTimeMsg={availableTimeMsg}
+        paginate={paginate}
+      />
+    );
+  }
 
   const dataIndex = wrap(0, renderData.length, page);
 
   return (
     <div className={css.wrapper}>
-      {/* {isLoadingAvailableTime && <LoadingCard />}  */}
       {isLoadingAvailableTime && (
-        <div className="bg-black bg-opacity-5 w-full h-screen scrollbar-hide overflow-hidden flex flex-col space-y-1 items-center justify-center fixed top-0 left-16 z-50">
+        <div
+          className="bg-black bg-opacity-5 w-full h-screen scrollbar-hide overflow-hidden flex flex-col space-y-1 items-center justify-center fixed top-0 left-0"
+          style={{ zIndex: 999 }}
+        >
           <ClipSpinner size={30} />
           <span className="text-[#01ABAB]">Loading...</span>
         </div>

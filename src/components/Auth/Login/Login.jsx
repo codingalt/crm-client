@@ -5,36 +5,39 @@ import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginSchema } from "../../../utils/validations/AuthValidation";
 import { Button } from "@nextui-org/react";
-import { useLoginUserMutation, useValidateTokenQuery } from "../../../services/api/authApi/authApi";
+import {
+  useLoginUserMutation,
+  useValidateTokenQuery,
+} from "../../../services/api/authApi/authApi";
 import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import ClipSpinner from "../../Loader/ClipSpinner";
 
 const Login = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("crmClientToken");
-   const {
-     data,
-     isLoading: isLoadingValidate,
-     isSuccess: isSuccessValidate,
-     error: isErrorValidate,
-   } = useValidateTokenQuery(null, {
-     refetchOnMountOrArgChange: true,
-     skip: !token,
-   });
 
-   const [show, setShow] = useState(false);
+  const {
+    data,
+    isLoading: isLoadingValidate,
+    isSuccess: isSuccessValidate,
+    error: isErrorValidate,
+  } = useValidateTokenQuery(null, {
+    skip: !token,
+  });
 
-   useEffect(() => {
-     if (!token) {
-       setShow(true);
-     } else {
-       if (!isLoadingValidate && isSuccessValidate) {
-         navigate("/dashboard");
-       } else if (!isLoadingValidate && isErrorValidate) {
-         setShow(true);
-       }
-     }
-   }, [data, isLoadingValidate, isErrorValidate, isSuccessValidate]);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (!token) {
+      setShow(true);
+    } else {
+      if (!isLoadingValidate && isSuccessValidate) {
+        navigate("/dashboard");
+      } else if (!isLoadingValidate && isErrorValidate) {
+        setShow(true);
+      }
+    }
+  }, [data, isLoadingValidate, isErrorValidate, isSuccessValidate]);
 
   const initialValues = {
     email: "",
@@ -42,12 +45,12 @@ const Login = () => {
   };
 
   const [loginUser, res] = useLoginUserMutation();
-  const {isLoading, isSuccess, error} = res;
+  const { isLoading, isSuccess, error } = res;
 
   const apiErrors = useApiErrorHandling(error);
 
   const handleSubmit = async (values) => {
-    const {data} = await loginUser({
+    const { data } = await loginUser({
       email: values.email,
       password: values.password,
     });
@@ -58,23 +61,23 @@ const Login = () => {
     }
   };
 
-    if (isLoadingValidate) {
-      return (
-        <div
-          style={{
-            width: "100%",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: "999",
-            paddingBottom: "3rem",
-          }}
-        >
-          <ClipSpinner color="#01ABAB" size={45} speedMultiplier={0.85} />
-        </div>
-      );
-    }
+  if (isLoadingValidate) {
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: "999",
+          paddingBottom: "3rem",
+        }}
+      >
+        <ClipSpinner color="#01ABAB" size={45} speedMultiplier={0.85} />
+      </div>
+    );
+  }
 
   return (
     <>

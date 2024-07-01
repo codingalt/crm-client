@@ -40,20 +40,6 @@
   border-radius: 1rem;
 }
 
-/* set after behind the main element */
-// .calendar::before,
-// .calendar::after {
-//   content: "";
-//   position: absolute;
-//   top: 50%;
-//   left: 100%;
-//   width: 12px;
-//   height: 97%;
-//   border-radius: 0 5px 5px 0;
-//   background-color: #d3d4d6d7;
-//   transform: translateY(-50%);
-// }
-
 .calendar::before {
   height: 94%;
   left: calc(100% + 12px);
