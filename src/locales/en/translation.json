@@ -1,5 +1,150 @@
 {
-  "heading": "Your Queues",
-  "text": "This is a sample text to demonstrate LTR and RTL text direction.",
-  "toggle": "Toggle to Arabic"
+  "signIn": "Sign in",
+  "email": "Email",
+  "enterEmail": "Enter your email address",
+  "password": "Password",
+  "enterPassword": "Enter your password",
+  "enter": "Enter",
+  "forgotPassword": "Forgot Password?",
+  "emailRequired": "Email is Required",
+  "passwordRequired": "Password is Required",
+  "invalidEmail": "Please Enter a valid email address",
+  "passwordLength": "Password must be at least 6 characters",
+  "dontHaveAccount": "Don't have an account?",
+  "register": "Register",
+
+  
+
+  "accountRegistration": "Account Registration",
+  "name": "Name",
+  "enterName": "Enter your name",
+  "nameRequired": "Name is Required",
+  "contact": "Contact",
+  "contactRequired": "Contact is Required",
+  "address": "Address",
+  "searchAddress": "Search your address",
+  "addressRequired": "Address is Required",
+  "confirmPassword": "Confirm Password",
+  "confirmPasswordRequired": "Confirm Password is required",
+  "passwordNotMatched": "Password not matched",
+  "next": "Next",
+  "alreadyHaveAccount": "Already have an account?",
+  "login": "Login",
+  "registerHere": "Register Here",
+
+
+
+  "verificationCode": "Verification Code",
+  "verificationCodeRequired": "Verification code is Required",
+  "verificationCodeLength": "Verification code must be exactly 6 characters",
+  "verificationCodeSent": "The verification code is sent to the number",
+  "resendCode": "Resend Code",
+
+
+
+  "search": "Search",
+  "newAddress": "New address",
+  "signedInAs": "Signed in as",
+  "languages": "Languages",
+  "logOut": "Log Out",
+  "helpFeedback": "Help & Feedback",
+  "dashboard": "Dashboard",
+  "appointments": "Appointments",
+  "notifications": "Notifications",
+  "profile": "Profile",
+  "categories": "Categories",
+  "services": "Services",
+  "years": "years",
+  "min": "min",
+  "get": "Get",
+  "motive": "Motive",
+  "businesses": "Businesses",
+
+
+
+  "myQueues": "My Queues",
+  "activeQueues": "Active Queues",
+  "queuesHistory": "Queues History",
+  "noActiveAppointments": "No active appointments.",
+  "upcoming": "Upcoming",
+  "minutes": "minutes",
+  "nis": "Nis",
+  "lastMonth": "Last Month",
+  "appointmentDate": "Appointment Date",
+  "appointmentTime": "Appointment Time",
+  "service": "Service",
+  "price": "Price",
+  "rating": "Rating",
+  "rateService": "Rate Service",
+  "noCompletedAppointments": "No completed appointments.",
+  "appointmentSummary": "Appointment Summary",
+  "time": "Time",
+  "total": "Total",
+  "rateExperience": "Rate Experience",
+  "enterYourFeedback": "Enter your feedback",
+  "done": "Done",
+
+
+
+  "noNotificationsYet": "No Notifications yet.",
+  "notFound404": "404 Not Found",
+  "somethingMissing": "Something's missing.",
+  "backToHomePage": "Back to HomePage",
+
+
+
+  "seeReviews": "See reviews",
+  "moreInfo": "More info",
+  "availableServices": "Available Services",
+  "openingHours": "Opening Hours",
+  "hours": "Hours",
+  "monday": "Monday",
+  "tuesday": "Tuesday",
+  "wednesday": "Wednesday",
+  "thursday": "Thursday",
+  "friday": "Friday",
+  "saturday": "Saturday",
+  "sunday": "Sunday",
+  "closed": "Closed",
+
+
+
+  "makeNewAppointment": "Make a new Appointment",
+  "dateSelection": "Date Selection",
+  "timeSelection": "Time Selection",
+  "selectTime": "SELECT TIME",
+  "confirmTime": "Confirm Time",
+  "changeTime": "Change Time",
+  "continueAnyway": "Continue anyway",
+  "alreadyHaveAppointment": "You already have an appointment at this time.",
+  "serviceProviderHasAppointment": "This service provider already has an appointment at this time.",
+  "somethingWentWrong": "Uh oh! Something went wrong.",
+  "paymentMethod": "Payment Method",
+  "cashPayment": "Cash Payment",
+  "cardPayment": "Card Payment",
+  "makePayment": "Make a Payment",
+  "payNowToBookAppointment": "Pay Now to Book Appointment",
+  "confirmAppointment": "Confirm Appointment",
+
+
+
+  "january": "January",
+  "february": "February",
+  "march": "March",
+  "april": "April",
+  "may": "May",
+  "june": "June",
+  "july": "July",
+  "august": "August",
+  "september": "September",
+  "october": "October",
+  "november": "November",
+  "december": "December",
+
+
+
+  "noSubCategoriesFound": "No Sub Categories Found.",
+  "exploreMore": "Explore more",
+  "english": "English",
+  "addressToViewServices": "Address to view services"
 }

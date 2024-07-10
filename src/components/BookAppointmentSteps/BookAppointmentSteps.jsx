@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   useBookAppointmentMutation,
   useCheckBookingAvailableTimeMutation,
+  useGetPaymentMethodsQuery,
 } from "../../services/api/businessProfileApi/businessProfileApi";
 import { useApiErrorHandling } from "../../hooks/useApiErrors";
 import { toastError, toastSuccess } from "../Toast/Toast";
@@ -73,7 +74,15 @@ const BookAppointmentSteps = () => {
   const [isConfirmPayment, setIsConfirmPayment] = useState(null);
   const [availableTimeMsg, setAvailableTimeMsg] = useState(null);
   const [totalPages, setTotalPages] = useState(4);
-  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  const { data: paymentMethods, isLoading: isLoadingPaymentMethods, refetch: refetchPaymentMethods, error: errorPaymentMethods } = useGetPaymentMethodsQuery();
+
+  useEffect(()=>{
+    if(paymentMethods){
+      setPaymentMethod(paymentMethods?.paymentMethods[0]);
+    }
+  },[paymentMethods])
+
 
   useEffect(() => {
     if (availableTimeMsg) {
@@ -103,9 +112,9 @@ const BookAppointmentSteps = () => {
 
       // Show Appointment Confirmation Page if Method is cash
 
-      if (paymentMethod === "cash" && nextPage === 3) {
+      if (paymentMethod.code === "cash" && nextPage === 3) {
         setIsConfirmPayment(true);
-      } else if (paymentMethod === "card" && nextPage === 3) {
+      } else if (paymentMethod.code === "card" && nextPage === 3) {
         // Process Payment and User Balance Details
         const checkBalance = service?.service.price - user?.balance;
 
@@ -173,7 +182,11 @@ const BookAppointmentSteps = () => {
   const handleBookAppointment = async () => {
     const formattedDateTime = formatDate(selectedDate, selectedTime);
 
-    await bookAppointment({ serviceId: serviceId, date: formattedDateTime });
+    await bookAppointment({
+      serviceId: serviceId,
+      date: formattedDateTime,
+      payment_method_id: paymentMethod?.id,
+    });
   };
 
   const handleBack = () => {
@@ -195,6 +208,10 @@ const BookAppointmentSteps = () => {
       handleBack={handleBack}
       paymentMethod={paymentMethod}
       setPaymentMethod={setPaymentMethod}
+      data={paymentMethods}
+      isLoading={isLoadingPaymentMethods}
+      error={errorPaymentMethods}
+      refetch={refetchPaymentMethods}
     />,
 
     isConfirmPayment ? (

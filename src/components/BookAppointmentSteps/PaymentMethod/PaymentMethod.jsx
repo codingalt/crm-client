@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./PaymentMethod.module.scss";
 import { Button } from "@nextui-org/react";
 import { FaArrowLeft } from "react-icons/fa6";
-import { useGetPaymentMethodsQuery } from "../../../services/api/businessProfileApi/businessProfileApi";
 import { Skeleton } from "@mui/material";
 import { MdErrorOutline } from "react-icons/md";
 import { useMediaQuery } from "@uidotdev/usehooks";
@@ -13,8 +12,11 @@ const PaymentMethod = ({
   handleBack,
   paymentMethod,
   setPaymentMethod,
+  isLoading,
+  refetch,
+  error,
+  data
 }) => {
-  const { data, isLoading, refetch,error } = useGetPaymentMethodsQuery();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   const handleNext = () => {
@@ -65,17 +67,17 @@ const PaymentMethod = ({
               <div
                 key={item.id}
                 className={`${css.card} ${
-                  paymentMethod === item.code
+                  paymentMethod.code === item.code
                     ? "bg-[#01ABAB] hover:bg-[#01ABAB] text-white"
                     : "hover:bg-[#f7f7f7] text-[#3C3C3C]"
                 }`}
                 onClick={() => {
-                  setPaymentMethod(item.code);
+                  setPaymentMethod(item);
                 }}
               >
                 <div
                   className={`${
-                    paymentMethod === item.code
+                    paymentMethod.code === item.code
                       ? "text-white"
                       : "text-[#01ABAB]"
                   }`}

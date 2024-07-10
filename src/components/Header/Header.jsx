@@ -181,19 +181,13 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
             </DropdownMenu>
           </Dropdown>
         </div>
-        {/* <div className={css.header_right}>
-        <div className="md:hidden h-10 w-10 rounded-full">
-        </div>
-        <div className={`${css.profile}`}>
-          <img src={user} alt="" />
-          <span>Faheem</span>
-          <FaChevronDown />
-        </div>
-      </div> */}
+
       </header>
 
       {/* Location Header Mobile  */}
-      <LocationHeader onOpen={onOpen} />
+       {location && location?.address && (
+         <LocationHeader onOpen={onOpen} />
+       )}
 
       {/* Change Location Modal  */}
       <AddLocationModal isOpen={isOpen} onOpenChange={onOpenChange} />

@@ -24,6 +24,19 @@ export const businessProfileApi = createApi({
       providesTags: ["BusinessProfile"],
     }),
 
+    validateManualAppointmentUrl: builder.query({
+      query: ({ email, token }) =>
+        `customer/validateURL?token=${token}&email=${email}`,
+    }),
+
+    confirmAppointment: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `customer/confirmAppointment`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     getPaymentMethods: builder.query({
       query: () => `paymentMethods`,
     }),
@@ -65,15 +78,15 @@ export const businessProfileApi = createApi({
     }),
 
     bookAppointment: builder.mutation({
-      query: ({ serviceId, date }) => ({
+      query: ({ serviceId, date, payment_method_id }) => ({
         url: `customer/bookAppointment/${serviceId}`,
         method: "POST",
-        body: { date: date },
+        body: { date: date, payment_method_id: payment_method_id },
       }),
       invalidatesTags: ["BusinessProfile"],
     }),
   }),
 });
 
-export const { useGetBusinessProfileQuery, useGetPaymentIntentMutation, usePaymentSuccessMutation, useBookAppointmentMutation, useGetMyBookingsQuery, useSendRatingMutation, useCheckBookingAvailableTimeMutation, useGetPaymentMethodsQuery } =
+export const { useGetBusinessProfileQuery, useGetPaymentIntentMutation, usePaymentSuccessMutation, useBookAppointmentMutation, useGetMyBookingsQuery, useSendRatingMutation, useCheckBookingAvailableTimeMutation, useGetPaymentMethodsQuery, useValidateManualAppointmentUrlQuery,useConfirmAppointmentMutation } =
   businessProfileApi;

@@ -15,6 +15,9 @@ import AppointmentsPage from "../pages/AppointmentsPage";
 import NotificationsPage from "../pages/NotificationsPage";
 import NotFound from "../components/NotFound/NotFound";
 import ViewServicePage from "../pages/ViewServicePage";
+import VerifyManualAppointmentPage from "../pages/VerifyManualAppointmentPage";
+import ManualAppointmentPaymentPage from "../pages/ManualAppointmentPaymentPage";
+import PaymentSuccessPage from "../pages/PaymentSuccessPage";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +70,18 @@ export const router = createBrowserRouter([
       {
         path: "/notifications",
         element: <Protected Component={NotificationsPage} />,
+      },
+      {
+        path: "/verifyAppointment",
+        element: <VerifyManualAppointmentPage />,
+      },
+      {
+        path: "/verifyAppointment/payment",
+        element: <ManualAppointmentPaymentPage />,
+      },
+      {
+        path: "/payment/success",
+        element: <Protected Component={PaymentSuccessPage} />,
       },
       {
         path: "*",

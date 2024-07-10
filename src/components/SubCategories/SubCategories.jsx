@@ -47,16 +47,18 @@ const SubCategories = () => {
 
       {/* Empty Data  */}
       {!isLoading && data?.category?.sub_categories?.length === 0 && (
-        <div className="flex gap-2 items-start md:items-center justify-center w-full text-[#9F9F9F]">
-          <RiMenuSearchLine className="text-[20px] md:text-[22px]" />
-          <p className="text-[14px] md:text-[20px] font-normal md:font-medium flex flex-col justify-center items-center gap-0.5">
-            <span>No Sub Categories Found.</span>
-            <span
-              onClick={() => navigate("/dashboard")}
-              className="text-[#01ABAB] ml-1 cursor-pointer"
-            >
-              Explore more
-            </span>
+        <div className="w-full max-w-md m-auto mt-24 md:mt-0">
+          <div className="flex gap-2 items-start md:items-center justify-center w-full text-[#9F9F9F]">
+            <RiMenuSearchLine className="text-[20px] md:text-[22px]" />
+            <p className="text-[15px] md:text-[18px] font-normal md:font-medium flex flex-col justify-center items-center gap-0.5">
+              <span>No Sub Categories Found.</span>
+            </p>
+          </div>
+          <p
+            onClick={() => navigate("/dashboard")}
+            className="text-[#01ABAB] cursor-pointer text-[15px] md:text-[18px] font-normal md:font-medium flex flex-col justify-center items-center gap-0.5"
+          >
+            Explore more
           </p>
         </div>
       )}

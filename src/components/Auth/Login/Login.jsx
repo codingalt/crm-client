@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import css from "./Login.module.scss";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginSchema } from "../../../utils/validations/AuthValidation";
@@ -13,9 +13,12 @@ import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import ClipSpinner from "../../Loader/ClipSpinner";
 
 const Login = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const redirect = searchParams.get("redirect");
   const navigate = useNavigate();
   const token = localStorage.getItem("crmClientToken");
-
+ 
   const {
     data,
     isLoading: isLoadingValidate,
@@ -32,7 +35,8 @@ const Login = () => {
       setShow(true);
     } else {
       if (!isLoadingValidate && isSuccessValidate) {
-        navigate("/dashboard");
+      
+        navigate(redirect ? redirect : "/dashboard");
       } else if (!isLoadingValidate && isErrorValidate) {
         setShow(true);
       }
@@ -57,7 +61,8 @@ const Login = () => {
 
     if (data?.token) {
       localStorage.setItem("crmClientToken", data.token);
-      navigate("/dashboard");
+     
+      navigate(redirect ? redirect : "/dashboard");
     }
   };
 

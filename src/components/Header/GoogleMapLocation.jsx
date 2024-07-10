@@ -57,11 +57,11 @@ const GoogleMapLocation = ({ location, setSelectedAddress }) => {
         style={{
           margin: "13px auto",
           marginTop: "0px",
-          height: "400px",
           width: "100%",
           borderRadius: "20px",
           position: "relative",
         }}
+        className="h-[350px] md:h-[400px]"
       >
         {isLoaded ? (
           <GoogleMap

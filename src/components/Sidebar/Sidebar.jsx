@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import css from "./Sidebar.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Grid, Tooltip } from "@mui/material";
-import { FaLightbulb } from "react-icons/fa";
-import { LuClock4 } from "react-icons/lu";
+import { TbLogout2 } from "react-icons/tb";
 import { AiFillHome } from "react-icons/ai";
 import useClickOutside from "../../hooks/useClickOutside";
 import { FaUser } from "react-icons/fa";
@@ -23,6 +22,11 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
 
   useClickOutside(sidebarRef, () => setActiveSidebar(false));
 
+   const handleLogout = () => {
+     localStorage.removeItem("crmClientToken");
+     window.location.reload(false);
+   };
+
   return (
     <>
       <input type="checkbox" id="nav-toggle" hidden />
@@ -33,10 +37,12 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
         id="sidebar"
         ref={sidebarRef}
       >
-        <div className={css.sidebarProfile}>
-          <FaLightbulb />
-          <LuClock4 />
-        </div>
+        <Tooltip title="Logout" placement="right">
+          <div className={css.sidebarProfile}>
+            <TbLogout2 onClick={handleLogout} />
+          </div>
+        </Tooltip>
+
         <div className={css.sidebarMenu}>
           <ul style={{ paddingLeft: "0" }}>
             <Grid item>

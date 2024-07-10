@@ -14,8 +14,10 @@ import { setUserLocation } from "../../services/slices/auth/authSlice";
 import css from "./Header.module.scss";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 const AddLocationModal = ({ isOpen, onOpenChange }) => {
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const { location } = useSelector((store) => store.auth);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const dispatch = useDispatch();
@@ -86,10 +88,10 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
 
   return (
     <Modal
-      className="z-[9999] -top-1 shadow-lg max-w-[85%] md:max-w-2xl"
+      className="z-[9999] -top-1 shadow-lg max-w-[88%] md:max-w-2xl"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
-      placement="top"
+      placement={isSmallDevice ? "center" : "top"}
       hideCloseButton
       onClose={() => {
         dispatch(
@@ -106,9 +108,9 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-1 mb-4">
-                  <span className="text-[#01ABAB] text-2xl">
+              <div className="flex justify-between items-center pt-3">
+                <div className="flex md:items-center gap-1 mb-4">
+                  <span className="text-[#01ABAB] text-lg md:text-2xl mt-1 md:mt-0">
                     <HiOutlineLocationMarker />
                   </span>
                   <p>Add address to view services</p>
@@ -118,13 +120,13 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
                   onClick={() => {
                     onClose();
                   }}
-                  className="w-6 h-6 mb-4 rounded-full bg-blue-50 text-default-700 text-medium cursor-pointer flex items-center justify-center"
+                  className="w-6 h-6 mb-4 rounded-full bg-blue-50 text-default-700 text-medium cursor-pointer hidden md:flex items-center justify-center"
                 >
                   <IoClose />
                 </div>
               </div>
 
-              <div className="flex w-full items-center gap-4">
+              <div className="flex flex-col md:flex-row w-full items-center gap-3 md:gap-4">
                 <div className="w-full relative">
                   <input
                     ref={inputRef}
@@ -132,7 +134,7 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
                     id="inputAddress"
                     onChange={(e) => handleInput(e)}
                     placeholder="Enter your location"
-                    className="w-full h-14 rounded-md text-[16px] font-medium outline-none border pl-8"
+                    className="w-full h-14 rounded-md text-[14px] md:text-[16px] font-medium outline-none border pl-8"
                     style={{
                       paddingLeft: "1rem",
                     }}
@@ -164,15 +166,16 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
                   </div>
                 </div>
                 <Button
-                  radius="md"
-                  className="w-[25px] h-[55px] bg-[#01ABAB] text-white"
+                  radius={isSmallDevice ? "sm" : "md"}
+                  className="mb-2 md:mb-0 w-full md:w-[25px] h-[47px] md:h-[55px] text-medium md:text-2xl bg-[#01ABAB] text-white"
                   onClick={handleConfirm}
                 >
-                  <FaArrowRight className="text-2xl" />
+                  <p className="md:hidden">Confirm Location</p>
+                  <FaArrowRight />
                 </Button>
               </div>
             </ModalHeader>
-            <ModalBody>
+            <ModalBody className="rounded-lg">
               <GoogleMapLocation
                 location={location}
                 setSelectedAddress={setSelectedAddress}

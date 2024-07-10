@@ -10,6 +10,7 @@ const ConfirmPayment = ({
   paymentMethod,
   handleBack,
 }) => {
+ 
   return (
     <div className={css.wrapper}>
       <div
@@ -35,7 +36,7 @@ const ConfirmPayment = ({
         </div>
         <div className={css.item}>
           <p>Payment Method</p>
-          <span className="capitalize">{paymentMethod}</span>
+          <span className="capitalize">{paymentMethod?.name}</span>
         </div>
         <div className={css.footer}>
           <p>Facial</p>
@@ -45,7 +46,7 @@ const ConfirmPayment = ({
 
       <div className={`${css.button} max-w-2xl`}>
         <Button isLoading={isLoading} onClick={handleBookAppointment}>
-          Confirm Payment
+          Confirm Appointment
         </Button>
       </div>
     </div>

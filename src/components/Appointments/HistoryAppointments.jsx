@@ -46,9 +46,7 @@ const HistoryAppointments = ({ data, setShow, setRatingData }) => {
                       {item.customer_rating}/5
                     </div>
                   </div>
-                  {/* <div className="text-[14px] md:text-[16px] text-[#1c1c1c] opacity-50 font-medium mt-0.5">
-                    Good
-                  </div> */}
+
                 </div>
               ) : (
                 <Button
