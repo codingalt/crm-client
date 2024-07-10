@@ -41,9 +41,10 @@
 
   @media (max-width: 768px){
     &{
-
+      margin-bottom: 0;
       .paymentForm{
         margin-top: 0;
+        min-height: auto;
         
         button{
         width: 100%;
@@ -51,6 +52,8 @@
         font-size: 15px;
         margin-bottom: .9rem;
         margin-top: 0;
+        position: static;
+        margin-top: 4rem;
       }
       }
       

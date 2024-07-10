@@ -60,7 +60,7 @@ const ViewService = () => {
                   <p className="text-white font-medium text-sm md:text-lg xl:text-xl">
                     {service?.name}
                   </p>
-                  <Rating size="small" name="read-only" value={5} readOnly />
+                  <Rating size="small" name="read-only" value={4} readOnly />
                 </div>
               )}
             </div>
@@ -76,7 +76,7 @@ const ViewService = () => {
                     animation={false}
                   />
                 ) : (
-                  <p className="font-medium text-sm mb-0 lg:mb-1 md:text-sm lg:text-medium text-default-400 uppercase">
+                  <p className="font-medium text-xs mb-0 lg:mb-1 md:text-sm lg:text-medium text-default-400 uppercase">
                     Bedroom
                   </p>
                 )}
@@ -160,8 +160,8 @@ const ViewService = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="grid gap-x-3.5 md:gap-x-0 grid-cols-3 md:grid-cols-3 w-full md:w-[90%] mt-1 md:mt-4 lg:mt-7 px-0 md:px-6 rounded-lg pt-4 md:pt-6 pb-4 md:pb-6 bg-transparent md:bg-green-50">
-                    <div className="flex items-start md:items-start py-0 pb-1 md:py-0 rounded-lg flex-col w-fit gap-1 md:bg-transparent bg-[#D1FAE5]">
+                  <div className="grid gap-x-3.5 md:gap-x-0 grid-cols-3 md:grid-cols-3 w-full md:w-[90%] mt-0.5 md:mt-4 lg:mt-7 px-0 md:px-6 rounded-lg pt-4 md:pt-6 pb-4 md:pb-6 bg-transparent md:bg-green-50">
+                    <div className="flex items-start md:items-start py-0 pb-1 md:py-0 rounded-lg flex-col w-fit gap-1 md:bg-transparent">
                       <IoIosTimer className="text-[#065F46] text-2xl md:text-3xl mx-auto" />
 
                       <span className="text-sm md:text-medium text-default-900 font-semibold">
@@ -172,7 +172,7 @@ const ViewService = () => {
                       </p>
                     </div>
 
-                    <div className="flex items-start md:items-start py-0 pb-1 md:py-0 rounded-lg flex-col w-fit gap-1 md:bg-transparent bg-[#FCE7F3]">
+                    <div className="flex items-start md:items-start py-0 pb-1 md:py-0 rounded-lg flex-col w-fit gap-1 md:bg-transparent">
                       <MdOutlinePriceChange className="text-[#065F46] text-2xl md:text-3xl mx-auto" />
                       <p className="text-sm text-[#065F46] md:text-default-500 font-medium uppercase hidden">
                         Price
@@ -182,7 +182,7 @@ const ViewService = () => {
                       </span>
                     </div>
 
-                    <div className="flex items-start md:items-start py-0 pb-1 md:py-0 rounded-lg flex-col w-fit gap-1 md:bg-transparent bg-[#FFEDD5]">
+                    <div className="flex items-start md:items-start py-0 pb-1 md:py-0 rounded-lg flex-col w-fit gap-1 md:bg-transparent">
                       <BiGroup className="text-[#065F46] text-2xl md:text-3xl mx-auto" />
                       <p className="text-sm text-[#065F46] md:text-default-500 font-medium uppercase hidden">
                         Age

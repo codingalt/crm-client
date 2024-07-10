@@ -45,12 +45,18 @@
       width: 95%;
       margin: auto;
       margin-top: 0.5rem;
+      overflow-y: auto;
 
       .heading {
         font-size: 22px;
         font-weight: 600;
-        margin-bottom: 0.1rem;
+        margin-bottom: 0rem;
         text-align: center;
+      }
+
+      .clockWrapper {
+        margin: 1.1rem auto;
+        margin-top: -2px;
       }
 
       .nextButton {
@@ -58,11 +64,11 @@
       }
 
       .mobileBtn {
-        margin-bottom: 1.5rem;
-        margin-top: 18px;
+        margin-bottom: 1.2rem;
+        margin-top: 13px;
 
         button {
-          @include button($width: 11.5rem, $height: 2.75rem);
+          @include button($width: 11.5rem, $height: 2.7rem);
           font-size: 0.95rem;
         }
       }

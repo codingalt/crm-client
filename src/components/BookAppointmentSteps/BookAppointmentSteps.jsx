@@ -112,9 +112,9 @@ const BookAppointmentSteps = () => {
 
       // Show Appointment Confirmation Page if Method is cash
 
-      if (paymentMethod.code === "cash" && nextPage === 3) {
+      if (paymentMethod?.code === "cash" && nextPage === 3) {
         setIsConfirmPayment(true);
-      } else if (paymentMethod.code === "card" && nextPage === 3) {
+      } else if (paymentMethod?.code === "card" && nextPage === 3) {
         // Process Payment and User Balance Details
         const checkBalance = service?.service.price - user?.balance;
 

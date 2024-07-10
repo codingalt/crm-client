@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { useGetPaymentIntentMutation } from "../../../services/api/businessProfileApi/businessProfileApi";
 import { toastError } from "../../Toast/Toast";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 const appearance = {
   labels: "floating",
@@ -55,6 +56,7 @@ const appearance = {
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
 const Payment = ({ loading, setLoading, amount, setIsConfirmPayment }) => {
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const navigate = useNavigate();
   const [clientSecret, setClientSecret] = useState("");
   const [getPaymentIntent, res] = useGetPaymentIntentMutation();
@@ -106,7 +108,7 @@ const Payment = ({ loading, setLoading, amount, setIsConfirmPayment }) => {
           }}
         >
           <div className="-mt-96">
-            <ClipLoader color="#01ABAB" size={43} speedMultiplier={0.9} />
+            <ClipLoader color="#01ABAB" size={isSmallDevice ? 32 : 43} speedMultiplier={0.9} />
           </div>
         </div>
       )}

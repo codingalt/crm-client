@@ -17,14 +17,14 @@ const SelectTime = ({
   };
 
   return (
-    <div className={css.selectTimeWrapper}>
+    <div className={`${css.selectTimeWrapper} scrollbar-hide`}>
       <div
         className={`${css.heading} max-w-4xl mx-auto flex justify-between items-center`}
       >
-        <div className={`${css.backButton} flex items-center gap-x-6`}>
+        <div className={`${css.backButton} flex items-center gap-x-4 md:gap-x-6`}>
           <div
             onClick={() => handleBack()}
-            className="w-12 h-12 cursor-pointer hover:bg-default-50 transition-all text-lg border shadow-sm rounded-full flex items-center justify-center"
+            className="w-9 h-9 md:w-12 md:h-12 cursor-pointer hover:bg-default-50 transition-all text-medium md:text-lg border shadow-sm rounded-full flex items-center justify-center"
           >
             <FaArrowLeft />
           </div>

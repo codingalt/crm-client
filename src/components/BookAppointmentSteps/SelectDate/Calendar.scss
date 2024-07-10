@@ -287,7 +287,7 @@
 
 @media screen and (max-width: 500px) {
   .calendar .month {
-    height: 58px;
+    height: 54px;
     padding: 0 15px;
     font-size: 1.05rem;
 
@@ -322,7 +322,7 @@
   }
 
   .calendar .days .active::before {
-    box-shadow: 0 0 2px 1px $primary;
+    box-shadow: none;
     border-radius: 50%;
     box-shadow: none;
     transition: all .3s;

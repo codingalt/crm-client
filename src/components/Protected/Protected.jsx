@@ -5,8 +5,10 @@ import { useDispatch } from "react-redux";
 import { setAuth } from "../../services/slices/auth/authSlice";
 import { ClipLoader } from "react-spinners";
 import { useValidateTokenQuery } from "../../services/api/authApi/authApi";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 const Protected = ({ Component }) => {
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [show, setShow] = useState(null);
@@ -60,7 +62,7 @@ const Protected = ({ Component }) => {
           paddingBottom: "3rem",
         }}
       >
-        <ClipLoader color="#01AB8E" size={45} speedMultiplier={0.85} />
+        <ClipLoader color="#01AB8E" size={isSmallDevice ? 34 : 45} speedMultiplier={0.85} />
       </div>
     );
   }

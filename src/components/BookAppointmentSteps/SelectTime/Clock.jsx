@@ -36,8 +36,8 @@ const Clock = ({ setSelectedTime }) => {
 
                   [`.css-7kirvq-MuiTypography-root-MuiPickersToolbarText-root.Mui-selected`]:
                     {
-                      backgroundColor: "#01ABAB",
-                      color: "#fff",
+                      backgroundColor: "#01ABAB !important",
+                      color: "#fff !important",
                       textAlign: "center",
                       padding: "2px 5px",
                       borderRadius: "6px",
@@ -48,7 +48,7 @@ const Clock = ({ setSelectedTime }) => {
 
                   [`.css-7kirvq-MuiTypography-root-MuiPickersToolbarText-root:active`]:
                     {
-                      color: "#fff",
+                      color: "#fff !important",
                     },
 
                   [`.css-ihhycx-MuiTimePickerToolbar-amPmSelection .MuiTimePickerToolbar-ampmLabel`]:
@@ -57,20 +57,20 @@ const Clock = ({ setSelectedTime }) => {
                     },
 
                   [`.css-umzx0k-MuiClock-pin`]: {
-                    backgroundColor: "#01ABAB",
+                    backgroundColor: "#01ABAB !important",
                   },
 
                   [`.css-d0vs79-MuiClockPointer-root`]: {
-                    backgroundColor: "#01ABAB",
+                    backgroundColor: "#01ABAB !important",
                   },
 
                   [`.css-f53ilk-MuiClockPointer-thumb`]: {
-                    backgroundColor: "#01ABAB",
-                    border: "16px solid #01ABAB",
+                    backgroundColor: "#01ABAB !important",
+                    border: "16px solid #01ABAB !important",
                   },
 
                   [`.css-12t0dn4-MuiClockPointer-thumb`]: {
-                    border: "16px solid #01ABAB",
+                    border: "16px solid #01ABAB !important",
                   },
 
                   [`.css-2x8kvt-MuiPickersArrowSwitcher-root-MuiTimeClock-arrowSwitcher`]:
@@ -80,8 +80,8 @@ const Clock = ({ setSelectedTime }) => {
 
                   [`.css-13u1oz-MuiButtonBase-root-MuiButton-root-MuiPickersToolbarButton-root:active`]:
                     {
-                      color: "#01ABAB",
-                      background: "#01ABAB",
+                      color: "#01ABAB !important",
+                      background: "#01ABAB !important",
                     },
                 },
               },
