@@ -39,6 +39,7 @@ const Login = () => {
         navigate(redirect ? redirect : "/dashboard");
       } else if (!isLoadingValidate && isErrorValidate) {
         setShow(true);
+        localStorage.removeItem("crmClientToken");
       }
     }
   }, [data, isLoadingValidate, isErrorValidate, isSuccessValidate]);
