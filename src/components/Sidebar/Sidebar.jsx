@@ -10,6 +10,8 @@ import { IoMdListBox } from "react-icons/io";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { Badge } from "@nextui-org/react";
 import { useSelector } from "react-redux";
+import { IoChatboxEllipses } from "react-icons/io5";
+import { removeToken } from "../../utils/helpers/tokenUtils";
 
 const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
   let pathname = window.location.pathname;
@@ -22,10 +24,10 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
 
   useClickOutside(sidebarRef, () => setActiveSidebar(false));
 
-   const handleLogout = () => {
-     localStorage.removeItem("crmClientToken");
-     window.location.reload(false);
-   };
+  const handleLogout = () => {
+    removeToken();
+    window.location.reload(false);
+  };
 
   return (
     <>
@@ -95,6 +97,19 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
                     ) : (
                       <IoNotificationsSharp />
                     )}
+                  </NavLink>
+                </li>
+              </Tooltip>
+            </Grid>
+
+            <Grid item>
+              <Tooltip title="Chat" placement="right-end">
+                <li className="sidebar-li">
+                  <NavLink
+                    to={"/chat"}
+                    className={pathname.match("/chat") ? css.activeMenuLi : ""}
+                  >
+                    <IoChatboxEllipses />
                   </NavLink>
                 </li>
               </Tooltip>

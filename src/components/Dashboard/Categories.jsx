@@ -25,7 +25,7 @@ const Categories = ({ data, isLoading }) => {
     isSmallDevice
       ? setValue(2)
       : isMediumDevice
-      ? setValue(3)
+      ? setValue(4)
       : isLargeDevice
       ? setValue(4)
       : isExtraLargeDevice
@@ -35,11 +35,15 @@ const Categories = ({ data, isLoading }) => {
 
   return (
     <div
-      className={`${css.categories} min-h-36 lg:min-h-44 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-4`}
+      className={`${css.categories} min-h-36 lg:min-h-44 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-6 gap-x-4 md:gap-x-5 gap-y-4`}
     >
       {isLoading
         ? Array.from({ length: value }).map((_, index) => (
-            <Skeleton disableAnimation key={index} className="rounded-lg h-32 md:h-44">
+            <Skeleton
+              disableAnimation
+              key={index}
+              className="rounded-lg h-32 md:h-44"
+            >
               <div className="w-full rounded-lg bg-secondary"></div>
             </Skeleton>
           ))
@@ -50,7 +54,10 @@ const Categories = ({ data, isLoading }) => {
               onClick={() => navigate(`/categories/${item.name}/${item.id}`)}
             >
               <div className={css.image}>
-                <ImageComponent src={import.meta.env.VITE_CATEGORY_IMAGE+item.image} radius={"8px"} />
+                <ImageComponent
+                  src={import.meta.env.VITE_CATEGORY_IMAGE + item.image}
+                  radius={"8px"}
+                />
               </div>
               <p>{item.name}</p>
             </div>

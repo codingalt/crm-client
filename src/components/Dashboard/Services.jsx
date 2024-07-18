@@ -130,14 +130,14 @@ const Services = () => {
 
       <div
         onClick={handleBackClick}
-        className="absolute -left-8 md:-left-10 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-50"
+        className="absolute -left-8 md:-left-10 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-10"
       >
         <FaChevronLeft />
       </div>
 
       <div
         onClick={handleNextClick}
-        className="absolute right-0 md:-right-10 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-50"
+        className="absolute right-0 md:-right-10 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-10"
       >
         <FaChevronRight />
       </div>

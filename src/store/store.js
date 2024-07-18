@@ -6,6 +6,7 @@ import { categoriesApi } from "../services/api/categoriesApi/categoriesApi";
 import { businessProfileApi } from "../services/api/businessProfileApi/businessProfileApi";
 import { servicesApi } from "../services/api/servicesApi/servicesApi";
 import { notificationsApi } from "../services/api/notificationsApi/notificationsApi";
+import { chatApi } from "../services/api/chat/chatApi";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,9 @@ export const store = configureStore({
     // Notifications Api
     [notificationsApi.reducerPath]: notificationsApi.reducer,
 
+    // Chat Api
+    [chatApi.reducerPath]: chatApi.reducer,
+
     auth: authSlice,
   },
   middleware: (getDefaultMiddleware) =>
@@ -33,6 +37,7 @@ export const store = configureStore({
       businessProfileApi.middleware,
       servicesApi.middleware,
       notificationsApi.middleware,
+      chatApi.middleware,
     ]),
 });
 

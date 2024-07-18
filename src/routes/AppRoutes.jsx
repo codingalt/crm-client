@@ -18,6 +18,7 @@ import ViewServicePage from "../pages/ViewServicePage";
 import VerifyManualAppointmentPage from "../pages/VerifyManualAppointmentPage";
 import ManualAppointmentPaymentPage from "../pages/ManualAppointmentPaymentPage";
 import PaymentSuccessPage from "../pages/PaymentSuccessPage";
+import ChatPage from "../pages/ChatPage";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: "/appointments",
         element: <Protected Component={AppointmentsPage} />,
+      },
+      {
+        path: "/chat",
+        element: <Protected Component={ChatPage} />,
       },
       {
         path: "/services/:serviceName/:serviceId",

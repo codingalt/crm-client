@@ -11,6 +11,7 @@ import {
 } from "../../../services/api/authApi/authApi";
 import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import ClipSpinner from "../../Loader/ClipSpinner";
+import { setToken } from "../../../utils/helpers/tokenUtils";
 
 const Login = () => {
   const location = useLocation();
@@ -61,7 +62,7 @@ const Login = () => {
     });
 
     if (data?.token) {
-      localStorage.setItem("crmClientToken", data.token);
+      setToken(data.token);
      
       navigate(redirect ? redirect : "/dashboard");
     }

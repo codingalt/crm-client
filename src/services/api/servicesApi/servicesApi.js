@@ -19,6 +19,10 @@ export const servicesApi = createApi({
       providesTags: ["Services"],
     }),
 
+    searchServices: builder.query({
+      query: ({query,city}) => `customer/searchServices?query=${query}&city=${city}`,
+    }),
+
     // registerUser: builder.mutation({
     //   query: (data) => ({
     //     url: "register",
@@ -30,4 +34,4 @@ export const servicesApi = createApi({
   }),
 });
 
-export const { useGetServiceDetailsByIdQuery } = servicesApi;
+export const { useGetServiceDetailsByIdQuery, useSearchServicesQuery } = servicesApi;

@@ -9,11 +9,16 @@ import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Badge } from "@nextui-org/react";
+import { CiSearch } from "react-icons/ci";
+import { useMainContext } from "../../context/MainContext";
+import { BiSolidSearch } from "react-icons/bi";
+import { RiSearchFill } from "react-icons/ri";
 
 const MobileMenu = () => {
-    const navigate = useNavigate();
-    let pathname = window.location.pathname;
-    const { user } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+  let pathname = window.location.pathname;
+  const { user } = useSelector((store) => store.auth);
+  const { setShowSearch } = useMainContext();
 
   useEffect(() => {
     pathname = window.location.pathname;
@@ -49,7 +54,20 @@ const MobileMenu = () => {
             </button>
           </Tooltip>
 
-          <Tooltip title="New Appointment">
+          <Tooltip title="Search">
+            <div className="flex items-center justify-center">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center font-medium bg-transparent rounded-full group focus:outline-none"
+                onClick={() => setShowSearch(true)}
+              >
+                <RiSearchFill className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
+                <span className="sr-only">Search</span>
+              </button>
+            </div>
+          </Tooltip>
+
+          {/* <Tooltip title="New Appointment">
             <div className="flex items-center justify-center">
               <button
                 type="button"
@@ -59,7 +77,7 @@ const MobileMenu = () => {
                 <span className="sr-only">New Appoitment</span>
               </button>
             </div>
-          </Tooltip>
+          </Tooltip> */}
 
           <Tooltip title="Notifications">
             <button
@@ -69,22 +87,20 @@ const MobileMenu = () => {
               }`}
               onClick={() => navigate("/notifications")}
             >
-              {
-                user?.notificationCount > 0 ? (
-                  <Badge
-                    color="danger"
-                    content={user?.notificationCount}
-                    isInvisible={!user}
-                    shape="circle"
-                  >
-                    <IoNotificationsSharp className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
-                  </Badge>
-                ) : (
+              {user?.notificationCount > 0 ? (
+                <Badge
+                  color="danger"
+                  content={user?.notificationCount}
+                  isInvisible={!user}
+                  shape="circle"
+                >
                   <IoNotificationsSharp className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
-                )
-              }
-          
-                <span className="sr-only">Notifications</span>
+                </Badge>
+              ) : (
+                <IoNotificationsSharp className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
+              )}
+
+              <span className="sr-only">Notifications</span>
             </button>
           </Tooltip>
 

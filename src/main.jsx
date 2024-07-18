@@ -7,13 +7,19 @@ import "./styles/global.scss";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 import { DirectionProvider } from './context/DirectionContext.jsx';
+import { PusherProvider } from './context/PusherContext.jsx';
+import { MainProvider } from './context/MainContext.jsx';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <DirectionProvider>
-      <NextUIProvider>
-        <RouterProvider router={router} />
-      </NextUIProvider>
+      <MainProvider>
+        <PusherProvider>
+          <NextUIProvider>
+            <RouterProvider router={router} />
+          </NextUIProvider>
+        </PusherProvider>
+      </MainProvider>
     </DirectionProvider>
   </Provider>
 );

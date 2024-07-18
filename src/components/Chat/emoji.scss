@@ -1,0 +1,71 @@
+$background-color_3: #f5f7fb;
+
+.react-emoji {
+  width: calc(100% - 140px) !important;
+  z-index: 100;
+  scrollbar-width: none;
+}
+
+[dir="rtl"] .react-emoji {
+  direction: ltr !important;
+}
+
+[dir="rtl"] .react-emoji-picker--wrapper {
+  right: 0 !important;
+  left: auto;
+}
+
+.react-input-emoji--input {
+  padding: 15px 10px 11px !important;
+}
+
+[dir="rtl"] .react-input-emoji--input {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.react-input-emoji--wrapper {
+  height: 3.1rem;
+  scrollbar-width: none;
+}
+.react-input-emoji--container {
+  background-color: $background-color_3 !important;
+  border-radius: 2rem !important;
+  padding-left: .8rem;
+  margin-left: 8px;
+  scrollbar-width: none !important;
+}
+
+.react-input-emoji--input{
+  scrollbar-width: none !important;
+}
+
+@media screen and (max-width: 430px) {
+  .react-emoji {
+    width: calc(100% - 89px) !important;
+    max-width: 84% !important;
+  }
+
+  .react-input-emoji--input {
+    padding: 11.1px 10px 11px !important;
+  }
+
+  .react-input-emoji--wrapper {
+    height: 2.6rem;
+  }
+
+  .react-input-emoji--container {
+    border-radius: 2rem !important;
+    padding-left: 0.6rem;
+    margin-left: 3px;
+  }
+
+  .react-input-emoji--placeholder {
+    font-size: 0.75rem;
+    left: 7px;
+  }
+
+  .react-input-emoji--button{
+    display: none !important;
+  }
+}

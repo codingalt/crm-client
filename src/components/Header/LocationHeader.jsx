@@ -8,7 +8,7 @@ import { truncateText } from '../../utils/helpers/helpers';
 const LocationHeader = ({ onOpen }) => {
   const { location } = useSelector((store) => store.auth);
   return (
-    <div className="flex pb-5 pt-2 h-12 items-center justify-center w-full bg-white z-[999] md:hidden">
+    <div className="flex pb-5 pt-2 h-12 items-center justify-center w-full bg-white -mt-0.5 z-[999] md:hidden">
       <div
         className={`px-2 py-3 flex items-center justify-center hover:bg-[#eef9f7] transition-all rounded-lg`}
         onClick={onOpen}
