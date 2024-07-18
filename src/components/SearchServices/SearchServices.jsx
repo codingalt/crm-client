@@ -12,7 +12,7 @@ const SearchServices = () => {
   const { showSearch, setShowSearch } = useMainContext();
   const searchRef = useRef();
   const { location } = useSelector((store) => store.auth);
-  console.log(location);
+  // console.log(location);
   const [searchText, setSearchText] = useState("");
   const [debouncedSearchText, setDebouncedSearchText] = useState("");
   const [results, setResults] = useState(null);

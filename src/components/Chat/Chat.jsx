@@ -120,19 +120,18 @@ const Chat = () => {
         subscribedChannels.push(channelName);
 
         echo.private(channelName).listen("NewMessage", (e) => {
+          console.log("received", e);
           if (e?.message?.sender_type !== `App\\Models\\User`) {
-            console.log("received", e);
+            console.log(
+              parseInt(e.message.communication_id) === parseInt(selectedChat.id)
+            );
             if (
               selectedChat &&
-              e.message.communication_id === selectedChat?.id
+              parseInt(e.message.communication_id) ===
+                parseInt(selectedChat.id)
             ) {
               // Read Messages
-              const debouncedHandleReadMessages = debounce(
-                handleReadMessages,
-                1000
-              );
-              debouncedHandleReadMessages(parseInt(chatId));
-
+              handleReadMessages(parseInt(chatId));
               // It means chat is open. process received message
               handleNewMessage(e);
             } else {
