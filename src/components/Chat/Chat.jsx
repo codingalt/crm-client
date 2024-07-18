@@ -123,7 +123,7 @@ const Chat = () => {
           console.log("received", e);
           if (e?.message?.sender_type !== `App\\Models\\User`) {
             console.log(
-              parseInt(e.message.communication_id) === parseInt(selectedChat.id)
+              parseInt(e.message.communication_id) === parseInt(selectedChat?.id)
             );
             if (
               selectedChat &&
