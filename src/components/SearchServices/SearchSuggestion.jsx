@@ -98,6 +98,9 @@ const SearchSuggestion = ({
                   <div
                     key={item.id}
                     className="flex items-center justify-between w-full cursor-pointer md:hover:bg-slate-100 transition-all rounded-lg md:px-2 py-2 mb-2"
+                    onClick={() =>
+                      navigate(`/services/${item.name}/${item.id}`)
+                    }
                   >
                     {/* Left Side  */}
                     <div className="flex">
@@ -150,6 +153,7 @@ const SearchSuggestion = ({
                 <div
                   key={item.id}
                   className="flex items-center justify-between w-full cursor-pointer md:hover:bg-slate-100 transition-all rounded-lg md:px-2 py-2 mb-2"
+                  onClick={() => navigate(`/services/${item.name}/${item.id}`)}
                 >
                   {/* Left Side  */}
                   <div className="flex">

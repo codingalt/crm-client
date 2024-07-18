@@ -166,7 +166,7 @@ const Chat = () => {
 
   useEffect(() => {
     if (messagesData) {
-      setMessages(messagesData?.communications?.messages);
+      setMessages(messagesData?.communication?.messages);
       setIsLoadingMessages(false);
     }
   }, [messagesData, activeChatMob]);
