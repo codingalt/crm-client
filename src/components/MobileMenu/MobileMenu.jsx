@@ -13,6 +13,7 @@ import { CiSearch } from "react-icons/ci";
 import { useMainContext } from "../../context/MainContext";
 import { BiSolidSearch } from "react-icons/bi";
 import { RiSearchFill } from "react-icons/ri";
+import { FiSearch } from "react-icons/fi";
 
 const MobileMenu = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const MobileMenu = () => {
 
   return (
     <div className={`${css.wrapper} block md:hidden`}>
-      <div className="fixed shadow-sm z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2">
+      <div className="fixed shadow-sm z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-b-0 border-gray-200 rounded-none bottom-0 left-1/2">
         <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
           <Tooltip title="Home">
             <button
@@ -58,10 +59,10 @@ const MobileMenu = () => {
             <div className="flex items-center justify-center">
               <button
                 type="button"
-                className="inline-flex items-center justify-center font-medium bg-transparent rounded-full group focus:outline-none"
-                onClick={() => setShowSearch(true)}
+                className="inline-flex items-center justify-center w-10 h-10 font-medium bg-[#01ABAB] rounded-full hover:bg-[#13D3B3] group focus:ring-4 focus:ring-[#13D3B3] focus:outline-none"
+                onClick={()=> setShowSearch(true)}
               >
-                <RiSearchFill className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
+                <FiSearch className="text-[21px] text-white" />
                 <span className="sr-only">Search</span>
               </button>
             </div>
