@@ -44,19 +44,29 @@ const ViewService = () => {
         <div className="mt-5 md:mt-0">
           <div className="flex gap-x-8 flex-col md:flex-row">
             {/* Left Side  */}
-            <div className="w-full relative max-h-48 md:max-h-72 lg:max-h-96 rounded-md flex-1 shrink-0 overflow-hidden">
-              <Image
-                src={serviceImg}
-                width={"100%"}
-                height={"100%"}
-                alt="Service Image"
-                radius="md"
-                className="object-cover align-middle h-full"
-              />
+            <div className="w-full relative max-h-48 md:h-96 md:max-h-72 lg:max-h-96 rounded-md flex-1 shrink-0 overflow-hidden">
+              {isLoading ? (
+                <Skeleton
+                  variant="rounded"
+                  width={"100%"}
+                  height={"100%"}
+                  sx={{ borderRadius: "6px", objectFit: "cover" }}
+                  animation={false}
+                />
+              ) : (
+                <Image
+                  src={import.meta.env.VITE_SERVICE_IMAGE + service?.image}
+                  width={"100%"}
+                  height={"100%"}
+                  alt="Service Image"
+                  radius="md"
+                  className="object-cover align-middle h-full"
+                />
+              )}
 
               {/* Service Details over Image | Overlay  */}
               {data && (
-                <div className="absolute left-0 right-0 bottom-0 bg-black bg-opacity-45 py-1.5 md:py-2.5 px-3.5 md:px-5 z-10">
+                <div className="absolute hidden left-0 right-0 bottom-0 bg-black bg-opacity-45 py-1.5 md:py-2.5 px-3.5 md:px-5 z-10">
                   <p className="text-white font-medium text-sm md:text-lg xl:text-xl">
                     {service?.name}
                   </p>
@@ -195,7 +205,7 @@ const ViewService = () => {
                 )}
 
                 {/* Chat Button  */}
-                <div className=" py-0 md:py-1 lg:py-3">
+                <div className=" py-0 md:py-1 md:pb-0 lg:py-3">
                   {isLoading ? (
                     <Skeleton
                       variant="text"
@@ -216,17 +226,20 @@ const ViewService = () => {
                 </div>
 
                 {/* Make Appointment Button  */}
-                <div className="pt-4 md:pt-0.5 lg:pt-3">
+                <div className="pt-4 lg:pt-3">
                   {isLoading ? (
                     <Skeleton
                       width={isSmallDevice ? "100%" : "90%"}
                       height={isSmallDevice ? "85px" : "100px"}
-                      sx={{ borderRadius: "41px", mt: isSmallDevice ? "-15px" : "-10px" }}
+                      sx={{
+                        borderRadius: "41px",
+                        mt: isSmallDevice ? "-15px" : "-10px",
+                      }}
                       animation={false}
                     />
                   ) : (
                     <Button
-                      className="bg-[#01ABAB] py-4 md:py-5 lg:py-7 w-full md:w-[90%] text-white text-medium lg:text-xl font-semibold"
+                      className="bg-[#01ABAB] py-4 md:py-4 lg:py-7 w-full md:w-[90%] text-white text-medium lg:text-xl font-semibold"
                       size="lg"
                       radius="full"
                       disabled={isLoading}

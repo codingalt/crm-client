@@ -32,14 +32,17 @@ import { useMainContext } from "../../context/MainContext";
 
 const Header = ({ activeSidebar, setActiveSidebar }) => {
   const navigate = useNavigate();
+  let pathname = window.location.pathname;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { user, location } = useSelector((store) => store.auth);
   const [show, setShow] = useState(false);
   const { setShowSearch } = useMainContext();
 
-  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  useEffect(() => {
+    pathname = window.location.pathname;
+  }, [window.location.pathname]);
 
-  const handleChange = () => {};
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   const storedLanguage = localStorage.getItem("language") || i18n.language;
 
@@ -56,7 +59,6 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
     removeToken();
     window.location.reload(false);
   };
-
 
   return (
     <>
@@ -203,7 +205,9 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
         </header>
 
         {/* Location Header Mobile  */}
-        {location && location?.address && <LocationHeader onOpen={onOpen} />}
+        {!pathname.includes("/chat") && location && location?.address && (
+          <LocationHeader onOpen={onOpen} />
+        )}
 
         {/* Change Location Modal  */}
         <AddLocationModal isOpen={isOpen} onOpenChange={onOpenChange} />

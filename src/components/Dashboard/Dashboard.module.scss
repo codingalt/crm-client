@@ -64,11 +64,11 @@
 
     .item {
       border: 1px solid rgba($color: #000000, $alpha: 0.15);
-      border-radius: 8px;
+      border-radius: 9px;
       @include flexCenter;
       flex-direction: column;
       gap: 20px;
-      padding: 1.5rem 1.4rem;
+      padding: 1.2rem 1.4rem;
       cursor: pointer;
 
       svg {
@@ -317,45 +317,39 @@
     width: 100%;
     margin: 2rem auto;
     margin-top: 1.2rem;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    display: flex;
-    gap: 1.3rem;
     scrollbar-width: none;
     padding-right: 1rem;
     padding: 0 .9rem;
 
     .card {
       border-radius: 8px;
-      overflow: hidden;
       border: 1px solid #d9d9d9;
-      flex: 0 0 auto; 
-      width: calc(100% / 2 - 1rem);
+      // width: 100%;
 
-      @media (min-width: 768px) {
-        &{
-          width: calc(100% / 3 - 1rem); /* Width for md:grid-cols-3 */
-        }
-      }
+      // @media (min-width: 768px) {
+      //   &{
+      //     width: calc(100% / 3 - 1rem); /* Width for md:grid-cols-3 */
+      //   }
+      // }
 
-      @media (min-width: 1280px) {
-        &{
-          width: calc(100% / 4 - 1rem); /* Width for xl:grid-cols-4 */
-        }
-      }
+      // @media (min-width: 1280px) {
+      //   &{
+      //     width: calc(100% / 4 - 1rem); /* Width for xl:grid-cols-4 */
+      //   }
+      // }
 
-      @media (min-width: 1536px) {
-        &{
-          width: calc(100% / 5 - 1rem); /* Width for 2xl:grid-cols-5 */
-        }
-      }
+      // @media (min-width: 1536px) {
+      //   &{
+      //     width: calc(100% / 5 - 1rem); /* Width for 2xl:grid-cols-5 */
+      //   }
+      // }
 
-      @media (max-width: 768px) {
-        &{
-          width: calc(100% / 1 - 3.5rem); /* Width for mobile */
-          pointer-events: none;
-        }
-      }
+      // @media (max-width: 768px) {
+      //   &{
+      //     width: calc(100% / 1 - 3.5rem); /* Width for mobile */
+      //     pointer-events: none;
+      //   }
+      // }
 
       .image {
         width: 100%;
@@ -432,6 +426,8 @@
         font-weight: 400;
         margin-top: 14px;
         cursor: pointer;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
       }
     }
 

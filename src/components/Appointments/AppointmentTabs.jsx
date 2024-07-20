@@ -9,9 +9,11 @@ import HistoryAppointments from './HistoryAppointments';
 import { useGetMyBookingsQuery } from '../../services/api/businessProfileApi/businessProfileApi';
 import { Empty } from 'antd';
 import ClipSpinner from '../Loader/ClipSpinner';
+import { useMediaQuery } from '@uidotdev/usehooks';
 
 const AppointmentTabs = ({ setRatingData, setShow }) => {
   const { data, isLoading } = useGetMyBookingsQuery();
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   return (
     <div className="flex w-full flex-col">
@@ -56,7 +58,7 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
 
           {isLoading && (
             <div className="w-full h-40 flex justify-center max-w-md mt-14">
-              <ClipSpinner />
+              <ClipSpinner size={isSmallDevice ? 35 : 43} />
             </div>
           )}
         </Tab>
@@ -74,7 +76,11 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
             </div>
           }
         >
-          <HistoryAppointments data={data?.completed} setShow={setShow} setRatingData={setRatingData} />
+          <HistoryAppointments
+            data={data?.completed}
+            setShow={setShow}
+            setRatingData={setRatingData}
+          />
           {!isLoading && data?.completed?.length === 0 && (
             <div className="w-full h-40 flex justify-center max-w-md mt-10">
               <Empty description={<span>No completed appointments.</span>} />

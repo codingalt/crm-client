@@ -8,17 +8,19 @@ import ClipSpinner from "../Loader/ClipSpinner";
 import { RiMenuSearchLine } from "react-icons/ri";
 import { TbListSearch } from "react-icons/tb";
 import { truncateText } from "../../utils/helpers/helpers";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 const SubCategories = () => {
   const { categoryId } = useParams();
   const { data, isLoading } = useGetSubCategoriesByCategoryIdQuery(categoryId);
   const navigate = useNavigate();
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   return (
     <div className={css.wrapper}>
       {isLoading ? (
-        <div className="w-full h-[70%] flex items-center justify-center">
-          <ClipSpinner />
+        <div className="w-full h-[70%] py-32 flex items-center justify-center">
+          <ClipSpinner size={isSmallDevice ? 35 : 41} />
         </div>
       ) : (
         <>

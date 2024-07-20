@@ -8,11 +8,16 @@ import {
   useGetGlobalCategoriesQuery,
 } from "../../services/api/categoriesApi/categoriesApi";
 import Services from "./Services";
+import { useGetTargetedServicesQuery } from "../../services/api/servicesApi/servicesApi";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const { location } = useSelector((store) => store.auth);
   const { data, isLoading } = useGetGlobalCategoriesQuery();
   const { data: businesses, isLoading: isLoadingBusinesses } =
     useGetBusinessesQuery();
+  const { data: services, isLoading: isLoadingServices } =
+    useGetTargetedServicesQuery(location?.city);
 
   return (
     <>
@@ -26,7 +31,7 @@ const Dashboard = () => {
         <div className={css.heading}>
           <h1>Services</h1>
         </div>
-        <Services />
+        <Services data={services?.services} isLoading={isLoadingServices} />
 
         <Appointments />
 

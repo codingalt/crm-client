@@ -4,8 +4,10 @@ import { useGetNotificationsQuery } from "../../services/api/notificationsApi/no
 import ClipSpinner from "../Loader/ClipSpinner";
 import { Empty } from "antd";
 import { useMarkNotiAsReadMutation } from "../../services/api/authApi/authApi";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 const Notifications = () => {
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const { data, isLoading } = useGetNotificationsQuery();
   
   // Mark Notification as read 
@@ -44,7 +46,7 @@ const Notifications = () => {
           // Loading
           isLoading && (
             <div className="flex h-48 items-center justify-center">
-              <ClipSpinner />
+              <ClipSpinner size={isSmallDevice ? 35 : 43} />
             </div>
           )
         }

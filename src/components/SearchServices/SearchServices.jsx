@@ -12,12 +12,12 @@ const SearchServices = () => {
   const { showSearch, setShowSearch } = useMainContext();
   const searchRef = useRef();
   const { location } = useSelector((store) => store.auth);
-  // console.log(location);
   const [searchText, setSearchText] = useState("");
   const [debouncedSearchText, setDebouncedSearchText] = useState("");
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const { data, isFetching,error,isLoading } = useSearchServicesQuery(
+  console.log(debouncedSearchText);
+  const { data, isFetching, error, isLoading } = useSearchServicesQuery(
     {
       query: debouncedSearchText,
       city: location?.city,
@@ -31,8 +31,6 @@ const SearchServices = () => {
     }
   }, [data, isLoading]);
 
-  // console.log(results);
-
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedSearchText(searchText);
@@ -42,10 +40,10 @@ const SearchServices = () => {
     return () => clearTimeout(timeoutId);
   }, [searchText]);
 
-   const handleSearchChange = (e) => {
-     setSearchText(e.target.value);
-     setIsSearching(true);
-   };
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+    setIsSearching(true);
+  };
 
   useClickOutside(searchRef, () => setShowSearch(false));
 
@@ -88,6 +86,7 @@ const SearchServices = () => {
           error={error}
           setSearchText={setSearchText}
           debouncedSearchText={debouncedSearchText}
+          setDebouncedSearchText={setDebouncedSearchText}
         />
       </div>
     </div>

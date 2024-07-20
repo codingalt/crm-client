@@ -3,7 +3,7 @@ import React from "react";
 
 const EmptyData = ({ debouncedSearchText, setSearchText }) => {
   return (
-    <div className="w-full px-2 md:px-0 py-12 md:py-16 flex items-center justify-center flex-col">
+    <div className="w-full px-2 md:px-0 py-12 md:py-6 flex items-center justify-center flex-col">
       <AvatarGroup isBordered>
         <Avatar
           src="https://i.pravatar.cc/150?u=a042581f4e29026024d"

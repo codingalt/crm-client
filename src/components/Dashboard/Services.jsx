@@ -1,145 +1,135 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import css from "./Dashboard.module.scss";
-import s1 from "../../assets/s1.svg";
-import s2 from "../../assets/s2.svg";
-import s3 from "../../assets/s3.svg";
-import s4 from "../../assets/s4.svg";
-import s5 from "../../assets/s5.svg";
-import s6 from "../../assets/s6.svg";
 import { Image, Tooltip } from "@nextui-org/react";
 import { FaRegStar } from "react-icons/fa";
 import { GrContactInfo } from "react-icons/gr";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { truncateText } from "../../utils/helpers/helpers";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
-import logo from "../../assets/logo.svg";
 import ImagePlaceholder from "../ui/Image/ImagePlaceholder";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
+import { useMediaQuery } from "@uidotdev/usehooks";
+import { useNavigate } from "react-router-dom";
+import ServicesSkeleton from "./ServicesSkeleton";
 
-const data = [
-  {
-    title: "Buttons Stitching",
-    time: 45,
-    age: "10-45",
-    image: s1,
-  },
-  {
-    title: "Se. Citizens Talks for female massage",
-    time: 30,
-    age: "50-100",
-    image: s2,
-  },
-  {
-    title: "Female Massage",
-    time: 20,
-    age: "10-45",
-    image: s3,
-  },
-  {
-    title: "Men Hair Cut",
-    time: 40,
-    age: "10-60",
-    image: s4,
-  },
-  {
-    title: "Male Yoga",
-    time: 45,
-    age: "35-90",
-    image: s5,
-  },
-  {
-    title: "Bridal Makeup",
-    time: 40,
-    age: "18-60",
-    image: s6,
-  },
-];
+const Services = ({ data, isLoading }) => {
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const navigate = useNavigate();
 
-const Services = () => {
-  const sliderRef = useRef(null);
-
-  const handleNextClick = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        left: sliderRef.current.offsetWidth,
-        behavior: "smooth",
-      });
-    }
+  const responsive = {
+    0: { items: 1 },
+    464: { items: 2 },
+    1024: { items: 3 },
+    1280: { items: 4 },
+    1580: { items: 5 },
   };
 
-  const handleBackClick = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        left: -sliderRef.current.offsetWidth,
-        behavior: "smooth",
-      });
-    }
+  const slidePrev = () => setActiveIndex((prevIndex) => prevIndex - 1);
+  const slideNext = () => setActiveIndex((prevIndex) => prevIndex + 1);
+
+  // Custom arrow components
+  const CustomPrevButton = ({ onClick }) => (
+    <div
+      onClick={onClick}
+      className="absolute -left-8 md:-left-12 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-20"
+    >
+      <FaChevronLeft />
+    </div>
+  );
+
+  const CustomNextButton = ({ onClick }) => (
+    <div
+      onClick={onClick}
+      className="absolute right-0 md:-right-10 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-20"
+    >
+      <FaChevronRight />
+    </div>
+  );
+
+  const items = data?.map((item, index) => {
+    return (
+      <div key={item.id} className={`${css.card} mx-2`}>
+        <div className={css.image}>
+          <ImagePlaceholder
+            src={import.meta.env.VITE_SERVICE_IMAGE + item.image}
+            width={"100%"}
+            height={"100%"}
+            isZoomed
+          />
+        </div>
+        <Tooltip
+          placement="bottom-start"
+          content={item.name}
+          classNames={{
+            base: [
+              // arrow color
+              "before:bg-[#01ABAB]",
+            ],
+            content: [
+              "py-1.5 px-2.5 shadow-lg",
+              "text-white text-[13px] bg-[#01ABAB]",
+            ],
+          }}
+        >
+          <div className={css.title}>{truncateText(item.name, 23)}</div>
+        </Tooltip>
+        <div className={css.rating}>
+          <FaRegStar />
+          <FaRegStar />
+          <FaRegStar />
+          <FaRegStar />
+          <FaRegStar />
+        </div>
+        <div className={css.detail}>
+          <div className={css.age}>
+            <GrContactInfo />
+            <span>
+              {item.start_age}-{item.end_age} yrs
+            </span>
+          </div>
+          <div className={css.time}>
+            <LiaBusinessTimeSolid />
+            <span>{item.time} min</span>
+          </div>
+        </div>
+        <div
+          className={css.price}
+          onClick={() => navigate(`/services/${item.name}/${item.id}`)}
+        >
+          <span>${item.price} Get</span>
+        </div>
+      </div>
+    );
+  });
+
+  const syncActiveIndexForSwipeGestures = (e) => setActiveIndex(e.item);
+
+  const onSlideChanged = (e) => {
+    syncActiveIndexForSwipeGestures(e);
   };
 
   return (
     <div className="relative w-full">
-      <div ref={sliderRef} className={`${css.services} min-h-36 lg:min-h-44`}>
-        {data?.map((item, index) => (
-          <div key={index} className={`${css.card}`}>
-            <div className={css.image}>
-              <ImagePlaceholder
-                src={item.image}
-                width={"100%"}
-                height={"100%"}
-                isZoomed
-              />
-            </div>
-            <Tooltip
-              placement="bottom-start"
-              content={item.title}
-              classNames={{
-                base: [
-                  // arrow color
-                  "before:bg-[#01ABAB]",
-                ],
-                content: [
-                  "py-1.5 px-2.5 shadow-lg",
-                  "text-white text-[13px] bg-[#01ABAB]",
-                ],
-              }}
-            >
-              <div className={css.title}>{truncateText(item.title, 23)}</div>
-            </Tooltip>
-            <div className={css.rating}>
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-            </div>
-            <div className={css.detail}>
-              <div className={css.age}>
-                <GrContactInfo />
-                <span>{item.age} years</span>
-              </div>
-              <div className={css.time}>
-                <LiaBusinessTimeSolid />
-                <span>{item.time} min</span>
-              </div>
-            </div>
-            <div className={css.price}>
-              <span>$43 Get</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div
-        onClick={handleBackClick}
-        className="absolute -left-8 md:-left-10 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-10"
-      >
-        <FaChevronLeft />
-      </div>
-
-      <div
-        onClick={handleNextClick}
-        className="absolute right-0 md:-right-10 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-10"
-      >
-        <FaChevronRight />
+      <div className={`${css.services} min-h-36 lg:min-h-44`}>
+        {isLoading ? (
+          <ServicesSkeleton />
+        ) : (
+          <AliceCarousel
+            mouseTracking
+            items={items}
+            activeIndex={activeIndex}
+            responsive={responsive}
+            onSlideChanged={onSlideChanged}
+            disableDotsControls
+            renderPrevButton={() => <CustomPrevButton onClick={slidePrev} />}
+            renderNextButton={() => <CustomNextButton onClick={slideNext} />}
+            keyboardNavigation
+            touchMoveDefaultEvents
+            paddingRight={isSmallDevice ? 20 : 0}
+          />
+        )}
       </div>
     </div>
   );

@@ -45,7 +45,12 @@ const ImagePlaceholder = ({
         >
           <img
             src={errorImage}
-            style={{ width: "100%", margin: "auto", transform: "scale(.52)" }}
+            style={{
+              width: "100%",
+              maxWidth: "10.5rem",
+              margin: "auto",
+              transform: "scale(.4)",
+            }}
             loading="lazy"
             alt="Image"
           />

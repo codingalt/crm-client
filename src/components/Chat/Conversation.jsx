@@ -18,7 +18,7 @@ const Conversation = ({ chat, chatId, handleChatMob }) => {
       className={chat.id === parseInt(chatId) ? css.activeChat : ""}
     >
       <div className={css.image}>
-        <Avvvatars value={chat.seller.name} size={isSmallDevice ? 47 : isMediumDevice ? 47 : isLargeDevice ? 47 : 51} />
+        <Avvvatars value={chat.seller.name} size={isSmallDevice ? 43 : isMediumDevice ? 47 : isLargeDevice ? 47 : 51} />
       </div>
       <div className={css.cDetail}>
         <div className={css.name}>{chat.seller.name}</div>

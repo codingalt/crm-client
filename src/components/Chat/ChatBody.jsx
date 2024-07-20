@@ -13,7 +13,7 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import FileUploader from "./FileUploader";
 import { FaFileAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import {Image} from "@nextui-org/react"
+import { Image } from "@nextui-org/react";
 
 const ChatBody = ({
   messages,
@@ -87,7 +87,7 @@ const ChatBody = ({
                   message.files && message.files.length > 0 ? "row" : undefined,
                 gap: message.files && message.files.length > 0 ? 0 : undefined,
                 zIndex: 30,
-                paddingBottom: index === messages.length - 1 && "33px",
+                paddingBottom: index === messages.length - 1 && "23px",
               }}
               ref={index === messages.length - 1 ? lastMessageRef : null}
             >
@@ -157,15 +157,13 @@ const ChatBody = ({
                         {message?.files?.map((file, index) => (
                           <div key={index} className="w-full h-full">
                             {file.type.startsWith("image/") ? (
-                              <div className="w-full cursor-zoom-in h-full rounded-xl flex items-center justify-center object-cover">
+                              <div className="w-full z-0 cursor-zoom-in h-full rounded-xl flex items-center justify-center object-cover">
                                 <Image
                                   src={file.src}
                                   alt={file.name}
-                                  className="object-cover align-middle w-full rounded-xl"
+                                  className="object-cover align-middle w-full rounded-xl z-0"
                                   loading="lazy"
-                                  onClick={() =>
-                                    setIsOpenMediaModal(file)
-                                  }
+                                  onClick={() => setIsOpenMediaModal(file)}
                                 />
                                 {/* <ViewMediaGallery file={file} /> */}
                                 {/* <ViewMediaGallery
