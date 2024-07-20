@@ -31,7 +31,7 @@ const SearchServices = () => {
     }
   }, [data, isLoading]);
 
-  console.log(results);
+  // console.log(results);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {

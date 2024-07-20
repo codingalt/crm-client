@@ -128,8 +128,9 @@ const Chat = () => {
         echo.private(channelName).listen("NewMessage", (e) => {
           const currentChatId = chatIdRef.current;
           if (e?.message?.sender_type !== `App\\Models\\User`) {
+            console.log(currentChatId);
             if (
-              chatId &&
+              currentChatId &&
               parseInt(e.message.communication_id) === parseInt(currentChatId)
             ) {
               // Read Messages
