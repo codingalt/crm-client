@@ -12,8 +12,10 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { useNavigate } from "react-router-dom";
 import ServicesSkeleton from "./ServicesSkeleton";
+import { useTranslation } from "react-i18next";
 
 const Services = ({ data, isLoading }) => {
+  const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
@@ -98,7 +100,9 @@ const Services = ({ data, isLoading }) => {
           className={css.price}
           onClick={() => navigate(`/services/${item.name}/${item.id}`)}
         >
-          <span>${item.price} Get</span>
+          <span>
+            ${item.price} {t("get")}
+          </span>
         </div>
       </div>
     );

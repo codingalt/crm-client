@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 import css from "./Appointments.module.scss";
 import moment from "moment";
-import { Chip } from '@nextui-org/react';
+import { Chip } from "@nextui-org/react";
 
 const FutureQueues = ({ active, upComing }) => {
   return (
@@ -12,7 +12,7 @@ const FutureQueues = ({ active, upComing }) => {
         {/* Active Appointments  */}
         {active?.map((item) => (
           <div className={css.inner} key={item.id}>
-            <h3>{moment(item.appointment_date).format("D MMMM, YYYY")}</h3>
+            <h3>{moment(item.appointment_date).format("D MMMM, hh:mm A")}</h3>
             <div className={css.card}>
               <div className={css.cardHeader}>
                 <div className={css.cardTitle}>
@@ -37,7 +37,7 @@ const FutureQueues = ({ active, upComing }) => {
         {/* Pending Appointments  */}
         {upComing?.map((item) => (
           <div className={css.inner} key={item.id}>
-            <h3>{moment(item.appointment_date).format("D MMMM, YYYY")}</h3>
+            <h3>{moment(item.appointment_date).format("D MMMM, hh:mm A")}</h3>
             <div className={css.card}>
               <div className={css.cardHeader}>
                 <div className={css.cardTitle}>
@@ -63,4 +63,4 @@ const FutureQueues = ({ active, upComing }) => {
   );
 };
 
-export default FutureQueues
+export default FutureQueues;

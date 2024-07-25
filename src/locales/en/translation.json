@@ -13,8 +13,6 @@
   "dontHaveAccount": "Don't have an account?",
   "register": "Register",
 
-  
-
   "accountRegistration": "Account Registration",
   "name": "Name",
   "enterName": "Enter your name",
@@ -32,21 +30,20 @@
   "login": "Login",
   "registerHere": "Register Here",
 
-
-
   "verificationCode": "Verification Code",
   "verificationCodeRequired": "Verification code is Required",
   "verificationCodeLength": "Verification code must be exactly 6 characters",
   "verificationCodeSent": "The verification code is sent to the number",
   "resendCode": "Resend Code",
 
-
-
   "search": "Search",
+  "searchServices": "Search Services...",
   "newAddress": "New address",
   "signedInAs": "Signed in as",
   "languages": "Languages",
   "logOut": "Log Out",
+  "addAddressToView": "Add address to view services",
+  "selectLanguage": "Select Language",
   "helpFeedback": "Help & Feedback",
   "dashboard": "Dashboard",
   "appointments": "Appointments",
@@ -59,8 +56,6 @@
   "get": "Get",
   "motive": "Motive",
   "businesses": "Businesses",
-
-
 
   "myQueues": "My Queues",
   "activeQueues": "Active Queues",
@@ -84,14 +79,10 @@
   "enterYourFeedback": "Enter your feedback",
   "done": "Done",
 
-
-
   "noNotificationsYet": "No Notifications yet.",
   "notFound404": "404 Not Found",
   "somethingMissing": "Something's missing.",
   "backToHomePage": "Back to HomePage",
-
-
 
   "seeReviews": "See reviews",
   "moreInfo": "More info",
@@ -106,8 +97,6 @@
   "saturday": "Saturday",
   "sunday": "Sunday",
   "closed": "Closed",
-
-
 
   "makeNewAppointment": "Make a new Appointment",
   "dateSelection": "Date Selection",
@@ -126,8 +115,6 @@
   "payNowToBookAppointment": "Pay Now to Book Appointment",
   "confirmAppointment": "Confirm Appointment",
 
-
-
   "january": "January",
   "february": "February",
   "march": "March",
@@ -140,8 +127,6 @@
   "october": "October",
   "november": "November",
   "december": "December",
-
-
 
   "noSubCategoriesFound": "No Sub Categories Found.",
   "exploreMore": "Explore more",

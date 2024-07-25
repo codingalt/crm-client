@@ -15,8 +15,10 @@ import css from "./Header.module.scss";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import { useTranslation } from "react-i18next";
 
 const AddLocationModal = ({ isOpen, onOpenChange }) => {
+  const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const { location } = useSelector((store) => store.auth);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -113,7 +115,7 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
                   <span className="text-[#01ABAB] text-lg md:text-2xl mt-1 md:mt-0">
                     <HiOutlineLocationMarker />
                   </span>
-                  <p>Add address to view services</p>
+                  <p>{t("addAddressToView")}</p>
                 </div>
 
                 <div

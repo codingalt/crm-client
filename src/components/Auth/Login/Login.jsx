@@ -12,6 +12,7 @@ import {
 import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import ClipSpinner from "../../Loader/ClipSpinner";
 import { setToken } from "../../../utils/helpers/tokenUtils";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const Login = () => {
   const redirect = searchParams.get("redirect");
   const navigate = useNavigate();
   const token = localStorage.getItem("crmClientToken");
+  const { t } = useTranslation();
  
   const {
     data,
@@ -92,7 +94,7 @@ const Login = () => {
         <div className="w-full h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
           <div className={css.wrapper}>
             <div className={css.top}>
-              <p>Sign in</p>
+              <p>{t("signIn")}</p>
             </div>
 
             {/* Display Errors  */}
@@ -106,12 +108,12 @@ const Login = () => {
               {({ errors, setFieldValue, touched }) => (
                 <Form className={css.loginForm}>
                   <div className={css.inputContainer}>
-                    <label htmlFor="name">Email</label>
+                    <label htmlFor="name">{t("email")}</label>
                     <Field
                       type="email"
                       name="email"
                       id="email"
-                      placeholder="Enter your email address"
+                      placeholder={t("enterEmail")}
                       className={
                         errors.email && touched.email && "inputBottomBorder"
                       }
@@ -124,12 +126,12 @@ const Login = () => {
                   </div>
 
                   <div className={css.inputContainer}>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">{t("password")}</label>
                     <Field
                       type="password"
                       name="password"
                       id="password"
-                      placeholder="Enter your password"
+                      placeholder={t("enterPassword")}
                       className={
                         errors.password &&
                         touched.password &&
@@ -153,17 +155,17 @@ const Login = () => {
                         fontSize: "18px",
                       }}
                     >
-                      Forgot Password?
+                      {t("forgotPassword")}
                     </button>
                     <Button isLoading={isLoading} type="submit">
-                      Enter
+                      {t("enter")}
                     </Button>
                   </div>
 
                   <p className="text-medium text-center font-medium text-default-600 mt-14">
-                    <span>Don't have an account?</span>{" "}
+                    <span>{t("dontHaveAccount")}</span>{" "}
                     <NavLink className="text-blue-400" to={"/signup"}>
-                      Register here
+                      {t("register")}
                     </NavLink>
                   </p>
                 </Form>

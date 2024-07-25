@@ -58,12 +58,14 @@ const ChatBody = ({
   const chatContainerRef = useRef(null);
 
   const scrollToBottom = () => {
-    if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-      });
-    }
+    setTimeout(() => {
+      if (lastMessageRef.current) {
+        lastMessageRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+        });
+      }
+    }, 100);
   };
 
   useEffect(() => {
@@ -87,7 +89,7 @@ const ChatBody = ({
                   message.files && message.files.length > 0 ? "row" : undefined,
                 gap: message.files && message.files.length > 0 ? 0 : undefined,
                 zIndex: 30,
-                paddingBottom: index === messages.length - 1 && "23px",
+                paddingBottom: index === messages.length - 1 && "0px",
               }}
               ref={index === messages.length - 1 ? lastMessageRef : null}
             >
@@ -153,11 +155,11 @@ const ChatBody = ({
                         paddingRight: 0,
                       }}
                     >
-                      <div className="w-full mt-1 min-h-52 min-w-52 flex flex-wrap flex-col items-center justify-end gap-x-3 gap-y-4">
+                      <div className="w-full mt-1 min-w-52 flex flex-wrap flex-col items-center justify-end gap-x-3 gap-y-4">
                         {message?.files?.map((file, index) => (
                           <div key={index} className="w-full h-full">
                             {file.type.startsWith("image/") ? (
-                              <div className="w-full z-0 cursor-zoom-in h-full rounded-xl flex items-center justify-center object-cover">
+                              <div className="w-full min-h-52 z-0 cursor-zoom-in h-full rounded-xl flex items-center justify-center object-cover">
                                 <Image
                                   src={file.src}
                                   alt={file.name}
@@ -165,11 +167,6 @@ const ChatBody = ({
                                   loading="lazy"
                                   onClick={() => setIsOpenMediaModal(file)}
                                 />
-                                {/* <ViewMediaGallery file={file} /> */}
-                                {/* <ViewMediaGallery
-                                  galleryID="my-test-gallery"
-                                  file={file}
-                                /> */}
                               </div>
                             ) : file.type.startsWith("video/") ? (
                               <div className="w-full md:h-full rounded-xl flex items-center justify-center">

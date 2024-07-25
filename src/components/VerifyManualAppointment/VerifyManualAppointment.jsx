@@ -165,7 +165,7 @@ const VerifyManualAppointment = () => {
             <div className="flex gap-x-4 flex-col md:flex-row">
               <div className="w-full relative max-h-80 rounded-md flex-1 overflow-hidden">
                 <Image
-                  src={serviceImg}
+                  src={import.meta.env.VITE_SERVICE_IMAGE + data?.service?.image}
                   width={"100%"}
                   height={"100%"}
                   alt="Service Image"
@@ -243,8 +243,7 @@ const VerifyManualAppointment = () => {
               Please ensure to arrive at least 10 minutes prior to your
               appointment to complete any necessary preparations. If you need to
               make any changes to your booking, kindly contact{" "}
-              {data?.business?.name} {" "}
-              Customer Care at your earliest convenience.
+              {data?.business?.name} Customer Care at your earliest convenience.
             </p>
 
             <p className="mt-6">

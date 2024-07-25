@@ -7,7 +7,8 @@ import useClickOutside from "@/hooks/useClickOutside";
 
 const ViewMediaModal = ({ isOpen, setIsOpen }) => {
     const ref = useRef();
-  useClickOutside(ref, () => setIsOpen(null));
+  const excludeRef = useRef();
+  useClickOutside(ref, () => setIsOpen(null), excludeRef);
 
   return (
     <div
@@ -20,9 +21,9 @@ const ViewMediaModal = ({ isOpen, setIsOpen }) => {
         {/* Close button */}
         <div className="absolute top-6 right-7 md:right-8 z-50">
           <div className="flex items-center gap-6 text-white text-3xl">
-            <Link to={isOpen?.src} target="_blank" download={isOpen?.src}>
+            <a href={isOpen?.src} target="_blank" ref={excludeRef}>
               <LiaDownloadSolid />
-            </Link>
+            </a>
             <button
               onClick={() => setIsOpen(null)}
               className="bg-transparent outline-none border-none"

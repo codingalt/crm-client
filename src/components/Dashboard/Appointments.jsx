@@ -1,10 +1,13 @@
 import React from "react";
 import css from "./Dashboard.module.scss";
+import { useTranslation } from "react-i18next";
 
 const Appointments = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={css.queuesWrap}>
-      <h3>Appointments</h3>
+      <h3>{t("appointments")}</h3>
 
       <div
         className={`${css.queues} grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5`}
@@ -12,12 +15,14 @@ const Appointments = () => {
         <div className={css.card}>
           <div className={css.cardHeader}>
             <div className={css.cardTitle}>
-              <h4>Motive</h4>
+              <h4>{t("motive")}</h4>
             </div>
           </div>
 
           <div className={css.cardBody}>
-            <p>Business Name</p>
+            <p>
+              {t("businesses")} {t("name")}
+            </p>
           </div>
 
           <div className={css.cardFooter}>

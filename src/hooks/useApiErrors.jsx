@@ -33,7 +33,7 @@ export const useApiErrorHandling = (error) => {
           break;
 
         default:
-          toastError("Could not perform the request. Try again later");
+          toastError("Could not perform the request. Please try again later");
       }
     }
   }, [error, extractErrors]);

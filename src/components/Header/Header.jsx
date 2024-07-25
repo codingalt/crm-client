@@ -29,8 +29,10 @@ import { truncateText } from "../../utils/helpers/helpers";
 import { removeToken } from "../../utils/helpers/tokenUtils";
 import SearchServices from "../SearchServices/SearchServices";
 import { useMainContext } from "../../context/MainContext";
+import { useTranslation } from "react-i18next";
 
 const Header = ({ activeSidebar, setActiveSidebar }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   let pathname = window.location.pathname;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -80,7 +82,7 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
             >
               <CiSearch className="text-xl text-[#ababab]" />
               <p className="pl-4 text-medium font-normal text-[#ababab]">
-                Search Services...
+                {t("searchServices")}
               </p>
             </div>
           </div>
@@ -97,7 +99,9 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
                 <button className="outline-none border-none bg-transparent flex items-center justify-center gap-1">
                   <LocationIcon className="text-[#454545] text-[1.15rem]" />
                   <p className="text-medium m-0 text-[#454545] font-medium text-ellipsis whitespace-nowrap pr-1">
-                    <span className="hidden xl:inline-block">New address</span>
+                    <span className="hidden xl:inline-block">
+                      {t("newAddress")}
+                    </span>
                     <span className="text-[#01ABAB] inline-block ml-1">
                       {truncateText(location.address, 44)}
                     </span>
@@ -111,7 +115,11 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
             <Dropdown dir={direction}>
               <DropdownTrigger>
                 <div className="flex items-center space-x-1.5 cursor-pointer">
-                  <Tooltip dir={direction} size="sm" content="Select Language">
+                  <Tooltip
+                    dir={direction}
+                    size="sm"
+                    content={t("selectLanguage")}
+                  >
                     <div className="w-5 h-5 md:w-6 md:h-6 rounded-full">
                       <Image
                         src={
@@ -156,7 +164,7 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
                   Pakistan
                 </DropdownItem>
                 <DropdownItem
-                  key="israel"
+                  key="he"
                   startContent={
                     <Image
                       src={israelFlag}
@@ -166,7 +174,7 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
                     />
                   }
                 >
-                  Israeli
+                  עִברִית
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -185,19 +193,19 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
                 <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold">{t("signedInAs")}</p>
                   <p className="font-semibold">{user?.email}</p>
                 </DropdownItem>
-                <DropdownItem key="languages">Languages</DropdownItem>
+                <DropdownItem key="languages">{t("languages")}</DropdownItem>
                 <DropdownItem key="help_and_feedback">
-                  Help & Feedback
+                  {t("helpFeedback")}
                 </DropdownItem>
                 <DropdownItem
                   onClick={handleLogout}
                   key="logout"
                   color="danger"
                 >
-                  Log Out
+                  {t("logOut")}
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>

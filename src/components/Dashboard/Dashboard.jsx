@@ -10,33 +10,36 @@ import {
 import Services from "./Services";
 import { useGetTargetedServicesQuery } from "../../services/api/servicesApi/servicesApi";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const { location } = useSelector((store) => store.auth);
+  console.log(location);
   const { data, isLoading } = useGetGlobalCategoriesQuery();
   const { data: businesses, isLoading: isLoadingBusinesses } =
     useGetBusinessesQuery();
   const { data: services, isLoading: isLoadingServices } =
-    useGetTargetedServicesQuery(location?.city);
+    useGetTargetedServicesQuery("Multan", {skip: !location});
 
   return (
     <>
       <div className={css.dashboardDetails}>
         <div className={css.top}>
-          <h1>Categories</h1>
+          <h1>{t("categories")}</h1>
         </div>
 
         <Categories data={data?.categories} isLoading={isLoading} />
 
         <div className={css.heading}>
-          <h1>Services</h1>
+          <h1>{t("services")}</h1>
         </div>
         <Services data={services?.services} isLoading={isLoadingServices} />
 
         <Appointments />
 
         <div className={css.heading}>
-          <h1>Businesses</h1>
+          <h1>{t("businesses")}</h1>
         </div>
         <Business
           data={businesses?.businesses}

@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import i18n from "../i18n";
 
-const rtlLanguages = ["pk", "israel"];
+const rtlLanguages = ["pk", "he"];
 
 export const DirectionContext = createContext();
 
