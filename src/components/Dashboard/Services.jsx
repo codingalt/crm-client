@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import css from "./Dashboard.module.scss";
 import { Image, Tooltip } from "@nextui-org/react";
 import { FaRegStar } from "react-icons/fa";
@@ -13,12 +13,15 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import { useNavigate } from "react-router-dom";
 import ServicesSkeleton from "./ServicesSkeleton";
 import { useTranslation } from "react-i18next";
+import { DirectionContext } from "../../context/DirectionContext";
 
 const Services = ({ data, isLoading }) => {
   const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
+  const { direction } = useContext(DirectionContext);
+  console.log(direction);
 
   const responsive = {
     0: { items: 1 },
@@ -37,7 +40,7 @@ const Services = ({ data, isLoading }) => {
       onClick={onClick}
       className="absolute -left-8 md:-left-12 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-20"
     >
-      <FaChevronLeft />
+      {direction === "rtl" ? <FaChevronRight /> : <FaChevronLeft />}
     </div>
   );
 
@@ -46,7 +49,7 @@ const Services = ({ data, isLoading }) => {
       onClick={onClick}
       className="absolute right-0 md:-right-10 top-1/2 transform -translate-y-1/2 w-11 h-11 bg-[#00AEAD] bg-opacity-20 hidden md:flex items-center justify-center text-2xl cursor-pointer rounded-full text-[#01ABAB] z-20"
     >
-      <FaChevronRight />
+      {direction === "rtl" ? <FaChevronLeft /> : <FaChevronRight />}
     </div>
   );
 
@@ -88,12 +91,12 @@ const Services = ({ data, isLoading }) => {
           <div className={css.age}>
             <GrContactInfo />
             <span>
-              {item.start_age}-{item.end_age} yrs
+              {item.start_age}-{item.end_age} {t("yrs")}
             </span>
           </div>
           <div className={css.time}>
             <LiaBusinessTimeSolid />
-            <span>{item.time} min</span>
+            <span>{item.time} {t("min")}</span>
           </div>
         </div>
         <div
@@ -132,6 +135,7 @@ const Services = ({ data, isLoading }) => {
             keyboardNavigation
             touchMoveDefaultEvents
             paddingRight={isSmallDevice ? 20 : 0}
+            autoPlayDirection={direction === "rtl" ? "rtl" : "ltr"}
           />
         )}
       </div>

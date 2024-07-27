@@ -18,8 +18,10 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import ViewMediaModal from "./ViewMediaModal";
 import { usePusherContext } from "../../context/PusherContext";
 import { debounce } from "lodash";
+import { useTranslation } from "react-i18next";
 
 const Chat = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const echo = usePusherContext();
@@ -304,14 +306,14 @@ const Chat = () => {
               style={activeChatMob ? { display: "none" } : { display: "block" }}
             >
               <div className={css.cLeftHeading}>
-                <span>Chats</span>
+                <span>{t("chats")}</span>
               </div>
               <div className={`${css.chatSearch}`}>
                 <bi.BiSearch />
                 <input
                   type="text"
                   value={searchQuery}
-                  placeholder="SEARCH"
+                  placeholder={t("search")}
                   onChange={handleSearchChange}
                 />
               </div>
@@ -349,7 +351,7 @@ const Chat = () => {
                     <div className="w-full h-full flex gap-y-3 items-center justify-center px-20 text-center flex-col">
                       <TbMessage fontSize={60} color="#01AB8E" />
                       <p className="text-tiny text-default-500 font-medium">
-                        Your upcoming chats will appear here.
+                        {t("upComingChatsMessage")}
                       </p>
                     </div>
                   )}

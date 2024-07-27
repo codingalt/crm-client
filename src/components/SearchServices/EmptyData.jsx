@@ -1,7 +1,10 @@
 import { Avatar, AvatarGroup, Button } from "@nextui-org/react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const EmptyData = ({ debouncedSearchText, setSearchText }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full px-2 md:px-0 py-12 md:py-6 flex items-center justify-center flex-col">
       <AvatarGroup isBordered>
@@ -19,12 +22,11 @@ const EmptyData = ({ debouncedSearchText, setSearchText }) => {
         />
       </AvatarGroup>
       <p className="text-medium text-gray-700 font-medium mt-3">
-        No Results found
+        {t("noResultsFound")}
       </p>
       <p className="text-default-500 font-normal text-xs md:text-sm max-w-sm text-center mt-1">
-        Sorry, we couldn't find any results with the name{" "}
-        <br className="hidden md:block" /> <span>"{debouncedSearchText}"</span>.
-        Please try searching something else.
+        {t("sorryCouldNotFindText")} <br className="hidden md:block" />{" "}
+        <span>"{debouncedSearchText}"</span>. {t("trySearching")}
       </p>
       <Button
         variant="ghost"
@@ -32,7 +34,7 @@ const EmptyData = ({ debouncedSearchText, setSearchText }) => {
         size="md"
         onClick={() => setSearchText("")}
       >
-        Clear Search
+        {t("clearSearch")}
       </Button>
     </div>
   );

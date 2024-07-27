@@ -7,8 +7,10 @@ import SearchSuggestion from "./SearchSuggestion";
 import { useSearchServicesQuery } from "../../services/api/servicesApi/servicesApi";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const SearchServices = () => {
+  const { t } = useTranslation();
   const { showSearch, setShowSearch } = useMainContext();
   const searchRef = useRef();
   const { location } = useSelector((store) => store.auth);
@@ -71,7 +73,7 @@ const SearchServices = () => {
             value={searchText}
             maxLength={70}
             onChange={handleSearchChange}
-            placeholder="What are you looking for?"
+            placeholder={t("whatAreYouLookingFor")}
             className="w-full h-full pl-3 outline-none border-none bg-transparent placeholder:font-normal placeholder:text-medium placeholder:text-[#ababab]"
           />
         </div>

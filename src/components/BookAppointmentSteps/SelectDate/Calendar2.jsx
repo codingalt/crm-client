@@ -1,21 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Calendar.scss";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+import { useTranslation } from "react-i18next";
 
   const formatDate = (date) => {
     const yyyy = date.getFullYear();
@@ -25,6 +11,22 @@ const months = [
   };
 
 const Calendar = ({ setSelectedDate }) => {
+  const { t } = useTranslation();
+
+  const months = [
+    t("january"),
+    t("february"),
+    t("march"),
+    t("april"),
+    t("may"),
+    t("june"),
+    t("july"),
+    t("august"),
+    t("september"),
+    t("october"),
+    t("november"),
+    t("december"),
+  ];
   const [today] = useState(new Date());
   const [activeDay, setActiveDay] = useState(today.getDate());
   const [month, setMonth] = useState(today.getMonth());

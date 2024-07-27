@@ -15,12 +15,12 @@ import { setToken } from "../../../utils/helpers/tokenUtils";
 import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const redirect = searchParams.get("redirect");
   const navigate = useNavigate();
   const token = localStorage.getItem("crmClientToken");
-  const { t } = useTranslation();
  
   const {
     data,

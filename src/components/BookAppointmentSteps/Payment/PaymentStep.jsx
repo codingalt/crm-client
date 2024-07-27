@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import css from "./PaymentStep.module.scss";
 import Payment from './Payment';
 import { FaArrowLeft } from "react-icons/fa6";
+import { useTranslation } from 'react-i18next';
 
 const PaymentStep = ({
   loading,
@@ -10,6 +11,8 @@ const PaymentStep = ({
   setIsConfirmPayment,
   handleBack,
 }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     setLoading(true);
   }, []);
@@ -28,7 +31,7 @@ const PaymentStep = ({
           >
             <FaArrowLeft />
           </div>
-          <span className="flex-1 text-center">Make a Payment</span>
+          <span className="flex-1 text-center">{t("makePayment")}</span>
         </div>
       </div>
 

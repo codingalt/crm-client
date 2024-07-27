@@ -14,6 +14,7 @@ import FileUploader from "./FileUploader";
 import { FaFileAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Image } from "@nextui-org/react";
+import { useTranslation } from "react-i18next";
 
 const ChatBody = ({
   messages,
@@ -30,6 +31,7 @@ const ChatBody = ({
   isLoadingSendMessage,
   setIsOpenMediaModal,
 }) => {
+  const { t } = useTranslation();
   const { user } = useSelector((state) => state.auth);
   const inputRef = useRef();
   const lastMessageRef = useRef();
@@ -214,9 +216,7 @@ const ChatBody = ({
         ) : (
           <div className={css.noChatMessage}>
             <img src={noChat} alt="" />
-            <span className="text-center">
-              Tap on the Chat to Start a Conversation
-            </span>
+            <span className="text-center">{t("tapOnChat")}</span>
           </div>
         )}
 
@@ -235,7 +235,7 @@ const ChatBody = ({
               onKeyDown={handleKeyDown}
               onChange={handleChange}
               cleanOnEnter
-              placeholder={"Type your message here"}
+              placeholder={t("typeYourMessage")}
               inputClass={css.inputMessageBox}
               ref={inputRef}
             />

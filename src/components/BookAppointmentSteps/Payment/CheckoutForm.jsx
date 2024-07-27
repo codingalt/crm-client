@@ -12,6 +12,7 @@ import { Button } from "@nextui-org/react";
 import { usePaymentSuccessMutation } from "../../../services/api/businessProfileApi/businessProfileApi";
 
 const CheckoutForm = ({ clientSecret, setIsConfirmPayment }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
@@ -72,8 +73,8 @@ const CheckoutForm = ({ clientSecret, setIsConfirmPayment }) => {
             type="submit"
           >
             {loading || isLoading
-              ? "Processing.."
-              : "Pay Now to Book Appointment"}
+              ? t("processing")
+              : t("payNowToBookAppointment")}
           </Button>
         )}
       </form>

@@ -1,27 +1,18 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import css from "./Header.module.scss";
-import { useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import logo from "../../assets/logo.svg";
-import { useMediaQuery } from "@uidotdev/usehooks";
 import Avvvatars from "avvvatars-react";
 import { useSelector } from "react-redux";
-import { HiOutlineLocationMarker } from "react-icons/hi";
 import {
   DropdownItem,
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
   Avatar,
-  Image,
-  Tooltip,
   useDisclosure,
 } from "@nextui-org/react";
-import ukFlag from "../../assets/uk.png";
-import pakFlag from "../../assets/pakistan.png";
-import israelFlag from "../../assets/israel.png";
 import { DirectionContext } from "../../context/DirectionContext";
-import i18n from "../../i18n";
 import LocationHeader from "./LocationHeader";
 import LocationIcon from "./LocationIcon";
 import AddLocationModal from "./AddLocationModal";
@@ -30,32 +21,24 @@ import { removeToken } from "../../utils/helpers/tokenUtils";
 import SearchServices from "../SearchServices/SearchServices";
 import { useMainContext } from "../../context/MainContext";
 import { useTranslation } from "react-i18next";
+import ChooseLanguageModal from "./ChooseLanguageModal";
+import { useMediaQuery } from "@uidotdev/usehooks";
+import { IoLocationOutline } from "react-icons/io5";
 
-const Header = ({ activeSidebar, setActiveSidebar }) => {
+const Header = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   let pathname = window.location.pathname;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen: isOpenLangModal, onOpen: onOpenLangModal, onOpenChange: onOpenChangeLangModal } = useDisclosure();
   const { user, location } = useSelector((store) => store.auth);
-  const [show, setShow] = useState(false);
   const { setShowSearch } = useMainContext();
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   useEffect(() => {
     pathname = window.location.pathname;
   }, [window.location.pathname]);
 
-  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
-
-  const storedLanguage = localStorage.getItem("language") || i18n.language;
-
-  const [selectedKeys, setSelectedKeys] = useState(new Set([storedLanguage]));
-
-  const selectedValue = useMemo(
-    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    [selectedKeys]
-  );
-
-  const { toggleLanguage, direction } = useContext(DirectionContext);
+  const { direction } = useContext(DirectionContext);
 
   const handleLogout = () => {
     removeToken();
@@ -66,6 +49,13 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
     <>
       {/* Show Search Suggestions Modal  */}
       <SearchServices />
+
+      {/* Choose Language Modal  */}
+      <ChooseLanguageModal
+        isOpen={isOpenLangModal}
+        onOpenChange={onOpenChangeLangModal}
+      />
+
       <div
         className="sticky top-0 left-0 bg- z-40 overflow-hidden"
         style={{ boxShadow: "0px 0px 24px 0px rgba(0,0,0,0.16)" }}
@@ -86,24 +76,34 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
               </p>
             </div>
           </div>
-          <div className={`text-[19px] font-medium text-[#01AB8E] md:hidden`}>
-            Paycust
-          </div>
+          {/* <div className={`text-[19px] font-medium text-[#01AB8E] md:hidden`}>
+            <button className="outline-none border-none bg-transparent flex items-center justify-center gap-0">
+              <LocationIcon className="text-[#656565] text-[1rem]" />
+              <p className="text-sm md:text-medium m-0 text-[#454545] font-medium text-ellipsis whitespace-nowrap pr-1">
+                <span className="hidden xl:inline-block">
+                  {t("newAddress")}
+                </span>
+                <span className="text-[#01ABAB] inline-block ml-1">
+                  {truncateText(location.address, 27)}
+                </span>
+              </p>
+            </button>
+          </div> */}
 
           {location && location?.address && (
-            <div
-              className={`${css.header_center} hidden md:block`}
-              onClick={onOpen}
-            >
+            <div className={`${css.header_center}`} onClick={onOpen}>
               <div className="flex justify-center items-center">
-                <button className="outline-none border-none bg-transparent flex items-center justify-center gap-1">
+                <button className="outline-none border-none bg-transparent flex items-center justify-center gap-0.5 md:gap-1">
+                  <div className="md:block hidden">
                   <LocationIcon className="text-[#454545] text-[1.15rem]" />
+                  </div>
+                  <IoLocationOutline className="md:hidden text-[#454545] text-[1.29rem]" />
                   <p className="text-medium m-0 text-[#454545] font-medium text-ellipsis whitespace-nowrap pr-1">
                     <span className="hidden xl:inline-block">
                       {t("newAddress")}
                     </span>
                     <span className="text-[#01ABAB] inline-block ml-1">
-                      {truncateText(location.address, 44)}
+                      {truncateText(location.address, isSmallDevice ? 18 : 44)}
                     </span>
                   </p>
                 </button>
@@ -112,73 +112,6 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
           )}
 
           <div className="flex items-center space-x-7">
-            <Dropdown dir={direction}>
-              <DropdownTrigger>
-                <div className="flex items-center space-x-1.5 cursor-pointer">
-                  <Tooltip
-                    dir={direction}
-                    size="sm"
-                    content={t("selectLanguage")}
-                  >
-                    <div className="w-5 h-5 md:w-6 md:h-6 rounded-full">
-                      <Image
-                        src={
-                          selectedValue === "en"
-                            ? ukFlag
-                            : selectedValue === "pk"
-                            ? pakFlag
-                            : israelFlag
-                        }
-                        width={50}
-                        height={50}
-                        radius="full"
-                      />
-                    </div>
-                  </Tooltip>
-                  {/* <span>|</span>
-                  <span>{i18n.language}</span>  */}
-                </div>
-              </DropdownTrigger>
-              <DropdownMenu
-                selectionMode="single"
-                selectedKeys={selectedKeys}
-                onSelectionChange={setSelectedKeys}
-                onAction={(key) => toggleLanguage(key)}
-                variant="faded"
-                aria-label="Dropdown menu with icons"
-              >
-                <DropdownItem
-                  key="en"
-                  startContent={
-                    <Image src={ukFlag} width={27} height={27} radius="full" />
-                  }
-                >
-                  English
-                </DropdownItem>
-                <DropdownItem
-                  key="pk"
-                  startContent={
-                    <Image src={pakFlag} width={27} height={27} radius="full" />
-                  }
-                >
-                  Pakistan
-                </DropdownItem>
-                <DropdownItem
-                  key="he"
-                  startContent={
-                    <Image
-                      src={israelFlag}
-                      width={27}
-                      height={27}
-                      radius="full"
-                    />
-                  }
-                >
-                  עִברִית
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-
             <Dropdown placement="bottom-end" dir={direction}>
               <DropdownTrigger>
                 <Avatar
@@ -196,7 +129,9 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
                   <p className="font-semibold">{t("signedInAs")}</p>
                   <p className="font-semibold">{user?.email}</p>
                 </DropdownItem>
-                <DropdownItem key="languages">{t("languages")}</DropdownItem>
+                <DropdownItem onClick={onOpenLangModal} key="languages">
+                  {t("languages")}
+                </DropdownItem>
                 <DropdownItem key="help_and_feedback">
                   {t("helpFeedback")}
                 </DropdownItem>
@@ -213,9 +148,9 @@ const Header = ({ activeSidebar, setActiveSidebar }) => {
         </header>
 
         {/* Location Header Mobile  */}
-        {!pathname.includes("/chat") && location && location?.address && (
+        {/* {!pathname.includes("/chat") && location && location?.address && (
           <LocationHeader onOpen={onOpen} />
-        )}
+        )} */}
 
         {/* Change Location Modal  */}
         <AddLocationModal isOpen={isOpen} onOpenChange={onOpenChange} />

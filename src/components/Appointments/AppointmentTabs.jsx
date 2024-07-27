@@ -10,8 +10,10 @@ import { useGetMyBookingsQuery } from '../../services/api/businessProfileApi/bus
 import { Empty } from 'antd';
 import ClipSpinner from '../Loader/ClipSpinner';
 import { useMediaQuery } from '@uidotdev/usehooks';
+import { useTranslation } from 'react-i18next';
 
 const AppointmentTabs = ({ setRatingData, setShow }) => {
+  const { t } = useTranslation();
   const { data, isLoading } = useGetMyBookingsQuery();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
@@ -36,7 +38,7 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
           title={
             <div className="flex items-center space-x-2 text-sm md:text-medium">
               <MdUpcoming className="text-[18px] md:text-[23px]" />
-              <span>Active Queues</span>
+              <span>{t("activeQueues")}</span>
               {data && (
                 <Chip size="sm" variant="faded">
                   {parseInt(data?.active?.length) +
@@ -50,7 +52,7 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
             data?.active?.length === 0 &&
             data?.upComing?.length === 0 && (
               <div className="w-full h-40 flex justify-center max-w-md mt-20 md:mt-10">
-                <Empty description={<span>No active appointments.</span>} />
+                <Empty description={<span>{t("noActiveAppointments")}</span>} />
               </div>
             )}
 
@@ -67,7 +69,7 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
           title={
             <div className="flex items-center space-x-2 text-sm md:text-medium">
               <RiChatHistoryFill className="text-[18px] md:text-[23px]" />
-              <span>Queues History</span>
+              <span>{t("queuesHistory")}</span>
               {data && (
                 <Chip size="sm" variant="faded">
                   {parseInt(data?.completed?.length)}
@@ -83,7 +85,9 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
           />
           {!isLoading && data?.completed?.length === 0 && (
             <div className="w-full h-40 flex justify-center max-w-md mt-10">
-              <Empty description={<span>No completed appointments.</span>} />
+              <Empty
+                description={<span>{t("noCompletedAppointments")}</span>}
+              />
             </div>
           )}
         </Tab>

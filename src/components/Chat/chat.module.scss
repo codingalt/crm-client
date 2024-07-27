@@ -104,6 +104,7 @@ $background-color_7: #5cbfa1;
     background-color: $background-color_3;
     &::placeholder {
       font-size: 0.9rem;
+      text-transform: uppercase;
     }
   }
 }

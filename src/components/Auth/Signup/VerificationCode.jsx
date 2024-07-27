@@ -13,8 +13,10 @@ import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import { formatTime } from "../../../utils/helpers/helpers";
 import { toastError, toastSuccess } from "../../Toast/Toast";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const VerificationCode = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
@@ -101,7 +103,7 @@ const VerificationCode = () => {
       {show && (
         <div className={css.wrapper}>
           <div className={css.top}>
-            <p>Verification Code</p>
+            <p>{t("verificationCode")}</p>
           </div>
 
           {/* Display Errors  */}
@@ -140,8 +142,7 @@ const VerificationCode = () => {
                     className={`flex justify-end items-end flex-col md:flex-row md:justify-between md:items-center ${css.note}`}
                   >
                     <p className="text-sm md:text-medium">
-                      The verification code is sent to the number{" "}
-                      {clientContact}
+                      {t("verificationCodeSent")} {clientContact}
                     </p>
                     <div className="flex">
                       {remainingTime > 0 ? (
@@ -165,7 +166,7 @@ const VerificationCode = () => {
                               : {}
                           }
                         >
-                          Resend Code
+                          {t("resendCode")}
                         </Button>
                       )}
                     </div>

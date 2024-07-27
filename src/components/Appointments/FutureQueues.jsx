@@ -2,8 +2,11 @@ import React from "react";
 import css from "./Appointments.module.scss";
 import moment from "moment";
 import { Chip } from "@nextui-org/react";
+import { useTranslation } from "react-i18next";
 
 const FutureQueues = ({ active, upComing }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full mt-6">
       <div
@@ -17,7 +20,7 @@ const FutureQueues = ({ active, upComing }) => {
               <div className={css.cardHeader}>
                 <div className={css.cardTitle}>
                   <div className="bg-[#fdf3f1] font-medium text-tiny px-3 py-1 rounded-full">
-                    Active
+                    {t("active")}
                   </div>
                 </div>
               </div>
@@ -27,7 +30,9 @@ const FutureQueues = ({ active, upComing }) => {
               </div>
 
               <div className={`${css.cardFooter} bg-[#fdf3f1]`}>
-                <p>{item.service.time} minutes</p>
+                <p>
+                  {item.service.time} {t("minutes")}
+                </p>
                 <p>{item.price} Nis</p>
               </div>
             </div>
@@ -42,7 +47,7 @@ const FutureQueues = ({ active, upComing }) => {
               <div className={css.cardHeader}>
                 <div className={css.cardTitle}>
                   <div className="bg-[#ECF3F9] font-medium text-tiny px-3 py-1 rounded-full">
-                    Upcoming
+                    {t("upcoming")}
                   </div>
                 </div>
               </div>
@@ -52,7 +57,7 @@ const FutureQueues = ({ active, upComing }) => {
               </div>
 
               <div className={`${css.cardFooter} bg-[#ECF3F9]`}>
-                <p>{item.service.time} minutes</p>
+                <p>{item.service.time} {t("minutes")}</p>
                 <p>{item.price} Nis</p>
               </div>
             </div>

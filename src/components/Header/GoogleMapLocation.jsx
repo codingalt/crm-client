@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import pin from "../../assets/pin.png";
 import { Button } from "@nextui-org/react";
 import _ from "lodash";
+import { useTranslation } from "react-i18next";
 
 const containerStyle = {
   width: "100%",
@@ -21,6 +22,7 @@ const divStyle = {
 const defaultLocation = { lat: 40.7128, lng: -74.006 };
 
 const GoogleMapLocation = ({ location, setSelectedAddress }) => {
+  const { t } = useTranslation();
   const { isLoaded } = useSelector((state) => state.auth);
   const [infoWindow, setInfoWindow] = useState(null);
   const [mapCenter, setMapCenter] = useState(defaultLocation);
@@ -92,7 +94,7 @@ const GoogleMapLocation = ({ location, setSelectedAddress }) => {
                   size="md"
                   radius="sm"
                 >
-                  Confirm Location
+                  {t("confirmLocation")}
                 </Button>
               </div>
             )}

@@ -10,6 +10,8 @@ import css from "./chat.module.scss";
 import { IoClose } from "react-icons/io5";
 import ClipSpinner from "../Loader/ClipSpinner";
 import { Oval } from "react-loader-spinner";
+import { Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const FileUploader = ({
   setFiles,
@@ -17,6 +19,7 @@ const FileUploader = ({
   setFilePreviews,
   isLoadingSendMessage,
 }) => {
+  const { t } = useTranslation();
   const fileRef = useRef();
 
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
@@ -76,13 +79,15 @@ const FileUploader = ({
 
   return (
     <>
-      <button
-        onClick={() => fileRef?.current?.click()}
-        size="sm"
-        className={`${css.fileSelect} scrollbar-hide md:-mt-0.5 w-8 h-8 md:w-11 md:h-11 ml-1 md:ml-2 rounded-full bg-transparent text-default-800 text-lg md:text-2xl border-none outline-none hover:bg-default-100 transition-all flex items-center justify-center`}
-      >
-        <GrAttachment />
-      </button>
+      <Tooltip title={t("attatchFiles")} placement="top">
+        <button
+          onClick={() => fileRef?.current?.click()}
+          size="sm"
+          className={`${css.fileSelect} scrollbar-hide md:-mt-0.5 w-8 h-8 md:w-11 md:h-11 ml-1 md:ml-2 rounded-full bg-transparent text-default-800 text-lg md:text-2xl border-none outline-none hover:bg-default-100 transition-all flex items-center justify-center`}
+        >
+          <GrAttachment />
+        </button>
+      </Tooltip>
 
       {/* Select file hidden input  */}
       <input

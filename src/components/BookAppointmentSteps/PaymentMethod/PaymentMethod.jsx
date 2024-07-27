@@ -6,6 +6,7 @@ import { Skeleton } from "@mui/material";
 import { MdErrorOutline } from "react-icons/md";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { iconMap } from "./Icons";
+import { useTranslation } from "react-i18next";
 
 const PaymentMethod = ({
   paginate,
@@ -17,6 +18,7 @@ const PaymentMethod = ({
   error,
   data
 }) => {
+  const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   const handleNext = () => {
@@ -28,18 +30,20 @@ const PaymentMethod = ({
       <div
         className={`${css.heading} max-w-4xl mx-auto flex justify-between items-center`}
       >
-        <div className={`${css.backButton} flex items-center gap-x-4 md:gap-x-6`}>
+        <div
+          className={`${css.backButton} flex items-center gap-x-4 md:gap-x-6`}
+        >
           <div
             onClick={() => handleBack()}
             className="w-9 h-9 md:w-12 md:h-12 cursor-pointer hover:bg-default-50 transition-all text-medium md:text-lg border shadow-sm rounded-full flex items-center justify-center"
           >
             <FaArrowLeft />
           </div>
-          <span className="flex-1">Payment Method</span>
+          <span className="flex-1">{t("paymentMethod")}</span>
         </div>
         {/* Next Button  */}
         <div className={`${css.nextButton} flex-1`}>
-          <Button onClick={handleNext}>Next</Button>
+          <Button onClick={handleNext}>{t("next")}</Button>
         </div>
       </div>
 
@@ -111,7 +115,7 @@ const PaymentMethod = ({
       <div
         className={`${css.mobileBtn} flex md:hidden justify-center items-center`}
       >
-        <Button onClick={handleNext}>Next</Button>
+        <Button onClick={handleNext}>{t("next")}</Button>
       </div>
     </div>
   );

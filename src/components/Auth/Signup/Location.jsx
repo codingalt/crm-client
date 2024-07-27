@@ -5,6 +5,7 @@ import { ErrorMessage, Field } from "formik";
 import _ from "lodash";
 import { useSelector } from "react-redux";
 import { Skeleton } from "@nextui-org/react";
+import { useTranslation } from "react-i18next";
 
 const bounds = {
   east: -110,
@@ -14,6 +15,7 @@ const bounds = {
 };
 
 const Location = ({ errors, touched, setFieldValue, setIsAddressError }) => {
+  const { t } = useTranslation();
   const { isLoaded } = useSelector((state) => state.auth);
   const [searchBox, setSearchBox] = useState(null);
   const [searchBoxBounds, setSearchBoxBounds] = useState(null);
@@ -70,7 +72,7 @@ const Location = ({ errors, touched, setFieldValue, setIsAddressError }) => {
               type="text"
               id="address"
               name="address"
-              placeholder="Search your address"
+              placeholder={t("searchAddress")}
               className={
                 errors.address && touched.address && "inputBottomBorder"
               }

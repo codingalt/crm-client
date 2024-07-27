@@ -11,8 +11,10 @@ import { useSendRatingMutation } from "../../services/api/businessProfileApi/bus
 import { Button, Textarea } from "@nextui-org/react";
 import { useApiErrorHandling } from "../../hooks/useApiErrors";
 import { DirectionContext } from "../../context/DirectionContext";
+import { useTranslation } from "react-i18next";
 
 const RatingModal = ({ show,data, setShow }) => {
+  const { t } = useTranslation();
   const { direction } = useContext(DirectionContext);
   const [value, setValue] = useState(0);
   const [comment, setComment] = useState("");
@@ -53,10 +55,11 @@ const RatingModal = ({ show,data, setShow }) => {
       className={
         !show ? `${css.wrapper}` : `${css.activeRating} ${css.wrapper}`
       }
+      dir={direction}
     >
       <div className={css.card} ref={ratingRef}>
         <div className={css.header}>
-          <span>Appointment Summary</span>
+          <span>{t("appointmentSummary")}</span>
           <span className="text-gray-300">
             {moment(data?.appointment_date).format("dddd, MMMM DD hh:mm a")}
           </span>
@@ -66,39 +69,37 @@ const RatingModal = ({ show,data, setShow }) => {
           <div className={css.top}>
             <div className={css.common}>
               <md.MdSocialDistance />
-              <span
-                className="text-[.93rem] md:text-[1.15rem] font-bold"
-              >
+              <span className="text-[.93rem] md:text-[1.15rem] font-bold">
                 {truncateText(data?.service?.name, 14)}
               </span>
               <span
                 style={{ fontWeight: "500", fontSize: ".9rem" }}
                 className="text-gray-400 span2"
               >
-                Service
+                {t("service")}
               </span>
             </div>
             <div className={css.common}>
               <rx.RxTimer />
               <span className="text-[.93rem] md:text-[1.15rem] font-bold">
-                {data?.service?.time} min
+                {data?.service?.time} {t("min")}
               </span>
               <span
                 style={{ fontWeight: "500", fontSize: ".9rem" }}
                 className="text-gray-400 span2"
               >
-                Time
+                {t("time")}
               </span>
             </div>
           </div>
           <div className={css.bottom}>
-            <span>Total</span>
+            <span>{t("total")}</span>
             <span>{data?.price} Nis</span>
           </div>
         </div>
 
         <div className={css.rate}>
-          <h3>Rate Experience</h3>
+          <h3>{t("rateExperience")}</h3>
           <Rating
             name="simple-controlled"
             size="large"
@@ -114,7 +115,7 @@ const RatingModal = ({ show,data, setShow }) => {
         <div className="w-[82%] mx-auto">
           <Textarea
             variant="bordered"
-            placeholder="Enter your feedback"
+            placeholder={t("enterYourFeedback")}
             isRequired
             value={comment}
             disableAnimation
@@ -133,7 +134,7 @@ const RatingModal = ({ show,data, setShow }) => {
           isLoading={isLoading}
           className={css.ratingBtn}
         >
-          Done
+          {t("done")}
         </Button>
       </div>
     </div>

@@ -3,22 +3,16 @@ import css from "./ViewService.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Image } from "@nextui-org/react";
 import { useGetServiceDetailsByIdQuery } from "../../services/api/servicesApi/servicesApi";
-import ImageComponent from "../ui/Image/ImageComponent";
-import { FaStar } from "react-icons/fa6";
-import { IoMdInformationCircleOutline } from "react-icons/io";
-import { MdLocationOn } from "react-icons/md";
 import { IoIosTimer } from "react-icons/io";
-import serviceImg from "../../assets/h3.jpg";
 import { Rating, Skeleton } from "@mui/material";
-import moment from "moment";
 import { BsChatLeftDots } from "react-icons/bs";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { MdOutlinePriceChange } from "react-icons/md";
-import { MdOutlineGroups } from "react-icons/md";
-import { GrGroup } from "react-icons/gr";
 import { BiGroup } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
 
 const ViewService = () => {
+  const { t } = useTranslation();
   const { serviceId } = useParams();
   const navigate = useNavigate();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
@@ -121,7 +115,7 @@ const ViewService = () => {
                         readOnly
                       />
                       <p className="text-default-500 font-medium text-sm md:text-medium mt-0.5 md:mt-1">
-                        4.4 (328 reviews)
+                        4.4 (328 {t("reviews")})
                       </p>
                     </>
                   )}
@@ -175,7 +169,7 @@ const ViewService = () => {
                       <IoIosTimer className="text-[#065F46] text-2xl md:text-3xl mx-auto" />
 
                       <span className="text-sm md:text-medium text-default-900 font-semibold">
-                        {service?.time} min
+                        {service?.time} {t("min")}
                       </span>
                       <p className="text-sm text-[#065F46] md:text-default-500 font-medium uppercase hidden">
                         Time
@@ -185,7 +179,7 @@ const ViewService = () => {
                     <div className="flex items-start md:items-start py-0 pb-1 md:py-0 rounded-lg flex-col w-fit gap-1 md:bg-transparent">
                       <MdOutlinePriceChange className="text-[#065F46] text-2xl md:text-3xl mx-auto" />
                       <p className="text-sm text-[#065F46] md:text-default-500 font-medium uppercase hidden">
-                        Price
+                        {t("price")}
                       </p>
                       <span className="text-sm md:text-medium text-default-900 font-semibold">
                         {service?.price} Nis
@@ -198,7 +192,7 @@ const ViewService = () => {
                         Age
                       </p>
                       <span className="text-sm md:text-medium text-default-900 font-semibold">
-                        {service?.start_age}-{service?.end_age} yrs
+                        {service?.start_age}-{service?.end_age} {t("yrs")}
                       </span>
                     </div>
                   </div>
@@ -220,7 +214,7 @@ const ViewService = () => {
                       radius="sm"
                       startContent={<BsChatLeftDots className="text-lg" />}
                     >
-                      <p>Chat with Service Provider</p>
+                      <p>{t("chatWithServiceProvider")}</p>
                     </Button>
                   )}
                 </div>
@@ -245,7 +239,9 @@ const ViewService = () => {
                       disabled={isLoading}
                       onClick={handleMakeAppointment}
                     >
-                      <p>${service?.price} Make Appointment</p>
+                      <p>
+                        ${service?.price} {t("makeAppointment")}
+                      </p>
                     </Button>
                   )}
                 </div>

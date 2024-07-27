@@ -5,8 +5,10 @@ import ClipSpinner from "../Loader/ClipSpinner";
 import { Empty } from "antd";
 import { useMarkNotiAsReadMutation } from "../../services/api/authApi/authApi";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import { useTranslation } from "react-i18next";
 
 const Notifications = () => {
+  const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const { data, isLoading } = useGetNotificationsQuery();
   
@@ -28,7 +30,7 @@ const Notifications = () => {
   return (
     <div className={`${css.wrapper} max-w-4xl mx-auto`}>
       <div className={css.top}>
-        <h1>Notifications</h1>
+        <h1>{t("notifications")}</h1>
       </div>
 
       <div className={css.notifications}>
@@ -53,7 +55,7 @@ const Notifications = () => {
 
         {!isLoading && data?.notifications.length === 0 && (
           <div className="flex h-56 items-center justify-center">
-            <Empty description={<span>No Notifications yet.</span>} />
+            <Empty description={<span>{t("noNotificationsYet")}</span>} />
           </div>
         )}
       </div>

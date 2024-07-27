@@ -20,6 +20,7 @@ import ConfirmPayment from "./ConfirmPayment/ConfirmPayment";
 import ConfirmTime from "./ConfirmTime/ConfirmTime";
 import ClipSpinner from "../Loader/ClipSpinner";
 import PaymentMethod from "./PaymentMethod/PaymentMethod";
+import { useTranslation } from "react-i18next";
 
 const formatDate = (selectedDate, selectedTime) => {
   const date = moment(selectedDate);
@@ -61,6 +62,7 @@ const variants = {
 };
 
 const BookAppointmentSteps = () => {
+  const { t } = useTranslation();
   const { user } = useSelector((store) => store.auth);
   const navigate = useNavigate();
   const location = useLocation();
@@ -140,11 +142,9 @@ const BookAppointmentSteps = () => {
 
     if (availableTime && availableTime.has_appointment) {
       if (availableTime.mine_appointment) {
-        setAvailableTimeMsg("You already have an appointment on this time.");
+        setAvailableTimeMsg(t("alreadyHaveAppointment"));
       } else {
-        setAvailableTimeMsg(
-          "This service provider already have an appointment on this time."
-        );
+        setAvailableTimeMsg(t("serviceProviderHasAppointment"));
       }
 
       setPage([2, 2]);
@@ -162,16 +162,14 @@ const BookAppointmentSteps = () => {
   useEffect(() => {
     if (error && error.status !== 500 && error.status != "FETCH_ERROR") {
       toastError(
-        error?.data?.message
-          ? error?.data?.message
-          : "Uh ho! Something went wrong"
+        error?.data?.message ? error?.data?.message : t("somethingWentWrong")
       );
     }
   }, [error]);
 
   useEffect(() => {
     if (isSuccess) {
-      toastSuccess("Booking Successfull");
+      toastSuccess(t("bookingSuccessfull"));
 
       setTimeout(() => {
         navigate("/appointments");

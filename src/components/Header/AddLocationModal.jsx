@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -6,7 +6,7 @@ import {
   ModalBody,
   Button,
 } from "@nextui-org/react";
-import { FaArrowRight } from "react-icons/fa6";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa6";
 import GoogleMapLocation from "./GoogleMapLocation";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +16,11 @@ import { IoLocationSharp } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { useTranslation } from "react-i18next";
+import { DirectionContext } from "../../context/DirectionContext";
 
 const AddLocationModal = ({ isOpen, onOpenChange }) => {
   const { t } = useTranslation();
+  const { direction } = useContext(DirectionContext);
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const { location } = useSelector((store) => store.auth);
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -105,6 +107,7 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
           })
         );
       }}
+      dir={direction}
     >
       <ModalContent>
         {(onClose) => (
@@ -135,7 +138,7 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
                     type="text"
                     id="inputAddress"
                     onChange={(e) => handleInput(e)}
-                    placeholder="Enter your location"
+                    placeholder={t("enterYourLocation")}
                     className="w-full h-14 rounded-md text-[14px] md:text-[16px] font-medium outline-none border pl-8"
                     style={{
                       paddingLeft: "1rem",
@@ -172,8 +175,8 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
                   className="mb-2 md:mb-0 w-full md:w-[25px] h-[47px] md:h-[55px] text-medium md:text-2xl bg-[#01ABAB] text-white"
                   onClick={handleConfirm}
                 >
-                  <p className="md:hidden">Confirm Location</p>
-                  <FaArrowRight />
+                  <p className="md:hidden">{t("confirmLocation")}</p>
+                  {direction === "rtl" ? <FaArrowLeft /> : <FaArrowRight />}
                 </Button>
               </div>
             </ModalHeader>

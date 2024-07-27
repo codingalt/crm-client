@@ -3,13 +3,16 @@ import css from "./Appointments.module.scss";
 import moment from "moment"
 import { FaStar } from "react-icons/fa6";
 import { Button } from "@nextui-org/react";
+import { useTranslation } from "react-i18next";
 
 const HistoryAppointments = ({ data, setShow, setRatingData }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full mt-4 md:mt-6">
       <div className={css.heading}>
         <h3 className="text-[1.4rem] font-medium text-black mb-3 md:mb-4">
-          Last Month
+          {t("lastMonth")}
         </h3>
       </div>
       <div
@@ -18,26 +21,26 @@ const HistoryAppointments = ({ data, setShow, setRatingData }) => {
         {data?.map((item) => (
           <div className={css.card} key={item.id}>
             <div className={css.item}>
-              <p>Appointment Date</p>
+              <p>{t("appointmentDate")}</p>
               <span>
                 {moment(item.appointment_date).format("D MMMM, YYYY")}
               </span>
             </div>
             <div className={css.item}>
-              <p>Appointment Time</p>
+              <p>{t("appointmentTime")}</p>
               <span>{moment(item.appointment_date).format("hh:mm A")}</span>
             </div>
             <div className={css.item}>
-              <p>Service</p>
+              <p>{t("service")}</p>
               <span>{item.service.name}</span>
             </div>
             <div className={css.item}>
-              <p>Price</p>
+              <p>{t("price")}</p>
               <span>{item.price} Nis</span>
             </div>
 
             <div className={css.item}>
-              <p>Rating</p>
+              <p>{t("rating")}</p>
               {item.customer_rating && item.customer_comments ? (
                 <div className={`flex justify-end gap-2`}>
                   <div className="flex items-center gap-x-1">
@@ -46,7 +49,6 @@ const HistoryAppointments = ({ data, setShow, setRatingData }) => {
                       {item.customer_rating}/5
                     </div>
                   </div>
-
                 </div>
               ) : (
                 <Button
@@ -59,7 +61,7 @@ const HistoryAppointments = ({ data, setShow, setRatingData }) => {
                     setShow(true);
                   }}
                 >
-                  Rate Service
+                  {t("rateService")}
                 </Button>
               )}
             </div>

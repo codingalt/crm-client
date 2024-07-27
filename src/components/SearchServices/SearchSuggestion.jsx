@@ -8,6 +8,7 @@ import EmptyData from "./EmptyData";
 import { useNavigate } from "react-router-dom";
 import { useMainContext } from "../../context/MainContext";
 import SearchTags from "./SearchTags";
+import { useTranslation } from "react-i18next";
 
 const SearchSuggestion = ({
   showSearch,
@@ -20,6 +21,7 @@ const SearchSuggestion = ({
   debouncedSearchText,
   setDebouncedSearchText,
 }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { setShowSearch } = useMainContext();
 
@@ -36,7 +38,7 @@ const SearchSuggestion = ({
     >
       <div className="w-full min-h-32 h-dvh md:h-auto md:max-h-[60vh] px-5 pt-4 md:pt-2 pb-8 border rounded-none md:rounded-xl md:rounded-t-none">
         <p className="text-default-400 md:text-default-300 font-normal text-xs md:text-sm ">
-          Search by service name, business, tags, category, and e.t.
+          {t("searchByText")}
         </p>
 
         {!error &&

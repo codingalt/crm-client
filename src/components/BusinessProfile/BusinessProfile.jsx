@@ -12,8 +12,10 @@ import { useGetBusinessProfileQuery } from "../../services/api/businessProfileAp
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Skeleton } from "@nextui-org/react";
 import { notification, Tooltip } from "antd";
+import { useTranslation } from "react-i18next";
 
 const BusinessProfile = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { businessId } = useParams();
   const [selectedService, setSelectedService] = useState(null);
@@ -99,9 +101,9 @@ const BusinessProfile = () => {
                     <p>
                       4.1/5<span> (1000+)</span>
                     </p>
-                    <button>See reviews</button>
+                    <button>{t("seeReviews")}</button>
                     <button className={css.moreInfo}>
-                      <IoMdInformationCircleOutline /> More info
+                      <IoMdInformationCircleOutline /> {t("moreInfo")}
                     </button>
                   </div>
                 </>
@@ -110,7 +112,7 @@ const BusinessProfile = () => {
           </div>
 
           <div className={css.right}>
-              {/* <Button disabled={isLoading} onClick={handleMakeAppointment}>
+            {/* <Button disabled={isLoading} onClick={handleMakeAppointment}>
                 {selectedService
                   ? `Make a $${selectedService.price} Appointment`
                   : "Make a new Appointment"}
@@ -124,7 +126,7 @@ const BusinessProfile = () => {
           <div className="w-[84%] flex items-center justify-between">
             <div className={css.title}>
               <h1>
-                <FaFire /> Available Services
+                <FaFire /> {t("availableServices")}
               </h1>
             </div>
           </div>
@@ -142,9 +144,9 @@ const BusinessProfile = () => {
               <div
                 className={`${css.title} mb-4 w-full flex items-center justify-between`}
               >
-                <h1>Opening Hours</h1>
+                <h1>{t("openingHours")}</h1>
                 <div className="px-6 py-0.5 bg-[#01AB8E] text-white flex items-center justify-center rounded-full">
-                  Hours
+                  {t("hours")}
                 </div>
               </div>
               <OpeningHours />
