@@ -105,19 +105,21 @@
     @media (max-width: 768px) {
       & {
         margin-top: 1.4rem;
-        padding-right: 8px;
+        padding-right: 10px;
+        padding-left: 10px;
 
         .item {
-          padding: 0.8rem 1.1rem;
-          gap: 18px;
+          padding: 1.05rem 1.1rem;
+          gap: 15px;
+          border-radius: 8px;
 
           svg {
             font-size: 2.5rem;
           }
 
           .image {
-            width: 33px;
-            height: 33px;
+            width: 42px;
+            height: 42px;
           }
 
           p {
@@ -326,13 +328,14 @@
     margin: 2rem 0;
     margin-top: 1.2rem;
     scrollbar-width: none;
-    padding-right: 1rem;
-    padding: 0 .9rem;
+    // padding-right: 1rem;
+    // padding: 0 .9rem;
 
     .card {
       border-radius: 8px;
       border: 1px solid #d9d9d9;
-      // width: 100%;
+      width: 100%;
+      max-width: 350px;
 
       // @media (min-width: 768px) {
       //   &{
@@ -425,7 +428,7 @@
       }
 
       .price {
-        height: 44px;
+        height: 46px;
         width: 100%;
         background-color: $primary;
         color: #fff;
@@ -442,6 +445,10 @@
     @media (max-width: 768px){
       &{
         padding: 0 !important;
+
+        .card{
+          max-width: 100%;
+        }
       }
     }
   }

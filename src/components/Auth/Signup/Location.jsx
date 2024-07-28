@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { StandaloneSearchBox } from "@react-google-maps/api";
 import { reverseGeocodeLatLng } from "../../../utils/helpers/geoCode";
-import { ErrorMessage, Field } from "formik";
+import { Field } from "formik";
 import _ from "lodash";
 import { useSelector } from "react-redux";
 import { Skeleton } from "@nextui-org/react";

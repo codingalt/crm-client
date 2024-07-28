@@ -10,11 +10,13 @@ export const DirectionProvider = ({ children }) => {
   const [direction, setDirection] = useState(
     storedLanguage === "en" ? "ltr" : "rtl"
   );
+  console.log(direction);
 
   const toggleLanguage = (language) => {
     const newLanguage = language;
     i18n.changeLanguage(newLanguage);
     localStorage.setItem("language", newLanguage);
+    window.location.reload();
   };
 
   useEffect(() => {

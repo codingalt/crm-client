@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./Login.module.scss";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginSchema } from "../../../utils/validations/AuthValidation";
-import { Button } from "@nextui-org/react";
+import { Button, Image } from "@nextui-org/react";
 import {
   useLoginUserMutation,
   useValidateTokenQuery,
@@ -13,6 +13,7 @@ import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import ClipSpinner from "../../Loader/ClipSpinner";
 import { setToken } from "../../../utils/helpers/tokenUtils";
 import { useTranslation } from "react-i18next";
+import logo from "../../../assets/logo.svg";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -94,6 +95,9 @@ const Login = () => {
         <div className="w-full h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
           <div className={css.wrapper}>
             <div className={css.top}>
+              <div className="w-14 md:w-16 mb-9 mx-auto">
+                <Image src={logo} width="100%" height="100%" />
+              </div>
               <p>{t("signIn")}</p>
             </div>
 

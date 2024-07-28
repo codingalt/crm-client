@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./Signup.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
@@ -6,16 +6,15 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signupEmailSchema } from "../../../utils/validations/AuthValidation";
 import {
   useRegisterUserMutation,
-  useValidateTokenQuery,
 } from "../../../services/api/authApi/authApi";
-import { Button } from "@nextui-org/react";
+import { Button, Image } from "@nextui-org/react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ApiErrorDisplay from "../../../hooks/ApiErrorDisplay";
 import { useDispatch } from "react-redux";
-import ClipSpinner from "../../Loader/ClipSpinner";
 import Location from "./Location";
 import { useTranslation } from "react-i18next";
+import logo from "../../../assets/logo.svg";
 
 const Email = () => {
   const { t } = useTranslation();
@@ -82,9 +81,12 @@ const Email = () => {
 
   return (
     <>
-      <div className="w-full min-h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
+      <div className="w-full min-h-screen flex justify-center items-center max-w-screen-sm mx-auto">
         <div className={css.wrapper}>
           <div className={css.top}>
+            <div className="w-14 md:w-16 mb-7 md:mb-9 mx-auto">
+              <Image src={logo} width="100%" height="100%" />
+            </div>
             <p>{t("accountRegistration")}</p>
           </div>
 
@@ -97,7 +99,7 @@ const Email = () => {
             onSubmit={handleSubmit}
           >
             {({ errors, setFieldValue, touched }) => (
-              <Form className={`${css.emailForm} mt-12`}>
+              <Form className={`${css.emailForm} mt-10`}>
                 <div className={css.inputContainer}>
                   <label htmlFor="name">{t("name")}</label>
                   <Field

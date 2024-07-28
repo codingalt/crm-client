@@ -11,6 +11,7 @@ import Services from "./Services";
 import { useGetTargetedServicesQuery } from "../../services/api/servicesApi/servicesApi";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import Services2 from "./Services2";
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ const Dashboard = () => {
         <div className={css.heading}>
           <h1>{t("services")}</h1>
         </div>
-        <Services data={services?.services} isLoading={isLoadingServices} />
+        <Services2 data={services?.services} isLoading={isLoadingServices} />
 
         <Appointments />
 

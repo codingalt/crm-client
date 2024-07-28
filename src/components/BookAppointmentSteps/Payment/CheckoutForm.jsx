@@ -10,6 +10,7 @@ import { toastError, toastSuccess } from "../../Toast/Toast";
 import css from "./Payment.module.scss";
 import { Button } from "@nextui-org/react";
 import { usePaymentSuccessMutation } from "../../../services/api/businessProfileApi/businessProfileApi";
+import { useTranslation } from "react-i18next";
 
 const CheckoutForm = ({ clientSecret, setIsConfirmPayment }) => {
   const { t } = useTranslation();

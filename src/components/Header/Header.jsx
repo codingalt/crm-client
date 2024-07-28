@@ -57,8 +57,8 @@ const Header = () => {
       />
 
       <div
-        className="sticky top-0 left-0 bg- z-40 overflow-hidden"
-        style={{ boxShadow: "0px 0px 24px 0px rgba(0,0,0,0.16)" }}
+        className="sticky top-0 left-0 bg- z-40 overflow-hidden border"
+        // style={{ boxShadow: "0px 0px 24px 0px rgba(0,0,0,0.16)" }}
       >
         <header className={`${css.Header}`}>
           <div className={`${css.header_left} flex items-center gap-2`}>
@@ -131,9 +131,6 @@ const Header = () => {
                 </DropdownItem>
                 <DropdownItem onClick={onOpenLangModal} key="languages">
                   {t("languages")}
-                </DropdownItem>
-                <DropdownItem key="help_and_feedback">
-                  {t("helpFeedback")}
                 </DropdownItem>
                 <DropdownItem
                   onClick={handleLogout}

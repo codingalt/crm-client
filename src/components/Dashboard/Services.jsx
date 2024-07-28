@@ -21,7 +21,6 @@ const Services = ({ data, isLoading }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
   const { direction } = useContext(DirectionContext);
-  console.log(direction);
 
   const responsive = {
     0: { items: 1 },
@@ -119,7 +118,7 @@ const Services = ({ data, isLoading }) => {
 
   return (
     <div className="relative w-full">
-      <div className={`${css.services} min-h-36 lg:min-h-44`}>
+      <div className={`${css.services} `}>
         {isLoading ? (
           <ServicesSkeleton />
         ) : (

@@ -13,7 +13,7 @@ const ServicesSkeleton = () => {
         <div
           key={index}
           className={`${css.card} mx-2`}
-          style={{ width: "100%", maxWidth: "320px",marginLeft: isSmallDevice && 0 }}
+          style={{ width: "100%", minWidth:"280px", maxWidth: "320px",marginLeft: isSmallDevice && 0 }}
         >
           <div className={css.image}>
             <Skeleton className="w-full h-full rounded-sm" />

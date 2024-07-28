@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./Signup.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useApiErrorHandling } from "../../../hooks/useApiErrors";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { verificationCodeSchema } from "../../../utils/validations/AuthValidation";
-import { Button } from "@nextui-org/react";
+import { Button, Image } from "@nextui-org/react";
 import {
   useReSendVerificationCodeMutation,
   useValidateCodeMutation,
@@ -14,6 +14,7 @@ import { formatTime } from "../../../utils/helpers/helpers";
 import { toastError, toastSuccess } from "../../Toast/Toast";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import logo from "../../../assets/logo.svg";
 
 const VerificationCode = () => {
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ const VerificationCode = () => {
   const [remainingTime, setRemainingTime] = useState(0);
   const { user } = useSelector((store) => store.auth);
   const clientContact = localStorage.getItem("clientContact");
+
   useEffect(()=>{
     if(user){
 
@@ -43,7 +45,7 @@ const VerificationCode = () => {
   const [validateCode, res] = useValidateCodeMutation();
   const { isLoading, isSuccess, error } = res;
 
-  useMemo(() => {
+  useEffect(() => {
     if (error) {
       if (error.status === 422) {
         toastError("Incorrect OTP. Please try again");
@@ -62,7 +64,7 @@ const VerificationCode = () => {
     error: isErrorResend,
   } = resp;
 
-  useMemo(() => {
+  useEffect(() => {
     if (isSuccessResend) {
       toastSuccess("Verification code sent successfully");
     }
@@ -88,7 +90,7 @@ const VerificationCode = () => {
     setRemainingTime(120);
   };
 
-  useMemo(() => {
+  useEffect(() => {
     if (isSuccess) {
       navigate("/dashboard");
     }
@@ -99,10 +101,13 @@ const VerificationCode = () => {
   };
 
   return (
-    <div className="w-full h-[99vh] flex justify-center items-center max-w-screen-sm mx-auto">
+    <div className="w-full h-[98vh] flex justify-center items-center max-w-screen-sm mx-auto">
       {show && (
         <div className={css.wrapper}>
           <div className={css.top}>
+            <div className="w-14 md:w-16 mb-14 mx-auto">
+              <Image src={logo} width="100%" height="100%" />
+            </div>
             <p>{t("verificationCode")}</p>
           </div>
 
@@ -119,7 +124,7 @@ const VerificationCode = () => {
             onSubmit={handleSubmit}
           >
             {({ errors, setFieldValue, touched }) => (
-              <Form className={`${css.verificationFotm} mt-12`}>
+              <Form className={`${css.verificationFotm} mt-6 md:mt-8`}>
                 <div className={css.inputContainer}>
                   <Field
                     type="number"
