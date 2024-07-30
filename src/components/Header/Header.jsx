@@ -29,7 +29,11 @@ const Header = () => {
   const { t } = useTranslation();
   let pathname = window.location.pathname;
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { isOpen: isOpenLangModal, onOpen: onOpenLangModal, onOpenChange: onOpenChangeLangModal } = useDisclosure();
+  const {
+    isOpen: isOpenLangModal,
+    onOpen: onOpenLangModal,
+    onOpenChange: onOpenChangeLangModal,
+  } = useDisclosure();
   const { user, location } = useSelector((store) => store.auth);
   const { setShowSearch } = useMainContext();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
@@ -56,10 +60,7 @@ const Header = () => {
         onOpenChange={onOpenChangeLangModal}
       />
 
-      <div
-        className="sticky top-0 left-0 bg- z-40 overflow-hidden border"
-        // style={{ boxShadow: "0px 0px 24px 0px rgba(0,0,0,0.16)" }}
-      >
+      <div className="sticky top-0 left-0 bg- z-40 overflow-hidden border">
         <header className={`${css.Header}`}>
           <div className={`${css.header_left} flex items-center gap-2`}>
             <div className={css.logo}>
@@ -95,7 +96,7 @@ const Header = () => {
               <div className="flex justify-center items-center">
                 <button className="outline-none border-none bg-transparent flex items-center justify-center gap-0.5 md:gap-1">
                   <div className="md:block hidden">
-                  <LocationIcon className="text-[#454545] text-[1.15rem]" />
+                    <LocationIcon className="text-[#454545] text-[1.15rem]" />
                   </div>
                   <IoLocationOutline className="md:hidden text-[#454545] text-[1.29rem]" />
                   <p className="text-medium m-0 text-[#454545] font-medium text-ellipsis whitespace-nowrap pr-1">
@@ -114,15 +115,12 @@ const Header = () => {
           <div className="flex items-center space-x-7">
             <Dropdown placement="bottom-end" dir={direction}>
               <DropdownTrigger>
-                <Avatar
-                  isBordered
-                  as="button"
-                  className="transition-transform"
-                  color="#01ABAB"
-                  name={user?.name}
-                  size="sm"
-                  src={`https://i.pravatar.cc/140?u=${user?.id}`}
-                />
+                <div className="cursor-pointer">
+                  <Avvvatars
+                    value={user?.name}
+                    size={isSmallDevice ? 33 : 38}
+                  />
+                </div>
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
                 <DropdownItem key="profile" className="h-14 gap-2">

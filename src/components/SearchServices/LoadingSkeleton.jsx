@@ -19,7 +19,7 @@ const LoadingSkeleton = () => {
             </div>
           </div>
           {/* Right Side  */}
-          <div className="text-gray-600 font-medium text-sm md:text-medium md:pr-3">
+          <div className="hidden md:block text-gray-600 font-medium text-sm md:text-medium md:pr-3">
             <Skeleton className="w-28 h-4 rounded-md" disableAnimation />
           </div>
         </div>
@@ -38,7 +38,7 @@ const LoadingSkeleton = () => {
             </div>
           </div>
           {/* Right Side  */}
-          <div className="text-gray-600 font-medium text-sm md:text-medium md:pr-3">
+          <div className="hidden md:block text-gray-600 font-medium text-sm md:text-medium md:pr-3">
             <Skeleton className="w-28 h-4 rounded-md" disableAnimation />
           </div>
         </div>
@@ -57,7 +57,7 @@ const LoadingSkeleton = () => {
             </div>
           </div>
           {/* Right Side  */}
-          <div className="text-gray-600 font-medium text-sm md:text-medium md:pr-3">
+          <div className="hidden md:block text-gray-600 font-medium text-sm md:text-medium md:pr-3">
             <Skeleton className="w-28 h-4 rounded-md" disableAnimation />
           </div>
         </div>
@@ -76,7 +76,7 @@ const LoadingSkeleton = () => {
             </div>
           </div>
           {/* Right Side  */}
-          <div className="text-gray-600 font-medium text-sm md:text-medium md:pr-3">
+          <div className="hidden md:block text-gray-600 font-medium text-sm md:text-medium md:pr-3">
             <Skeleton className="w-28 h-4 rounded-md" disableAnimation />
           </div>
         </div>
@@ -95,7 +95,7 @@ const LoadingSkeleton = () => {
             </div>
           </div>
           {/* Right Side  */}
-          <div className="text-gray-600 font-medium text-sm md:text-medium md:pr-3">
+          <div className="hidden md:block text-gray-600 font-medium text-sm md:text-medium md:pr-3">
             <Skeleton className="w-28 h-4 rounded-md" disableAnimation />
           </div>
         </div>

@@ -19,6 +19,7 @@ import VerifyManualAppointmentPage from "../pages/VerifyManualAppointmentPage";
 import ManualAppointmentPaymentPage from "../pages/ManualAppointmentPaymentPage";
 import PaymentSuccessPage from "../pages/PaymentSuccessPage";
 import ChatPage from "../pages/ChatPage";
+import SearchServicesPageMobile from "../pages/SearchServicesPageMobile";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
       {
         path: "/notifications",
         element: <Protected Component={NotificationsPage} />,
+      },
+      {
+        path: "/search",
+        element: <Protected Component={SearchServicesPageMobile} />,
       },
       {
         path: "/verifyAppointment",

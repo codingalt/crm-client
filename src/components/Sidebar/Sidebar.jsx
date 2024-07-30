@@ -63,6 +63,7 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
                 </li>
               </Tooltip>
             </Grid>
+            
             <Grid item>
               <Tooltip title={t("appointments")} placement="right-end">
                 <li className="sidebar-li">

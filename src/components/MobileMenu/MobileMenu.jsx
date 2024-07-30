@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import css from "./MobileMenu.module.scss";
-import { IoNotificationsSharp } from "react-icons/io5";
+import { IoChatboxEllipses, IoNotificationsSharp } from "react-icons/io5";
 import { Tooltip } from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
@@ -27,7 +27,7 @@ const MobileMenu = () => {
 
   return (
     <div className={`${css.wrapper} block md:hidden`}>
-      <div className="fixed shadow-sm z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-b-0 border-gray-200 rounded-none bottom-0 left-1/2">
+      <div className="fixed shadow-sm z-50 w-full h-[70px] max-w-lg -translate-x-1/2 bg-white border border-b-0 border-gray-200 rounded-none bottom-0 left-1/2">
         <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
           <Tooltip title="Home">
             <button
@@ -60,7 +60,9 @@ const MobileMenu = () => {
               <button
                 type="button"
                 className="inline-flex items-center justify-center w-10 h-10 font-medium bg-[#01ABAB] rounded-full hover:bg-[#13D3B3] group focus:ring-4 focus:ring-[#13D3B3] focus:outline-none"
-                onClick={()=> setShowSearch(true)}
+                onClick={() => {
+                  navigate("/search");
+                }}
               >
                 <FiSearch className="text-[21px] text-white" />
                 <span className="sr-only">Search</span>
@@ -105,16 +107,16 @@ const MobileMenu = () => {
             </button>
           </Tooltip>
 
-          <Tooltip title="Profile">
+          <Tooltip title="Chats">
             <button
               type="button"
               className={`inline-flex flex-col items-center justify-center px-3 rounded-s-full group ${
-                pathname.match("/profile") ? "bg-gray-50" : ""
+                pathname.match("/chat") ? "bg-gray-50" : ""
               }`}
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/chat")}
             >
-              <FaUserCircle className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
-              <span className="sr-only">Profile</span>
+              <IoChatboxEllipses className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
+              <span className="sr-only">Chats</span>
             </button>
           </Tooltip>
         </div>

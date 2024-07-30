@@ -24,7 +24,7 @@ const Categories = ({ data, isLoading }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
+      if (data && window.innerWidth <= 768) {
         // Mobile devices
         setVisibleCategories(data.slice(0, 6));
       } else {
