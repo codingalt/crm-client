@@ -9,6 +9,7 @@ import ImageComponent from "../ui/Image/ImageComponent";
 const Categories = ({ data, isLoading }) => {
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
+  const [visibleCategories, setVisibleCategories] = useState(data);
 
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const isMediumDevice = useMediaQuery(
@@ -22,46 +23,79 @@ const Categories = ({ data, isLoading }) => {
   );
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        // Mobile devices
+        setVisibleCategories(data.slice(0, 6));
+      } else {
+        // Larger devices
+        setVisibleCategories(data);
+      }
+    };
+
+    handleResize(); 
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [data]);
+
+  useEffect(() => {
     isSmallDevice
-      ? setValue(2)
+      ? setValue(6)
       : isMediumDevice
-      ? setValue(4)
+      ? setValue(6)
       : isLargeDevice
-      ? setValue(4)
+      ? setValue(8)
       : isExtraLargeDevice
-      ? setValue(7)
+      ? setValue(8)
       : null;
   }, [isSmallDevice, isMediumDevice, isLargeDevice, isExtraLargeDevice]);
 
   return (
-    <div
-      className={`${css.categories} scrollbar-hide min-h-36 lg:min-h-44 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-5 md:gap-x-5 gap-y-4`}
-    >
-      {isLoading
-        ? Array.from({ length: value }).map((_, index) => (
-            <Skeleton
-              disableAnimation
-              key={index}
-              className="rounded-lg h-32 md:h-44"
-            >
-              <div className="w-full rounded-lg bg-secondary"></div>
-            </Skeleton>
-          ))
-        : data?.map((item) => (
-            <div
-              key={item.id}
-              className={`${css.item} hover:shadow-md hover:scale-105 transition-all`}
-              onClick={() => navigate(`/categories/${item.name}/${item.id}`)}
-            >
-              <div className={css.image}>
-                <ImageComponent
-                  src={import.meta.env.VITE_CATEGORY_IMAGE + item.image}
-                  radius={"8px"}
-                />
+    <div className="lg:overflow-x-auto lg:scroll-x lg:scrollbar-hide lg:snap-mandatory lg:snap-x lg:scroll-smooth">
+      {/* <div
+        className={`${css.categories} scrollbar-hide min-h-36 lg:min-h-44 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-5 md:gap-x-5 gap-y-4`}
+      > */}
+      <div className={`${css.categories} w-full scrollbar-hide`}>
+        {isLoading
+          ? Array.from({ length: value }).map((_, index) => (
+              <div key={index} className="flex flex-col gap-3 px-[6px]">
+                <Skeleton
+                  disableAnimation
+                  className="rounded-2xl h-[98px] lg:h-[135px]"
+                >
+                  <div className="w-full rounded-lg bg-secondary"></div>
+                </Skeleton>
+                <Skeleton
+                  disableAnimation
+                  className="block lg:hidden rounded-2xl w-[75%] lg:w-[84%] h-2 mx-auto"
+                >
+                  <div className="rounded-lg bg-secondary"></div>
+                </Skeleton>
               </div>
-              <p>{item.name}</p>
-            </div>
-          ))}
+            ))
+          : visibleCategories?.map((item) => (
+              <div
+                key={item.id}
+                className={`${css.itemWrap} flex justify-center items-center md:p-1.5`}
+              >
+                <div
+                  className={`${css.item} transition-all`}
+                  onClick={() =>
+                    navigate(`/categories/${item.name}/${item.id}`)
+                  }
+                >
+                  <div className={css.image}>
+                    <ImageComponent
+                      src={import.meta.env.VITE_CATEGORY_IMAGE + item.image}
+                      radius={"8px"}
+                    />
+                  </div>
+                  <p>{item.name}</p>
+                </div>
+              </div>
+            ))}
+      </div>
     </div>
   );
 };

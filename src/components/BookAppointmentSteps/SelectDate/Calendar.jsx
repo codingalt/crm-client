@@ -1,28 +1,51 @@
-import React, { useEffect, useState } from 'react'
-import "./Calendar.scss"
-import { FaChevronLeft } from "react-icons/fa6";
-import { FaChevronRight } from "react-icons/fa6";
+import React, { useEffect, useState } from "react";
+import "./Calendar.scss";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+const formatDate = (date) => {
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+};
 
-const Calendar = ({ setSelectedDate }) => {
-  const [today, setToday] = useState(new Date());
-  const [activeDay, setActiveDay] = useState(today.getDate());
-  const [month, setMonth] = useState(today.getMonth());
-  const [year, setYear] = useState(today.getFullYear());
+const Calendar = ({ selectedDate, setSelectedDate }) => {
+  const { t } = useTranslation();
+
+  const months = [
+    t("january"),
+    t("february"),
+    t("march"),
+    t("april"),
+    t("may"),
+    t("june"),
+    t("july"),
+    t("august"),
+    t("september"),
+    t("october"),
+    t("november"),
+    t("december"),
+  ];
+
+  const [today] = useState(new Date());
+  const [activeDay, setActiveDay] = useState();
+  const [month, setMonth] = useState();
+  const [year, setYear] = useState();
+  const [days, setDays] = useState([]);
+  console.log(month);
+  useEffect(() => {
+    if (selectedDate) {
+      const choosenDate = new Date(selectedDate);
+      setActiveDay(choosenDate.getDate());
+      setMonth(choosenDate.getMonth());
+      setYear(choosenDate.getFullYear());
+    }
+  }, [selectedDate]);
+
+  useEffect(() => {
+    initCalendar();
+  }, [month, year]);
 
   const initCalendar = () => {
     const firstDay = new Date(year, month, 1);
@@ -33,117 +56,75 @@ const Calendar = ({ setSelectedDate }) => {
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
 
-    const dateElement = document.querySelector(".date");
-    dateElement.innerHTML = months[month] + " " + year;
-
-    let days = "";
+    let daysArray = [];
 
     for (let x = day; x > 0; x--) {
-      days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
+      daysArray.push({
+        date: prevDays - x + 1,
+        currentMonth: false,
+        past: true,
+      });
     }
 
     for (let i = 1; i <= lastDate; i++) {
-      let event = false;
-      if (
-        i === today.getDate() &&
-        year === today.getFullYear() &&
-        month === today.getMonth()
-      ) {
-        setActiveDay(i);
-        getActiveDay(i);
-        if (event) {
-          days += `<div class="day today active event">${i}</div>`;
-        } else {
-          days += `<div class="day today active">${i}</div>`;
-        }
-      } else {
-        if (event) {
-          days += `<div class="day event">${i}</div>`;
-        } else {
-          days += `<div class="day">${i}</div>`;
-        }
-      }
+      const dateToCheck = new Date(year, month, i);
+      const isPast =
+        dateToCheck <
+        new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      daysArray.push({ date: i, currentMonth: true, past: isPast });
     }
 
     for (let j = 1; j <= nextDays; j++) {
-      days += `<div class="day next-date">${j}</div>`;
+      daysArray.push({ date: j, currentMonth: false, past: false });
     }
 
-    const daysContainer = document.querySelector(".days");
-    daysContainer.innerHTML = days;
-    addListner();
+    setDays(daysArray);
+    // Automatically select the current day if it's in the current month and year
+    if (month === today.getMonth() && year === today.getFullYear()) {
+      setActiveDay(today.getDate());
+    } else {
+      setActiveDay(null);
+    }
   };
 
-  const addListner = () => {
-    const days = document.querySelectorAll(".day");
-    days.forEach((day) => {
-      day.addEventListener("click", (e) => {
-        getActiveDay(e.target.innerHTML);
-        setActiveDay(Number(e.target.innerHTML));
-        days.forEach((day) => {
-          day.classList.remove("active");
-        });
-        if (e.target.classList.contains("prev-date")) {
-          prevMonth();
-          setTimeout(() => {
-            const days = document.querySelectorAll(".day");
-            days.forEach((day) => {
-              if (
-                !day.classList.contains("prev-date") &&
-                day.innerHTML === e.target.innerHTML
-              ) {
-                day.classList.add("active");
-              }
-            });
-          }, 100);
-        } else if (e.target.classList.contains("next-date")) {
-          nextMonth();
-          setTimeout(() => {
-            const days = document.querySelectorAll(".day");
-            days.forEach((day) => {
-              if (
-                !day.classList.contains("next-date") &&
-                day.innerHTML === e.target.innerHTML
-              ) {
-                day.classList.add("active");
-              }
-            });
-          }, 100);
-        } else {
-          day.classList.add("active");
-        }
-      });
-    });
-  };
+  const handleDayClick = (day) => {
+    if (day.past) {
+      return;
+    }
 
-  const getActiveDay = (date) => {
-    const day = new Date(year, month, date);
-    const dayName = day.toString().split(" ")[0];
-    setSelectedDate(day);
-  };
+    const selected = new Date(year, month, day.date);
+    setSelectedDate(formatDate(selected));
 
-  useEffect(() => {
-    initCalendar();
-  }, [month, today, year]);
+    setActiveDay(day.date);
+    if (!day.currentMonth) {
+      if (day.date > 15) {
+        prevMonth();
+      } else {
+        nextMonth();
+      }
+    }
+  };
 
   const prevMonth = () => {
-    setMonth((prevMonth) => (prevMonth - 1 + 12) % 12);
     if (month === 0) {
-      setYear((prevYear) => prevYear - 1);
+      setMonth(11);
+      setYear(year - 1);
+    } else {
+      setMonth(month - 1);
     }
-    initCalendar();
   };
 
   const nextMonth = () => {
-    setMonth((prevMonth) => (prevMonth + 1) % 12);
     if (month === 11) {
-      setYear((prevYear) => prevYear + 1);
+      setMonth(0);
+      setYear(year + 1);
+    } else {
+      setMonth(month + 1);
     }
-    initCalendar();
   };
 
   return (
-    <div className="calendar scrollbar-hide">
+    <div className="calendar">
       <div className="month">
         <FaChevronLeft className="cursor-pointer" onClick={prevMonth} />
         <div className="date">
@@ -160,9 +141,23 @@ const Calendar = ({ setSelectedDate }) => {
         <div>Fri</div>
         <div>Sat</div>
       </div>
-      <div className="days"></div>
+      <div className="days">
+        {days.map((day, index) => (
+          <div
+            key={index}
+            className={`day ${day.currentMonth ? "" : "other-month"} ${
+              day.date === activeDay && day.currentMonth && !day.past
+                ? "active"
+                : ""
+            } ${day.past ? "disabled prev-date" : ""}`}
+            onClick={() => handleDayClick(day)}
+          >
+            {day.date}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Calendar
+export default Calendar;

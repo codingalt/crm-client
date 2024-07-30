@@ -6,6 +6,7 @@ import s1 from "../../assets/h3.jpg";
 import { Skeleton } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Empty } from "antd";
+import {NumericFormat} from "react-number-format"
 
 const Services = ({ data, isLoading, selectedService, setSelectedService }) => {
   const navigate = useNavigate();
@@ -32,7 +33,15 @@ const Services = ({ data, isLoading, selectedService, setSelectedService }) => {
             >
               <div className={css.left}>
                 <div className={css.name}>{item.name}</div>
-                <div className={css.price}>Rs. {item.price}</div>
+                <div className={css.price}>
+                  <NumericFormat
+                    displayType="text"
+                    value={item.price}
+                    thousandSeparator=","
+                    suffix="Nis"
+                    thousandsGroupStyle="lakh"
+                  />
+                </div>
                 <div className={css.desc}>
                   Fresh & fluffy pancakes. Served with a topping
                 </div>

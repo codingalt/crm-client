@@ -10,6 +10,8 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import { MdOutlinePriceChange } from "react-icons/md";
 import { BiGroup } from "react-icons/bi";
 import { useTranslation } from "react-i18next";
+import { NumericFormat } from "react-number-format";
+import { truncateText } from "../../utils/helpers/helpers";
 
 const ViewService = () => {
   const { t } = useTranslation();
@@ -92,8 +94,8 @@ const ViewService = () => {
                     animation={false}
                   />
                 ) : (
-                  <h3 className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-default-800">
-                    {service?.name}
+                  <h3 className="text-2xl md:max-w-[92%] md:text-2xl lg:text-3xl xl:text-4xl font-bold text-default-800">
+                    {truncateText(`${service?.name}`, 40)}
                   </h3>
                 )}
 
@@ -182,7 +184,13 @@ const ViewService = () => {
                         {t("price")}
                       </p>
                       <span className="text-sm md:text-medium text-default-900 font-semibold">
-                        {service?.price} Nis
+                        <NumericFormat
+                          displayType="text"
+                          value={service?.price}
+                          thousandSeparator=","
+                          suffix="Nis"
+                          thousandsGroupStyle="lakh"
+                        />
                       </span>
                     </div>
 
@@ -240,7 +248,13 @@ const ViewService = () => {
                       onClick={handleMakeAppointment}
                     >
                       <p>
-                        ${service?.price} {t("makeAppointment")}
+                        <NumericFormat
+                          displayType="text"
+                          value={service?.price}
+                          thousandSeparator=","
+                          thousandsGroupStyle="lakh"
+                        />{" "}
+                        {t("makeAppointment")}
                       </p>
                     </Button>
                   )}

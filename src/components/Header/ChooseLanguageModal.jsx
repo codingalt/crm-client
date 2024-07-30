@@ -79,7 +79,7 @@ const ChooseLanguageModal = ({ isOpen, onOpenChange }) => {
                     className={`w-full border-2 ${
                       selectedLanguage === item.key
                         ? "border-green-500"
-                        : "border-default-200"
+                        : "border-default-300"
                     }  rounded-xl px-4 md:px-5 py-6 hover:bg-green-50 transition-all cursor-pointer`}
                     onClick={() => handleLanguageChange(item.key)}
                   >

@@ -18,7 +18,6 @@ const SearchServices = () => {
   const [debouncedSearchText, setDebouncedSearchText] = useState("");
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  console.log(debouncedSearchText);
   const { data, isFetching, error, isLoading } = useSearchServicesQuery(
     {
       query: debouncedSearchText,

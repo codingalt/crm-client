@@ -21,8 +21,16 @@ import ConfirmTime from "./ConfirmTime/ConfirmTime";
 import ClipSpinner from "../Loader/ClipSpinner";
 import PaymentMethod from "./PaymentMethod/PaymentMethod";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
-const formatDate = (selectedDate, selectedTime) => {
+const formatDateInitial = (date) => {
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+};
+
+export const formatDate = (selectedDate, selectedTime) => {
   const date = moment(selectedDate);
   const time = moment(selectedTime);
 
@@ -71,20 +79,30 @@ const BookAppointmentSteps = () => {
 
   const [loadingPayment, setLoadingPayment] = useState(null);
   const [[page, direction], setPage] = useState([0, 0]);
-  const [selectedDate, setSelectedDate] = useState();
-  const [selectedTime, setSelectedTime] = useState();
+  const today = new Date();
+  const selected = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+  const [selectedDate, setSelectedDate] = useState(formatDateInitial(selected));
+  const [selectedTime, setSelectedTime] = useState(dayjs(new Date()));
   const [isConfirmPayment, setIsConfirmPayment] = useState(null);
   const [availableTimeMsg, setAvailableTimeMsg] = useState(null);
   const [totalPages, setTotalPages] = useState(4);
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const { data: paymentMethods, isLoading: isLoadingPaymentMethods, refetch: refetchPaymentMethods, error: errorPaymentMethods } = useGetPaymentMethodsQuery();
+  const {
+    data: paymentMethods,
+    isLoading: isLoadingPaymentMethods,
+    refetch: refetchPaymentMethods,
+    error: errorPaymentMethods,
+  } = useGetPaymentMethodsQuery();
 
-  useEffect(()=>{
-    if(paymentMethods){
+  useEffect(() => {
+    if (paymentMethods) {
       setPaymentMethod(paymentMethods?.paymentMethods[0]);
     }
-  },[paymentMethods])
-
+  }, [paymentMethods]);
 
   useEffect(() => {
     if (availableTimeMsg) {
@@ -134,7 +152,9 @@ const BookAppointmentSteps = () => {
   };
 
   const handleCheckAvailableTime = async () => {
-    const formattedDateTime = formatDate(selectedDate, selectedTime);
+    const formattedTime = dayjs(selectedTime).format();
+    const formattedDateTime = formatDate(selectedDate, formattedTime);
+
     const { data: availableTime } = await checkAvailableTime({
       id: serviceId,
       date: formattedDateTime,
@@ -157,7 +177,7 @@ const BookAppointmentSteps = () => {
   const [bookAppointment, res] = useBookAppointmentMutation();
   const { isLoading, error, isSuccess } = res;
 
-  const apiErrors = useApiErrorHandling(error);
+  const apiErrors = error && error?.status !== 403 && useApiErrorHandling(error);
 
   useEffect(() => {
     if (error && error.status !== 500 && error.status != "FETCH_ERROR") {
@@ -178,7 +198,8 @@ const BookAppointmentSteps = () => {
   }, [isSuccess]);
 
   const handleBookAppointment = async () => {
-    const formattedDateTime = formatDate(selectedDate, selectedTime);
+    const formattedTime = dayjs(selectedTime).format();
+    const formattedDateTime = formatDate(selectedDate, formattedTime);
 
     await bookAppointment({
       serviceId: serviceId,
@@ -194,7 +215,11 @@ const BookAppointmentSteps = () => {
   };
 
   const renderData = [
-    <SelectDate paginate={paginate} setSelectedDate={setSelectedDate} />,
+    <SelectDate
+      paginate={paginate}
+      selectedDate={selectedDate}
+      setSelectedDate={setSelectedDate}
+    />,
     <SelectTime
       paginate={paginate}
       selectedTime={selectedTime}
@@ -215,9 +240,11 @@ const BookAppointmentSteps = () => {
     isConfirmPayment ? (
       <ConfirmPayment
         data={service?.service}
+        paymentMethod={paymentMethod}
+        date={selectedDate}
+        time={selectedTime}
         handleBookAppointment={handleBookAppointment}
         isLoading={isLoading}
-        paymentMethod={paymentMethod}
         handleBack={handleBack}
       />
     ) : (

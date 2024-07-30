@@ -6,10 +6,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 import { pickersLayoutClasses } from "@mui/x-date-pickers/PickersLayout";
 
-const Clock = ({ setSelectedTime }) => {
-
+const Clock = ({ selectedTime, setSelectedTime }) => {
   const handleAppointmentTime = (time) => {
-    setSelectedTime(dayjs(time).format());
+    setSelectedTime(time);
   };
 
   return (
@@ -22,7 +21,8 @@ const Clock = ({ setSelectedTime }) => {
           <StaticTimePicker
             orientation="portrait"
             defaultValue={dayjs(new Date())}
-            onChange={(e) => handleAppointmentTime(e.$d)}
+            value={selectedTime}
+            onChange={(e) => handleAppointmentTime(e)}
             slotProps={{
               layout: {
                 sx: {
@@ -30,7 +30,7 @@ const Clock = ({ setSelectedTime }) => {
                     display: "none",
                   },
 
-                  [`.css-1rv8zyt-MuiStack-root`]: {
+                  [`.MuiStack-root`]: {
                     scrollbarWidth: "none",
                   },
 
@@ -46,43 +46,46 @@ const Clock = ({ setSelectedTime }) => {
                       alignItems: "center",
                     },
 
-                  [`.css-7kirvq-MuiTypography-root-MuiPickersToolbarText-root:active`]:
-                    {
-                      color: "#fff !important",
-                    },
+                  [`.MuiTypography-root-MuiPickersToolbarText-root:active`]: {
+                    color: "#fff !important",
+                  },
 
-                  [`.css-ihhycx-MuiTimePickerToolbar-amPmSelection .MuiTimePickerToolbar-ampmLabel`]:
+                  [`.MuiTimePickerToolbar-amPmSelection .MuiTimePickerToolbar-ampmLabel`]:
                     {
                       borderRadius: "6px",
                     },
 
-                  [`.css-umzx0k-MuiClock-pin`]: {
+                  [`.MuiClock-pin`]: {
                     backgroundColor: "#01ABAB !important",
                   },
 
-                  [`.css-d0vs79-MuiClockPointer-root`]: {
+                  [`.MuiClockPointer-root`]: {
                     backgroundColor: "#01ABAB !important",
                   },
 
-                  [`.css-f53ilk-MuiClockPointer-thumb`]: {
+                  [`.MuiClockPointer-thumb`]: {
                     backgroundColor: "#01ABAB !important",
                     border: "16px solid #01ABAB !important",
                   },
 
-                  [`.css-12t0dn4-MuiClockPointer-thumb`]: {
+                  [`.MuiClockPointer-thumb`]: {
                     border: "16px solid #01ABAB !important",
                   },
 
-                  [`.css-2x8kvt-MuiPickersArrowSwitcher-root-MuiTimeClock-arrowSwitcher`]:
+                  [`.MuiPickersArrowSwitcher-root-MuiTimeClock-arrowSwitcher`]:
                     {
                       display: "none",
                     },
 
-                  [`.css-13u1oz-MuiButtonBase-root-MuiButton-root-MuiPickersToolbarButton-root:active`]:
+                  [`.MuiButtonBase-root-MuiButton-root-MuiPickersToolbarButton-root:active`]:
                     {
                       color: "#01ABAB !important",
                       background: "#01ABAB !important",
                     },
+
+                  [`.MuiClockPointer-root`]: {
+                    backgroundColor: "#01ABAB !important",
+                  },
                 },
               },
             }}

@@ -3,16 +3,28 @@ import css from "./ConfirmPayment.module.scss";
 import { Button } from "@nextui-org/react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
+import { formatDate } from "../BookAppointmentSteps";
+import moment from "moment";
 
 const ConfirmPayment = ({
   data,
+  date,
+  time,
   handleBookAppointment,
   isLoading,
   paymentMethod,
   handleBack,
 }) => {
   const { t } = useTranslation();
- 
+
+  const getFormattedTime = () => {
+    const formattedTime = dayjs(time).format();
+    const formattedDateTime = formatDate(date, formattedTime);
+
+    return formattedDateTime;
+  };
+
   return (
     <div className={css.wrapper}>
       <div
@@ -33,6 +45,14 @@ const ConfirmPayment = ({
 
       <div className={`${css.card} border w-full max-w-2xl mx-auto rounded-lg`}>
         <div className={css.item}>
+          <p>{t("date")}</p>
+          <span>{moment(getFormattedTime()).format("DD MMM YYYY")}</span>
+        </div>
+        <div className={css.item}>
+          <p>{t("time")}</p>
+          <span>{moment(getFormattedTime()).format("hh:mm A")}</span>
+        </div>
+        <div className={css.item}>
           <p>{t("price")}</p>
           <span>{data?.price}</span>
         </div>
@@ -41,7 +61,7 @@ const ConfirmPayment = ({
           <span className="capitalize">{paymentMethod?.name}</span>
         </div>
         <div className={css.footer}>
-          <p>Facial</p>
+          <p>{data?.name}</p>
           <span>{data?.price} Nis</span>
         </div>
       </div>

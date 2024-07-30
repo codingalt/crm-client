@@ -15,7 +15,7 @@ const SelectTime = ({
   const { t } = useTranslation();
 
   const handleNext = () => {
-    setSelectedTime(dayjs(selectedTime).format());
+    // setSelectedTime(dayjs(selectedTime).format());
     paginate(1, true);
   };
 
@@ -42,7 +42,7 @@ const SelectTime = ({
       </div>
 
       <div className={`${css.clockWrapper} max-w-4xl`}>
-        <Clock setSelectedTime={setSelectedTime} />
+        <Clock selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
       </div>
 
       {/* Next Button Mobile  */}

@@ -3,15 +3,43 @@ $md: 768px;
 $lg: 1024px;
 $xl: 1280px;
 $xxl: 1536px;
-$primary: #01ABAB;
-$primaryLight: #13D3B3;
+$primary: #01abab;
+$primaryLight: #13d3b3;
 $primaryHover: #eef9f7;
 $white: #fff;
-$textSecondary: #6A6C6D;
-$error: #FF0000;
+$textSecondary: #6a6c6d;
+$error: #ff0000;
 
-.inputBottomBorder{
+.inputBottomBorder {
   border-bottom: 1px solid $error !important;
+}
+
+.servicesDashboard .swiper-button-next::after {
+  font-size: 32px;
+  color: $primary;
+}
+
+.swiper-rtl .swiper-button-next::after {
+  transform: rotate(180deg);
+}
+
+.servicesDashboard .swiper-button-prev::after {
+  font-size: 32px;
+  color: $primary;
+}
+
+.swiper-rtl .swiper-button-prev::after {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .swiperContainer {
+    overflow: visible; 
+  }
+
+  .swiper-slide {
+    margin-right: -35px; 
+  }
 }
 
 @mixin flexCenter {
@@ -60,7 +88,7 @@ $error: #FF0000;
   z-index: 10;
   gap: 8px;
 
-  &:hover{
+  &:hover {
     background-color: $primaryLight;
     transition: all 0.2s;
   }

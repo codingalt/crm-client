@@ -1,11 +1,10 @@
 import React from "react";
 import css from "./SelectDate.module.scss";
-import Calendar from "./Calendar";
 import { Button } from "@nextui-org/react";
-import Calendar2 from "./Calendar2";
+import Calendar from "./Calendar";
 import { useTranslation } from "react-i18next";
 
-const SelectDate = ({ paginate, setSelectedDate }) => {
+const SelectDate = ({ paginate, selectedDate, setSelectedDate }) => {
   const { t } = useTranslation();
   const handleNext = () => {
     paginate(1);
@@ -26,7 +25,10 @@ const SelectDate = ({ paginate, setSelectedDate }) => {
       <div
         className={`${css.calendarWrapper} bg-white max-w-3xl scrollbar-hide`}
       >
-        <Calendar2 setSelectedDate={setSelectedDate} />
+        <Calendar
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
       </div>
 
       {/* Next Button Mobile  */}

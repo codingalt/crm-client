@@ -124,6 +124,7 @@
   "selectTime": "SELECT TIME",
   "confirmTime": "Confirm Time",
   "changeTime": "Change Time",
+  "date": "Date",
   "continueAnyway": "Continue anyway",
   "alreadyHaveAppointment": "You already have an appointment at this time.",
   "serviceProviderHasAppointment": "This service provider already has an appointment at this time.",
