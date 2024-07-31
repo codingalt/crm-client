@@ -36,6 +36,7 @@ const Chat = () => {
 
   const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [files, setFiles] = useState([]);
   const [filePreviews, setFilePreviews] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
@@ -95,6 +96,7 @@ const Chat = () => {
   useEffect(() => {
     if (conversations) {
       setChats(conversations?.communications);
+      setIsInitialLoading(false);
     }
   }, [conversations]);
 
@@ -298,7 +300,7 @@ const Chat = () => {
         setIsOpen={setIsOpenMediaModal}
       />
 
-      <div className="w-full xl:max-w-screen-xl md:max-w-screen-2xl mx-auto px-0 md:px-1 xl:px-4 pt-1 md:pt-6 pb-0 max-h-[79.5vh]">
+      <div className="w-full xl:max-w-screen-xl md:max-w-screen-2xl mx-auto px-0 md:px-1 xl:px-4 pt-0 md:pt-6 pb-0 max-h-[79.5vh]">
         <div className={css.chatWrapper}>
           <div className={css.chatContainer}>
             <div
@@ -347,14 +349,16 @@ const Chat = () => {
                   )}
 
                   {/* No Conversation Message  */}
-                  {!isLoadingConversations && chats?.length === 0 && (
-                    <div className="w-full h-full flex gap-y-3 items-center justify-center px-20 text-center flex-col">
-                      <TbMessage fontSize={60} color="#01AB8E" />
-                      <p className="text-tiny text-default-500 font-medium">
-                        {t("upComingChatsMessage")}
-                      </p>
-                    </div>
-                  )}
+                  {!isInitialLoading &&
+                    !isLoadingConversations &&
+                    chats?.length === 0 && (
+                      <div className="w-full h-full flex gap-y-3 items-center justify-center px-20 text-center flex-col">
+                        <TbMessage fontSize={60} color="#01AB8E" />
+                        <p className="text-tiny text-default-500 font-medium">
+                          {t("upComingChatsMessage")}
+                        </p>
+                      </div>
+                    )}
                 </ul>
               </div>
             </div>

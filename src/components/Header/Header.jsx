@@ -94,17 +94,17 @@ const Header = () => {
           {location && location?.address && (
             <div className={`${css.header_center}`} onClick={onOpen}>
               <div className="flex justify-center items-center">
-                <button className="outline-none border-none bg-transparent flex items-center justify-center gap-0.5 md:gap-1">
+                <button className="outline-none border-none bg-transparent flex items-center justify-center gap-0 md:gap-1">
                   <div className="md:block hidden">
                     <LocationIcon className="text-[#454545] text-[1.15rem]" />
                   </div>
-                  <IoLocationOutline className="md:hidden text-[#454545] text-[1.29rem]" />
+                  <IoLocationOutline className="md:hidden text-[#454545] text-[1.16rem]" />
                   <p className="text-medium m-0 text-[#454545] font-medium text-ellipsis whitespace-nowrap pr-1">
                     <span className="hidden xl:inline-block">
                       {t("newAddress")}
                     </span>
-                    <span className="text-[#01ABAB] inline-block ml-1">
-                      {truncateText(location.address, isSmallDevice ? 18 : 44)}
+                    <span className="text-[#01ABAB] text-sm md:text-medium inline-block ml-1">
+                      {truncateText(location.address, isSmallDevice ? 19 : 44)}
                     </span>
                   </p>
                 </button>

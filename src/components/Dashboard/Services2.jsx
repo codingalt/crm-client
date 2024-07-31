@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import css from "./Dashboard.module.scss";
-import { Tooltip } from "@nextui-org/react";
+import { Button, Tooltip } from "@nextui-org/react";
 import { FaRegStar } from "react-icons/fa";
 import { GrContactInfo } from "react-icons/gr";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
@@ -19,7 +19,7 @@ import { NumericFormat } from "react-number-format";
 import "swiper/css";
 import "swiper/css/navigation";
 
-const Services2 = ({ data, isLoading }) => {
+const Services2 = ({ data, isLoading, error, refetchServices }) => {
   const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const isMediumDevice = useMediaQuery(
@@ -40,81 +40,84 @@ const Services2 = ({ data, isLoading }) => {
         key={item.id}
         onClick={() => navigate(`/services/${item.name}/${item.id}`)}
       >
-        
-          <div className={`${css.card}`}>
-            <div className={css.image}>
-              <ImagePlaceholder
-                src={import.meta.env.VITE_SERVICE_IMAGE + item.image}
-                width={"100%"}
-                height={"100%"}
-                isZoomed
-              />
-            </div>
-            <Tooltip
-              placement="bottom-start"
-              content={item.name}
-              classNames={{
-                base: [
-                  // arrow color
-                  "before:bg-black before:bg-opacity-60 before:rounded-[6px]",
-                ],
-                content: [
-                  "py-1 px-2.5 shadow-lg rounded-[6px]",
-                  "text-white text-[12px] bg-black bg-opacity-60",
-                ],
-              }}
-            >
-              <div className={css.title}>{truncateText(item.name, 22)}</div>
-            </Tooltip>
-            <div className={css.rating}>
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-            </div>
-            <div className={css.detail}>
-              <div className={css.age}>
-                <GrContactInfo />
-                <span>
-                  {item.start_age}-{item.end_age} {t("yrs")}
-                </span>
-              </div>
-              <div className={css.time}>
-                <LiaBusinessTimeSolid />
-                <span>
-                  {item.time} {t("min")}
-                </span>
-              </div>
-            </div>
-            <div
-              className={css.price}
-              onClick={() => navigate(`/services/${item.name}/${item.id}`)}
-            >
+        <div className={`${css.card}`}>
+          <div className={css.image}>
+            <ImagePlaceholder
+              src={import.meta.env.VITE_SERVICE_IMAGE + item.image}
+              width={"100%"}
+              height={"100%"}
+              isZoomed
+            />
+          </div>
+          <Tooltip
+            placement="bottom-start"
+            content={item.name}
+            classNames={{
+              base: [
+                // arrow color
+                "before:bg-black before:bg-opacity-60 before:rounded-[6px]",
+              ],
+              content: [
+                "py-1 px-2.5 shadow-lg rounded-[6px]",
+                "text-white text-[12px] bg-black bg-opacity-60",
+              ],
+            }}
+          >
+            <div className={css.title}>{truncateText(item.name, 22)}</div>
+          </Tooltip>
+          <div className={css.rating}>
+            <FaRegStar />
+            <FaRegStar />
+            <FaRegStar />
+            <FaRegStar />
+            <FaRegStar />
+          </div>
+          <div className={css.detail}>
+            <div className={css.age}>
+              <GrContactInfo />
               <span>
-                <NumericFormat
-                  displayType="text"
-                  value={item.price}
-                  thousandSeparator=","
-                  thousandsGroupStyle="lakh"
-                />{" "}
-                {t("get")}
+                {item.start_age}-{item.end_age} {t("yrs")}
+              </span>
+            </div>
+            <div className={css.time}>
+              <LiaBusinessTimeSolid />
+              <span>
+                {item.time} {t("min")}
               </span>
             </div>
           </div>
+          <div
+            className={css.price}
+            onClick={() => navigate(`/services/${item.name}/${item.id}`)}
+          >
+            <span>
+              <NumericFormat
+                displayType="text"
+                value={item.price}
+                thousandSeparator=","
+                thousandsGroupStyle="lakh"
+              />{" "}
+              {t("get")}
+            </span>
+          </div>
+        </div>
       </SwiperSlide>
     );
   });
 
   return (
-    <div className="relative w-full">
-      <div className={`${css.services} servicesDashboard`}>
-        {isLoading ? (
+    <>
+      <div className="relative w-full">
+        <div
+          className={`${css.services} servicesDashboard`}
+          style={error ? { minHeight: "auto" } : {}}
+        >
+          {isLoading ? (
           <ServicesSkeleton />
         ) : (
           <Swiper
             modules={[Navigation]}
-            spaceBetween={isSmallDevice ? 0 : 14}
+            spaceBetween={isSmallDevice ? 15 : 14}
             slidesPerView={
               isSmallDevice
                 ? 1
@@ -129,12 +132,36 @@ const Services2 = ({ data, isLoading }) => {
             navigation={isSmallDevice ? false : true}
             dir={direction}
             className="swiperContainer"
+            // centeredSlides
+            freeMode
+            grabCursor
           >
             {items}
           </Swiper>
         )}
+        </div>
       </div>
-    </div>
+
+      {/* Show Error If data fails to load  */}
+      {!isLoading && error && (
+        <div className="px-4 mx-auto w-full py-9 h-[230px] flex flex-col gap-2 items-center">
+          <p className="font-medium text-[15px] text-[#01abab]">
+            Let's try this again.
+          </p>
+          <span className="px-6 text-xs text-default-600 text-center max-w-xs">
+            Oops! Something went wrong. We couldn't fetch the data.
+          </span>
+          <Button
+            size="sm"
+            radius="sm"
+            className="mt-2 px-6 text-white bg-[#01abab]"
+            onClick={refetchServices}
+          >
+            Try again
+          </Button>
+        </div>
+      )}
+    </>
   );
 };
 

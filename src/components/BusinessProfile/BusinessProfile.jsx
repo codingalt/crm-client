@@ -21,7 +21,6 @@ const BusinessProfile = () => {
   const [selectedService, setSelectedService] = useState(null);
   const { data, isLoading } = useGetBusinessProfileQuery(businessId);
   const [res, setRes] = useState(null);
-  console.log(data);
 
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type) => {
@@ -112,11 +111,6 @@ const BusinessProfile = () => {
           </div>
 
           <div className={css.right}>
-            {/* <Button disabled={isLoading} onClick={handleMakeAppointment}>
-                {selectedService
-                  ? `Make a $${selectedService.price} Appointment`
-                  : "Make a new Appointment"}
-              </Button> */}
           </div>
         </div>
 

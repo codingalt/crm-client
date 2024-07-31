@@ -6,11 +6,12 @@ import { Empty } from "antd";
 import { useMarkNotiAsReadMutation } from "../../services/api/authApi/authApi";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { useTranslation } from "react-i18next";
+import { Button } from "@nextui-org/react";
 
 const Notifications = () => {
   const { t } = useTranslation();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
-  const { data, isLoading } = useGetNotificationsQuery();
+  const { data, isLoading,error, refetch } = useGetNotificationsQuery();
   
   // Mark Notification as read 
   const [markNotiAsRead, res] = useMarkNotiAsReadMutation();
@@ -52,6 +53,26 @@ const Notifications = () => {
             </div>
           )
         }
+
+        {/* Show Error If data fails to load  */}
+        {!isLoading && error && (
+          <div className="px-4 w-full mx-auto max-w-md mt-28 md:mt-32 py-2 flex flex-col gap-2 items-center">
+            <p className="font-medium text-[15px] md:text-lg text-[#01abab]">
+              Let's try this again.
+            </p>
+            <span className="px-6 text-xs text-default-600 text-center max-w-xs">
+              Oops! Something went wrong. We couldn't fetch the data.
+            </span>
+            <Button
+              size="sm"
+              radius="sm"
+              className="mt-2 px-6 text-white bg-[#01abab]"
+              onClick={refetch}
+            >
+              Try again
+            </Button>
+          </div>
+        )}
 
         {!isLoading && data?.notifications.length === 0 && (
           <div className="flex h-56 items-center justify-center">

@@ -38,7 +38,11 @@ $error: #ff0000;
   }
 
   .swiper-slide {
-    margin-right: -35px; 
+    width: 305px !important;
+
+    &:last-child{
+      margin-right: 0px !important;
+    }
   }
 }
 

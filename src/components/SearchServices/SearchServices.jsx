@@ -18,7 +18,7 @@ const SearchServices = () => {
   const [debouncedSearchText, setDebouncedSearchText] = useState("");
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [showEmptyData, setShowEmptyData] = useState(false);
   const { data, isFetching, error, isLoading } = useSearchServicesQuery(
     {
       query: debouncedSearchText,
@@ -28,17 +28,16 @@ const SearchServices = () => {
   );
 
   useEffect(() => {
-    if (data) {
+    if (data && !isFetching) {
       setResults(data.services);
-      setIsInitialized(true);
+      setShowEmptyData(false);
     }
-  }, [data, isLoading]);
+  }, [data, isFetching]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedSearchText(searchText);
       setIsSearching(false);
-      setIsInitialized(false);
     }, 1000);
 
     return () => clearTimeout(timeoutId);
@@ -47,7 +46,24 @@ const SearchServices = () => {
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
     setIsSearching(true);
+    setShowEmptyData(false);
   };
+
+  useEffect(() => {
+    if (
+      !isSearching &&
+      !isFetching &&
+      searchText.length > 0 &&
+      !error &&
+      results?.length === 0
+    ) {
+      const emptyDataTimeout = setTimeout(() => {
+        setShowEmptyData(true);
+      }, 300); // Delay before showing EmptyData component
+
+      return () => clearTimeout(emptyDataTimeout);
+    }
+  }, [isSearching, isFetching, searchText, error, results]);
 
   useClickOutside(searchRef, () => setShowSearch(false));
 
@@ -91,7 +107,8 @@ const SearchServices = () => {
           setSearchText={setSearchText}
           debouncedSearchText={debouncedSearchText}
           setDebouncedSearchText={setDebouncedSearchText}
-          isInitialized={isInitialized}
+          showEmptyData={showEmptyData}
+          setShowEmptyData={setShowEmptyData}
         />
       </div>
     </div>

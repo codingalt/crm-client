@@ -10,7 +10,7 @@ import css from "./chat.module.scss";
 import { IoClose } from "react-icons/io5";
 import ClipSpinner from "../Loader/ClipSpinner";
 import { Oval } from "react-loader-spinner";
-import { Tooltip } from "@mui/material";
+import { Tooltip, useMediaQuery } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 const FileUploader = ({
@@ -21,6 +21,7 @@ const FileUploader = ({
 }) => {
   const { t } = useTranslation();
   const fileRef = useRef();
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
@@ -124,7 +125,7 @@ const FileUploader = ({
           {filePreviews?.map((file, index) => (
             <div key={index}>
               {file.type.startsWith("image/") ? (
-                <div className="w-32 h-16 md:w-36 md:h-24 relative bg-slate-50 rounded-lg md:rounded-xl flex items-center justify-center">
+                <div className="w-28 h-16 md:w-36 md:h-24 relative bg-slate-50 rounded-lg md:rounded-xl flex items-center justify-center">
                   <img
                     src={file.src}
                     alt={file.name}
@@ -138,8 +139,8 @@ const FileUploader = ({
                         <div className=" text-white text-2xl flex items-center justify-center">
                           <Oval
                             visible={true}
-                            height="55"
-                            width="55"
+                            height={isSmallDevice ? "42" : "55"}
+                            width={isSmallDevice ? "42" : "55"}
                             color="#4fa94d"
                             ariaLabel="oval-loading"
                             wrapperClass=""
@@ -150,7 +151,7 @@ const FileUploader = ({
                   )}
                 </div>
               ) : file.type.startsWith("video/") ? (
-                <div className="w-32 h-20 md:w-52 md:h-32 relative bg-slate-50 rounded-lg md:rounded-xl flex items-center justify-center">
+                <div className="w-28 h-20 md:w-52 md:h-32 relative bg-slate-50 rounded-lg md:rounded-xl flex items-center justify-center">
                   <video
                     controls
                     src={file.src}
@@ -165,8 +166,8 @@ const FileUploader = ({
                         <div className=" text-white text-2xl flex items-center justify-center">
                           <Oval
                             visible={true}
-                            height="55"
-                            width="55"
+                            height={isSmallDevice ? "42" : "55"}
+                            width={isSmallDevice ? "42" : "55"}
                             color="#4fa94d"
                             secondaryColor="#fff"
                             ariaLabel="oval-loading"
@@ -193,8 +194,8 @@ const FileUploader = ({
                         <div className=" text-white text-2xl flex items-center justify-center">
                           <Oval
                             visible={true}
-                            height="55"
-                            width="55"
+                            height={isSmallDevice ? "42" : "55"}
+                            width={isSmallDevice ? "42" : "55"}
                             color="#4fa94d"
                             ariaLabel="oval-loading"
                             wrapperClass=""

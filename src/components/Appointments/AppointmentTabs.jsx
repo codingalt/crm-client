@@ -1,20 +1,18 @@
-import React from 'react'
-import { Tabs, Tab, Chip } from "@nextui-org/react";
-import { MdHistory } from "react-icons/md";
+import React from "react";
+import { Tabs, Tab, Chip, Button } from "@nextui-org/react";
 import { MdUpcoming } from "react-icons/md";
-import { RiFileHistoryFill } from "react-icons/ri";
 import { RiChatHistoryFill } from "react-icons/ri";
-import FutureQueues from './FutureQueues';
-import HistoryAppointments from './HistoryAppointments';
-import { useGetMyBookingsQuery } from '../../services/api/businessProfileApi/businessProfileApi';
-import { Empty } from 'antd';
-import ClipSpinner from '../Loader/ClipSpinner';
-import { useMediaQuery } from '@uidotdev/usehooks';
-import { useTranslation } from 'react-i18next';
+import FutureQueues from "./FutureQueues";
+import HistoryAppointments from "./HistoryAppointments";
+import { useGetMyBookingsQuery } from "../../services/api/businessProfileApi/businessProfileApi";
+import { Empty } from "antd";
+import ClipSpinner from "../Loader/ClipSpinner";
+import { useMediaQuery } from "@uidotdev/usehooks";
+import { useTranslation } from "react-i18next";
 
 const AppointmentTabs = ({ setRatingData, setShow }) => {
   const { t } = useTranslation();
-  const { data, isLoading } = useGetMyBookingsQuery();
+  const { data, isLoading, error, refetch } = useGetMyBookingsQuery();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   return (
@@ -56,12 +54,8 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
               </div>
             )}
 
-          <FutureQueues active={data?.active} upComing={data?.upComing} />
-
-          {isLoading && (
-            <div className="w-full h-40 flex justify-center max-w-md mt-14">
-              <ClipSpinner size={isSmallDevice ? 35 : 43} />
-            </div>
+          {!isLoading && !error && (
+            <FutureQueues active={data?.active} upComing={data?.upComing} />
           )}
         </Tab>
         <Tab
@@ -78,11 +72,13 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
             </div>
           }
         >
-          <HistoryAppointments
-            data={data?.completed}
-            setShow={setShow}
-            setRatingData={setRatingData}
-          />
+          {!isLoading && !error && (
+            <HistoryAppointments
+              data={data?.completed}
+              setShow={setShow}
+              setRatingData={setRatingData}
+            />
+          )}
           {!isLoading && data?.completed?.length === 0 && (
             <div className="w-full h-40 flex justify-center max-w-md mt-10">
               <Empty
@@ -92,8 +88,34 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
           )}
         </Tab>
       </Tabs>
+
+      {isLoading && (
+        <div className="w-full h-40 flex justify-center max-w-md mt-28">
+          <ClipSpinner size={isSmallDevice ? 35 : 43} />
+        </div>
+      )}
+
+      {/* Show Error If data fails to load  */}
+      {!isLoading && error && (
+        <div className="px-4 w-full max-w-md mt-28 md:mt-24 py-2 flex flex-col gap-2 items-center">
+          <p className="font-medium text-[15px] md:text-lg text-[#01abab]">
+            Let's try this again.
+          </p>
+          <span className="px-6 text-xs text-default-600 text-center max-w-xs">
+            Oops! Something went wrong. We couldn't fetch the data.
+          </span>
+          <Button
+            size="sm"
+            radius="sm"
+            className="mt-2 px-6 text-white bg-[#01abab]"
+            onClick={refetch}
+          >
+            Try again
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
 
-export default AppointmentTabs
+export default AppointmentTabs;

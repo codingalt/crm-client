@@ -14,7 +14,7 @@ const SearchServicesMobile = () => {
   const [debouncedSearchText, setDebouncedSearchText] = useState("");
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [showEmptyData, setShowEmptyData] = useState(false);
   const { data, isFetching, error, isLoading } = useSearchServicesQuery(
     {
       query: debouncedSearchText,
@@ -24,25 +24,42 @@ const SearchServicesMobile = () => {
   );
 
   useEffect(() => {
-    if (data) {
+    if (data && !isFetching) {
       setResults(data.services);
-      setIsInitialized(true);
+      setShowEmptyData(false);
     }
-  }, [data, isLoading]);
+  }, [data, isFetching]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedSearchText(searchText);
       setIsSearching(false);
-      setIsInitialized(false);
     }, 1000);
 
     return () => clearTimeout(timeoutId);
   }, [searchText]);
 
+  useEffect(() => {
+    
+    if (
+      !isSearching &&
+      !isFetching &&
+      searchText.length > 0 &&
+      !error &&
+      results?.length === 0
+    ) {
+      const emptyDataTimeout = setTimeout(() => {
+        setShowEmptyData(true);
+      }, 300); // Delay before showing EmptyData component
+
+      return () => clearTimeout(emptyDataTimeout);
+    }
+  }, [isSearching, isFetching, setSearchText, searchText, error, results]);
+
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
     setIsSearching(true);
+    setShowEmptyData(false);
   };
 
   return (
@@ -75,7 +92,8 @@ const SearchServicesMobile = () => {
           debouncedSearchText={debouncedSearchText}
           setDebouncedSearchText={setDebouncedSearchText}
           isMobile={true}
-          isInitialized={isInitialized}
+          showEmptyData={showEmptyData}
+          setShowEmptyData={setShowEmptyData}
         />
       </div>
     </div>

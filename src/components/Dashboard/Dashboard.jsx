@@ -7,7 +7,6 @@ import {
   useGetBusinessesQuery,
   useGetGlobalCategoriesQuery,
 } from "../../services/api/categoriesApi/categoriesApi";
-import Services from "./Services";
 import { useGetTargetedServicesQuery } from "../../services/api/servicesApi/servicesApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -17,17 +16,26 @@ import { toastError } from "../Toast/Toast";
 import { notification, Space } from "antd";
 import { Button } from "@nextui-org/react";
 import { geocodeLatLng } from "../../utils/helpers/geoCode";
+import { useGetMyBookingsQuery } from "../../services/api/businessProfileApi/businessProfileApi";
 
 const Dashboard = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { location } = useSelector((store) => store.auth);
-  console.log(location);
-  const { data, isLoading } = useGetGlobalCategoriesQuery();
-  const { data: businesses, isLoading: isLoadingBusinesses } =
-    useGetBusinessesQuery();
-  const { data: services, isLoading: isLoadingServices } =
-    useGetTargetedServicesQuery("Multan", { skip: !location });
+  const { data, isLoading, error: errorCategories, refetch: refetchCategories } = useGetGlobalCategoriesQuery();
+  const {
+    data: businesses,
+    isLoading: isLoadingBusinesses,
+    error: errorBusinesses,
+    refetch: refetchBusinesses,
+  } = useGetBusinessesQuery();
+  const {
+    data: services,
+    isLoading: isLoadingServices,
+    error: errorServices,
+    refetch: refetchServices,
+  } = useGetTargetedServicesQuery("Multan", { skip: !location });
+  const { data: appointments, isLoading: isLoadingAppointments, error: errorAppointments, refetch: refetchAppointments } = useGetMyBookingsQuery();
 
   // Get User Location
   const [api, contextHolder] = notification.useNotification();
@@ -123,14 +131,24 @@ const Dashboard = () => {
           <h1>{t("categories")}</h1>
         </div>
 
-        <Categories data={data?.categories} isLoading={isLoading} />
+        <Categories
+          data={data?.categories}
+          isLoading={isLoading}
+          error={errorCategories}
+          refetchCategories={refetchCategories}
+        />
 
         <div className={css.heading}>
           <h1>{t("services")}</h1>
         </div>
-        <Services2 data={services?.services} isLoading={isLoadingServices} />
+        <Services2
+          data={services?.services}
+          isLoading={isLoadingServices}
+          error={errorServices}
+          refetchServices={refetchServices}
+        />
 
-        <Appointments />
+        <Appointments data={appointments} isLoading={isLoadingAppointments} error={errorAppointments} refetchAppointments={refetchAppointments} />
 
         <div className={css.heading}>
           <h1>{t("businesses")}</h1>
@@ -138,6 +156,8 @@ const Dashboard = () => {
         <Business
           data={businesses?.businesses}
           isLoading={isLoadingBusinesses}
+          error={errorBusinesses}
+          refetchBusinesses={refetchBusinesses}
         />
       </div>
     </>

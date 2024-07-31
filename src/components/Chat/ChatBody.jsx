@@ -35,7 +35,6 @@ const ChatBody = ({
   const { user } = useSelector((state) => state.auth);
   const inputRef = useRef();
   const lastMessageRef = useRef();
-  const [sources, setSources] = useState(null);
 
   const { direction } = useContext(DirectionContext);
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");

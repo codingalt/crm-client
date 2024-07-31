@@ -2,11 +2,15 @@ import { Avatar, AvatarGroup, Button } from "@nextui-org/react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const EmptyData = ({ debouncedSearchText, setSearchText }) => {
+const EmptyData = ({
+  debouncedSearchText,
+  setSearchText,
+  setShowEmptyData,
+}) => {
   const { t } = useTranslation();
 
   return (
-    <div className="w-full px-2 md:px-0 py-12 md:py-6 flex items-center justify-center flex-col">
+    <div className="w-full px-2 md:px-0 pt-16 pb-12 md:pb-4 md:pt-10 flex items-center justify-center flex-col">
       <AvatarGroup isBordered>
         <Avatar
           src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
@@ -32,7 +36,7 @@ const EmptyData = ({ debouncedSearchText, setSearchText }) => {
         variant="ghost"
         className="mt-1 text-green-700 font-medium border-none"
         size="md"
-        onClick={() => setSearchText("")}
+        onClick={() => {setSearchText(""); setShowEmptyData(false)}}
       >
         {t("clearSearch")}
       </Button>

@@ -93,9 +93,9 @@ const Login = () => {
     <>
       {show && (
         <div className="w-full min-h-[97vh] flex justify-center items-center max-w-screen-sm mx-auto">
-          <div className={css.wrapper}>
+          <div className={`${css.wrapper} scrollbar-hide`}>
             <div className={css.top}>
-              <div className="w-14 md:w-16 mb-10 mx-auto">
+              <div className="w-[52px] md:w-16 mb-9 md:mb-10 mx-auto">
                 <Image src={logo} width="100%" height="100%" />
               </div>
               <p>{t("signIn")}</p>

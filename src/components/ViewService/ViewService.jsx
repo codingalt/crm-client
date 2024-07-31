@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import css from "./ViewService.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Image } from "@nextui-org/react";
@@ -12,16 +12,49 @@ import { BiGroup } from "react-icons/bi";
 import { useTranslation } from "react-i18next";
 import { NumericFormat } from "react-number-format";
 import { truncateText } from "../../utils/helpers/helpers";
+import { useOneOoneCommunicationQuery } from "@/services/api/chat/chatApi";
+import { useApiErrorHandling } from "../../hooks/useApiErrors";
 
 const ViewService = () => {
   const { t } = useTranslation();
   const { serviceId } = useParams();
   const navigate = useNavigate();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const isLargeDevice = useMediaQuery("only screen and (min-width : 1024px)");
+  const [chatWithOwner, setChatWithOwner] = useState(false);
 
   // Service Details
   const { data, isLoading } = useGetServiceDetailsByIdQuery(serviceId);
   const service = data?.service;
+
+  console.log(service);
+
+  const props = {
+    user_type: "client",
+    receiver_id: service?.business_id,
+  };
+
+  // oneOone Communication | Messages
+  const {
+    data: messagesData,
+    isLoading: isLoadingChatWithProvider,
+    error: errorChatWithProvider,
+    isSuccess: isSuccessChatWithProvider,
+  } = useOneOoneCommunicationQuery(props, {
+    skip: !chatWithOwner,
+  });
+
+  const handleChatWithServiceProvider = () => {
+    setChatWithOwner(true);
+  };
+
+  const apiErrors = useApiErrorHandling(errorChatWithProvider);
+
+  useEffect(() => {
+    if (isSuccessChatWithProvider && messagesData) {
+      navigate(`/chat?chatId=${messagesData?.communication?.id}`);
+    }
+  }, [isSuccessChatWithProvider, messagesData]);
 
   const handleMakeAppointment = () => {
     if (!serviceId) {
@@ -45,7 +78,9 @@ const ViewService = () => {
                 <Skeleton
                   variant="rounded"
                   width={"100%"}
-                  height={"100%"}
+                  height={
+                    isSmallDevice ? "192px" : isLargeDevice ? "384px" : "288px"
+                  }
                   sx={{ borderRadius: "6px", objectFit: "cover" }}
                   animation={false}
                 />
@@ -207,7 +242,7 @@ const ViewService = () => {
                 )}
 
                 {/* Chat Button  */}
-                <div className=" py-0 md:py-1 md:pb-0 lg:py-3">
+                <div className=" pt-2 pb-0 md:pt-1 md:pb-0 lg:py-3">
                   {isLoading ? (
                     <Skeleton
                       variant="text"
@@ -221,6 +256,8 @@ const ViewService = () => {
                       size="lg"
                       radius="sm"
                       startContent={<BsChatLeftDots className="text-lg" />}
+                      isLoading={isLoadingChatWithProvider}
+                      onClick={handleChatWithServiceProvider}
                     >
                       <p>{t("chatWithServiceProvider")}</p>
                     </Button>
@@ -228,20 +265,20 @@ const ViewService = () => {
                 </div>
 
                 {/* Make Appointment Button  */}
-                <div className="pt-4 lg:pt-3">
+                <div className="pt-8 lg:pt-3">
                   {isLoading ? (
                     <Skeleton
                       width={isSmallDevice ? "100%" : "90%"}
                       height={isSmallDevice ? "85px" : "100px"}
                       sx={{
-                        borderRadius: "41px",
+                        borderRadius: "8px",
                         mt: isSmallDevice ? "-15px" : "-10px",
                       }}
                       animation={false}
                     />
                   ) : (
                     <Button
-                      className="bg-[#01ABAB] py-4 md:py-4 lg:py-7 w-full md:w-[90%] text-white text-medium lg:text-xl font-semibold"
+                      className="bg-[#01ABAB] mt-5 md:mt-0 py-4 md:py-4 lg:py-7 w-full md:w-[90%] text-white text-medium lg:text-xl font-semibold"
                       size="lg"
                       radius="full"
                       disabled={isLoading}

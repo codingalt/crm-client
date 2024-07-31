@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import css from "./Dashboard.module.scss";
-import { FaStethoscope } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { Skeleton } from "@nextui-org/react";
+import { Button, Skeleton } from "@nextui-org/react";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import ImageComponent from "../ui/Image/ImageComponent";
 
-const Categories = ({ data, isLoading }) => {
+const Categories = ({ data, isLoading, error, refetchCategories }) => {
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
   const [visibleCategories, setVisibleCategories] = useState(data);
@@ -33,7 +32,7 @@ const Categories = ({ data, isLoading }) => {
       }
     };
 
-    handleResize(); 
+    handleResize();
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -52,17 +51,21 @@ const Categories = ({ data, isLoading }) => {
   }, [isSmallDevice, isMediumDevice, isLargeDevice, isExtraLargeDevice]);
 
   return (
-    <div className="lg:overflow-x-auto lg:scroll-x lg:scrollbar-hide lg:snap-mandatory lg:snap-x lg:scroll-smooth">
-      {/* <div
-        className={`${css.categories} scrollbar-hide min-h-36 lg:min-h-44 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-5 md:gap-x-5 gap-y-4`}
-      > */}
-      <div className={`${css.categories} w-full scrollbar-hide`}>
-        {isLoading
+    <>
+      <div className="lg:overflow-x-auto lg:scroll-x lg:scrollbar-hide lg:snap-mandatory lg:snap-x lg:scroll-smooth">
+        <div
+          className={`${css.categories} w-full scrollbar-hide`}
+          style={error ? { height: "auto" } : {}}
+        >
+          {isLoading
           ? Array.from({ length: value }).map((_, index) => (
-              <div key={index} className="flex flex-col gap-3 px-[6px]">
+              <div
+                key={index}
+                className="flex flex-col gap-3 px-[1px] md:px-[6px]"
+              >
                 <Skeleton
                   disableAnimation
-                  className="rounded-2xl h-[98px] lg:h-[135px]"
+                  className="rounded-2xl h-[96px] lg:h-[135px]"
                 >
                   <div className="w-full rounded-lg bg-secondary"></div>
                 </Skeleton>
@@ -95,8 +98,29 @@ const Categories = ({ data, isLoading }) => {
                 </div>
               </div>
             ))}
+        </div>
       </div>
-    </div>
+
+      {/* Show Error If data fails to load  */}
+      {!isLoading && error && (
+        <div className="px-4 mx-auto w-full h-[130px] flex flex-col gap-2 items-center">
+          <p className="font-medium text-[15px] text-[#01abab]">
+            Let's try this again.
+          </p>
+          <span className="px-6 text-xs text-default-600 text-center max-w-xs">
+            OOps! Something went wrong. We couldn't fetch the data.
+          </span>
+          <Button
+            size="sm"
+            radius="sm"
+            className="mt-2 px-6 text-white bg-[#01abab]"
+            onClick={refetchCategories}
+          >
+            Try again
+          </Button>
+        </div>
+      )}
+    </>
   );
 };
 
