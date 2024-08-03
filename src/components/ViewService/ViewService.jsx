@@ -14,6 +14,8 @@ import { NumericFormat } from "react-number-format";
 import { truncateText } from "../../utils/helpers/helpers";
 import { useOneOoneCommunicationQuery } from "@/services/api/chat/chatApi";
 import { useApiErrorHandling } from "../../hooks/useApiErrors";
+import ImagePlaceholder from "../ui/Image/ImagePlaceholder";
+import Reviews from "./Reviews";
 
 const ViewService = () => {
   const { t } = useTranslation();
@@ -26,8 +28,6 @@ const ViewService = () => {
   // Service Details
   const { data, isLoading } = useGetServiceDetailsByIdQuery(serviceId);
   const service = data?.service;
-
-  console.log(service);
 
   const props = {
     user_type: "client",
@@ -68,12 +68,12 @@ const ViewService = () => {
 
   return (
     <div className={css.wrapper}>
-      <div className="w-full lg:max-w-screen-xl md:h-screen md:pt-0 px-1">
+      <div className="w-full lg:max-w-screen-xl mx-auto lg:px-3 md:h-screen md:pt-0 px-1">
         {/* Card  */}
         <div className="mt-5 md:mt-0">
-          <div className="flex gap-x-8 flex-col md:flex-row">
+          <div className="flex gap-x-7 flex-col md:flex-row">
             {/* Left Side  */}
-            <div className="w-full relative max-h-48 md:h-96 md:max-h-72 lg:max-h-96 rounded-md flex-1 shrink-0 overflow-hidden">
+            <div className="w-full bg-default-100 flex items-center justify-center relative max-h-48 md:h-96 lg:max-h-96 rounded-md flex-1 shrink-0 overflow-hidden">
               {isLoading ? (
                 <Skeleton
                   variant="rounded"
@@ -85,11 +85,11 @@ const ViewService = () => {
                   animation={false}
                 />
               ) : (
-                <Image
+                <ImagePlaceholder
                   src={import.meta.env.VITE_SERVICE_IMAGE + service?.image}
                   width={"100%"}
                   height={"100%"}
-                  alt="Service Image"
+                  alt={service?.name}
                   radius="md"
                   className="object-cover align-middle h-full"
                 />
@@ -117,7 +117,7 @@ const ViewService = () => {
                     animation={false}
                   />
                 ) : (
-                  <p className="font-medium text-xs mb-0 lg:mb-1 md:text-sm lg:text-medium text-default-400 uppercase">
+                  <p className="font-medium text-tiny mb-0 lg:mb-1 md:text-sm lg:text-medium text-default-400 uppercase">
                     Bedroom
                   </p>
                 )}
@@ -242,7 +242,7 @@ const ViewService = () => {
                 )}
 
                 {/* Chat Button  */}
-                <div className=" pt-2 pb-0 md:pt-1 md:pb-0 lg:py-3">
+                <div className=" pt-1 pb-0 md:pt-1 md:pb-0 lg:py-3">
                   {isLoading ? (
                     <Skeleton
                       variant="text"
@@ -265,7 +265,7 @@ const ViewService = () => {
                 </div>
 
                 {/* Make Appointment Button  */}
-                <div className="pt-8 lg:pt-3">
+                <div className="pt-6 lg:pt-2.5">
                   {isLoading ? (
                     <Skeleton
                       width={isSmallDevice ? "100%" : "90%"}
@@ -278,7 +278,7 @@ const ViewService = () => {
                     />
                   ) : (
                     <Button
-                      className="bg-[#01ABAB] mt-5 md:mt-0 py-4 md:py-4 lg:py-7 w-full md:w-[90%] text-white text-medium lg:text-xl font-semibold"
+                      className="bg-[#01ABAB] mt-0 md:mt-0 py-4 md:py-4 lg:py-7 w-full md:w-[90%] text-white text-medium lg:text-xl font-semibold"
                       size="lg"
                       radius="full"
                       disabled={isLoading}
@@ -300,6 +300,12 @@ const ViewService = () => {
             </div>
           </div>
         </div>
+        
+        {/* Divider  */}
+        <div className="w-full border mt-10 md:mt-16 mb-7 md:mb-6"></div>
+
+        {/* Reviews  */}
+        <Reviews />
       </div>
     </div>
   );

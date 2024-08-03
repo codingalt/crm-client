@@ -5,7 +5,7 @@ import { Skeleton } from "@nextui-org/react";
 
 const Appointments = ({ data, isLoading, error, refetchAppointments }) => {
   const { t } = useTranslation();
-  
+
   return (
     <div
       className={css.queuesWrap}

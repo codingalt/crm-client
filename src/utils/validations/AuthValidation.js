@@ -39,15 +39,16 @@ export const loginSchema = Yup.object({
     .required("Password is Required"),
 });
 
-export const personalInformationSchema = Yup.object({
+export const updateProfileSchema = Yup.object({
   name: Yup.string()
     .max(255, "Maximun characters are 255")
-    .required("Buisness name is Required"),
-  description: Yup.string()
+    .required("Name is Required"),
+  email: Yup.string()
     .max(255, "Maximun characters are 255")
-    .required("Buisness description is Required"),
-  address: Yup.string()
+    .email("Please Enter a valid email address")
+    .required("Email is Required"),
+  gender: Yup.string()
     .max(255, "Maximun characters are 255")
-    .required("Buisness Address is Required"),
-  profileImg: Yup.mixed().nullable().required("Please Select Business Profile"),
+    .required("Gender is Required"),
+  address: Yup.string().max(255, "Maximun characters are 255"),
 });

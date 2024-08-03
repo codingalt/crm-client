@@ -1,6 +1,7 @@
-import { Avatar, AvatarGroup, Button } from "@nextui-org/react";
+import { Button, Image } from "@nextui-org/react";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import empty from "../../assets/emptyData.png";
 
 const EmptyData = ({
   debouncedSearchText,
@@ -11,21 +12,11 @@ const EmptyData = ({
 
   return (
     <div className="w-full px-2 md:px-0 pt-16 pb-12 md:pb-4 md:pt-10 flex items-center justify-center flex-col">
-      <AvatarGroup isBordered>
-        <Avatar
-          src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-          size="md"
-        />
-        <Avatar
-          src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
-          size="md"
-        />
-        <Avatar
-          src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-          size="md"
-        />
-      </AvatarGroup>
-      <p className="text-medium text-gray-700 font-medium mt-3">
+      <div className="w-14">
+        <Image src={empty} radius="none" />
+      </div>
+
+      <p className="text-medium text-gray-700 font-medium mt-2.5">
         {t("noResultsFound")}
       </p>
       <p className="text-default-500 font-normal text-xs md:text-sm max-w-sm text-center mt-1">
@@ -34,9 +25,12 @@ const EmptyData = ({
       </p>
       <Button
         variant="ghost"
-        className="mt-1 text-green-700 font-medium border-none"
+        className="mt-1 text-green-600 font-medium border-none"
         size="md"
-        onClick={() => {setSearchText(""); setShowEmptyData(false)}}
+        onClick={() => {
+          setSearchText("");
+          setShowEmptyData(false);
+        }}
       >
         {t("clearSearch")}
       </Button>

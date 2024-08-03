@@ -71,7 +71,7 @@ const SearchServices = () => {
     <div
       className={`${
         css.searchWrapper
-      } w-screen h-screen fixed top-0 left-0 right-0 bottom-0 z-50 bg-black bg-opacity-50 transition-opacity duration-500 ${
+      } w-screen h-screen fixed top-0 left-0 right-0 bottom-0 z-50 bg-black bg-opacity-50 transition-opacity duration-400 ${
         showSearch ? "opacity-100 visible" : "opacity-0 invisible"
       }`}
     >

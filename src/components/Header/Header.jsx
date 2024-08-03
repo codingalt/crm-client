@@ -13,7 +13,6 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { DirectionContext } from "../../context/DirectionContext";
-import LocationHeader from "./LocationHeader";
 import LocationIcon from "./LocationIcon";
 import AddLocationModal from "./AddLocationModal";
 import { truncateText } from "../../utils/helpers/helpers";
@@ -24,18 +23,24 @@ import { useTranslation } from "react-i18next";
 import ChooseLanguageModal from "./ChooseLanguageModal";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { IoLocationOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   let pathname = window.location.pathname;
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const {
     isOpen: isOpenLangModal,
     onOpen: onOpenLangModal,
     onOpenChange: onOpenChangeLangModal,
   } = useDisclosure();
   const { user, location } = useSelector((store) => store.auth);
-  const { setShowSearch } = useMainContext();
+  const {
+    setShowSearch,
+    isOpenLocationModal,
+    onOpenLocationModal,
+    onOpenChangeLocationModal,
+  } = useMainContext();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
   useEffect(() => {
@@ -68,31 +73,18 @@ const Header = () => {
             </div>
 
             <div
-              className="w-full h-12 hidden md:flex items-center px-4 cursor-pointer"
+              className="w-full h-12 hidden md:flex items-center pl-0 pr-4 lg:px-4 cursor-pointer"
               onClick={() => setShowSearch(true)}
             >
-              <CiSearch className="text-xl text-[#ababab]" />
-              <p className="pl-4 text-medium font-normal text-[#ababab]">
+              <CiSearch className="text-xl text-gray-700 lg:text-[#ababab]" />
+              <p className="pl-2 lg:pl-4 max-w-[75px] lg:max-w-none overflow-hidden truncate text-sm lg:text-medium font-normal text-[#ababab]">
                 {t("searchServices")}
               </p>
             </div>
           </div>
-          {/* <div className={`text-[19px] font-medium text-[#01AB8E] md:hidden`}>
-            <button className="outline-none border-none bg-transparent flex items-center justify-center gap-0">
-              <LocationIcon className="text-[#656565] text-[1rem]" />
-              <p className="text-sm md:text-medium m-0 text-[#454545] font-medium text-ellipsis whitespace-nowrap pr-1">
-                <span className="hidden xl:inline-block">
-                  {t("newAddress")}
-                </span>
-                <span className="text-[#01ABAB] inline-block ml-1">
-                  {truncateText(location.address, 27)}
-                </span>
-              </p>
-            </button>
-          </div> */}
 
           {location && location?.address && (
-            <div className={`${css.header_center}`} onClick={onOpen}>
+            <div className={`${css.header_center}`} onClick={onOpenLocationModal}>
               <div className="flex justify-center items-center">
                 <button className="outline-none border-none bg-transparent flex items-center justify-center gap-0 md:gap-1">
                   <div className="md:block hidden">
@@ -123,9 +115,15 @@ const Header = () => {
                 </div>
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
+                <DropdownItem key="signedInAs" className="h-14 gap-2">
                   <p className="font-semibold">{t("signedInAs")}</p>
                   <p className="font-semibold">{user?.email}</p>
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() => navigate("/profile")}
+                  key="profile"
+                >
+                  {t("profile")}
                 </DropdownItem>
                 <DropdownItem onClick={onOpenLangModal} key="languages">
                   {t("languages")}
@@ -142,13 +140,11 @@ const Header = () => {
           </div>
         </header>
 
-        {/* Location Header Mobile  */}
-        {/* {!pathname.includes("/chat") && location && location?.address && (
-          <LocationHeader onOpen={onOpen} />
-        )} */}
-
         {/* Change Location Modal  */}
-        <AddLocationModal isOpen={isOpen} onOpenChange={onOpenChange} />
+        <AddLocationModal
+          isOpen={isOpenLocationModal}
+          onOpenChange={onOpenChangeLocationModal}
+        />
       </div>
     </>
   );

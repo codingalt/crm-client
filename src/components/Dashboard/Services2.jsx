@@ -18,6 +18,7 @@ import { NumericFormat } from "react-number-format";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import { Rating } from "@mui/material";
 
 const Services2 = ({ data, isLoading, error, refetchServices }) => {
   const { t } = useTranslation();
@@ -38,7 +39,7 @@ const Services2 = ({ data, isLoading, error, refetchServices }) => {
     return (
       <SwiperSlide
         key={item.id}
-        onClick={() => navigate(`/services/${item.name}/${item.id}`)}
+        onClick={() => navigate(`/service/${item.name}/${item.id}`)}
       >
         <div className={`${css.card}`}>
           <div className={css.image}>
@@ -52,6 +53,7 @@ const Services2 = ({ data, isLoading, error, refetchServices }) => {
           <Tooltip
             placement="bottom-start"
             content={item.name}
+            hidden={item.name.length < 22}
             classNames={{
               base: [
                 // arrow color
@@ -66,11 +68,12 @@ const Services2 = ({ data, isLoading, error, refetchServices }) => {
             <div className={css.title}>{truncateText(item.name, 22)}</div>
           </Tooltip>
           <div className={css.rating}>
+            {/* <FaRegStar />
             <FaRegStar />
             <FaRegStar />
             <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
+            <FaRegStar /> */}
+            <Rating value={item.rating} readOnly size="small" sx={{fontSize:"1.1rem"}} />
           </div>
           <div className={css.detail}>
             <div className={css.age}>
@@ -113,32 +116,32 @@ const Services2 = ({ data, isLoading, error, refetchServices }) => {
           style={error ? { minHeight: "auto" } : {}}
         >
           {isLoading ? (
-          <ServicesSkeleton />
-        ) : (
-          <Swiper
-            modules={[Navigation]}
-            spaceBetween={isSmallDevice ? 15 : 14}
-            slidesPerView={
-              isSmallDevice
-                ? 1
-                : isMediumDevice
-                ? 2
-                : isLargeDevice
-                ? 3
-                : isExtraLargeDevice
-                ? 4
-                : 5
-            }
-            navigation={isSmallDevice ? false : true}
-            dir={direction}
-            className="swiperContainer"
-            // centeredSlides
-            freeMode
-            grabCursor
-          >
-            {items}
-          </Swiper>
-        )}
+            <ServicesSkeleton />
+          ) : (
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={isSmallDevice ? 15 : 14}
+              slidesPerView={
+                isSmallDevice
+                  ? 1
+                  : isMediumDevice
+                  ? 2
+                  : isLargeDevice
+                  ? 3
+                  : isExtraLargeDevice
+                  ? 4
+                  : 5
+              }
+              navigation={isSmallDevice ? false : true}
+              dir={direction}
+              className="swiperContainer"
+              // centeredSlides
+              freeMode
+              grabCursor
+            >
+              {items}
+            </Swiper>
+          )}
         </div>
       </div>
 
@@ -146,7 +149,7 @@ const Services2 = ({ data, isLoading, error, refetchServices }) => {
       {!isLoading && error && (
         <div className="px-4 mx-auto w-full py-9 h-[230px] flex flex-col gap-2 items-center">
           <p className="font-medium text-[15px] text-[#01abab]">
-            Let's try this again.
+            Let's try that again.
           </p>
           <span className="px-6 text-xs text-default-600 text-center max-w-xs">
             Oops! Something went wrong. We couldn't fetch the data.

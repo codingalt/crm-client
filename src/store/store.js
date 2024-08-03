@@ -7,6 +7,7 @@ import { businessProfileApi } from "../services/api/businessProfileApi/businessP
 import { servicesApi } from "../services/api/servicesApi/servicesApi";
 import { notificationsApi } from "../services/api/notificationsApi/notificationsApi";
 import { chatApi } from "../services/api/chat/chatApi";
+import { profileApi } from "../services/api/profileApi/profileApi";
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,9 @@ export const store = configureStore({
     // Chat Api
     [chatApi.reducerPath]: chatApi.reducer,
 
+    // User Profile Api
+    [profileApi.reducerPath]: profileApi.reducer,
+
     auth: authSlice,
   },
   middleware: (getDefaultMiddleware) =>
@@ -38,6 +42,7 @@ export const store = configureStore({
       servicesApi.middleware,
       notificationsApi.middleware,
       chatApi.middleware,
+      profileApi.middleware,
     ]),
 });
 

@@ -20,7 +20,7 @@ const Card = ({ item, index }) => {
     <div
       className={css.item}
       style={{ background: colors[index % colors.length] }}
-      onClick={() => navigate(`/categories/${item.name}/${item.id}`)}
+      onClick={() => navigate(`/services/${item.name}/${item.id}`)}
     >
       <div className={css.image}>
         <ImagePlaceholder

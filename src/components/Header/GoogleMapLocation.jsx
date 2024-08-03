@@ -63,7 +63,7 @@ const GoogleMapLocation = ({ location, setSelectedAddress }) => {
           borderRadius: "20px",
           position: "relative",
         }}
-        className="h-[350px] md:h-[400px]"
+        className="h-[300px] md:h-[400px]"
       >
         {isLoaded ? (
           <GoogleMap

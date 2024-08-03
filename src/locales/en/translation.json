@@ -61,6 +61,8 @@
   "get": "Get",
   "motive": "Motive",
   "businesses": "Businesses",
+  "chatWithBusiness": "Chat With Business",
+  
 
   "whatAreYouLookingFor": "What are you looking for?",
   "searchByText": "Search by service name, business, tags, category, and e.t.",

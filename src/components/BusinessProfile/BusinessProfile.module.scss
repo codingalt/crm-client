@@ -238,12 +238,9 @@
 
           .box {
             position: sticky;
-            // top: 0;
-            // left: 0;
             border: 1px solid #dcdcdc;
             border-radius: 12px;
             padding: 1.2rem 1.1rem;
-            // height: 100vh;
             width: 100%;
 
             ul {
@@ -285,7 +282,53 @@
     }
   }
 
-  @media (max-width: 768px) {
+    @media (max-width: 1260px) {
+    & {
+      .servicesWrapper{
+        .services{
+          .left{
+            flex: 1;
+          }
+
+          .right{
+            flex: 0.7;
+          }
+        }
+      }
+    }
+  }
+
+   @media (max-width: 960px) {
+    & {
+      .servicesWrapper{
+        .services{
+          .left{
+            flex: 1;
+          }
+
+          .right{
+            flex: 0.9;
+
+            .openingHours{
+              .box{
+                ul{
+                  li{
+                    .right{
+                      p{
+                        font-size: 0.8rem;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 840px) {
     & {
       margin: 0 8px;
       margin-top: 1.2rem;

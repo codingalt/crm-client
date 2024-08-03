@@ -10,7 +10,7 @@ const ImagePlaceholder = ({
   height = "100%",
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);  
 
   useEffect(() => {
     const img = new Image();
@@ -23,6 +23,7 @@ const ImagePlaceholder = ({
     };
     img.src = src;
   }, [src]);
+  
 
   if (isError) {
     return (
@@ -73,12 +74,12 @@ const ImagePlaceholder = ({
       }}
     >
       <div
-        className="relative overflow-hidden rounded-inherit rounded-small"
+        className="h-full w-full relative overflow-hidden rounded-inherit rounded-small align-middle"
         style={{ borderRadius: radius ? radius : 0 }}
       >
         <img
           src={src}
-          className={`relative z-10 shadow-black/5 ${
+          className={`relative align-middle z-10 shadow-black/5 ${
             imageLoaded && "opacity-100"
           } shadow-none object-cover transform ${
             isZoomed && "hover:scale-125"
@@ -86,7 +87,7 @@ const ImagePlaceholder = ({
           width="100%"
           height="100%"
           loading="lazy"
-          style={{ borderRadius: radius ? radius : 0 }}
+          style={{ borderRadius: radius ? radius : 0,height:height }}
         />
       </div>
     </div>

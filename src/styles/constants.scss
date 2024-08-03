@@ -14,6 +14,10 @@ $error: #ff0000;
   border-bottom: 1px solid $error !important;
 }
 
+.inputBorder {
+  border: 1px solid $error !important;
+}
+
 .servicesDashboard .swiper-button-next::after {
   font-size: 32px;
   color: $primary;

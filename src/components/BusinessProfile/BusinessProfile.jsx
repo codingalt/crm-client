@@ -32,7 +32,7 @@ const BusinessProfile = () => {
 
   useEffect(() => {
     if (data) {
-      setRes(data.businesses);
+      setRes(data.business);
     }
   }, [data]);
 
@@ -110,8 +110,7 @@ const BusinessProfile = () => {
             </div>
           </div>
 
-          <div className={css.right}>
-          </div>
+          <div className={css.right}></div>
         </div>
 
         {/* Services  */}
@@ -139,11 +138,11 @@ const BusinessProfile = () => {
                 className={`${css.title} mb-4 w-full flex items-center justify-between`}
               >
                 <h1>{t("openingHours")}</h1>
-                <div className="px-6 py-0.5 bg-[#01AB8E] text-white flex items-center justify-center rounded-full">
+                <div className="px-6 py-0.5 bg-[#01AB8E] text-white hidden lg:flex items-center justify-center rounded-full">
                   {t("hours")}
                 </div>
               </div>
-              <OpeningHours />
+              <OpeningHours data={data} isLoading={isLoading} />
             </div>
           </div>
         </div>

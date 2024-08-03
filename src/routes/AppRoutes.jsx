@@ -20,6 +20,8 @@ import ManualAppointmentPaymentPage from "../pages/ManualAppointmentPaymentPage"
 import PaymentSuccessPage from "../pages/PaymentSuccessPage";
 import ChatPage from "../pages/ChatPage";
 import SearchServicesPageMobile from "../pages/SearchServicesPageMobile";
+import AllServicesPage from "../pages/AllServicesPage";
+import ProfilePage from "../pages/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -70,7 +72,15 @@ export const router = createBrowserRouter([
         element: <Protected Component={ChatPage} />,
       },
       {
-        path: "/services/:serviceName/:serviceId",
+        path: "/profile",
+        element: <Protected Component={ProfilePage} />,
+      },
+      {
+        path: "/services/:subCategoryName/:subCategoryId",
+        element: <Protected Component={AllServicesPage} />,
+      },
+      {
+        path: "/service/:serviceName/:serviceId",
         element: <Protected Component={ViewServicePage} />,
       },
       {
