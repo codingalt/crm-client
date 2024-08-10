@@ -4,7 +4,8 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   isLoaded: null,
-  location: null,
+  location: JSON.parse(localStorage.getItem("userLocation")) ?? null,
+  isLocationChanged: false,
 };
 
 export const authSlice = createSlice({
@@ -30,8 +31,13 @@ export const authSlice = createSlice({
     setIsLoaded: (state, action) => {
       state.isLoaded = action.payload;
     },
+
+    setLocationChanged: (state, action) => {
+      state.isLocationChanged = true;
+    },
   },
 });
 
-export const { setAuth, logout, setIsLoaded, setUserLocation } = authSlice.actions;
+export const { setAuth, logout, setIsLoaded, setUserLocation, setLocationChanged } =
+  authSlice.actions;
 export default authSlice.reducer;

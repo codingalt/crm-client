@@ -62,7 +62,7 @@ export const resetPasswordSchema = Yup.object({
 
 export const NewPasswordSchema = Yup.object({
   password: Yup.string()
-    .min(6)
+    .min(8)
     .max(255, "Maximun characters are 255")
     .required("Password is Required"),
   confirmPass: Yup.string()

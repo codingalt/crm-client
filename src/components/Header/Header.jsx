@@ -36,6 +36,7 @@ const Header = () => {
   } = useDisclosure();
   const { user } = useSelector((store) => store.auth);
   const loc = JSON.parse(localStorage.getItem("userLocation"));
+  
   const {
     setShowSearch,
     isOpenLocationModal,
@@ -97,7 +98,7 @@ const Header = () => {
                       {t("newAddress")}
                     </span>
                     <span className="text-[#01ABAB] text-sm md:text-medium inline-block ml-1">
-                      {truncateText(loc.address, isSmallDevice ? 19 : 44)}
+                      {truncateText(loc.address, isSmallDevice ? 19 : 36)}
                     </span>
                   </p>
                 </button>

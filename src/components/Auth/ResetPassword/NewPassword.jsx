@@ -49,7 +49,7 @@ const NewPassword = () => {
     }
   }, [error]);
 
-  const apiErrors = useApiErrorHandling(error);
+  const apiErrors = useApiErrorHandling(error && error?.status != 422 && error);
 
   const handleSubmit = async (values) => {
     await setNewPassword({
@@ -82,11 +82,9 @@ const NewPassword = () => {
             <ApiErrorDisplay apiErrors={apiErrors} className="mx-auto mt-3" />
 
             {/* Custom Error  */}
-            {error && (
+            {error && error?.status == 422 && (
               <div className="mx-auto mt-3 bg-red-50 rounded-lg px-6 py-3 border border-red-300 text-red-700">
-                {error?.status == 422
-                  ? "The link you are trying to validate has been expired."
-                  : t("somethingMissingTryAgain")}
+                The link you are trying to validate has been expired.
               </div>
             )}
 

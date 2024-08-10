@@ -53,8 +53,6 @@ const GoogleMapLocation = ({ location, setSelectedAddress }) => {
     });
   };
 
-  console.log(mapCenter);
-
   return (
     <>
       <div

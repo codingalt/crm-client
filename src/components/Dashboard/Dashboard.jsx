@@ -23,6 +23,7 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 const Dashboard = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { location, isLocationChanged } = useSelector((store) => store.auth);
   const loc = JSON.parse(localStorage.getItem("userLocation"));
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
@@ -44,13 +45,22 @@ const Dashboard = () => {
     isLoading: isLoadingServices,
     error: errorServices,
     refetch: refetchServices,
-  } = useGetTargetedServicesQuery(loc ? loc.city : "", { skip: !isShow });
+  } = useGetTargetedServicesQuery(location ? location.city : "", { skip: !isShow });
   const {
     data: appointments,
     isLoading: isLoadingAppointments,
     error: errorAppointments,
     refetch: refetchAppointments,
-  } = useGetMyBookingsQuery();
+  } = useGetMyBookingsQuery();  
+
+  // Fetch Services again when user changes his location 
+  useEffect(() => {
+    if (isLocationChanged) {
+      setTimeout(() => {
+        refetchServices(location.city);
+      }, 1000);
+    }
+  }, [isLocationChanged]);
 
   // Get User Location
   const [api, contextHolder] = notification.useNotification();

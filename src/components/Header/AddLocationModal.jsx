@@ -10,13 +10,14 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa6";
 import GoogleMapLocation from "./GoogleMapLocation";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserLocation } from "../../services/slices/auth/authSlice";
+import { setLocationChanged, setUserLocation } from "../../services/slices/auth/authSlice";
 import css from "./Header.module.scss";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { useTranslation } from "react-i18next";
 import { DirectionContext } from "../../context/DirectionContext";
+import { geocodeLatLng } from "../../utils/helpers/geoCode";
 
 const AddLocationModal = ({ isOpen, onOpenChange }) => {
   const { t } = useTranslation();
@@ -27,9 +28,9 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
   const dispatch = useDispatch();
   const [resultArr, setResultArr] = useState([]);
   const inputRef = useRef(null);
-  const loc = JSON.parse(localStorage.getItem("userLocation"));
+  const loc = JSON.parse(localStorage.getItem("userLocation"));  
 
-  const handlePlaceChanged = (value) => {
+  const handlePlaceChanged = async(value) => {
     setResultArr([]);
 
     // Initialize the Places Service
@@ -38,16 +39,25 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
     );
 
     // Get details for the selected place
-    service.getDetails({ placeId: value.place_id }, (place, status) => {
+    service.getDetails({ placeId: value.place_id }, async(place, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         const latLng = place.geometry.location;
+        console.log("latlng",latLng);
 
+        // Get City and Country with latlng
+        const res = await geocodeLatLng({
+          lat: latLng.lat(),
+          lng: latLng.lng(),
+        });
+        
         // Set the selected address and location
         setSelectedAddress({
           address: value.description,
           previewAddress: value.description,
           lat: latLng.lat(),
           lng: latLng.lng(),
+          city: res.city,
+          country: res.country
         });
       }
     });
@@ -59,6 +69,9 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
       return;
     }
 
+    // inputRef.current.value = e.target.value;
+    
+
     // eslint-disable-next-line no-undef
     const service = new google.maps.places.AutocompleteService();
     service.getQueryPredictions({ input: e.target.value }, (suggestions) => {
@@ -67,26 +80,43 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
   };
 
   useEffect(() => {
-    if (loc && inputRef.current) {
-      inputRef.current.value = loc.previewAddress;
+    if (location && inputRef.current) {
+      inputRef.current.value = location.previewAddress;
     }
-  }, [loc, isOpen]);
+  }, [isOpen,location]);
 
   useEffect(() => {
     if (selectedAddress) {
+      console.log("selected Address", selectedAddress);
+      
       dispatch(
         setUserLocation({
           previewAddress: selectedAddress.address,
           lat: selectedAddress.lat,
           lng: selectedAddress.lng,
+          city: selectedAddress.city,
+          country: selectedAddress.country,
         })
       );
     }
   }, [selectedAddress]);
 
+  function sendMessageToFlutter(message) {
+    if (
+      window.Location &&
+      typeof window.Location.postMessage === "function"
+    ) {
+      window.Location.postMessage(message);
+    }
+  }
+
+
   const handleConfirm = () => {
     dispatch(setUserLocation(selectedAddress));
     localStorage.setItem("userLocation", JSON.stringify(selectedAddress));
+    
+    sendMessageToFlutter(selectedAddress);
+    dispatch(setLocationChanged());
     onOpenChange(false);
   };
 
@@ -182,7 +212,7 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
             </ModalHeader>
             <ModalBody className="rounded-lg">
               <GoogleMapLocation
-                location={loc}
+                location={location}
                 setSelectedAddress={setSelectedAddress}
               />
             </ModalBody>
