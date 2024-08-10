@@ -51,14 +51,12 @@ const Dashboard = () => {
     isLoading: isLoadingAppointments,
     error: errorAppointments,
     refetch: refetchAppointments,
-  } = useGetMyBookingsQuery();  
-
+  } = useGetMyBookingsQuery();
+  
   // Fetch Services again when user changes his location 
   useEffect(() => {
     if (isLocationChanged) {
-      setTimeout(() => {
         refetchServices(location.city);
-      }, 1000);
     }
   }, [isLocationChanged]);
 

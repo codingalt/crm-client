@@ -33,7 +33,7 @@ export const authSlice = createSlice({
     },
 
     setLocationChanged: (state, action) => {
-      state.isLocationChanged = true;
+      state.isLocationChanged = action.payload;
     },
   },
 });

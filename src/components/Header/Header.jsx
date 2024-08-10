@@ -37,6 +37,9 @@ const Header = () => {
   const { user } = useSelector((store) => store.auth);
   const loc = JSON.parse(localStorage.getItem("userLocation"));
   
+  useEffect(()=>{
+    alert(loc);
+  },[loc]);
   const {
     setShowSearch,
     isOpenLocationModal,

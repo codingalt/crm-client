@@ -23,7 +23,7 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
   const { t } = useTranslation();
   const { direction } = useContext(DirectionContext);
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
-  const { location } = useSelector((store) => store.auth);
+  const { location, isLocationChanged } = useSelector((store) => store.auth);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const dispatch = useDispatch();
   const [resultArr, setResultArr] = useState([]);
@@ -87,7 +87,6 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
 
   useEffect(() => {
     if (selectedAddress) {
-      console.log("selected Address", selectedAddress);
       
       dispatch(
         setUserLocation({
@@ -116,7 +115,7 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
     localStorage.setItem("userLocation", JSON.stringify(selectedAddress));
     
     sendMessageToFlutter(selectedAddress);
-    dispatch(setLocationChanged());
+    dispatch(setLocationChanged(!isLocationChanged));
     onOpenChange(false);
   };
 
