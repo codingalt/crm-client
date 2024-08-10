@@ -26,32 +26,6 @@ const NewPassword = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
-  // Validate Reset Password Link
-  const {
-    isLoading: isLoadingResetLink,
-    isSuccess: isSuccessResetLink,
-    error: errorResetLink,
-  } = useVerifyResetPasswordLinkQuery({ email: email, token: token });
-
-  useEffect(() => {
-    if (errorResetLink) {
-      if (errorResetLink?.status == 410) {
-        setErrorMessage("Link Epired!");
-      } else if (
-        errorResetLink?.status !== 410 ||
-        errorResetLink?.status == "FETCH_ERROR"
-      ) {
-        setErrorMessage(t("somethingWentWrong"));
-      }
-    }
-  }, [errorResetLink]);
-
-  useEffect(() => {
-    if (isSuccessResetLink) {
-      setShow(true);
-    }
-  }, [isSuccessResetLink]);
-
   const initialValues = {
     password: "",
     confirmPass: "",
@@ -65,6 +39,19 @@ const NewPassword = () => {
       navigate("/reset-password/success");
     }
   }, [isSuccess]);
+
+   useEffect(() => {
+     if (error) {
+       if (error?.status == 422) {
+         setErrorMessage("Link Epired!");
+       } else if (
+         error?.status !== 422 ||
+         error?.status == "FETCH_ERROR"
+       ) {
+         setErrorMessage(t("somethingWentWrong"));
+       }
+     }
+   }, [error]);
 
   const apiErrors = useApiErrorHandling(error);
 
@@ -140,6 +127,9 @@ const NewPassword = () => {
 
               {/* Display Errors  */}
               <ApiErrorDisplay apiErrors={apiErrors} className="mx-auto mt-3" />
+
+              {/* Custom Error  */}
+              <div className="mx-auto mt-3 bg-red-100 rounded-lg px-5 py-3 border-red-400 text-red-600">Something went wrong.</div>
 
               <Formik
                 initialValues={initialValues}

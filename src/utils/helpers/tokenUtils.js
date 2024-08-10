@@ -5,11 +5,7 @@ export const setToken = (token) => {
 };
 
 function sendMessageToFlutter(message) {
-  if (window.ReactNativeWebView) {
-    window.ReactNativeWebView.postMessage(message);
-  } else {
-    console.error("ReactNativeWebView is not defined");
-  }
+   window.LogoutEvent.postMessage(message);
 }
 
 export const removeToken = () => {
