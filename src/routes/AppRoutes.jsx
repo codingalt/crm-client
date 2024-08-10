@@ -22,6 +22,10 @@ import ChatPage from "../pages/ChatPage";
 import SearchServicesPageMobile from "../pages/SearchServicesPageMobile";
 import AllServicesPage from "../pages/AllServicesPage";
 import ProfilePage from "../pages/ProfilePage";
+import ResetPasswordPage from "../pages/ResetPasswordPage";
+import CheckEmail from "../components/Auth/ResetPassword/CheckEmail";
+import NewPassword from "../components/Auth/ResetPassword/NewPassword";
+import ResetSuccess from "../components/Auth/ResetPassword/ResetSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -40,8 +44,20 @@ export const router = createBrowserRouter([
         element: <Protected Component={VerificationCode} />,
       },
       {
-        path: "/login",
-        element: <Login />,
+        path: "/forgot-password",
+        element: <ResetPasswordPage />,
+      },
+      {
+        path: "/check-email",
+        element: <CheckEmail />,
+      },
+      {
+        path: "/new-password",
+        element: <NewPassword />,
+      },
+      {
+        path: "/reset-password/success",
+        element: <ResetSuccess />,
       },
       {
         path: "/dashboard",

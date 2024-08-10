@@ -34,7 +34,8 @@ const Header = () => {
     onOpen: onOpenLangModal,
     onOpenChange: onOpenChangeLangModal,
   } = useDisclosure();
-  const { user, location } = useSelector((store) => store.auth);
+  const { user } = useSelector((store) => store.auth);
+  const loc = JSON.parse(localStorage.getItem("userLocation"));
   const {
     setShowSearch,
     isOpenLocationModal,
@@ -51,6 +52,7 @@ const Header = () => {
 
   const handleLogout = () => {
     removeToken();
+    window.LogoutEvent.postMessage();
     window.location.reload(false);
   };
 
@@ -83,20 +85,20 @@ const Header = () => {
             </div>
           </div>
 
-          {location && location?.address && (
+          {loc && loc?.address && (
             <div className={`${css.header_center}`} onClick={onOpenLocationModal}>
               <div className="flex justify-center items-center">
                 <button className="outline-none border-none bg-transparent flex items-center justify-center gap-0 md:gap-1">
                   <div className="md:block hidden">
                     <LocationIcon className="text-[#454545] text-[1.15rem]" />
                   </div>
-                  <IoLocationOutline className="md:hidden text-[#454545] text-[1.16rem]" />
+                  <IoLocationOutline className="md:hidden text-[#454545] text-[1.09rem]" />
                   <p className="text-medium m-0 text-[#454545] font-medium text-ellipsis whitespace-nowrap pr-1">
                     <span className="hidden xl:inline-block">
                       {t("newAddress")}
                     </span>
                     <span className="text-[#01ABAB] text-sm md:text-medium inline-block ml-1">
-                      {truncateText(location.address, isSmallDevice ? 19 : 44)}
+                      {truncateText(loc.address, isSmallDevice ? 19 : 44)}
                     </span>
                   </p>
                 </button>

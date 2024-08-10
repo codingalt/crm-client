@@ -27,7 +27,7 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
           tabList:
             "gap-9 md:gap-14 w-full max-w-xs md:max-w-md relative rounded-none p-0 border-b border-divider",
           cursor: "w-full bg-[#01ABAB]",
-          tab: "max-w-fit px-0 h-12",
+          tab: "max-w-[50%] px-0 h-12",
           tabContent: "group-data-[selected=true]:text-[#01ABAB]",
         }}
       >
@@ -36,7 +36,10 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
           title={
             <div className="flex items-center space-x-2 text-sm md:text-medium">
               <MdUpcoming className="text-[18px] md:text-[23px]" />
-              <span>{t("activeQueues")}</span>
+              <span className="capitalize">
+                {t("active")}{" "}
+                <span className="hidden sm:inline-block">{t("queues")}</span>{" "}
+              </span>
               {data && (
                 <Chip size="sm" variant="faded">
                   {parseInt(data?.active?.length) +
@@ -63,7 +66,10 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
           title={
             <div className="flex items-center space-x-2 text-sm md:text-medium">
               <RiChatHistoryFill className="text-[18px] md:text-[23px]" />
-              <span>{t("queuesHistory")}</span>
+              <span className="capitalize">
+                <span className="hidden sm:inline-block">{t("queues")}</span>{" "}
+                <span>{t("history")}</span>
+              </span>
               {data && (
                 <Chip size="sm" variant="faded">
                   {parseInt(data?.completed?.length)}

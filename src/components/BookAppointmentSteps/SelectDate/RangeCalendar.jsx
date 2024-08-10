@@ -10,9 +10,10 @@ const formatDate = (date) => {
   return `${yyyy}-${mm}-${dd}`;
 };
 
-const Calendar = ({
+const RangeCalendar = ({
   selectedDate,
   setSelectedDate,
+  paginate,
   activeDay,
   setActiveDay,
   tempDateSelected,
@@ -35,10 +36,12 @@ const Calendar = ({
     t("december"),
   ];
 
-  const today = new Date();
+  const [today] = useState(new Date());
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
   const [days, setDays] = useState([]);
+  const [rangeStart, setRangeStart] = useState(null);
+  const [rangeEnd, setRangeEnd] = useState(null);
 
   useEffect(() => {
     if (selectedDate) {
@@ -46,18 +49,16 @@ const Calendar = ({
       setActiveDay(choosenDate.getDate());
       setMonth(choosenDate.getMonth());
       setYear(choosenDate.getFullYear());
-    } else {
-      // Set today's date as the default active day
-      setActiveDay(today.getDate());
     }
-  }, [selectedDate]);
 
-  useEffect(() => {
     if (month !== today.getMonth() || year !== today.getFullYear()) {
       if (!tempDateSelected) {
-        setActiveDay(null); // Clear active day when changing months
+        setActiveDay(null);
       }
     }
+  }, [selectedDate, tempDateSelected]);
+
+  useEffect(() => {
     initCalendar();
   }, [month, year]);
 
@@ -107,29 +108,37 @@ const Calendar = ({
         // Clicked on a date from the previous month
         setMonth((prev) => (prev === 0 ? 11 : prev - 1));
         setYear((prev) => (month === 0 ? prev - 1 : prev));
-        setActiveDay(day.date);
-        setSelectedDate(formatDate(new Date(year, month - 1, day.date)));
-        setTempDateSelected(formatDate(new Date(year, month - 1, day.date)));
+        setActiveDay(null);
       } else {
         // Clicked on a date from the next month
         setMonth((prev) => (prev === 11 ? 0 : prev + 1));
         setYear((prev) => (month === 11 ? prev + 1 : prev));
-        setActiveDay(day.date);
-        setSelectedDate(formatDate(new Date(year, month + 1, day.date)));
-        setTempDateSelected(formatDate(new Date(year, month + 1, day.date)));
+        setActiveDay(null);
       }
-    } else {
-      // Clicked on a date from the current month
-      setSelectedDate(formatDate(newDate));
-      setTempDateSelected(formatDate(newDate));
-      setActiveDay(day.date);
     }
+
+    // Handle range selection logic
+    if (!rangeStart || (rangeStart && rangeEnd)) {
+      setRangeStart(newDate);
+      setRangeEnd(null);
+    } else if (newDate < rangeStart) {
+      setRangeEnd(rangeStart);
+      setRangeStart(newDate);
+    } else {
+      setRangeEnd(newDate);
+    }
+
+    setSelectedDate(formatDate(newDate));
+    setTempDateSelected(formatDate(newDate));
+    setActiveDay(day.date);
   };
 
   const prevMonth = () => {
-    setMonth((prev) => (prev === 0 ? 11 : prev - 1));
-    setYear((prev) => (month === 0 ? prev - 1 : prev));
-    setActiveDay(null);
+    if (month > today.getMonth() || year > today.getFullYear()) {
+      setMonth((prev) => (prev === 0 ? 11 : prev - 1));
+      setYear((prev) => (month === 0 ? prev - 1 : prev));
+      setActiveDay(null);
+    }
   };
 
   const nextMonth = () => {
@@ -138,23 +147,26 @@ const Calendar = ({
     setActiveDay(null);
   };
 
+  const isInRange = (day) => {
+    if (!rangeStart || !rangeEnd) return false;
+    const date = new Date(year, month, day.date);
+    return date >= rangeStart && date <= rangeEnd;
+  };
+
   const isPrevMonthDisabled =
-    month === today.getMonth() && year === today.getFullYear();
+    month <= today.getMonth() && year <= today.getFullYear();
 
   return (
     <div className="calendar border shadow-sm">
       <div className="month">
         <div
-          onClick={isPrevMonthDisabled ? null : prevMonth}
-          className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full transition-all flex items-center justify-center ${
-            isPrevMonthDisabled
-              ? "cursor-not-allowed opacity-50"
-              : "cursor-pointer hover:bg-slate-50 hover:text-default-800"
+          onClick={!isPrevMonthDisabled ? prevMonth : undefined}
+          className={`w-9 h-9 sm:w-10 sm:h-10 cursor-pointer rounded-full transition-all flex items-center justify-center hover:bg-slate-50 hover:text-default-800 ${
+            isPrevMonthDisabled ? "disabled" : ""
           }`}
         >
-          <FaChevronLeft />
+          <FaChevronLeft className="cursor-pointer" />
         </div>
-
         <div className="date">
           {months[month]} {year}
         </div>
@@ -166,23 +178,19 @@ const Calendar = ({
         </div>
       </div>
       <div className="weekdays">
-        <div>{t("sun")}</div>
-        <div>{t("mon")}</div>
-        <div>{t("tue")}</div>
-        <div>{t("wed")}</div>
-        <div>{t("thu")}</div>
-        <div>{t("fri")}</div>
-        <div>{t("sat")}</div>
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
       </div>
       <div className="days">
         {days.map((day, index) => (
           <div
             key={index}
-            className={`day ${
-              day.past
-                ? "disabled prev-date cursor-not-allowed"
-                : "cursor-pointer"
-            }`}
+            className={`day ${isInRange(day) ? "in-range" : ""}`}
             onClick={() => handleDayClick(day)}
           >
             <p
@@ -190,7 +198,7 @@ const Calendar = ({
                 day.date === activeDay && day.currentMonth && !day.past
                   ? "active"
                   : ""
-              } ${day.past ? "disabled prev-date cursor-not-allowed" : ""}`}
+              } ${day.past ? "disabled prev-date" : ""}`}
             >
               {day.date}
             </p>
@@ -201,4 +209,4 @@ const Calendar = ({
   );
 };
 
-export default Calendar;
+export default RangeCalendar;

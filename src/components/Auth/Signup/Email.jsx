@@ -245,7 +245,7 @@ const Email = () => {
 
                 <p className="text-sm text-center font-medium text-default-600 mt-10">
                   <span>{t("alreadyHaveAccount")}</span>{" "}
-                  <NavLink className="text-blue-400" to={"/"}>
+                  <NavLink className="text-blue-400 underline" to={"/"}>
                     {t("login")}
                   </NavLink>
                 </p>

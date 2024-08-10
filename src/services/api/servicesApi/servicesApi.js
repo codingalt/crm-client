@@ -29,6 +29,10 @@ export const servicesApi = createApi({
         `customer/searchServices?search=${query}&city=${city}`,
     }),
 
+    getServicesBySubCategoryId: builder.query({
+      query: (id) => `customer/servicesBySubCategory/${id}`,
+    }),
+
     // registerUser: builder.mutation({
     //   query: (data) => ({
     //     url: "register",
@@ -40,4 +44,9 @@ export const servicesApi = createApi({
   }),
 });
 
-export const { useGetServiceDetailsByIdQuery, useSearchServicesQuery, useGetTargetedServicesQuery } = servicesApi;
+export const {
+  useGetServiceDetailsByIdQuery,
+  useSearchServicesQuery,
+  useGetTargetedServicesQuery,
+  useGetServicesBySubCategoryIdQuery
+} = servicesApi;

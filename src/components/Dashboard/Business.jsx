@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import css from "./Dashboard.module.scss";
 import brand from "../../assets/brand.png";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { Button, Skeleton } from "@nextui-org/react";
 import { truncateText } from "../../utils/helpers/helpers";
@@ -69,7 +69,7 @@ const Business = ({ data, isLoading, error, refetchBusinesses }) => {
   }, [isSuccessChatWithProvider, messagesData]);
 
   useEffect(() => {
-    if(errorChatWithProvider){
+    if (errorChatWithProvider) {
       setChatWithOwner(null);
     }
   }, [errorChatWithProvider]);
@@ -77,7 +77,7 @@ const Business = ({ data, isLoading, error, refetchBusinesses }) => {
   return (
     <>
       <div
-        className={`${css.business} lg:min-h-40 grid grid-cols-1 md:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5 gap-y-2`}
+        className={`${css.business} lg:min-h-40 grid grid-cols-1 md:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5 gap-y-4`}
       >
         {isLoading
           ? Array.from({ length: value }).map((_, index) => (
@@ -86,43 +86,55 @@ const Business = ({ data, isLoading, error, refetchBusinesses }) => {
               </Skeleton>
             ))
           : data?.map((item) => (
-              <div
+              <NavLink
                 key={item.id}
-                className={`${css.card} bg-[#E1F4E2] bg-opacity-50 shadow`}
-                onClick={() => navigate(`/businesses/${item.name}/${item.id}`)}
+                to={`/businesses/${item.name}/${item.id}`}
+                preventScrollReset
               >
-                <div className={css.image}>
-                  <ImagePlaceholder src={brand} radius="5px" />
-                </div>
-                <div className={css.data}>
-                  <div className={css.name}>{item.name}</div>
-                  <div className={css.address}>
-                    <MdLocationOn />
-                    <span>
-                      {truncateText(item.address, isSmallDevice ? 24 : 40)}
-                    </span>
-                  </div>
-                  <div className={css.rating}>
-                    <FaStar color="#FFA534" />
-                    <p>
-                      {item.customer_rating_average}/5{" "}
-                      <span className="text-xs text-default-500">({item.customer_rating_count})</span>
-                    </p>
-                    <Button
-                      className="bg-transparent text-[#00AEAD] font-medium"
-                      size="sm"
-                      radius="sm"
-                      startContent={
-                        <BsChatLeftDots className="hidden md:block text-medium" />
+                <div
+                  className={`${css.card} bg-[#E1F4E2] bg-opacity-50 shadow`}
+                >
+                  <div className={css.image}>
+                    <ImagePlaceholder
+                      src={
+                        import.meta.env.VITE_BUSINESS_PROFILE +
+                        item.profile_picture
                       }
-                      isLoading={isLoadingChatWithProvider}
-                      onClick={() => handleChatWithServiceProvider(item)}
-                    >
-                      {t("chatWithBusiness")}
-                    </Button>
+                      radius="5px"
+                    />
+                  </div>
+                  <div className={css.data}>
+                    <div className={css.name}>{item.name}</div>
+                    <div className={css.address}>
+                      <MdLocationOn />
+                      <span>
+                        {truncateText(item.address, isSmallDevice ? 24 : 33)}
+                      </span>
+                    </div>
+                    <div className={css.rating}>
+                      <FaStar color="#FFA534" />
+                      <p>
+                        {item.customer_rating_average}/5{" "}
+                        <span className="text-xs text-default-500">
+                          ({item.customer_rating_count})
+                        </span>
+                      </p>
+                      <Button
+                        className="bg-transparent text-[#00AEAD] font-medium"
+                        size="sm"
+                        radius="sm"
+                        startContent={
+                          <BsChatLeftDots className="hidden md:block text-medium" />
+                        }
+                        isLoading={isLoadingChatWithProvider}
+                        onClick={() => handleChatWithServiceProvider(item)}
+                      >
+                        {t("chatWithBusiness")}
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </NavLink>
             ))}
 
         {/* Show Error If data fails to load  */}

@@ -52,3 +52,20 @@ export const updateProfileSchema = Yup.object({
     .required("Gender is Required"),
   address: Yup.string().max(255, "Maximun characters are 255"),
 });
+
+export const resetPasswordSchema = Yup.object({
+  email: Yup.string()
+    .max(255, "Maximun characters are 255")
+    .email("Please Enter a valid email address")
+    .required("Email is Required"),
+});
+
+export const NewPasswordSchema = Yup.object({
+  password: Yup.string()
+    .min(6)
+    .max(255, "Maximun characters are 255")
+    .required("Password is Required"),
+  confirmPass: Yup.string()
+    .required("Confirm Password is required")
+    .oneOf([Yup.ref("password")], "Password not matched"),
+});

@@ -31,7 +31,7 @@ const SearchSuggestion = ({
 
   const handleNavigate = (item) => {
     setShowSearch(false);
-    navigate(`/services/${item.name}/${item.id}`);
+    navigate(`/service/${item.name}/${item.id}`);
   };
 
   return (

@@ -28,7 +28,7 @@
     .inner {
       margin-bottom: 1rem;
       h3 {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         font-weight: 500;
         color: #000;
         margin-bottom: 0.8rem;
@@ -61,12 +61,14 @@
 
       .cardBody {
         width: 100%;
-        padding: .8rem 1.3rem;
+        padding: 0.95rem 1.3rem;
         padding-bottom: 1.2rem;
 
         p {
-          font-size: 1.26rem;
+          font-size: 1.2rem;
           font-weight: 600;
+          width: 286px;
+          @include limitText(310px);
         }
       }
 
@@ -108,7 +110,7 @@
 
       .item {
         width: 100%;
-        margin-bottom: .95rem;
+        margin-bottom: 0.95rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -141,13 +143,39 @@
         margin: 1rem 0;
         margin-bottom: 5rem;
 
-        .card {
+        .inner {
+          h3 {
+            font-size: 1.08rem;
+            margin-bottom: 0.7rem;
+            margin-left: 1px;
+          }
+        }
 
-          .cardBody {
-            padding: .1rem 1.3rem;
-            padding-bottom: 1rem;
+        .card {
+          .cardHeader {
+            .cardTitle {
+              padding: 3px 0px;
+            }
           }
 
+          .cardBody {
+            padding: 0.1rem 1.1rem;
+            padding-bottom: 1rem;
+
+            p {
+              font-size: 1.05rem;
+              font-weight: 500;
+               @include limitText(290px);
+            }
+          }
+
+          .cardFooter {
+            padding: 1rem 1.1rem;
+            p {
+              font-size: 1rem;
+              font-weight: 400;
+            }
+          }
         }
       }
 

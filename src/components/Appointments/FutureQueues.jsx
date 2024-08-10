@@ -10,7 +10,7 @@ const FutureQueues = ({ active, upComing }) => {
   return (
     <div className="w-full mt-6">
       <div
-        className={`${css.queues} grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5 gap-y-4 md:gap-y-5`}
+        className={`${css.queues} grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-x-7 gap-y-4 md:gap-y-7`}
       >
         {/* Active Appointments  */}
         {active?.map((item) => (
@@ -39,14 +39,14 @@ const FutureQueues = ({ active, upComing }) => {
           </div>
         ))}
 
-        {/* Pending Appointments  */}
+        {/* Upcoming Appointments  */}
         {upComing?.map((item) => (
           <div className={css.inner} key={item.id}>
             <h3>{moment(item.appointment_date).format("D MMMM, hh:mm A")}</h3>
             <div className={css.card}>
               <div className={css.cardHeader}>
                 <div className={css.cardTitle}>
-                  <div className="bg-[#ECF3F9] font-medium text-tiny px-3 py-1 rounded-full">
+                  <div className="bg-blue-200 font-medium text-tiny px-3 py-1 rounded-full">
                     {t("upcoming")}
                   </div>
                 </div>

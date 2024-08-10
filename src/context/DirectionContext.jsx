@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import i18n from "../i18n";
 
-const rtlLanguages = ["pk", "he"];
+const rtlLanguages = ["he"];
 
 export const DirectionContext = createContext();
 
@@ -15,6 +15,7 @@ export const DirectionProvider = ({ children }) => {
     const newLanguage = language;
     i18n.changeLanguage(newLanguage);
     localStorage.setItem("language", newLanguage);
+    window.Language.postMessage(newLanguage);
     window.location.reload();
   };
 

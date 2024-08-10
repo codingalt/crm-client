@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./SelectDate.module.scss";
 import { Button } from "@nextui-org/react";
 import Calendar from "./Calendar";
 import { useTranslation } from "react-i18next";
+import { toastError } from "../../Toast/Toast";
 
-const SelectDate = ({ paginate, selectedDate, setSelectedDate }) => {
+const SelectDate = ({
+  paginate,
+  selectedDate,
+  setSelectedDate,
+  tempDateSelected,
+  setTempDateSelected,
+  activeDay, 
+  setActiveDay
+}) => {
   const { t } = useTranslation();
+
   const handleNext = () => {
+    if (!selectedDate || !activeDay) {
+      toastError("Please select appointment date");
+      return;
+    }
+
     paginate(1);
   };
 
@@ -28,6 +43,11 @@ const SelectDate = ({ paginate, selectedDate, setSelectedDate }) => {
         <Calendar
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
+          paginate={paginate}
+          activeDay={activeDay}
+          setActiveDay={setActiveDay}
+          tempDateSelected={tempDateSelected}
+          setTempDateSelected={setTempDateSelected}
         />
       </div>
 

@@ -68,11 +68,6 @@ const Services2 = ({ data, isLoading, error, refetchServices }) => {
             <div className={css.title}>{truncateText(item.name, 22)}</div>
           </Tooltip>
           <div className={css.rating}>
-            {/* <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
-            <FaRegStar /> */}
             <Rating value={item.rating} readOnly size="small" sx={{fontSize:"1.1rem"}} />
           </div>
           <div className={css.detail}>
@@ -100,7 +95,8 @@ const Services2 = ({ data, isLoading, error, refetchServices }) => {
                 thousandSeparator=","
                 thousandsGroupStyle="lakh"
               />{" "}
-              {t("get")}
+              {/* {t("get")} */}
+              NIS
             </span>
           </div>
         </div>

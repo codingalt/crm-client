@@ -53,6 +53,8 @@ const GoogleMapLocation = ({ location, setSelectedAddress }) => {
     });
   };
 
+  console.log(mapCenter);
+
   return (
     <>
       <div
@@ -79,10 +81,10 @@ const GoogleMapLocation = ({ location, setSelectedAddress }) => {
             onLoad={(map) => {
               setMapRef(map);
             }}
-            onIdle={() => setMapCenter(mapRef.getCenter())}
+            onIdle={() => mapRef && setMapCenter(mapRef.getCenter())}
             onDragEnd={handleDragEnd}
           >
-            <Marker position={mapCenter} icon={pin} />
+            {mapCenter && <Marker position={mapCenter} icon={pin} />}
 
             {isConfirmButton && (
               <div

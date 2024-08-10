@@ -1,14 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import css from "./Dashboard.module.scss";
 import { useNavigate } from "react-router-dom";
 import { Button, Skeleton } from "@nextui-org/react";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import ImageComponent from "../ui/Image/ImageComponent";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const Categories = ({ data, isLoading, error, refetchCategories }) => {
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
   const [visibleCategories, setVisibleCategories] = useState(data);
+  const containerRef = useRef(null);
+  const [showNextButton, setShowNextButton] = useState(false);
+  const [showBackButton, setShowBackButton] = useState(false);
+
+    useEffect(() => {
+      checkButtonVisibility();
+    }, [visibleCategories]);
+
+    const checkButtonVisibility = () => {
+      const container = containerRef.current;
+      if (container) {
+        setShowNextButton(container.scrollWidth > container.clientWidth);
+        setShowBackButton(container.scrollLeft > 0);
+      }
+    };
+
+    const handleNext = () => {
+      const container = containerRef.current;
+      container.scrollBy({ left: 200, behavior: "smooth" });
+      setTimeout(checkButtonVisibility, 100); 
+    };
+
+    const handleBack = () => {
+      const container = containerRef.current;
+      container.scrollBy({ left: -200, behavior: "smooth" });
+      setTimeout(checkButtonVisibility, 100); 
+    };
 
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const isMediumDevice = useMediaQuery(
@@ -52,10 +80,12 @@ const Categories = ({ data, isLoading, error, refetchCategories }) => {
 
   return (
     <>
-      <div className="lg:overflow-x-auto lg:scroll-x lg:scrollbar-hide lg:snap-mandatory lg:snap-x lg:scroll-smooth">
+      <div className="relative lg:overflow-x-auto lg:scroll-x lg:scrollbar-hide lg:snap-mandatory lg:snap-x lg:scroll-smooth">
         <div
-          className={`${css.categories} w-full scrollbar-hide`}
+          ref={containerRef}
+          className={`${css.categories} overflow-hidden w-full scrollbar-hide`}
           style={error ? { height: "auto", minHeight: 0 } : {}}
+          onScroll={checkButtonVisibility}
         >
           {isLoading
             ? Array.from({ length: value }).map((_, index) => (
@@ -99,6 +129,32 @@ const Categories = ({ data, isLoading, error, refetchCategories }) => {
                 </div>
               ))}
         </div>
+
+        {/* Next Button */}
+        {showNextButton && (
+          <div className="hidden lg:block absolute right-0.5 top-1/3 mt-0 z-30">
+            <button
+              className="outline-none bg-white border shadow-2xl rounded-full w-11 h-11 flex items-center justify-center text-xl text-default-600"
+              type="button"
+              onClick={handleNext}
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+        )}
+
+        {/* Back Button */}
+        {showBackButton && (
+          <div className="hidden lg:block absolute left-0.5 top-1/3 mt-0 z-10">
+            <button
+              className="outline-none bg-white border shadow-2xl rounded-full w-11 h-11 flex items-center justify-center text-xl text-default-600"
+              type="button"
+              onClick={handleBack}
+            >
+              <FaChevronLeft />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Show Error If data fails to load  */}

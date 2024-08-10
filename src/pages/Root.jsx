@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import ScrollRestore from "../components/ScrollRestore/ScrollRestore";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import "../styles/global.scss";
 import { useDispatch } from "react-redux";
 import { useJsApiLoader } from "@react-google-maps/api";
@@ -33,7 +32,6 @@ const Root = () => {
     <>
       <wc-toast theme="light"></wc-toast>
       <div className="App w-full h-full" dir={direction}>
-        <ScrollRestore />
         <Outlet />
       </div>
     </>

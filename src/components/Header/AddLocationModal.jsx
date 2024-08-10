@@ -67,10 +67,10 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
   };
 
   useEffect(() => {
-    if (location && inputRef.current) {
-      inputRef.current.value = location.previewAddress;
+    if (loc && inputRef.current) {
+      inputRef.current.value = loc.previewAddress;
     }
-  }, [location, isOpen]);
+  }, [loc, isOpen]);
 
   useEffect(() => {
     if (selectedAddress) {
@@ -182,7 +182,7 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
             </ModalHeader>
             <ModalBody className="rounded-lg">
               <GoogleMapLocation
-                location={location}
+                location={loc}
                 setSelectedAddress={setSelectedAddress}
               />
             </ModalBody>

@@ -14,18 +14,29 @@ const data = [
   { id: 3, name: "Newest arrivals" },
 ];
 
-const SortRow = () => {
+const SortRow = ({ dataLength, isLoading, error }) => {
   const [selected, setSelected] = useState(data[0]);
 
   return (
     <div className="w-full flex-col-reverse sm:flex-row flex items-start sm:items-center justify-between gap-8 sm:gap-0 mb-4 sm:mb-8 sm:mt-1">
-      <p className="text-default-500 sm:text-lg">900+ results</p>
+      <div>
+        {dataLength && (
+          <p className="text-default-500 sm:text-lg">{dataLength}+ results</p>
+        )}
+      </div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
         <p className="text-default-500">Sort by:</p>
         <div className="z-20">
-          <Listbox value={selected} onChange={setSelected}>
+          <Listbox
+            disabled={isLoading || error}
+            value={selected}
+            onChange={setSelected}
+          >
             <div className="relative w-80 sm:w-60">
-              <ListboxButton className="relative w-full cursor-default rounded-md bg-white py-2.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 sm:text-medium sm:leading-6">
+              <ListboxButton
+                disabled={isLoading || error}
+                className="relative w-full cursor-default rounded-md bg-white py-2.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 sm:text-medium sm:leading-6"
+              >
                 <span className="flex items-center">
                   <span className="ml-3 block truncate text-gray-900">
                     {selected.name}

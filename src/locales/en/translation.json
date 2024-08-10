@@ -36,6 +36,21 @@
   "verificationCodeSent": "The verification code is sent to the number",
   "resendCode": "Resend Code",
 
+
+  "noWorriesText": "No worries, we'll send you reset instructions.",
+  "resetPassword": "Reset Password",
+  "backToLogin": "Back to login",
+  "please": "Please",
+  "checkEmail": "Check your Email",
+  "sentResetLinkText": "We've sent a password reset link to your email address. Follow the link in the email to reset your password.",
+  "youCanCloseThisPage": "You can now Close this Page",
+  "somethingMissingTryAgain": "Something's missing. Please try again later.",
+  "setNewPassword": "Set a New Password",
+  "allDone": "All done!",
+  "yourPasswordReset": "Your password has been reset. You can now log in to your account.",
+  "continueToLogin": "Continue to Login",
+
+
   "search": "Search",
   "searchServices": "Search Services...",
   "newAddress": "New address",

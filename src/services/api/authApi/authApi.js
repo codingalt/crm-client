@@ -72,6 +72,27 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
+
+    resetPasswordSendLink: builder.mutation({
+      query: (data) => ({
+        url: "sendResetLinkEmail",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    verifyResetPasswordLink: builder.query({
+      query: (email, token) =>
+        `verifyResetPasswordLink?email=${email}&token=${token}`,
+    }),
+
+    setNewPassword: builder.mutation({
+      query: (data) => ({
+        url: "resetPassword",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -82,5 +103,8 @@ export const {
   useValidateCodeMutation,
   useReSendVerificationCodeMutation,
   useStoreBusinessInformationMutation,
-  useMarkNotiAsReadMutation
+  useMarkNotiAsReadMutation,
+  useResetPasswordSendLinkMutation,
+  useSetNewPasswordMutation,
+  useVerifyResetPasswordLinkQuery,
 } = authApi;

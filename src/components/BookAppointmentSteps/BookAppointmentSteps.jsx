@@ -87,6 +87,8 @@ const BookAppointmentSteps = () => {
   );
   const [selectedDate, setSelectedDate] = useState(formatDateInitial(selected));
   const [selectedTime, setSelectedTime] = useState(dayjs(new Date()));
+  const [tempDateSelected, setTempDateSelected] = useState(null);
+  const [activeDay, setActiveDay] = useState(null);
   const [isConfirmPayment, setIsConfirmPayment] = useState(null);
   const [availableTimeMsg, setAvailableTimeMsg] = useState(null);
   const [totalPages, setTotalPages] = useState(4);
@@ -219,6 +221,10 @@ const BookAppointmentSteps = () => {
       paginate={paginate}
       selectedDate={selectedDate}
       setSelectedDate={setSelectedDate}
+      tempDateSelected={tempDateSelected}
+      setTempDateSelected={setTempDateSelected}
+      activeDay={activeDay}
+      setActiveDay={setActiveDay}
     />,
     <SelectTime
       paginate={paginate}

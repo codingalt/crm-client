@@ -11,15 +11,17 @@ import { PusherProvider } from './context/PusherContext.jsx';
 import { MainProvider } from './context/MainContext.jsx';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <DirectionProvider>
-      <MainProvider>
-        <PusherProvider>
-          <NextUIProvider>
-            <RouterProvider router={router} />
-          </NextUIProvider>
-        </PusherProvider>
-      </MainProvider>
-    </DirectionProvider>
-  </Provider>
+  <React.StrictMode> 
+    <Provider store={store}>
+      <DirectionProvider>
+        <MainProvider>
+          <PusherProvider>
+            <NextUIProvider>
+              <RouterProvider router={router} />
+            </NextUIProvider>
+          </PusherProvider>
+        </MainProvider>
+      </DirectionProvider>
+    </Provider>
+  </React.StrictMode>
 );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import css from "./Dashboard.module.scss";
 import Categories from "./Categories";
 import Appointments from "./Appointments";
@@ -17,12 +17,22 @@ import { notification, Space } from "antd";
 import { Button } from "@nextui-org/react";
 import { geocodeLatLng } from "../../utils/helpers/geoCode";
 import { useGetMyBookingsQuery } from "../../services/api/businessProfileApi/businessProfileApi";
+import ClipSpinner from "../Loader/ClipSpinner";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 const Dashboard = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { location } = useSelector((store) => store.auth);
-  const { data, isLoading, error: errorCategories, refetch: refetchCategories } = useGetGlobalCategoriesQuery();
+  const loc = JSON.parse(localStorage.getItem("userLocation"));
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+
+  const [isShow, setIsShow] = useState(loc ? true : false);
+  const {
+    data,
+    isLoading,
+    error: errorCategories,
+    refetch: refetchCategories,
+  } = useGetGlobalCategoriesQuery();
   const {
     data: businesses,
     isLoading: isLoadingBusinesses,
@@ -34,33 +44,22 @@ const Dashboard = () => {
     isLoading: isLoadingServices,
     error: errorServices,
     refetch: refetchServices,
-  } = useGetTargetedServicesQuery("Multan", { skip: !location });
-  const { data: appointments, isLoading: isLoadingAppointments, error: errorAppointments, refetch: refetchAppointments } = useGetMyBookingsQuery();
+  } = useGetTargetedServicesQuery(loc ? loc.city : "", { skip: !isShow });
+  const {
+    data: appointments,
+    isLoading: isLoadingAppointments,
+    error: errorAppointments,
+    refetch: refetchAppointments,
+  } = useGetMyBookingsQuery();
 
   // Get User Location
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = () => {
     const key = `open${Date.now()}`;
-    const btn = (
-      <Space>
-        <Button
-          className="bg-transparent border"
-          size="small"
-          variant="bordered"
-          onClick={() => {
-            api.destroy();
-            requestLocation();
-          }}
-        >
-          Allow Location
-        </Button>
-      </Space>
-    );
     api.open({
       message: "We're having trouble finding you",
       description: "Please check your connection and location access.",
-      btn,
       key,
       placement: "bottom",
       type: "error",
@@ -69,7 +68,14 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    requestLocation();
+    // If Location Exist in locastorage then Continue
+    if (loc) {
+      return;
+    }
+    // Else Find User Location
+    else {
+      requestLocation();
+    }
   }, []);
 
   const handleGetLocationByLatLng = async (latitude, longitude) => {
@@ -92,6 +98,8 @@ const Dashboard = () => {
           previewAddress: res.address,
         })
       );
+
+      setIsShow(true);
     }
   };
 
@@ -100,21 +108,17 @@ const Dashboard = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           api.destroy();
-          const loc = JSON.parse(localStorage.getItem("userLocation"));
-          // If Location Exist in locastorage then set location to redux slice
-          if (loc) {
-            return;
-          } else {
-            // Else Find User Location
-            handleGetLocationByLatLng(
-              position.coords.latitude,
-              position.coords.longitude
-            );
-          }
+
+          handleGetLocationByLatLng(
+            position.coords.latitude,
+            position.coords.longitude
+          );
         },
         (error) => {
+
           if (error.code === error.PERMISSION_DENIED) {
-            // openNotification();
+            openNotification();
+            setIsShow(true);
           }
         }
       );
@@ -126,40 +130,51 @@ const Dashboard = () => {
   return (
     <>
       {contextHolder}
-      <div className={css.dashboardDetails}>
-        <div className={css.top}>
-          <h1>{t("categories")}</h1>
+      {!isShow ? (
+        <div className="w-full h-[85vh] overflow-hidden bg-white flex items-center justify-center">
+          <ClipSpinner size={isSmallDevice ? 36 : 40} />
         </div>
+      ) : (
+        <div className={css.dashboardDetails}>
+          <div className={css.top}>
+            <h1>{t("categories")}</h1>
+          </div>
 
-        <Categories
-          data={data?.categories}
-          isLoading={isLoading}
-          error={errorCategories}
-          refetchCategories={refetchCategories}
-        />
+          <Categories
+            data={data?.categories}
+            isLoading={isLoading}
+            error={errorCategories}
+            refetchCategories={refetchCategories}
+          />
 
-        <div className={css.heading}>
-          <h1>{t("services")}</h1>
+          <div className={css.heading}>
+            <h1>{t("services")}</h1>
+          </div>
+          <Services2
+            data={services?.services}
+            isLoading={isLoadingServices}
+            error={errorServices}
+            refetchServices={refetchServices}
+          />
+
+          <Appointments
+            data={appointments}
+            isLoading={isLoadingAppointments}
+            error={errorAppointments}
+            refetchAppointments={refetchAppointments}
+          />
+
+          <div className={css.heading}>
+            <h1>{t("businesses")}</h1>
+          </div>
+          <Business
+            data={businesses?.businesses}
+            isLoading={isLoadingBusinesses}
+            error={errorBusinesses}
+            refetchBusinesses={refetchBusinesses}
+          />
         </div>
-        <Services2
-          data={services?.services}
-          isLoading={isLoadingServices}
-          error={errorServices}
-          refetchServices={refetchServices}
-        />
-
-        <Appointments data={appointments} isLoading={isLoadingAppointments} error={errorAppointments} refetchAppointments={refetchAppointments} />
-
-        <div className={css.heading}>
-          <h1>{t("businesses")}</h1>
-        </div>
-        <Business
-          data={businesses?.businesses}
-          isLoading={isLoadingBusinesses}
-          error={errorBusinesses}
-          refetchBusinesses={refetchBusinesses}
-        />
-      </div>
+      )}
     </>
   );
 };

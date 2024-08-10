@@ -10,7 +10,7 @@ const ImagePlaceholder = ({
   height = "100%",
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [isError, setIsError] = useState(false);  
+  const [isError, setIsError] = useState(false);    
 
   useEffect(() => {
     const img = new Image();

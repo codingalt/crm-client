@@ -59,7 +59,7 @@ const SearchServices = () => {
     ) {
       const emptyDataTimeout = setTimeout(() => {
         setShowEmptyData(true);
-      }, 300); // Delay before showing EmptyData component
+      }, 100); // Delay before showing EmptyData component
 
       return () => clearTimeout(emptyDataTimeout);
     }
