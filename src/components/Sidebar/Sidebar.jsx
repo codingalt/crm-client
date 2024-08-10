@@ -28,7 +28,6 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
 
   const handleLogout = () => {
     removeToken();
-    window.LogoutEvent.postMessage();
     window.location.reload(false);
   };
 

@@ -52,7 +52,6 @@ const Header = () => {
 
   const handleLogout = () => {
     removeToken();
-    window.LogoutEvent.postMessage();
     window.location.reload(false);
   };
 
