@@ -5,7 +5,12 @@ export const setToken = (token) => {
 };
 
 function sendMessageToFlutter(message) {
-   window.LogoutEvent.postMessage(message);
+  if (
+    window.LogoutEvent &&
+    typeof window.LogoutEvent.postMessage === "function"
+  ) {
+    window.LogoutEvent.postMessage(message);
+  }
 }
 
 export const removeToken = () => {

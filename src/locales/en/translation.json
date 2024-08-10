@@ -49,6 +49,7 @@
   "allDone": "All done!",
   "yourPasswordReset": "Your password has been reset. You can now log in to your account.",
   "continueToLogin": "Continue to Login",
+  "linkExpiredText": "The link you are trying to validate has been expired.",
 
 
   "search": "Search",
