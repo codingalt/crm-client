@@ -1,18 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import css from "./Sidebar.module.scss";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Grid, Tooltip } from "@mui/material";
 import { TbLogout2 } from "react-icons/tb";
-import { AiFillHome } from "react-icons/ai";
 import useClickOutside from "../../hooks/useClickOutside";
-import { FaUser } from "react-icons/fa";
-import { IoMdListBox } from "react-icons/io";
-import { IoNotificationsSharp } from "react-icons/io5";
 import { Badge } from "@nextui-org/react";
 import { useSelector } from "react-redux";
-import { IoChatboxEllipses } from "react-icons/io5";
 import { removeToken } from "../../utils/helpers/tokenUtils";
 import { useTranslation } from "react-i18next";
+import { Bell, ClipboardList, House, Mail, CircleUser } from "lucide-react";
 
 const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
   const { t } = useTranslation();
@@ -58,12 +54,12 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
                       pathname.match("/dashboard") ? css.activeMenuLi : ""
                     }
                   >
-                    <AiFillHome />
+                    <House />
                   </NavLink>
                 </li>
               </Tooltip>
             </Grid>
-            
+
             <Grid item>
               <Tooltip title={t("appointments")} placement="right-end">
                 <li className="sidebar-li">
@@ -73,7 +69,7 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
                       pathname.match("/appointments") ? css.activeMenuLi : ""
                     }
                   >
-                    <IoMdListBox />
+                    <ClipboardList />
                   </NavLink>
                 </li>
               </Tooltip>
@@ -95,10 +91,10 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
                         isInvisible={!user}
                         shape="circle"
                       >
-                        <IoNotificationsSharp />
+                        <Bell />
                       </Badge>
                     ) : (
-                      <IoNotificationsSharp />
+                      <Bell />
                     )}
                   </NavLink>
                 </li>
@@ -106,13 +102,13 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
             </Grid>
 
             <Grid item>
-              <Tooltip title={t("chat")} placement="right-end">
+              <Tooltip title={t("chats")} placement="right-end">
                 <li className="sidebar-li">
                   <NavLink
                     to={"/chat"}
                     className={pathname.match("/chat") ? css.activeMenuLi : ""}
                   >
-                    <IoChatboxEllipses />
+                    <Mail />
                   </NavLink>
                 </li>
               </Tooltip>
@@ -127,7 +123,7 @@ const Sidebar = ({ activeSidebar, setActiveSidebar }) => {
                       pathname.match("/profile") ? css.activeMenuLi : ""
                     }
                   >
-                    <FaUser />
+                    <CircleUser />
                   </NavLink>
                 </li>
               </Tooltip>

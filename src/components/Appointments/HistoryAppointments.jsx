@@ -10,11 +10,11 @@ const HistoryAppointments = ({ data, setShow, setRatingData }) => {
 
   return (
     <div className="w-full mt-4 md:mt-6">
-      <div className={css.heading}>
+      {data?.length > 0 && <div className={css.heading}>
         <h3 className="text-[1.4rem] font-medium text-black mb-3 md:mb-4">
           {t("lastMonth")}
         </h3>
-      </div>
+      </div>}
       <div
         className={`${css.history} grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-x-5 gap-y-4 md:gap-y-5`}
       >

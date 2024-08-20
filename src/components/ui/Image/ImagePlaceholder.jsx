@@ -9,6 +9,7 @@ const ImagePlaceholder = ({
   width = "100%",
   height = "100%",
 }) => {
+  
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isError, setIsError] = useState(false);    
 

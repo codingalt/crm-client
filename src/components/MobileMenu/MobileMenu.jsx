@@ -1,57 +1,46 @@
 import React, { useEffect } from "react";
 import css from "./MobileMenu.module.scss";
-import { IoChatboxEllipses, IoNotificationsSharp } from "react-icons/io5";
 import { Tooltip } from "@mui/material";
-import { FaUserCircle } from "react-icons/fa";
-import { AiFillHome } from "react-icons/ai";
-import { IoMdListBox } from "react-icons/io";
-import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Badge } from "@nextui-org/react";
-import { CiSearch } from "react-icons/ci";
-import { useMainContext } from "../../context/MainContext";
-import { BiSolidSearch } from "react-icons/bi";
-import { RiSearchFill } from "react-icons/ri";
-import { FiSearch } from "react-icons/fi";
+import {
+  Bell,
+  BellDot,
+  ClipboardList,
+  House,
+  Mail,
+  Search,
+} from "lucide-react";
 
 const MobileMenu = () => {
   const navigate = useNavigate();
   let pathname = window.location.pathname;
   const { user } = useSelector((store) => store.auth);
-  const { setShowSearch } = useMainContext();
 
   useEffect(() => {
     pathname = window.location.pathname;
   }, [window.location.pathname]);
 
   return (
-    <div className={`${css.wrapper} block md:hidden`}>
-      <div className="fixed shadow-xl z-50 w-full h-[70px] max-w-lg -translate-x-1/2 bg-white border border-b-0 border-gray-200 rounded-none bottom-0 left-1/2">
+    <div
+      className={`${css.wrapper} block md:hidden`}
+      style={pathname.match("/chat") ? { display: "none" } : {}}
+    >
+      <div className="fixed shadow-xl z-50 w-full h-[63px] max-w-lg -translate-x-1/2 bg-white border border-b-0 border-gray-200 rounded-none bottom-0 left-1/2">
         <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
           <Tooltip title="Home">
             <button
               type="button"
               className={`inline-flex flex-col items-center justify-center px-3 rounded-s-full group ${
-                pathname.match("/dashboard") ? "bg-gray-50" : ""
+                pathname.match("/dashboard")
+                  ? "text-[#01ABAB]"
+                  : "text-gray-500"
               }`}
               onClick={() => navigate("/dashboard")}
             >
-              <AiFillHome className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
+              <House className="text-[19px] mb-1" size={23} />
               <span className="sr-only">Home</span>
-            </button>
-          </Tooltip>
-
-          <Tooltip title="Appointments">
-            <button
-              type="button"
-              className={`inline-flex flex-col items-center justify-center px-3 rounded-s-full group ${
-                pathname.match("/appointments") ? "bg-gray-50" : ""
-              }`}
-              onClick={() => navigate("/appointments")}
-            >
-              <IoMdListBox className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
-              <span className="sr-only">Appointments</span>
             </button>
           </Tooltip>
 
@@ -59,34 +48,41 @@ const MobileMenu = () => {
             <div className="flex items-center justify-center">
               <button
                 type="button"
-                className="inline-flex items-center justify-center w-10 h-10 font-medium bg-[#01ABAB] rounded-full hover:bg-[#13D3B3] group focus:ring-4 focus:ring-[#13D3B3] focus:outline-none"
+                className={`inline-flex flex-col items-center justify-center px-3 rounded-s-full group ${
+                  pathname.match("/search") ? "text-[#01ABAB]" : "text-gray-500"
+                }`}
                 onClick={() => {
                   navigate("/search");
                 }}
               >
-                <FiSearch className="text-[21px] text-white" />
+                <Search className="text-[19px] mb-1" size={23} />
                 <span className="sr-only">Search</span>
               </button>
             </div>
           </Tooltip>
 
-          {/* <Tooltip title="New Appointment">
-            <div className="flex items-center justify-center">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center w-10 h-10 font-medium bg-[#01ABAB] rounded-full hover:bg-[#13D3B3] group focus:ring-4 focus:ring-[#13D3B3] focus:outline-none"
-              >
-                <FaPlus className="text-[22px] mb-1 text-white" />
-                <span className="sr-only">New Appoitment</span>
-              </button>
-            </div>
-          </Tooltip> */}
+          <Tooltip title="Appointments">
+            <button
+              type="button"
+              className={`inline-flex flex-col items-center justify-center px-3 rounded-s-full group ${
+                pathname.match("/appointments")
+                  ? "text-[#01ABAB]"
+                  : "text-gray-500"
+              }`}
+              onClick={() => navigate("/appointments")}
+            >
+              <ClipboardList className="text-[19px] mb-1" size={23} />
+              <span className="sr-only">Appointments</span>
+            </button>
+          </Tooltip>
 
           <Tooltip title="Notifications">
             <button
               type="button"
               className={`inline-flex flex-col items-center justify-center px-3 rounded-s-full group ${
-                pathname.match("/notifications") ? "bg-gray-50" : ""
+                pathname.match("/notifications")
+                  ? "text-[#01ABAB]"
+                  : "text-gray-500"
               }`}
               onClick={() => navigate("/notifications")}
             >
@@ -97,10 +93,10 @@ const MobileMenu = () => {
                   isInvisible={!user}
                   shape="circle"
                 >
-                  <IoNotificationsSharp className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
+                  <BellDot className="text-[19px] mb-1" size={23} />
                 </Badge>
               ) : (
-                <IoNotificationsSharp className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
+                <Bell className="text-[19px] mb-1" size={23} />
               )}
 
               <span className="sr-only">Notifications</span>
@@ -111,11 +107,11 @@ const MobileMenu = () => {
             <button
               type="button"
               className={`inline-flex flex-col items-center justify-center px-3 rounded-s-full group ${
-                pathname.match("/chat") ? "bg-gray-50" : ""
+                pathname.match("/chat") ? "text-[#01ABAB]" : "text-gray-500"
               }`}
               onClick={() => navigate("/chat")}
             >
-              <IoChatboxEllipses className="text-[22px] mb-1 text-[#01ABAB] group-hover:text-[#01ABAB]" />
+              <Mail className="text-[19px] mb-1" size={23} />
               <span className="sr-only">Chats</span>
             </button>
           </Tooltip>

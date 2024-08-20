@@ -33,7 +33,7 @@ const AllServices = () => {
       />
 
       {/* Services  */}
-      {/* <div
+      <div
         className={`${css.services} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-7 gap-y-4 sm:gap-y-8`}
       >
         {isLoading ? (
@@ -107,7 +107,7 @@ const AllServices = () => {
             </Link>
           ))
         )}
-      </div> */}
+      </div>
 
       {/* Show Error If data fails to load  */}
       {!isLoading && error && (
@@ -130,7 +130,7 @@ const AllServices = () => {
       )}
 
       {/* Empty Data  */}
-      {!isLoading && data?.services?.length != 0 && (
+      {!isLoading && data?.services?.length === 0 && (
         <div className="w-full max-w-md m-auto mt-24 md:mt-24">
           <div className="flex gap-2 items-start md:items-center justify-center w-full text-default-600">
             <RiMenuSearchLine className="text-[20px] md:text-[22px]" />

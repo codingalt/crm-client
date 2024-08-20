@@ -52,7 +52,7 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
           {!isLoading &&
             data?.active?.length === 0 &&
             data?.upComing?.length === 0 && (
-              <div className="w-full h-40 flex justify-center max-w-md mt-20 md:mt-10">
+              <div className="w-full h-40 flex justify-center max-w-md mt-36 md:mt-10">
                 <Empty description={<span>{t("noActiveAppointments")}</span>} />
               </div>
             )}
@@ -86,7 +86,7 @@ const AppointmentTabs = ({ setRatingData, setShow }) => {
             />
           )}
           {!isLoading && data?.completed?.length === 0 && (
-            <div className="w-full h-40 flex justify-center max-w-md mt-10">
+            <div className="w-full flex justify-center max-w-md mt-0">
               <Empty
                 description={<span>{t("noCompletedAppointments")}</span>}
               />

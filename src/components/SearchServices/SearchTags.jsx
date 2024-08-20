@@ -23,7 +23,7 @@ const SearchTags = ({ setSearchText, setDebouncedSearchText }) => {
 
   return (
     <div className="w-full mt-6 md:mt-5">
-      <p className="text-sm font-normal md:font-medium text-default-400">{t("lookingFor")}</p>
+      <p className="text-sm font-normal md:font-medium text-default-500">{t("lookingFor")}</p>
       <div className="flex items-center flex-wrap gap-x-3 gap-y-4 py-3 overflow-x-auto scrollbar-hide">
         {tags?.map((item, index) => (
           <div

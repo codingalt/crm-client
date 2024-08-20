@@ -26,7 +26,7 @@ const Reviews = ({ data, isLoading }) => {
 
   return (
     <div className={`${css.reviews} pb-10 md:pb-28`}>
-      <h2 className="font-semibold text-xl md:text-2xl text-default-900 mt-4 mb-7 md:mb-8">
+      <h2 className="font-semibold text-xl md:text-2xl text-default-900 mt-4 mb-6 md:mb-8">
         Reviews from customers
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-x-14 gap-y-14 sm:gap-y-20">

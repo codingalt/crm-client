@@ -11,11 +11,17 @@ export const DirectionProvider = ({ children }) => {
     storedLanguage === "en" ? "ltr" : "rtl"
   );
 
+  function sendMessageToFlutter(message) {
+    if (window.Language && typeof window.Language.postMessage === "function") {
+      window.Language.postMessage(message);
+    }
+  }
+
   const toggleLanguage = (language) => {
     const newLanguage = language;
     i18n.changeLanguage(newLanguage);
     localStorage.setItem("language", newLanguage);
-    window.Language.postMessage(newLanguage);
+    sendMessageToFlutter(newLanguage);
     window.location.reload();
   };
 

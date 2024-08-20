@@ -7,6 +7,8 @@ import { Skeleton } from "@nextui-org/react";
 
 const OpeningHours = ({data,isLoading}) => {
   const { t } = useTranslation();
+  console.log(data?.openingHours);
+  
 
   return (
     <div className={css.openingHours}>
@@ -18,7 +20,7 @@ const OpeningHours = ({data,isLoading}) => {
                   <div className="w-full rounded-lg bg-secondary"></div>
                 </Skeleton>
               ))
-            : data?.openingHours?.map((item,index) =>
+            : data?.openingHours?.map((item, index) =>
                 parseInt(item.close) === 0 ? (
                   <li key={item.day_of_week + index}>
                     <p>{item.day_of_week}</p>
@@ -34,7 +36,7 @@ const OpeningHours = ({data,isLoading}) => {
                   </li>
                 ) : (
                   <li key={item.day_of_week + index}>
-                    <p>{t("sunday")}</p>
+                    <p>{item.day_of_week}</p>
                     <div className={css.right}>
                       <div className="flex items-center justify-between w-[73.6%] md:w-[71%] px-4 bg-green-50 h-8 rounded-md">
                         <IoMoonOutline />

@@ -18,7 +18,7 @@ const Appointments = () => {
         </div>
 
         {/* Tabs  */}
-        <div className="mt-7">
+        <div className="mt-5 md:mt-7">
           <AppointmentTabs setRatingData={setRatingData} setShow={setShow} />
         </div>
         <RatingModal show={show} setShow={setShow} data={ratingData} />

@@ -184,12 +184,14 @@
   @media (max-width: 768px) {
     & {
       width: 80%;
-      padding-bottom: 7rem;
+      overflow-y: auto;
+      padding: .8rem 0;
+      padding-bottom: 5rem;
 
       .top {
         p {
-          font-size: 1.6rem;
-          text-align: center;
+          font-size: 1.4rem;
+          text-align: left;
           line-height: 46px;
           font-weight: 500;
         }
@@ -200,26 +202,28 @@
           gap: 0;
 
           label {
-            font-size: 19px;
+            font-size: 17px;
           }
 
           input {
             font-size: 19px !important;
 
             &::placeholder {
-              font-size: 14px;
+              font-size: .85rem;
             }
           }
 
           .inputContainer {
-            margin-top: 20px !important;
-            margin-bottom: 0.3rem;
+            margin-top: 15px !important;
+            margin-bottom: 0rem;
           }
         }
 
         .button {
           gap: 0;
           justify-content: space-between;
+          margin-top: 2.3rem;
+          
 
           p {
             font-size: 9px;
@@ -233,8 +237,9 @@
           }
 
           button {
-            flex: 0.5;
+            flex: 0.55;
             height: 43px;
+            width: 100%;
           }
         }
       }

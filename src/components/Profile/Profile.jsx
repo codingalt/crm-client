@@ -69,11 +69,11 @@ const Profile = () => {
 
   return (
     <div className={css.wrapper}>
-      <div className="max-w-screen-xl mx-auto my-7 md:my-6 px-2 sm:px-4">
+      <div className="max-w-screen-xl mx-auto my-6 md:my-6 px-2 sm:px-4">
         <h2 className="max-w-[290px] sm:max-w-none text-2xl sm:text-3xl font-medium sm:text-left">
           Edit your personal profile
         </h2>
-        <div className="w-full flex-col sm:flex-row flex items-start sm:items-start gap-6 sm:gap-8 mt-9 sm:mt-14">
+        <div className="w-full flex-col sm:flex-row flex items-start sm:items-start gap-6 sm:gap-8 mt-7 sm:mt-14">
           <div
             onClick={() => imageRef.current.click()}
             className="relative border cursor-pointer overflow-hidden w-32 h-32 rounded-full object-cover"
@@ -104,26 +104,26 @@ const Profile = () => {
               accept="image/*"
             />
 
-            <div className="z-10 transition-all absolute left-0 right-0 bottom-0 w-full h-12 bg-black bg-opacity-70">
+            <div className="z-10 transition-all absolute left-0 right-0 bottom-0 w-full h-11 md:h-12 bg-black bg-opacity-70">
               <div className="w-full h-full text-xl text-white flex items-center justify-center">
                 <IoCameraOutline />
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 w-[calc(100%-128px)]">
+          <div className="flex flex-col gap-2 w-[100%] md:w-[calc(100%-128px)]">
             <h3 className="text-lg font-semibold text-[#01abab]">
               How it Works:
             </h3>
             <ul className="pl-0">
-              <li className="text-sm text-default-600 mb-1 list-none">
+              <li className="text-xs md:text-sm text-default-600 mb-1 list-none">
                 Here you can edit your profile.
               </li>
-              <li className="text-sm text-default-600 mb-1 list-none">
+              <li className="text-xs md:text-sm text-default-600 mb-1 list-none">
                 If you need to reset your password? You can choose forgot
                 password option on login screen.
               </li>
-              <li className="text-sm text-default-600 mb-1 list-none">
+              <li className="text-xs md:text-sm text-default-600 mb-1 list-none">
                 Choose your location in above address field to view services
                 nearby.
               </li>

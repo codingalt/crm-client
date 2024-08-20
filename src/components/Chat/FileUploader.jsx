@@ -84,7 +84,7 @@ const FileUploader = ({
         <button
           onClick={() => fileRef?.current?.click()}
           size="sm"
-          className={`${css.fileSelect} scrollbar-hide md:-mt-0.5 w-8 h-8 md:w-11 md:h-11 ml-1 md:ml-2 rounded-full bg-transparent text-default-800 text-lg md:text-2xl border-none outline-none hover:bg-default-100 transition-all flex items-center justify-center`}
+          className={`${css.fileSelect} scrollbar-hide md:-mt-0.5 w-8 h-8 md:w-11 md:h-11 ml-1 mt-1 md:ml-2 rounded-full bg-transparent text-default-800 text-lg md:text-2xl border-none outline-none hover:bg-default-100 transition-all flex items-center justify-center`}
         >
           <GrAttachment />
         </button>

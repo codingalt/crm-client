@@ -212,15 +212,20 @@ const ChatBody = ({
               </div>
             </div>
           ))
+        ) : isSmallDevice ? (
+          <MessageSkeleton />
         ) : (
-          <div className={css.noChatMessage}>
+          <div className={`${css.noChatMessage} hidden md:flex`}>
             <img src={noChat} alt="" />
             <span className="text-center">{t("tapOnChat")}</span>
           </div>
         )}
 
         {selectedChat ? (
-          <div className={css.chatSender} dir={direction}>
+          <div
+            className={`${css.chatSender} border md:border-none`}
+            dir={direction}
+          >
             {/* Upload File Button  */}
             <FileUploader
               setFiles={setFiles}

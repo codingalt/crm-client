@@ -37,6 +37,14 @@ export const businessProfileApi = createApi({
       }),
     }),
 
+    cancelAppointment: builder.mutation({
+      query: (bookingId) => ({
+        url: `customer/cancelTheService/${bookingId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["BusinessProfile"],
+    }),
+
     getPaymentMethods: builder.query({
       query: () => `paymentMethods`,
     }),
@@ -88,5 +96,16 @@ export const businessProfileApi = createApi({
   }),
 });
 
-export const { useGetBusinessProfileQuery, useGetPaymentIntentMutation, usePaymentSuccessMutation, useBookAppointmentMutation, useGetMyBookingsQuery, useSendRatingMutation, useCheckBookingAvailableTimeMutation, useGetPaymentMethodsQuery, useValidateManualAppointmentUrlQuery,useConfirmAppointmentMutation } =
-  businessProfileApi;
+export const {
+  useGetBusinessProfileQuery,
+  useGetPaymentIntentMutation,
+  usePaymentSuccessMutation,
+  useBookAppointmentMutation,
+  useGetMyBookingsQuery,
+  useSendRatingMutation,
+  useCheckBookingAvailableTimeMutation,
+  useGetPaymentMethodsQuery,
+  useValidateManualAppointmentUrlQuery,
+  useConfirmAppointmentMutation,
+  useCancelAppointmentMutation
+} = businessProfileApi;

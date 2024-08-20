@@ -4,6 +4,14 @@
   width: 100%;
   margin: 0.92rem 10px;
 
+  .flexStart {
+    align-items: flex-start !important;
+  }
+
+  .center {
+    align-items: center !important;
+  }
+
   .profileInfo {
     display: flex;
     align-items: center;
@@ -19,6 +27,8 @@
 
       .image {
         width: 140px;
+        height: 140px;
+        border-radius: 11px;
 
         img {
           width: 100%;
@@ -45,6 +55,7 @@
           font-weight: 500;
           color: #333333;
           max-width: 38rem;
+          @include limitText(38rem);
 
           svg {
             color: $primary;
@@ -282,15 +293,15 @@
     }
   }
 
-    @media (max-width: 1260px) {
+  @media (max-width: 1260px) {
     & {
-      .servicesWrapper{
-        .services{
-          .left{
+      .servicesWrapper {
+        .services {
+          .left {
             flex: 1;
           }
 
-          .right{
+          .right {
             flex: 0.7;
           }
         }
@@ -298,23 +309,23 @@
     }
   }
 
-   @media (max-width: 960px) {
+  @media (max-width: 960px) {
     & {
-      .servicesWrapper{
-        .services{
-          .left{
+      .servicesWrapper {
+        .services {
+          .left {
             flex: 1;
           }
 
-          .right{
+          .right {
             flex: 0.9;
 
-            .openingHours{
-              .box{
-                ul{
-                  li{
-                    .right{
-                      p{
+            .openingHours {
+              .box {
+                ul {
+                  li {
+                    .right {
+                      p {
                         font-size: 0.8rem;
                       }
                     }
@@ -331,24 +342,27 @@
   @media (max-width: 840px) {
     & {
       margin: 0 8px;
-      margin-top: 1.2rem;
+      margin-top: 1rem;
 
       .profileInfo {
         flex-direction: column;
         align-items: start;
+        padding-bottom: 1.4rem;
 
         .left {
           flex-direction: column;
-          gap: 11px;
+          gap: 15px;
           align-items: start;
           width: 100%;
 
           .image {
             width: 100px;
+            height: 100px;
           }
 
           .details {
             gap: 7px;
+            width: 100%;
 
             .name {
               font-size: 1.3rem;
@@ -358,9 +372,10 @@
             .address {
               gap: 3px;
               font-size: 0.9rem;
+              white-space: wrap;
 
               span {
-                text-overflow: ellipsis;
+                word-break: break-all;
               }
             }
 
@@ -377,7 +392,7 @@
         }
 
         .right {
-          margin-top: 1.9rem;
+          margin-top: .7rem;
           width: 100%;
 
           button {
@@ -390,14 +405,16 @@
       }
 
       .servicesWrapper {
+        margin-top: 1.3rem;
+
         .title {
           h1 {
             font-size: 1.15rem;
             font-weight: 600;
           }
 
-          &>div{
-            font-size: .85rem;
+          & > div {
+            font-size: 0.85rem;
             padding: 0.125rem 1.3rem;
           }
         }
@@ -449,17 +466,16 @@
             flex: 1;
             width: 100%;
 
-            .openingHours{
-              .box{
+            .openingHours {
+              .box {
                 padding: 1.2rem 1rem;
 
                 ul {
-
-                  li{
-                    .right{
+                  li {
+                    .right {
                       gap: 3px;
 
-                      p{
+                      p {
                         font-size: 0.85rem;
                       }
                     }

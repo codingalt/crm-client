@@ -82,31 +82,35 @@
     @media (max-width: 768px){
     &{
       width: 80%;
-      height: 100vh;
       overflow-y: auto;
-      padding: 3rem 0;
+      padding: 1.7rem 0;
+      padding-bottom: 4rem;
 
       .top{
         p{
-          font-size: 33px;
-          text-align: center;
+          font-size: 29px;
+          text-align: left;
           line-height: 46px;
           font-weight: 500;
         }
       }
 
       form{
-        margin-top: 3.7rem;
+        margin-top: 3.2rem;
 
         .inputContainer{
           gap: 0;
 
           label{
-            font-size: 19px;
+            font-size: 17px;
           }
 
           input{
             font-size: 19px !important;
+
+            &::placeholder{
+              font-size: .85rem;
+            }
           }
 
         }

@@ -83,7 +83,7 @@ const Categories = ({ data, isLoading, error, refetchCategories }) => {
       <div className="relative lg:overflow-x-auto lg:scroll-x lg:scrollbar-hide lg:snap-mandatory lg:snap-x lg:scroll-smooth">
         <div
           ref={containerRef}
-          className={`${css.categories} overflow-hidden w-full scrollbar-hide`}
+          className={`${css.categories} overflow-y-hidden md:overflow-x-auto w-full scrollbar-hide`}
           style={error ? { height: "auto", minHeight: 0 } : {}}
           onScroll={checkButtonVisibility}
         >

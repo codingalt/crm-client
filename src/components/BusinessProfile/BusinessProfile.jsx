@@ -1,7 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./BusinessProfile.module.scss";
-import ImageComponent from "../ui/Image/ImageComponent";
-import brand from "../../assets/brand.png";
 import { MdLocationOn } from "react-icons/md";
 import { FaStar } from "react-icons/fa6";
 import { IoMdInformationCircleOutline } from "react-icons/io";
@@ -9,64 +7,54 @@ import Services from "./Services";
 import { FaFire } from "react-icons/fa";
 import OpeningHours from "./OpeningHours";
 import { useGetBusinessProfileQuery } from "../../services/api/businessProfileApi/businessProfileApi";
-import { useNavigate, useParams } from "react-router-dom";
-import { Button, Skeleton } from "@nextui-org/react";
-import { notification, Tooltip } from "antd";
+import { useParams } from "react-router-dom";
+import { Button, Image, Skeleton } from "@nextui-org/react";
 import { useTranslation } from "react-i18next";
 import ClipSpinner from "../Loader/ClipSpinner";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import { truncateText } from "../../utils/helpers/helpers";
+import useMultiLine from "../../hooks/useMultiline";
 
 const BusinessProfile = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { isMultiLine, elementRef } = useMultiLine();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const { businessId } = useParams();
   const [selectedService, setSelectedService] = useState(null);
   const { data, isLoading, error, isFetching, refetch } =
     useGetBusinessProfileQuery(businessId);
   const [res, setRes] = useState(null);
-
-  const [api, contextHolder] = notification.useNotification();
-  const openNotificationWithIcon = (type) => {
-    api[type]({
-      message: "Please Select a Service",
-      duration: 3,
-    });
-  };
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     if (data) {
       setRes(data.business);
+      setIsInitialized(true);
     }
   }, [data]);
 
-  const handleMakeAppointment = () => {
-    if (!selectedService) {
-      openNotificationWithIcon("info");
-      return;
-    }
-
-    navigate(
-      `/makeAppointment/${selectedService?.name}?service-id=${selectedService?.id}`
-    );
-  };
-
-  useEffect(() => {
-    document.documentElement.scrollTop = document.documentElement.clientHeight;
-    document.documentElement.scrollLeft = document.documentElement.clientWidth;
-  }, []);
-
   return (
     <>
-      {contextHolder}
-
       <div className={css.wrapper}>
         {!error && (
           <>
             <div className={css.profileInfo}>
               <div className={css.left}>
                 <div className={css.image}>
-                  <ImageComponent src={brand} />
+                  {!isInitialized ? (
+                    <Skeleton className="w-full h-full rounded-lg">
+                      <div className="h-4 w-full rounded-lg bg-secondary-300"></div>
+                    </Skeleton>
+                  ) : (
+                    <Image
+                      src={
+                        import.meta.env.VITE_BUSINESS_PROFILE +
+                        res?.profile_picture
+                      }
+                      radius="sm"
+                      className="h-full w-full"
+                    />
+                  )}
                 </div>
 
                 <div className={css.details}>
@@ -97,14 +85,23 @@ const BusinessProfile = () => {
                   ) : (
                     <>
                       <div className={css.name}>{res?.name}</div>
-                      <div className={css.address}>
-                        <MdLocationOn />
-                        <span>{res?.address}</span>
+                      <div
+                        className={
+                          isMultiLine
+                            ? `${css.address} ${css.flexStart}`
+                            : `${css.address} ${css.center}`
+                        }
+                      >
+                        <MdLocationOn className={isMultiLine ? "mt-[3px]" : ""} />
+                        <span ref={elementRef}>
+                          {truncateText(res?.address, isSmallDevice ? 70 : 200)}
+                        </span>
                       </div>
                       <div className={css.rating}>
                         <FaStar color="#FFA534" />
                         <p>
-                          4.1/5<span> (1000+)</span>
+                          {res?.customer_rating_average}/5
+                          <span> ({res?.customer_rating_count})</span>
                         </p>
                         <button>{t("seeReviews")}</button>
                         <button className={css.moreInfo}>

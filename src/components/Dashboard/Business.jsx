@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import css from "./Dashboard.module.scss";
-import brand from "../../assets/brand.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import { Button, Skeleton } from "@nextui-org/react";
 import { truncateText } from "../../utils/helpers/helpers";
@@ -59,12 +58,12 @@ const Business = ({ data, isLoading, error, refetchBusinesses }) => {
     setChatWithOwner(item);
   };
 
-  const apiErrors = useApiErrorHandling(errorChatWithProvider);
+  useApiErrorHandling(errorChatWithProvider);
 
   useEffect(() => {
     if (isSuccessChatWithProvider && messagesData) {
       setChatWithOwner(null);
-      navigate(`/chat?chatId=${messagesData?.communication?.id}`);
+      navigate(`/chat?chatId=${messagesData?.communication?.id}`,{replace: false});
     }
   }, [isSuccessChatWithProvider, messagesData]);
 
@@ -86,55 +85,54 @@ const Business = ({ data, isLoading, error, refetchBusinesses }) => {
               </Skeleton>
             ))
           : data?.map((item) => (
-              <NavLink
-                key={item.id}
-                to={`/businesses/${item.name}/${item.id}`}
-                preventScrollReset
+              <div
+                onClick={() => navigate(`/businesses/${item.name}/${item.id}`)}
+                className={`${css.card} bg-[#E1F4E2] bg-opacity-50 shadow`}
               >
-                <div
-                  className={`${css.card} bg-[#E1F4E2] bg-opacity-50 shadow`}
-                >
-                  <div className={css.image}>
-                    <ImagePlaceholder
-                      src={
-                        import.meta.env.VITE_BUSINESS_PROFILE +
-                        item.profile_picture
-                      }
-                      radius="5px"
-                    />
+                <div className={css.image}>
+                  <ImagePlaceholder
+                    src={
+                      import.meta.env.VITE_BUSINESS_PROFILE +
+                      item.profile_picture
+                    }
+                    radius="5px"
+                  />
+                </div>
+                <div className={css.data}>
+                  <div className={css.name}>{item.name}</div>
+                  <div className={css.address}>
+                    <MdLocationOn />
+                    <span>
+                      {truncateText(item.address, isSmallDevice ? 24 : 33)}
+                    </span>
                   </div>
-                  <div className={css.data}>
-                    <div className={css.name}>{item.name}</div>
-                    <div className={css.address}>
-                      <MdLocationOn />
-                      <span>
-                        {truncateText(item.address, isSmallDevice ? 24 : 33)}
+                  <div className={css.rating}>
+                    <FaStar color="#FFA534" />
+                    <p>
+                      {item.customer_rating_average}/5{" "}
+                      <span className="text-xs text-default-500">
+                        ({item.customer_rating_count})
                       </span>
-                    </div>
-                    <div className={css.rating}>
-                      <FaStar color="#FFA534" />
-                      <p>
-                        {item.customer_rating_average}/5{" "}
-                        <span className="text-xs text-default-500">
-                          ({item.customer_rating_count})
-                        </span>
-                      </p>
-                      <Button
-                        className="bg-transparent text-[#00AEAD] font-medium"
-                        size="sm"
-                        radius="sm"
-                        startContent={
-                          <BsChatLeftDots className="hidden md:block text-medium" />
-                        }
-                        isLoading={isLoadingChatWithProvider}
-                        onClick={() => handleChatWithServiceProvider(item)}
-                      >
-                        {t("chatWithBusiness")}
-                      </Button>
-                    </div>
+                    </p>
+                    <Button
+                      className="bg-transparent text-sm md:text-medium text-[#00AEAD] font-medium"
+                      size="sm"
+                      radius="sm"
+                      startContent={<BsChatLeftDots className="" />}
+                      isLoading={
+                        item.id === chatWithOwner?.id &&
+                        isLoadingChatWithProvider
+                      }
+                      onClick={() => handleChatWithServiceProvider(item)}
+                    >
+                      <span>{t("chat")}</span>{" "}
+                      <span className="hidden md:inline-block">
+                        {t("withBusiness")}
+                      </span>
+                    </Button>
                   </div>
                 </div>
-              </NavLink>
+              </div>
             ))}
 
         {/* Show Error If data fails to load  */}

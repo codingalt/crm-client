@@ -3,7 +3,7 @@ import css from "./BusinessProfile.module.scss";
 import { Skeleton } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { Empty } from "antd";
-import {NumericFormat} from "react-number-format"
+import { NumericFormat } from "react-number-format";
 import ImagePlaceholder from "../ui/Image/ImagePlaceholder";
 
 const Services = ({ data, isLoading, selectedService, setSelectedService }) => {
@@ -60,7 +60,7 @@ const Services = ({ data, isLoading, selectedService, setSelectedService }) => {
 
       {/* When No Service Available Empty state  */}
       {!isLoading && data?.services?.length === 0 && (
-        <div className="w-full h-40 flex mt-20 md:mt-10">
+        <div className="w-full h-40 flex mt-9 md:mt-10">
           <Empty description={<span>No Services Available.</span>} />
         </div>
       )}

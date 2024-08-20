@@ -383,8 +383,6 @@ $background-color_7: #5cbfa1;
     margin-left: 1rem;
 
     &:disabled {
-      // background-color: #cccccc;
-      // color: #666666;
       cursor: not-allowed;
       opacity: 0.4;
     }
@@ -485,10 +483,16 @@ $background-color_7: #5cbfa1;
   }
 }
 @media screen and (max-width: 768px) {
+  .noChatMessage {
+    display: none;
+  }
+
   .chatLeft {
     width: 100%;
-    height: 68vh;
-    max-height: 68vh;
+    height: calc(100vh - 3.7rem);
+    max-height: calc(100vh - 3.7rem);
+    box-shadow: none;
+    border: none;
 
     .conversation {
       border-radius: 9px;
@@ -526,8 +530,31 @@ $background-color_7: #5cbfa1;
   }
   .chatRight {
     width: 100%;
-    height: 68vh !important;
+    height: calc(100vh - 3.7rem) !important;
     display: none;
+
+    .chatHeader {
+      box-shadow: none;
+      border-radius: 0;
+      border-top: none;
+    }
+  }
+
+  .messageContainer {
+    box-shadow: none;
+    border: none;
+  }
+
+  .chatSender{
+    padding-bottom: 0;
+    padding: 10px 8px;
+    height: 4rem;
+    gap: 10px;
+
+    .sendButton{
+      margin-left: 0;
+      top: 50% !important;
+    }
   }
 }
 
@@ -539,19 +566,22 @@ $background-color_7: #5cbfa1;
   .conversation {
     ul {
       li {
-        align-items: flex-start;
-        gap: 0.7rem;
-        padding: .5rem .4rem;
-        padding-left: 0.8rem;
-        padding-top: .7rem;
+        align-items: center;
+        gap: 0.4rem;
+        padding: .6rem 0.4rem;
+        padding-left: 0.9rem;
+        margin-bottom: 0;
 
         .cDetail {
+          border-bottom: none;
+
           .name {
-            font-size: .83rem;
+            font-size: 0.83rem;
           }
 
           .preview {
             font-size: 0.65rem;
+            display: none;
           }
         }
       }
@@ -567,18 +597,18 @@ $background-color_7: #5cbfa1;
   }
 
   .chatRight {
-
     .chatHeader {
       height: 3.2rem;
     }
   }
 
   .chatLeft {
-    .cLeftHeading{
-      padding: .6rem 1.2rem;
+    .cLeftHeading {
+      padding: 0.6rem 1.2rem;
+      padding-top: 1.2rem;
 
-      span{
-        font-size: 1rem;
+      span {
+        font-size: 1.1rem;
         font-weight: 600;
       }
     }
@@ -631,7 +661,7 @@ $background-color_7: #5cbfa1;
     margin-left: auto;
   }
 
-  .messageBox{
+  .messageBox {
     margin-bottom: 0;
   }
 

@@ -17,6 +17,7 @@ const InformationCard = ({
   isLoadingBasicInfo,
   updateBasicInfo,
 }) => {
+  const loc = JSON.parse(localStorage.getItem("userLocation"));
   const { onOpenLocationModal } = useMainContext();
 
   return (
@@ -35,7 +36,7 @@ const InformationCard = ({
         </Tooltip>
       </div>
 
-      <div className="flex items-center">
+      <div className="flex items-center w-full">
         {/* Left Side  */}
         {isEditProfile ? (
           <UpdateInfoCard
@@ -45,24 +46,24 @@ const InformationCard = ({
             updateBasicInfo={updateBasicInfo}
           />
         ) : !error ? (
-          <div className="flex flex-col flex-1">
-            <div className="flex flex-col gap-1 mb-7">
+          <div className="flex flex-col flex-1 w-full">
+            <div className="flex flex-col gap-1 mb-7 w-full">
               <p className="text-sm font-normal text-[#3C3C3C]">Name</p>
               {isLoading ? (
                 <Skeleton className="h-4 w-[70%] rounded-md mt-1" />
               ) : (
-                <p className="text-lg sm:text-xl font-normal capitalize">
+                <p className="text-lg sm:text-xl font-normal truncate capitalize">
                   {data?.name}
                 </p>
               )}
             </div>
 
-            <div className="flex flex-col gap-1 mb-7">
+            <div className="flex flex-col gap-1 mb-7 w-full">
               <p className="text-sm font-normal text-[#3C3C3C]">Email</p>
               {isLoading ? (
                 <Skeleton className="h-4 w-[70%] rounded-md mt-1" />
               ) : (
-                <p className="text-lg sm:text-xl font-normal capitalize">
+                <p className="text-lg sm:text-xl font-normal truncate capitalize">
                   {data?.email}
                 </p>
               )}
@@ -97,9 +98,11 @@ const InformationCard = ({
               {isLoading ? (
                 <Skeleton className="h-4 w-full rounded-md mt-1.5" />
               ) : (
-                <p className="text-lg sm:text-xl mt-1.5 font-normal">
-                  115, Block C Multan, Punjab, Pakistan
-                </p>
+                loc && (
+                  <p className="text-lg sm:text-xl mt-1.5 font-normal">
+                    {loc.address}
+                  </p>
+                )
               )}
             </div>
           </div>
@@ -126,14 +129,14 @@ const InformationCard = ({
         )}
 
         {/* Right Side  */}
-          <div className="hidden lg:flex items-center justify-center flex-1">
-            <Image
-              src={profileVector}
-              loading="lazy"
-              className="w-full"
-              radius="none"
-            />
-          </div>
+        <div className="hidden lg:flex items-center justify-center flex-1">
+          <Image
+            src={profileVector}
+            loading="lazy"
+            className="w-full"
+            radius="none"
+          />
+        </div>
       </div>
     </div>
   );

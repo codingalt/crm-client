@@ -91,9 +91,9 @@ const Login = () => {
   return (
     <>
       {show && (
-        <div className="w-full min-h-[97vh] flex flex-col mx-auto">
-          <div className="w-full py-6 sm:py-7 px-8 sm:px-16 flex items-center gap-3 mb-4 md:mb-7">
-            <div className="w-[40px] md:w-11">
+        <div className="w-full md:min-h-[97vh] flex flex-col mx-auto">
+          <div className="w-full py-7 pb-5 sm:py-7 px-8 sm:px-16 flex items-center gap-3 mb-0 md:mb-7">
+            <div className="w-[35px] md:w-11">
               <Image src={logo} width="100%" height="100%" />
             </div>
             <p className="font-bold text-lg text-[#01abab]">Hint</p>
@@ -155,12 +155,11 @@ const Login = () => {
                     <div className={css.button}>
                       <NavLink
                         to="/forgot-password"
-                        className={`text-blue-400`}
+                        className={`text-blue-400 text-xs md:text-sm`}
                         style={{
                           width: "auto",
                           fontWeight: "400",
-                          fontSize: "15px",
-                          textDecoration: "underline",
+                          fontStyle:"italic"
                         }}
                       >
                         {t("forgotPassword")}
@@ -170,10 +169,10 @@ const Login = () => {
                       </Button>
                     </div>
 
-                    <p className="text-medium text-center font-medium text-default-600 mt-14">
+                    <p className="md:text-medium text-center font-medium text-sm text-default-600 mt-14">
                       <span>{t("dontHaveAccount")}</span>{" "}
                       <NavLink
-                        className="text-blue-400 underline"
+                        className="text-blue-400 italic"
                         to={"/signup"}
                       >
                         {t("register")}

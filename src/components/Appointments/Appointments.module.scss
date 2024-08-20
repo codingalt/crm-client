@@ -62,13 +62,30 @@
       .cardBody {
         width: 100%;
         padding: 0.95rem 1.3rem;
-        padding-bottom: 1.2rem;
+        padding-bottom: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
         p {
-          font-size: 1.2rem;
+          font-size: 1.11rem;
           font-weight: 600;
-          width: 286px;
-          @include limitText(310px);
+          max-width: 286px;
+          @include limitText(286px);
+        }
+
+        button {
+          font-size: 15px;
+          font-weight: 500;
+          color: $primary;
+          background-color: transparent;
+          border: none;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 2px;
+          // text-decoration: underline;
         }
       }
 
@@ -165,7 +182,8 @@
             p {
               font-size: 1.05rem;
               font-weight: 500;
-               @include limitText(290px);
+              @include limitText(170px);
+              max-width: 170px;
             }
           }
 

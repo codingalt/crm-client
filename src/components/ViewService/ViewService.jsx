@@ -97,7 +97,7 @@ const ViewService = () => {
       {!error && (
         <div className="w-full lg:max-w-screen-xl mx-auto lg:px-3 md:h-screen md:pt-0 px-1">
           {/* Card  */}
-          <div className="mt-5 md:mt-0">
+          <div className="mt-4 md:mt-0">
             <div className="flex gap-x-7 flex-col md:flex-row">
               {/* Left Side  */}
               <div className="w-full bg-default-100 flex items-center justify-center relative max-h-48 md:h-96 lg:max-h-96 rounded-md flex-1 shrink-0 overflow-hidden">
@@ -333,7 +333,7 @@ const ViewService = () => {
           </div>
 
           {/* Divider  */}
-          <div className="w-full border mt-10 md:mt-16 mb-7 md:mb-6"></div>
+          <div className="w-full border mt-7 md:mt-16 mb-4 md:mb-6"></div>
 
           {/* Reviews  */}
           <Reviews data={data?.reviews} isLoading={isLoading} />
