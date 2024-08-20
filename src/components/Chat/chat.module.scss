@@ -489,8 +489,8 @@ $background-color_7: #5cbfa1;
 
   .chatLeft {
     width: 100%;
-    height: calc(100vh - 3.7rem);
-    max-height: calc(100vh - 3.7rem);
+    height: calc(100vh - 4.2rem);
+    max-height: calc(100vh - 4.2rem);
     box-shadow: none;
     border: none;
 
@@ -498,6 +498,7 @@ $background-color_7: #5cbfa1;
       border-radius: 9px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
+      max-height: 100%;
     }
     .cDetail {
       display: inline-block !important;
@@ -530,7 +531,7 @@ $background-color_7: #5cbfa1;
   }
   .chatRight {
     width: 100%;
-    height: calc(100vh - 3.7rem) !important;
+    height: calc(100vh - 4.2rem) !important;
     display: none;
 
     .chatHeader {
@@ -581,7 +582,7 @@ $background-color_7: #5cbfa1;
 
           .preview {
             font-size: 0.65rem;
-            display: none;
+            // display: none;
           }
         }
       }
@@ -604,11 +605,10 @@ $background-color_7: #5cbfa1;
 
   .chatLeft {
     .cLeftHeading {
-      padding: 0.6rem 1.2rem;
-      padding-top: 1.2rem;
+      padding: .8rem 1.28rem;
 
       span {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-weight: 600;
       }
     }

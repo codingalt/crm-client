@@ -364,7 +364,6 @@ const Chat = () => {
             </div>
 
             {/* Messages  */}
-
             {
               <div
                 className={

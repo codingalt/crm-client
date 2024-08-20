@@ -160,7 +160,7 @@ const ChatBody = ({
                         {message?.files?.map((file, index) => (
                           <div key={index} className="w-full h-full">
                             {file.type.startsWith("image/") ? (
-                              <div className="w-full min-h-52 z-0 cursor-zoom-in h-full rounded-xl flex items-center justify-center object-cover">
+                              <div className="w-full min-h-52 max-h-56 z-0 cursor-zoom-in overflow-hidden rounded-xl flex items-center justify-center object-cover">
                                 <Image
                                   src={file.src}
                                   alt={file.name}
