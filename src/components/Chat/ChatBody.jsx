@@ -62,16 +62,16 @@ const ChatBody = ({
     setTimeout(() => {
       if (lastMessageRef.current) {
         lastMessageRef.current.scrollIntoView({
-          behavior: "smooth",
+          // behavior: "",
           block: "end",
         });
       }
-    }, 100);
+    }, 0);
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, selectedChat]);
+  }, [messages]);
 
   return (
     <>
@@ -94,7 +94,7 @@ const ChatBody = ({
               }}
               ref={index === messages.length - 1 ? lastMessageRef : null}
             >
-              <div className="flex justify-end gap-x-2.5 mb-5">
+              <div className="flex justify-end gap-x-2 md:gap-x-2.5">
                 {checkMessageType(message) === 0 ? (
                   <div className={css.image}>
                     <Avvvatars
@@ -151,7 +151,8 @@ const ChatBody = ({
                       }
                       style={{
                         backgroundColor: "transparent",
-                        padding: ".5rem .6rem",
+                        padding: ".1rem .6rem",
+                        paddingBottom: 0,
                         marginRight: 0,
                         paddingRight: 0,
                       }}
@@ -223,7 +224,7 @@ const ChatBody = ({
 
         {selectedChat ? (
           <div
-            className={`${css.chatSender} border md:border-none`}
+            className={`${css.chatSender} border-t-1 md:border-none`}
             dir={direction}
           >
             {/* Upload File Button  */}

@@ -9,7 +9,6 @@
   .services {
     .card {
       border-radius: 8px;
-      //   border: 1px solid #d9d9d9;
       width: 100%;
       max-width: 350px;
 
@@ -96,6 +95,10 @@
 
   @media (max-width: 640px){
     &{
+      margin: 0.8rem auto;
+      padding: 10px 5px;
+      width: 90%;
+
         .services{
             .card{
                 max-width: 100%;

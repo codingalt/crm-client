@@ -199,7 +199,7 @@ const Chat = () => {
   const updateSearchParams = (newChatId) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("chatId", newChatId);
-    navigate({ search: searchParams.toString() });
+    navigate({ search: searchParams.toString() },{replace: true});
   };
 
   // Execute when any chat from left side is clicked
@@ -207,13 +207,14 @@ const Chat = () => {
     if (selectedChat?.id != chat.id) {
       setIsLoadingMessages(true);
     }
-
+    
     // Read Messages
     if (parseInt(chat.unread_messages) > 0) {
       const debouncedHandleReadMessages = debounce(handleReadMessages, 1000);
       debouncedHandleReadMessages(chat.id);
     }
-
+    
+    setMessages([]);
     setSelectedChat(chat);
     updateSearchParams(chat.id);
   };

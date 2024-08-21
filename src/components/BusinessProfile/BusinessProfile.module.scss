@@ -341,8 +341,10 @@
 
   @media (max-width: 840px) {
     & {
-      margin: 0 8px;
+      margin: 0.8rem auto;
       margin-top: 1rem;
+      padding: 10px 0;
+      width: 90%;
 
       .profileInfo {
         flex-direction: column;
@@ -351,7 +353,7 @@
 
         .left {
           flex-direction: column;
-          gap: 15px;
+          gap: 13px;
           align-items: start;
           width: 100%;
 
@@ -421,7 +423,7 @@
 
         .services {
           flex-direction: column;
-          gap: 5.5rem;
+          gap: 5rem;
           padding-bottom: 8rem;
 
           .left {

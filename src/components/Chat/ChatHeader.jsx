@@ -3,9 +3,16 @@ import * as ai from "react-icons/ai";
 import css from "./chat.module.scss";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import Avvvatars from "avvvatars-react";
+import { useNavigate } from "react-router-dom";
 
 const ChatHeader = ({ selectedChat, activeChatMob, handleChatMob }) => {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const navigate = useNavigate();
+
+  const handleBackButtonClick = () => {
+    handleChatMob(false);
+    navigate("/chat", { replace: true });
+  };
 
   return (
     <div className={`${css.chatHeader} shadow-sm border`}>
@@ -17,7 +24,7 @@ const ChatHeader = ({ selectedChat, activeChatMob, handleChatMob }) => {
               className={`cursor-pointer w-9 h-9 md:h-10 md:w-10 -ml-2.5 mr-1 flex items-center justify-center hover:bg-default-100 rounded-full transition-all`}
             >
               <ai.AiOutlineArrowLeft
-                onClick={() => handleChatMob(false)}
+                onClick={handleBackButtonClick}
                 style={{
                   color: "#01AB8E",
                 }}

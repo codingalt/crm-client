@@ -16,9 +16,9 @@
       outline: none;
       padding-left: 1rem;
       --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-      --tw-shadow-colored: 0 1px 2px 0 ;
-      box-shadow: var(0 0 #0000, 0 0 #0000),
-        var(0 0 #0000, 0 0 #0000), 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --tw-shadow-colored: 0 1px 2px 0;
+      box-shadow: var(0 0 #0000, 0 0 #0000), var(0 0 #0000, 0 0 #0000),
+        0 1px 2px 0 rgb(0 0 0 / 0.05);
 
       &::placeholder {
         font-size: 0.9rem;
@@ -51,13 +51,16 @@
     }
   }
 
-  @media (max-width: 640px){
-    &{
-        padding-bottom: 8rem;
-        
-        .formWrap{
-            width: 100%;
-        }
+  @media (max-width: 640px) {
+    & {
+      margin: 0.5rem auto;
+      padding: 0;
+      width: 90%;
+      padding-bottom: 8rem;
+
+      .formWrap {
+        width: 100%;
+      }
     }
   }
 }

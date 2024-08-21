@@ -257,8 +257,12 @@
 }
 
 @media screen and (max-width: 500px) {
+  .calendar{
+    min-height: auto;
+  }
+
   .calendar .month {
-    height: 54px;
+    height: 52px;
     padding: 0 15px;
     font-size: 1.05rem;
 
@@ -267,11 +271,16 @@
     }
   }
   .calendar .weekdays {
-    height: 50px;
+    height: 45px;
     font-size: 0.9rem;
   }
+
+  .calendar .days{
+    padding: 0 .75rem;
+  }
+
   .calendar .days .day {
-    height: 50px;
+    height: 43px;
     width: 13%;
     font-size: 0.82rem;
     display: flex;
@@ -279,12 +288,12 @@
     justify-content: start;
   }
   .calendar .days .day p{
-    width: 40px;
+    width: 48px;
     height: 40px;
   }
   .calendar .days .day.active,
   .calendar .days .day.today {
-    font-size: 1rem;
+    font-size: .85rem;
   }
 
   .right .today-date {
@@ -298,7 +307,7 @@
 
   .calendar .days .active {
     border-radius: 50%;
-    font-size: 1.1rem;
+    font-size: .92rem;
   }
 
   .calendar .days .active::before {

@@ -601,8 +601,9 @@
 
   @media (max-width: 768px) {
     & {
-      margin: 0.72rem 5px;
-      margin-top: 0.2rem;
+      margin: 0.6rem auto;
+      padding: 10px 0;
+      width: 91%;
     }
   }
 }
