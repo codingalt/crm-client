@@ -136,7 +136,6 @@ $background-color_7: #5cbfa1;
       margin-bottom: 8px;
 
       &:hover {
-        // background-color: #fbfbfc;
         background-color: #fcfcfd;
         transition: all 0.2s;
         color: $color_3;
@@ -191,7 +190,7 @@ $background-color_7: #5cbfa1;
 }
 .cDetail {
   .name {
-    font-size: 1.05rem;
+    font-size: .99rem;
     font-weight: 600 !important;
     letter-spacing: 0.45px;
     color: $color_5;
@@ -205,7 +204,7 @@ $background-color_7: #5cbfa1;
   .preview {
     color: $color_2;
     font-size: 0.75rem;
-    margin-bottom: 14px;
+    margin-bottom: 4px;
     font-weight: 400 !important;
   }
 }
@@ -301,8 +300,10 @@ $background-color_7: #5cbfa1;
     margin-left: auto;
   }
 }
+
 .message {
-  background: #f5f7fb;
+  // background: #f5f7fb;
+  background-color: #F4F6F8;
   padding: 0.7rem 1.4rem;
   border-radius: 0rem 1rem 1rem 1rem;
   max-width: 28rem;
@@ -313,6 +314,7 @@ $background-color_7: #5cbfa1;
   margin-top: 0px;
   letter-spacing: 0.2px;
   color: $color_6;
+  color: #000;
   margin-right: 0.5rem;
   min-width: 8.5rem;
 
@@ -344,9 +346,10 @@ $background-color_7: #5cbfa1;
   justify-self: flex-end !important;
   align-self: flex-end;
   border-radius: 1rem 1rem 0 1rem;
-  background: linear-gradient(98.63deg, #24e4f0 0%, #358ff9 100%);
   background: $primary;
+  background-color: #C8FAD6;
   color: $white;
+  color: #1C252E;
 }
 .chatSender {
   position: absolute;
@@ -399,6 +402,7 @@ $background-color_7: #5cbfa1;
   height: 88.5%;
   width: 100%;
   overflow-y: auto;
+  padding-bottom: 2rem;
 }
 .sendButton {
   &:hover {
@@ -490,7 +494,7 @@ $background-color_7: #5cbfa1;
   .chatLeft {
     width: 100%;
     height: calc(100vh - 5rem);
-    max-height: calc(100vh - 8rem);
+    max-height: calc(100vh - 8.5rem);
     box-shadow: none;
     border: none;
 
@@ -561,6 +565,7 @@ $background-color_7: #5cbfa1;
     margin: 0px auto;
     height: calc(100% - 5rem);
     overflow-x: hidden;
+    padding-bottom: 2rem;
   }
 
   .chatSender {
@@ -610,7 +615,7 @@ $background-color_7: #5cbfa1;
     }
   }
   .chatBody {
-    padding-bottom: 1.7rem;
+    padding-bottom: 2rem;
 
     & > div {
       scrollbar-width: none;

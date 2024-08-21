@@ -86,6 +86,7 @@ const Business = ({ data, isLoading, error, refetchBusinesses }) => {
             ))
           : data?.map((item) => (
               <div
+              key={item.id}
                 onClick={() => navigate(`/businesses/${item.name}/${item.id}`)}
                 className={`${css.card} bg-[#E1F4E2] bg-opacity-50 shadow`}
               >

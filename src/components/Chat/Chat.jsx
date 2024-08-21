@@ -44,6 +44,19 @@ const Chat = () => {
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
   const [isOpenMediaModal, setIsOpenMediaModal] = useState(null);
 
+  useEffect(()=>{
+    const mobileMenuBar = document.getElementById("mobileMenuBar");
+
+    if(isSmallDevice){
+      if (activeChatMob) {
+        mobileMenuBar.style.display = "none";
+      } else {
+        mobileMenuBar.style.display = "block";
+      }
+    }
+    
+  },[activeChatMob,isSmallDevice]);
+
   // Update refs whenever these states change
   useEffect(() => {
     chatIdRef.current = chatId;

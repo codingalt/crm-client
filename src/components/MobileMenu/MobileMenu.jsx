@@ -24,8 +24,9 @@ const MobileMenu = () => {
 
   return (
     <div
+      id="mobileMenuBar"
       className={`${css.wrapper} block md:hidden`}
-      style={pathname.match("/chat") ? { display: "none" } : {}}
+      // style={pathname.match("/chat") ? { display: "none" } : {}}
     >
       <div className="fixed shadow-xl z-50 w-full h-[63px] max-w-lg -translate-x-1/2 bg-white border border-b-0 border-gray-200 rounded-none bottom-0 left-1/2">
         <div className="grid h-full max-w-lg grid-cols-5 mx-auto">

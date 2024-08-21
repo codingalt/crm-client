@@ -34,7 +34,7 @@ const ChatBody = ({
   const { t } = useTranslation();
   const { user } = useSelector((state) => state.auth);
   const inputRef = useRef();
-  const lastMessageRef = useRef();
+  const lastMessageRef = useRef(null);
 
   const { direction } = useContext(DirectionContext);
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
@@ -56,17 +56,19 @@ const ChatBody = ({
     }
   }, [filePreviews, inputRef]);
 
-  const chatContainerRef = useRef(null);
+  // const scrollToBottom = () => {
+  //   setTimeout(() => {
+  //     if (lastMessageRef.current) {
+  //       lastMessageRef.current.scrollIntoView({
+  //         // behavior: "",
+  //         block: "end",
+  //       });
+  //     }
+  //   }, 0);
+  // };
 
   const scrollToBottom = () => {
-    setTimeout(() => {
-      if (lastMessageRef.current) {
-        lastMessageRef.current.scrollIntoView({
-          // behavior: "",
-          block: "end",
-        });
-      }
-    }, 0);
+    lastMessageRef?.current?.scrollIntoView({ block: "end" });
   };
 
   useEffect(() => {
@@ -75,7 +77,10 @@ const ChatBody = ({
 
   return (
     <>
-      <div className={`${css.chatBody}`} ref={chatContainerRef}>
+      <div
+        className={`${css.chatBody}`}
+        style={!selectedChat ? { scrollbarWidth: "none" } : {}}
+      >
         {isLoadingMessages ? (
           <MessageSkeleton />
         ) : selectedChat ? (
@@ -92,7 +97,7 @@ const ChatBody = ({
                 zIndex: 30,
                 paddingBottom: index === messages.length - 1 && "0px",
               }}
-              ref={index === messages.length - 1 ? lastMessageRef : null}
+              // ref={index === messages.length - 1 ? lastMessageRef : null}
             >
               <div className="flex justify-end gap-x-2 md:gap-x-2.5">
                 {checkMessageType(message) === 0 ? (
@@ -260,6 +265,9 @@ const ChatBody = ({
         ) : (
           ""
         )}
+
+        {/* Last Messages Scroll div  */}
+        <div ref={lastMessageRef} className="mt-10" />
       </div>
     </>
   );
