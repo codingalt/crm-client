@@ -36,7 +36,7 @@ const ChatHeader = ({ selectedChat, activeChatMob, handleChatMob }) => {
           <div className={css.image}>
             <Avvvatars
               value={selectedChat?.seller?.name}
-              size={isSmallDevice ? 26 : 45}
+              size={isSmallDevice ? 28 : 45}
             />
             {/* <Image
               src={null}

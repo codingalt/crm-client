@@ -20,10 +20,10 @@ const ViewMediaModal = ({ isOpen, setIsOpen }) => {
         <div className="absolute top-6 right-7 md:right-8 z-50">
           <div
             ref={excludeRef}
-            className="flex items-center gap-4 text-white text-3xl"
+            className="flex items-center gap-4 text-white text-2xl md:text-3xl"
           >
             <a
-              className="w-11 h-11 bg-green-500 text-3xl flex items-center justify-center rounded-full"
+              className="w-10 h-10 bg-green-500 text-3xl flex items-center justify-center rounded-full"
               href={isOpen?.src}
               target="_blank"
               rel="noopener noreferrer"

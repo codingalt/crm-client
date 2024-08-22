@@ -79,7 +79,11 @@ const ChatBody = ({
     <>
       <div
         className={`${css.chatBody}`}
-        style={!selectedChat ? { scrollbarWidth: "none" } : {}}
+        style={
+          !selectedChat
+            ? { scrollbarWidth: "none" }
+            : { scrollbarWidth: isSmallDevice && "none" }
+        }
       >
         {isLoadingMessages ? (
           <MessageSkeleton />
@@ -229,7 +233,7 @@ const ChatBody = ({
 
         {selectedChat ? (
           <div
-            className={`${css.chatSender} border-t-1 md:border-none`}
+            className={`${css.chatSender} border-1 md:border-none`}
             dir={direction}
           >
             {/* Upload File Button  */}
