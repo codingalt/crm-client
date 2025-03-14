@@ -42,7 +42,6 @@ const AddLocationModal = ({ isOpen, onOpenChange }) => {
     service.getDetails({ placeId: value.place_id }, async(place, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         const latLng = place.geometry.location;
-        console.log("latlng",latLng);
 
         // Get City and Country with latlng
         const res = await geocodeLatLng({
