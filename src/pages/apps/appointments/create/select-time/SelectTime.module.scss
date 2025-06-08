@@ -1,0 +1,77 @@
+@import "@/styles/constants.scss";
+
+.selectTimeWrapper {
+  width: 100%;
+
+  .heading {
+    color: #333333;
+    font-size: 32px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.1rem;
+
+    .backButton {
+      svg {
+        [dir="rtl"] & {
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+
+  .clockWrapper {
+    width: 100%;
+    margin: 1.6rem auto;
+    margin-top: 0;
+  }
+
+  .nextButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    button {
+      @include button($width: 11rem, $height: 3rem);
+      // margin: 3.6rem auto;
+      // margin-bottom: 8rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      width: 95%;
+      margin: auto;
+      margin-top: 0.5rem;
+      overflow-y: auto;
+
+      .heading {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 0rem;
+        text-align: center;
+      }
+
+      .clockWrapper {
+        margin: 1.1rem auto;
+        margin-top: -2px;
+      }
+
+      .nextButton {
+        display: none;
+      }
+
+      .mobileBtn {
+        margin-bottom: 1.2rem;
+        margin-top: 13px;
+
+        button {
+          @include button($width: 11.5rem, $height: 2.7rem);
+          font-size: 0.95rem;
+        }
+      }
+    }
+  }
+}

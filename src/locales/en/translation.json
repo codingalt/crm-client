@@ -12,6 +12,7 @@
   "passwordLength": "Password must be at least 6 characters",
   "dontHaveAccount": "Don't have an account?",
   "register": "Register",
+  "createAnAccount": "Create an account",
 
   "accountRegistration": "Account Registration",
   "name": "Name",
@@ -27,7 +28,7 @@
   "passwordNotMatched": "Password not matched",
   "next": "Next",
   "alreadyHaveAccount": "Already have an account?",
-  "login": "Login",
+  "login": "Log in",
   "registerHere": "Register Here",
 
   "verificationCode": "Verification Code",
@@ -53,7 +54,7 @@
 
 
   "search": "Search",
-  "searchServices": "Search Services...",
+  "searchServices": "Search Services",
   "newAddress": "New address",
   "signedInAs": "Signed in as",
   "languages": "Languages",

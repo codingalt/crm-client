@@ -12,6 +12,7 @@
   "passwordLength": "סיסמא חייבת להיות לפחות בת 6 תווים",
   "dontHaveAccount": "אין לך חשבון?",
   "register": "הירשם",
+  "createAnAccount": "צור חשבון",
 
   "accountRegistration": "רישום חשבון",
   "name": "שֵׁם",

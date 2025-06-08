@@ -1,0 +1,96 @@
+@import "@/styles/constants.scss";
+
+.dashboardDetails {
+  width: 100%;
+  padding-top: 0.35rem;
+
+  .topHeader {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    padding: 0 50px;
+    height: 64px;
+    border-bottom: 1px solid $secondary;
+    position: sticky;
+    top: 0;
+
+    h1 {
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+    }
+
+    svg {
+      font-size: 19px;
+      color: $primary;
+    }
+
+    @media (max-width: 768px) {
+      & {
+        padding: 0;
+
+        h1 {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .heading {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    padding: 0 50px;
+    height: 60px;
+    border-bottom: 1px solid $secondary;
+    border-top: 1px solid $secondary;
+    margin-top: 1.6rem;
+
+    h1 {
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+    }
+
+    svg {
+      font-size: 19px;
+      color: $primary;
+    }
+
+    @media (max-width: 768px) {
+      & {
+        padding: 0;
+
+        h1 {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  // Services
+  .services {
+    width: 100%;
+    scrollbar-width: none;
+    min-height: 280px;
+    padding: 0 50px;
+    min-height: 160px;
+
+    @media (max-width: 768px) {
+      & {
+        padding: 0 !important;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      margin: 0rem auto;
+      padding: 10px 0;
+      padding-top: 0;
+      width: 91%;
+    }
+  }
+}

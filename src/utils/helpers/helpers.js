@@ -22,8 +22,21 @@ export const formatTime = (time) => {
   }
 };
 
-
 // Truncate Text 
 export const truncateText = (text, maxLength) => {
   return text?.length > maxLength ? `${text?.substring(0, maxLength)}..` : text;
+};
+
+// Helper function to check if a time slot has passed
+export const isTimeSlotPassed = (slot) => {
+  const now = new Date();
+  const currentHour = now.getHours();
+  
+  // For midnight slot (0-6), it's passed if current time is after 6 AM
+  if (slot.id === 'midnight') {
+    return currentHour >= 6;
+  }
+  
+  // For other slots, check if current time is past the end hour
+  return currentHour >= slot.endHour;
 };

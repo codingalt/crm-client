@@ -1,0 +1,89 @@
+@import "@/styles/constants.scss";
+
+.autocomplete {
+  width: 100%;
+  position: absolute;
+  top: 105%;
+  left: 0%;
+  right: 0;
+  margin: auto;
+  background-color: #fff;
+  z-index: 1000;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    & {
+      left: 4%;
+      width: 100%;
+      left: -0.35%;
+    }
+  }
+
+  .itemValue {
+    width: 100%;
+    @include flexCenter;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 7px 10px;
+    position: relative;
+    margin-bottom: 2px;
+    transition: all 0.2s;
+    cursor: default;
+
+    &:hover {
+      background-color: #f7f7f7;
+      transition: all 0.2s;
+    }
+
+    .icon {
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background-color: #eee;
+      background-color: $primary;
+      @include flexCenter;
+
+      svg {
+        font-size: 0.93rem;
+        color: $primary;
+        color: #fff;
+      }
+    }
+
+    .text {
+      color: #212121;
+      font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+
+      span:nth-child(1) {
+        font-size: 0.77rem;
+        letter-spacing: 0.1px;
+        font-weight: 600;
+        display: inline-block;
+        line-height: 15px;
+      }
+      span:nth-child(2) {
+        font-size: 0.65rem;
+        font-weight: 400;
+        color: gray;
+        display: inline-block;
+        line-height: 20px;
+      }
+    }
+
+    .arrow {
+      svg {
+        font-size: 1rem;
+        color: $primary;
+        position: absolute;
+        right: 1%;
+        top: 20.7%;
+        color: $primary;
+      }
+    }
+  }
+}

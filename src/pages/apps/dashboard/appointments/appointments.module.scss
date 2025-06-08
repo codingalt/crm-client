@@ -1,0 +1,113 @@
+@import "@/styles/constants.scss";
+
+  .queuesWrap {
+    width: 100%;
+    margin-bottom: 2.5rem;
+    padding: 0 50px;
+
+    & > h3 {
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+    }
+
+    .queues {
+      width: 100%;
+      margin: 1rem 0;
+
+      .card {
+        border: 1px solid rgba($color: #000000, $alpha: 0.15);
+        border-radius: 12px;
+        position: relative;
+        height: 200px;
+
+        .cardHeader {
+          width: 100%;
+          padding: 1.4rem 1.3rem;
+          padding-bottom: 1.4rem;
+          @include flexCenter;
+          justify-content: flex-end;
+
+          .cardTitle {
+            margin-left: auto;
+          }
+        }
+
+        .cardBody {
+          width: 100%;
+          height: 100px;
+          padding: 1rem 1.2rem;
+          padding-bottom: 1.8rem;
+
+          p {
+            font-size: 1.26rem;
+            font-weight: 600;
+            @include limitText(310px);
+          }
+        }
+
+        .cardFooter {
+          width: 100%;
+          height: 3.2rem;
+          background-color: $primary;
+          padding: 1.1rem 1.3rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom-left-radius: 12px;
+          border-bottom-right-radius: 12px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+
+          p {
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      & {
+        & > h3 {
+          font-size: 20px;
+          font-weight: 600;
+        }
+
+        .queues {
+          .card {
+            height: 185px;
+
+            .cardHeader {
+              .cardTitle {
+                padding: 3px 0px;
+              }
+            }
+
+            .cardBody {
+              padding: 0 1rem;
+              height: 40px;
+
+              p {
+                font-size: 1.05rem;
+                font-weight: 500;
+                @include limitText(290px);
+              }
+            }
+
+            .cardFooter {
+              padding: 1rem 0.9rem;
+
+              p {
+                font-size: 1rem;
+                font-weight: 400;
+              }
+            }
+          }
+        }
+      }
+    }
+  }

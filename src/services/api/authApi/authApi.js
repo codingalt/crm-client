@@ -1,17 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { createBaseQuery } from "..";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_URI,
-    prepareHeaders: async (headers, query) => {
-      const authToken = localStorage.getItem("crmClientToken");
-      headers.set("authorization", `Bearer ${authToken}`);
-      headers.set("x-app-type", "Web");
-      headers.set("Accept", "application/json");
-      return headers;
-    },
-  }),
+  baseQuery: createBaseQuery(),
   tagTypes: ["Users"],
   endpoints: (builder) => ({
     validateToken: builder.query({

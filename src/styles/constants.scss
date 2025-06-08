@@ -6,6 +6,8 @@ $xxl: 1536px;
 $primary: #01abab;
 $primaryLight: #13d3b3;
 $primaryHover: #eef9f7;
+$secondary: #F8FAFB;
+$secondary2: #e2e9ed;
 $white: #fff;
 $textSecondary: #6a6c6d;
 $error: #ff0000;
@@ -37,17 +39,17 @@ $error: #ff0000;
 }
 
 @media (max-width: 768px) {
-  .swiperContainer {
-    overflow: visible; 
-  }
+  // .swiperContainer {
+  //   overflow: visible; 
+  // }
 
-  .swiper-slide {
-    width: 305px !important;
+  // .swiper-slide {
+  //   width: 305px !important;
 
-    &:last-child{
-      margin-right: 0px !important;
-    }
-  }
+  //   &:last-child{
+  //     margin-right: 0px !important;
+  //   }
+  // }
 }
 
 @mixin flexCenter {

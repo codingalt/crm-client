@@ -6,9 +6,25 @@ import path from "path";
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+    alias: [
+      {
+        find: "@",
+        replacement: path.resolve(__dirname, "src"),
+      },
+      {
+        find: "~",
+        replacement: path.resolve(__dirname, "node_modules"),
+      },
+    ],
+  },
+  server: {
+    // this sets a default port to 5173
+    port: 5173,
+    host: true,
+  },
+  preview: {
+    open: true,
+    host: true,
   },
   build: {
     // generate .vite/manifest.json in outDir

@@ -1,18 +1,26 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import authSlice from "../services/slices/auth/authSlice";
-import { authApi } from "../services/api/authApi/authApi";
-import { categoriesApi } from "../services/api/categoriesApi/categoriesApi";
-import { businessProfileApi } from "../services/api/businessProfileApi/businessProfileApi";
-import { servicesApi } from "../services/api/servicesApi/servicesApi";
-import { notificationsApi } from "../services/api/notificationsApi/notificationsApi";
-import { chatApi } from "../services/api/chat/chatApi";
-import { profileApi } from "../services/api/profileApi/profileApi";
+import authSlice from "@/services/slices/auth/authSlice";
+import { authApi } from "@/services/api/authApi/authApi";
+import { categoriesApi } from "@/services/api/categoriesApi/categoriesApi";
+import { businessProfileApi } from "@/services/api/businessProfileApi/businessProfileApi";
+import { servicesApi } from "@/services/api/servicesApi/servicesApi";
+import { notificationsApi } from "@/services/api/notificationsApi/notificationsApi";
+import { chatApi } from "@/services/api/chat/chatApi";
+import { profileApi } from "@/services/api/profileApi/profileApi";
+import { dashboardApi } from "@/services/api/dashboardApi/dashboardApi";
+import { generalApi } from "@/services/api/general/generalApi";
 
 export const store = configureStore({
   reducer: {
+    // General Api
+    [generalApi.reducerPath]: generalApi.reducer,
+
     // Auth Api
     [authApi.reducerPath]: authApi.reducer,
+
+    // Dashboard Api
+    [dashboardApi.reducerPath]: dashboardApi.reducer,
 
     // Category Api
     [categoriesApi.reducerPath]: categoriesApi.reducer,
@@ -36,7 +44,9 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat([
+      generalApi.middleware,
       authApi.middleware,
+      dashboardApi.middleware,
       categoriesApi.middleware,
       businessProfileApi.middleware,
       servicesApi.middleware,

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { toastError } from "../components/Toast/Toast";
+import { toastError } from "../components/common/toast/Toast";
 import { extractErrors } from "../utils/helpers/helpers";
 
 export const useApiErrorHandling = (error) => {

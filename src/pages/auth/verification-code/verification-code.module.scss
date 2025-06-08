@@ -1,0 +1,231 @@
+@import "@/styles/constants.scss";
+
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+
+  .top {
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: #000;
+    }
+  }
+
+  .emailForm {
+    input {
+      font-size: 18px !important;
+    }
+  }
+
+  .personalInfoForm {
+    input {
+      font-size: 18px !important;
+    }
+  }
+
+  .verificationFotm {
+    input {
+      margin-top: 2rem;
+
+      &::placeholder {
+        font-size: 24px !important;
+        color: rgb(169, 168, 168) !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      & {
+        .button {
+          justify-content: flex-end;
+          margin-top: 2.5rem;
+        }
+      }
+    }
+  }
+
+  form {
+
+    .errorSpan {
+      font-size: 0.82rem;
+      color: $error;
+      margin-top: 1px;
+    }
+
+    .inputContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-bottom: 1.9rem;
+
+      label {
+        font-size: 19px;
+        font-weight: 500;
+      }
+
+      input {
+        width: 100%;
+        height: 3rem;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #000;
+        transition: all 0.2s;
+        font-size: 18px;
+
+        &::placeholder {
+          color: $textSecondary;
+          font-size: 14px;
+        }
+      }
+
+      .userProfile {
+        width: 100%;
+        @include flexCenter;
+        margin-bottom: 0.4rem;
+        position: relative;
+
+        .icon {
+          position: absolute;
+          bottom: 0%;
+          right: 0%;
+          width: 1.4rem;
+          height: 1.4rem;
+          border-radius: 50%;
+          transform: translate(75%, -25%);
+          left: 50%;
+          background: $primary;
+          @include flexCenter;
+          z-index: 8;
+
+          svg {
+            color: #fff;
+            transform: scale(0.95);
+          }
+        }
+
+        .profile {
+          width: 6.5rem;
+          height: 6.5rem;
+          border-radius: 50%;
+          cursor: pointer;
+          @include flexCenter;
+          background-color: #e8e8ea;
+          object-fit: cover;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            object-fit: cover;
+            transform: scale(1.3);
+          }
+        }
+      }
+
+      .note {
+        color: $textSecondary;
+        font-size: 15px;
+        font-weight: normal;
+        margin-top: 1rem;
+      }
+
+      .errorSpan {
+        font-size: 0.82rem;
+        color: $error;
+        margin-top: 1px;
+      }
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-top: 3rem;
+      gap: 1.6rem;
+
+      button {
+        background-color: $primary;
+        color: #fff;
+        width: 141px;
+        height: 48px;
+        @include flexCenter;
+        outline: none;
+        border: none;
+        border-radius: 100px;
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      .backBtn {
+        background-color: transparent;
+        border: 1px solid $primary;
+        color: #151515;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    & {
+      width: 80%;
+      overflow-y: auto;
+      padding: .8rem 0;
+      padding-bottom: 5rem;
+
+      .top {
+        h2 {
+          font-size: 1.4rem;
+          text-align: left;
+          line-height: 46px;
+          font-weight: 500;
+        }
+      }
+
+      form {
+        .inputContainer {
+          gap: 0;
+
+          label {
+            font-size: 17px;
+          }
+
+          input {
+            font-size: 19px !important;
+
+            &::placeholder {
+              font-size: .85rem;
+            }
+          }
+
+          .inputContainer {
+            margin-top: 15px !important;
+            margin-bottom: 0rem;
+          }
+        }
+
+        .button {
+          gap: 0;
+          justify-content: space-between;
+          margin-top: 2.3rem;
+          
+
+          p {
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            flex: 1.3;
+
+            a {
+              margin-left: 2px;
+            }
+          }
+
+          button {
+            flex: 0.55;
+            height: 43px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
